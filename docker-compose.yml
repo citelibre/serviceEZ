@@ -1,0 +1,69 @@
+version: '3.5'
+
+services:
+    db:
+        image: citelibre/forms:db-1.0.9-SNAPSHOT
+        container_name: db
+        ports:
+            - "3307:3306"
+        # if you want to persist data uncomment the following 2 lines... don't forget to create the directory mysql-data for sample
+        #volumes:
+        #    - ./mysql-data:/var/lib/mysql
+
+
+    solr:
+        image: citelibre/forms:solr-1.0.9-SNAPSHOT
+        container_name: solr
+        command: -force
+        depends_on:
+            - db
+        ports:
+            - "8983:8983"
+        # if you want to persist data uncomment the following 2 lines... and don't forget to create the directory
+        #volumes:
+        #    - ./solr-data:/var/solr/data/cite-libre/data
+
+
+    fake-smtp:
+        image: citelibre/forms:fake-smtp-1.0.9-SNAPSHOT
+        container_name: fake-smtp
+        ports:
+            - "1080:1080"
+            - "25:25"
+            
+    matomo:
+        image: citelibre/forms:matomo-1.0.9-SNAPSHOT
+        container_name: matomo
+        ports:
+            - "80:80"
+        depends_on:
+            - solr
+
+    keycloak:
+        image: citelibre/forms:keycloak-1.0.9-SNAPSHOT
+        container_name: keycloak
+        ports:
+            - "8081:8081"
+        command: ["-Djboss.http.port=8081"]
+        depends_on:
+            - citelibre
+
+
+    citelibre:
+        image: citelibre/forms:ihm-1.0.9-SNAPSHOT
+        container_name: citelibre
+        ports:
+            - 8080:8080
+        depends_on:
+            - solr
+        environment:
+            - LUTECE_DB_USER
+            - LUTECE_DB_PWD
+            - LUTECE_DB_NAME
+            - LUTECE_DB_HOST
+            - LUTECE_DB_PORT
+            - LUTECE_MAIL_HOST
+            - LUTECE_MAIL_PORT
+            - LUTECE_MAIL_USER
+            - LUTECE_MAIL_PWD
+            - LUTECE_INTERNAL_KEYCLOAK=true
