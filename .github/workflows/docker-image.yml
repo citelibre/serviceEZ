@@ -1,0 +1,106 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+      security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
+      actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
+
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up maven
+      uses: s4u/setup-maven-action@v1.2.1
+      with:
+        java-version: '11'
+        maven-version: '3.6.3'
+    - name: docker login
+      run: docker login -u=citelibre -p="${{ secrets.PASSWORD_DOCKER_CITELIBRE }}"
+    - name: Retrieve version in pom with Maven
+      run: echo "VERSION=$(cd citelibre-forms && mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version | sed -n -e '/^\[.*\]/ !{ /^[0-9]/ { p; q } }')">> $GITHUB_ENV
+
+    - name: Display version
+      run: echo "version $VERSION"
+
+    - name: Webapp display
+      run: time curl -v https://dev.lutece.paris.fr/maven_repository/fr/paris/lutece/lutece-core/7.0.8/lutece-core-7.0.8-webapp.zip -o test.zip 
+      
+    - name: build war ihm
+      run: cd citelibre-forms &&  mkdir -p $HOME/.m2/repository/fr/paris/lutece/lutece-core/7.0.8/ && curl --http1.0 -L https://dev.lutece.paris.fr/maven_repository/fr/paris/lutece/lutece-core/7.0.8/lutece-core-7.0.8-webapp.zip -o $HOME/.m2/repository/fr/paris/lutece/lutece-core/7.0.8/lutece-core-7.0.8-webapp.zip   &&   mvn -e lutece:site-assembly -Pdev
+      
+    - name: retrieve war name
+      run:  echo "WAR_NAME=$(cd citelibre-forms/target; ls *.war|sed -e 's/\.war//g')" >> $GITHUB_ENV
+      
+    - name: build forms
+      run: docker build citelibre-forms --build-arg site=$WAR_NAME -t citelibre/forms:ihm-$VERSION
+    
+    - name: build forms  
+      run: docker save -o citelibre-forms.tar citelibre/forms:ihm-$VERSION
+      
+    - name: Run Trivy vulnerability scanner in tarball mode of forms image
+      uses: aquasecurity/trivy-action@master
+      with:
+        input: /github/workspace/citelibre-forms.tar
+        severity: 'CRITICAL,HIGH'
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+        
+    - name: Upload Trivy scan results to GitHub Security tab
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: 'trivy-results.sarif'
+      
+    - name: build fakesmtp
+      run: docker build fake-smtp -t citelibre/forms:fake-smtp-$VERSION
+      
+    - name: build mysql
+      run: docker build mysql -t citelibre/forms:db-$VERSION
+      
+      
+    - name: build matomo
+      run: docker build matomo -t citelibre/forms:matomo-$VERSION
+      
+    - name: build solr
+      run: docker build solr -t citelibre/forms:solr-$VERSION
+      
+    - name: build keycloak
+      run: docker build keycloak -t citelibre/forms:keycloak-$VERSION
+      
+    - name: push images on docker hub
+      run: |
+        docker push citelibre/forms:solr-$VERSION
+        docker push citelibre/forms:db-$VERSION
+        docker push citelibre/forms:matomo-$VERSION
+        docker push citelibre/forms:fake-smtp-$VERSION
+        docker push citelibre/forms:keycloak-$VERSION
+        docker push citelibre/forms:ihm-$VERSION
+      
+    - name: update docker compose
+      run: |  
+        sed -i -e "s/:fake-smtp.*$/:fake-smtp-$VERSION/g" docker-compose.yml 
+        sed -i -e "s/:solr.*$/:solr-$VERSION/g" docker-compose.yml
+        sed -i -e "s/:matomo.*$/:matomo-$VERSION/g" docker-compose.yml
+        sed -i -e "s/:db.*$/:db-$VERSION/g" docker-compose.yml
+        sed -i -e "s/:ihm.*$/:ihm-$VERSION/g" docker-compose.yml
+        sed -i -e "s/:keycloak.*$/:keycloak-$VERSION/g" docker-compose.yml
+        cat docker-compose.yml
+        
+    - name: Commit and push docker compose
+      run: |
+        rm -rf citelibre-forms/target
+        git config --global user.name "githubaction"
+        git config --global user.email "githubaction"
+        git add docker-compose.yml
+        git commit -m "ci(githubaction): update docker compose with version $VERSION"  --allow-empty
+        git push
