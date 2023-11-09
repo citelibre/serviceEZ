@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
     db:
-        image: citelibre/forms:db-1.0.9-SNAPSHOT
+        image: citelibre/forms:db-1.0.9
         container_name: db
         ports:
             - "3307:3306"
@@ -12,7 +12,7 @@ services:
 
 
     solr:
-        image: citelibre/forms:solr-1.0.9-SNAPSHOT
+        image: citelibre/forms:solr-1.0.9
         container_name: solr
         command: -force
         depends_on:
@@ -25,14 +25,14 @@ services:
 
 
     fake-smtp:
-        image: citelibre/forms:fake-smtp-1.0.9-SNAPSHOT
+        image: citelibre/forms:fake-smtp-1.0.9
         container_name: fake-smtp
         ports:
             - "1080:1080"
             - "25:25"
             
     matomo:
-        image: citelibre/forms:matomo-1.0.9-SNAPSHOT
+        image: citelibre/forms:matomo-1.0.9
         container_name: matomo
         ports:
             - "80:80"
@@ -40,7 +40,7 @@ services:
             - solr
 
     keycloak:
-        image: citelibre/forms:keycloak-1.0.9-SNAPSHOT
+        image: citelibre/forms:keycloak-1.0.9
         container_name: keycloak
         ports:
             - "8081:8081"
@@ -50,7 +50,7 @@ services:
 
 
     citelibre:
-        image: citelibre/forms:ihm-1.0.9-SNAPSHOT
+        image: citelibre/forms:ihm-1.0.9
         container_name: citelibre
         ports:
             - 8080:8080
