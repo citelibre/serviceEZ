@@ -9,14 +9,14 @@
     <groupId>fr.paris.lutece.themes</groupId>
     <artifactId>site-citelibre-forms</artifactId>
     <packaging>lutece-site</packaging>
-    <name>Theme de FORMS V2</name>
+    <name>Demo CiteLibre Forms</name>
     <version>1.0.9</version>
     <description />
     <scm>
-        <connection>scm:git:https://dev.lutece.paris.fr/gitlab/bild/forms/theme-forms/site-theme-forms.git</connection>
-        <developerConnection>scm:git:https://dev.lutece.paris.fr/gitlab/bild/forms/theme-forms/site-theme-forms.git</developerConnection>
+        <connection>scm:git:https://github.com/citelibre/forms.git</connection>
+        <developerConnection>scm:git:https://github.com/citelibre/forms.git</developerConnection>
         <tag>site-theme-forms-1.3.6</tag>
-        <url>https://dev.lutece.paris.fr/gitlab/bild/forms/theme-forms/site-theme-forms.git</url>
+        <url>https://github.com/citelibre/forms.git</url>
     </scm>
     <repositories>
         <repository>
@@ -54,7 +54,7 @@
         <dependency>
             <groupId>fr.paris.lutece</groupId>
             <artifactId>lutece-core</artifactId>
-            <version>[7.0.8]</version>
+            <version>[7.0.10]</version>
             <type>lutece-core</type>
         </dependency>
 	<dependency>
@@ -468,11 +468,12 @@
             <version>[2.1.1]</version>
             <type>lutece-plugin</type>
         </dependency>
+		 <dependency>
+            <groupId>fr.paris.lutece.themes</groupId>
+            <artifactId>site-theme-citelibre</artifactId>
+            <version>[1.0.0-SNAPSHOT]</version>
+            <type>lutece-site</type>
+        </dependency>
     </dependencies>
-    <properties>
-        <componentName>Site Pack City Forms</componentName>
-        <jiraProjectName>THEMECITY</jiraProjectName>
-        <jiraComponentId/>
-    </properties>
 </project>
 
