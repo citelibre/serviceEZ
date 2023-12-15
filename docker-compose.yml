@@ -3,7 +3,7 @@ version: '3.5'
 services:
     db:
         image: citelibre/forms:db-1.0.9
-        container_name: db
+        container_name: db_forms
         ports:
             - "3307:3306"
         # if you want to persist data uncomment the following 2 lines... don't forget to create the directory mysql-data for sample
@@ -13,7 +13,7 @@ services:
 
     solr:
         image: citelibre/forms:solr-1.0.9
-        container_name: solr
+        container_name: solr_forms
         command: -force
         depends_on:
             - db
@@ -26,14 +26,14 @@ services:
 
     fake-smtp:
         image: citelibre/forms:fake-smtp-1.0.9
-        container_name: fake-smtp
+        container_name: fake-smtp_forms
         ports:
             - "1080:1080"
             - "25:25"
             
     matomo:
         image: citelibre/forms:matomo-1.0.9
-        container_name: matomo
+        container_name: matomo_forms
         ports:
             - "80:80"
         depends_on:
@@ -41,7 +41,7 @@ services:
 
     keycloak:
         image: citelibre/forms:keycloak-1.0.9
-        container_name: keycloak
+        container_name: keycloak_forms
         ports:
             - "8081:8081"
         command: ["-Djboss.http.port=8081"]
@@ -51,7 +51,7 @@ services:
 
     citelibre:
         image: citelibre/forms:ihm-1.0.9
-        container_name: citelibre
+        container_name: citelibre_forms
         ports:
             - 8080:8080
         depends_on:
