@@ -3,7 +3,7 @@ version: '3.5'
 services:
     db:
         image: citelibre/service_ez:db-1.0.9
-        container_name: serviceEZ_db
+        container_name: service_ez_db
         ports:
             - "3307:3306"
         # if you want to persist data uncomment the following 2 lines... don't forget to create the directory mysql-data for sample
@@ -13,7 +13,7 @@ services:
 
     solr:
         image: citelibre/service_ez:solr-1.0.9
-        container_name: serviceEZ_solr
+        container_name: service_ez_solr
         command: -force
         depends_on:
             - db
@@ -26,14 +26,14 @@ services:
 
     fake-smtp:
         image: citelibre/service_ez:fake-smtp-1.0.9
-        container_name: serviceEZ_fake-smtp
+        container_name: service_ez_fake-smtp
         ports:
             - "1080:1080"
             - "25:25"
 
     matomo:
         image: citelibre/service_ez:matomo-1.0.9
-        container_name: serviceEZ_matomo
+        container_name: service_ez_matomo
         ports:
             - "80:80"
         depends_on:
@@ -41,7 +41,7 @@ services:
 
     keycloak:
         image: citelibre/service_ez:keycloak-1.0.9
-        container_name: serviceEZ_keycloak
+        container_name: service_ez_keycloak
         ports:
             - "8081:8081"
         command: ["-Djboss.http.port=8081"]
@@ -51,7 +51,7 @@ services:
 
     citelibre:
         image: citelibre/service_ez:ihm-1.0.9
-        container_name: serviceEZ_citelibre
+        container_name: service_ez_citelibre
         ports:
             - 8080:8080
         depends_on:
