@@ -2,8 +2,8 @@ version: '3.5'
 
 services:
     db:
-        image: citelibre/forms:db-1.0.9
-        container_name: db_forms
+        image: citelibre/service_ez:db-1.0.9
+        container_name: serviceEZ_db
         ports:
             - "3307:3306"
         # if you want to persist data uncomment the following 2 lines... don't forget to create the directory mysql-data for sample
@@ -12,8 +12,8 @@ services:
 
 
     solr:
-        image: citelibre/forms:solr-1.0.9
-        container_name: solr_forms
+        image: citelibre/service_ez:solr-1.0.9
+        container_name: serviceEZ_solr
         command: -force
         depends_on:
             - db
@@ -25,23 +25,23 @@ services:
 
 
     fake-smtp:
-        image: citelibre/forms:fake-smtp-1.0.9
-        container_name: fake-smtp_forms
+        image: citelibre/service_ez:fake-smtp-1.0.9
+        container_name: serviceEZ_fake-smtp
         ports:
             - "1080:1080"
             - "25:25"
-            
+
     matomo:
-        image: citelibre/forms:matomo-1.0.9
-        container_name: matomo_forms
+        image: citelibre/service_ez:matomo-1.0.9
+        container_name: serviceEZ_matomo
         ports:
             - "80:80"
         depends_on:
             - solr
 
     keycloak:
-        image: citelibre/forms:keycloak-1.0.9
-        container_name: keycloak_forms
+        image: citelibre/service_ez:keycloak-1.0.9
+        container_name: serviceEZ_keycloak
         ports:
             - "8081:8081"
         command: ["-Djboss.http.port=8081"]
@@ -50,8 +50,8 @@ services:
 
 
     citelibre:
-        image: citelibre/forms:ihm-1.0.9
-        container_name: citelibre_forms
+        image: citelibre/service_ez:ihm-1.0.9
+        container_name: serviceEZ_citelibre
         ports:
             - 8080:8080
         depends_on:
