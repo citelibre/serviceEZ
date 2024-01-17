@@ -2,16 +2,16 @@ FROM tomcat:9.0-jdk11
 
 RUN apt update && apt install -y haproxy
 
-ARG site=site-citelibre-forms-1.0.9
+ARG site=site-citelibre-serviceEZ-1.0.9
 
 ARG tomcat=/usr/local/tomcat
 WORKDIR ${tomcat}
 COPY target/${site}.war webapps
 COPY haproxy.cfg /etc/haproxy/haproxy.cfg
 
-RUN cd webapps && mkdir forms &&  mv ${site}.war forms/forms.war  && cd forms && jar xvf forms.war && rm forms.war
+RUN cd webapps && mkdir serviceEZ &&  mv ${site}.war serviceEZ/serviceEZ.war  && cd serviceEZ && jar xvf serviceEZ.war && rm serviceEZ.war
 
-COPY webapp/WEB-INF webapps/forms/WEB-INF/
+COPY webapp/WEB-INF webapps/serviceEZ/WEB-INF/
 
 
 
