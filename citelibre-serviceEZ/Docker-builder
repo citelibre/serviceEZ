@@ -1,5 +1,5 @@
 FROM lutece/builder as builder
-ARG site=site-citelibre-forms-1.0.9
+ARG site=site-citelibre-serviceEZ-1.0.9
 
 # build the site and assemble the webapp
 WORKDIR /app
