@@ -147,7 +147,6 @@
             <version>[5.1.0]</version>
             <type>lutece-plugin</type>
         </dependency>
-        <!--
 	<dependency>
             <groupId>fr.paris.lutece.plugins</groupId>
             <artifactId>library-elastic</artifactId>
@@ -166,7 +165,6 @@
             <version>[1.0.6]</version>
             <type>lutece-plugin</type>
         </dependency>
-	-->
         <dependency>
             <groupId>fr.paris.lutece.plugins</groupId>
             <artifactId>plugin-filegenerator</artifactId>
@@ -297,14 +295,12 @@
             <version>[1.0.0]</version>
             <type>lutece-plugin</type>
         </dependency>
-        <!--
 	<dependency>
             <groupId>fr.paris.lutece.plugins</groupId>
             <artifactId>plugin-modulenotifygrumappingmanager</artifactId>
             <version>[2.0.2]</version>
             <type>lutece-plugin</type>
         </dependency>
-	-->
         <dependency>
             <groupId>fr.paris.lutece.plugins</groupId>
             <artifactId>plugin-mylutece</artifactId>
@@ -317,7 +313,6 @@
             <version>[2.1.2]</version>
             <type>lutece-plugin</type>
         </dependency>
-		<!--
         <dependency>
             <groupId>fr.paris.lutece.plugins</groupId>
             <artifactId>library-notifygru</artifactId>
@@ -330,7 +325,6 @@
             <version>[1.2.0]</version>
             <type>lutece-plugin</type>
         </dependency>
-		-->
         <dependency>
             <groupId>fr.paris.lutece.plugins</groupId>
             <artifactId>plugin-oauth2</artifactId>
@@ -433,7 +427,6 @@
             <version>[1.1.0]</version>
             <type>lutece-plugin</type>
         </dependency>
-		<!--
         <dependency>
             <groupId>fr.paris.lutece.plugins</groupId>
             <artifactId>module-workflow-notifygru</artifactId>
@@ -446,7 +439,6 @@
             <version>[2.2.1]</version>
             <type>lutece-plugin</type>
         </dependency>
-		-->
         <dependency>
             <groupId>fr.paris.lutece.plugins</groupId>
             <artifactId>module-workflow-rest</artifactId>
