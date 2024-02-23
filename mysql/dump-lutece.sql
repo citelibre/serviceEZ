@@ -5333,6 +5333,7 @@ CREATE TABLE `workflow_task_notify_gru_history` (
   `code_event` varchar(45) DEFAULT NULL,
   `type_event` varchar(45) DEFAULT NULL,
   `message_event` text DEFAULT NULL,
+  `content_cleaned` smallint(6) DEFAULT 0,
   PRIMARY KEY (`id_history`,`id_task`)
 );
 /*!40101 SET character_set_client = @saved_cs_client */;
