@@ -1,17 +1,43 @@
 VERSION=1.0.9
 
 REPO=citelibre/serviceEZ
+REPO-TEST=test-serviceez
+
 build: ## Build the containers
-	docker build service_ez_citelibre -t $(REPO):ihm
-	docker build service_ez_citelibre -t $(REPO):ihm-$(VERSION)
-	docker build service_ez_fake-smtp -t $(REPO):fake-smtp
-	docker build service_ez_fake-smtp -t $(REPO):fake-smtp-$(VERSION)
-	docker build service_ez_matomo -t $(REPO):matomo
-	docker build service_ez_matomo -t $(REPO):matomo-$(VERSION)
-	docker build service_ez_solr -t $(REPO):solr
-	docker build service_ez_solr -t $(REPO):solr-$(VERSION)
-	docker build service_ez_mysql -t $(REPO):db
-	docker build service_ez_mysql -t $(REPO):db-$(VERSION)
+	docker build citelibre-serviceEZ -t $(REPO):ihm
+	docker build citelibre-serviceEZ -t $(REPO):ihm-$(VERSION)
+	docker build fake-smtp -t $(REPO):fake-smtp
+	docker build fake-smtp -t $(REPO):fake-smtp-$(VERSION)
+	docker build matomo -t $(REPO):matomo
+	docker build matomo -t $(REPO):matomo-$(VERSION)
+	docker build solr -t $(REPO):solr
+	docker build solr -t $(REPO):solr-$(VERSION)
+	docker build mysql -t $(REPO):db
+	docker build mysql -t $(REPO):db-$(VERSION)
+	docker build keycloak -t $(REPO):keycloak
+	docker build keycloak -t $(REPO):keycloak-$(VERSION)
+	docker build kibana -t $(REPO):kibana
+	docker build kibana -t $(REPO):kibana-$(VERSION)
+	docker build elasticsearch -t $(REPO):elasticsearch
+	docker build elasticsearch -t $(REPO):elasticsearch-$(VERSION)
+
+test:
+	docker build -t $(REPO-TEST)/ihm citelibre-serviceEZ
+	docker build -t $(REPO-TEST)/fake-smtp fake-smtp
+	docker build -t $(REPO-TEST)/matomo matomo
+	docker build -t $(REPO-TEST)/solr solr
+	docker build -t $(REPO-TEST)/db mysql
+	docker build -t $(REPO-TEST)/keycloak keycloak
+	docker build -t $(REPO-TEST)/kibana kibana
+	docker build -t $(REPO-TEST)/elasticsearch elasticsearch
+	@echo REPO=$(REPO-TEST) > .env.test
+	docker-compose --env-file .env.test -f ./docker-compose-test.yml up -d
+
+
+test-down:
+	docker-compose --env-file .env.test -f ./docker-compose-test.yml down
+	rm .env.test
+
 
 publish: repo-login publish-latest publish-version ## Publish the `{VERSION}` ans `latest` tagged containers
 

@@ -67,3 +67,39 @@ services:
             - LUTECE_MAIL_USER
             - LUTECE_MAIL_PWD
             - LUTECE_INTERNAL_KEYCLOAK=true
+
+  kibana:
+    image: citelibre/rendezvous:kibana-1.0.12-SNAPSHOT
+    container_name: rdv_kibana
+    environment:
+      - discovery.type=single-node
+      - server.publicBaseUrl=localhost
+    ports:
+      - 5601:5601
+    mem_limit: 1g
+    depends_on:
+      - elasticsearch
+        #volumes:
+        #  - ./kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
+
+  elasticsearch:
+    image: citelibre/rendezvous:elasticsearch-1.0.12-SNAPSHOT
+    container_name: rdv_elasticsearch
+    environment:
+      - ELASTIC_PASSWORD="*93n2US7fWog"
+      - discovery.type=single-node
+      - ESJAVAOPTS=-Xmx1g
+      - xpack.security.enabled=false
+    mem_limit: 1g
+    ports:
+      - 9200:9200
+      - 9300:9300
+    volumes:
+      - type: volume
+        source: elasticsearch-data
+        target: /usr/share/elasticsearch/data
+
+volumes:
+  elasticsearch-data:
+  rendezvous-data:
+    #  solr-data:
