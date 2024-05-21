@@ -6,7 +6,7 @@ username = "root"
 password = "root"
 dbname = "matomo"
 tables_prefix = "matomo_"
-charset = "utf8mb4"
+charset = "utf8mb4_unicode_520_ci"
 
 [General]
 salt = "b6519453d9ac98489c501edb0beb84ac"

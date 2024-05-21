@@ -1,16 +1,16 @@
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8 */;
-/*!50503 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!50503 SET NAMES utf8mb4_unicode_520_ci */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 DROP TABLE IF EXISTS `appointmentgru_`;
 CREATE TABLE IF NOT EXISTS `appointmentgru_` (
   `id_appointmentgru` int(11) NOT NULL,
-  `guid` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `guid` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
   `cuid` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_appointmentgru`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `appointmentgru_` DISABLE KEYS */;
 /*!40000 ALTER TABLE `appointmentgru_` ENABLE KEYS */;
@@ -18,21 +18,21 @@ CREATE TABLE IF NOT EXISTS `appointmentgru_` (
 DROP TABLE IF EXISTS `appointment_appointment`;
 CREATE TABLE IF NOT EXISTS `appointment_appointment` (
   `id_appointment` int(11) NOT NULL AUTO_INCREMENT,
-  `reference` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `reference` varchar(45) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `nb_places` int(11) NOT NULL DEFAULT 0,
   `is_cancelled` tinyint(1) NOT NULL DEFAULT 0,
   `id_action_cancelled` int(11) DEFAULT NULL,
   `notification` int(11) NOT NULL DEFAULT 0,
   `id_admin_user` int(11) DEFAULT 0,
   `date_appointment_create` timestamp NOT NULL DEFAULT current_timestamp(),
-  `admin_access_code_create` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `admin_access_code_create` varchar(100) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `id_user` int(11) NOT NULL,
   `is_surbooked` tinyint(1) NOT NULL DEFAULT 0,
   `id_action_reported` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_appointment`),
   UNIQUE KEY `reference_idx` (`reference`),
   KEY `fk_appointment_appointment_appointment_user_idx` (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=852 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=852 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `appointment_appointment` DISABLE KEYS */;
 INSERT INTO `appointment_appointment` (`id_appointment`, `reference`, `nb_places`, `is_cancelled`, `id_action_cancelled`, `notification`, `id_admin_user`, `date_appointment_create`, `admin_access_code_create`, `id_user`, `is_surbooked`, `id_action_reported`) VALUES
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `appointment_appointment_response` (
   PRIMARY KEY (`id_appointment_response`),
   UNIQUE KEY `appointment_appointment_response_unique` (`id_appointment`,`id_response`),
   KEY `fk_appointment_appointment_response_appointment_appointment_idx` (`id_appointment`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `appointment_appointment_response` DISABLE KEYS */;
 /*!40000 ALTER TABLE `appointment_appointment_response` ENABLE KEYS */;
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `appointment_appointment_slot` (
   `nb_places` int(11) NOT NULL,
   PRIMARY KEY (`id_appointment`,`id_slot`),
   KEY `fk_appointment_appointment_slot_slot` (`id_slot`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `appointment_appointment_slot` DISABLE KEYS */;
 INSERT INTO `appointment_appointment_slot` (`id_appointment`, `id_slot`, `nb_places`) VALUES
@@ -93,11 +93,11 @@ INSERT INTO `appointment_appointment_slot` (`id_appointment`, `id_slot`, `nb_pla
 DROP TABLE IF EXISTS `appointment_calendar_template`;
 CREATE TABLE IF NOT EXISTS `appointment_calendar_template` (
   `id_calendar_template` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `template_path` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `template_path` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   PRIMARY KEY (`id_calendar_template`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `appointment_calendar_template` DISABLE KEYS */;
 INSERT INTO `appointment_calendar_template` (`id_calendar_template`, `title`, `description`, `template_path`) VALUES
@@ -111,11 +111,11 @@ INSERT INTO `appointment_calendar_template` (`id_calendar_template`, `title`, `d
 DROP TABLE IF EXISTS `appointment_category`;
 CREATE TABLE IF NOT EXISTS `appointment_category` (
   `id_category` int(11) NOT NULL AUTO_INCREMENT,
-  `label` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `label` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `nb_max_appointments_per_user` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_category`),
   UNIQUE KEY `appointment_category_unique_label` (`label`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `appointment_category` DISABLE KEYS */;
 INSERT INTO `appointment_category` (`id_category`, `label`, `nb_max_appointments_per_user`) VALUES
@@ -131,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `appointment_closing_day` (
   UNIQUE KEY `appointment_closing_day_unique` (`id_form`,`date_of_closing_day`),
   KEY `fk_appointment_closing_day_appointment_form_idx` (`id_form`),
   KEY `date_of_closing_day` (`date_of_closing_day`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `appointment_closing_day` DISABLE KEYS */;
 INSERT INTO `appointment_closing_day` (`id_closing_day`, `date_of_closing_day`, `id_form`) VALUES
@@ -188,7 +188,7 @@ CREATE TABLE IF NOT EXISTS `appointment_display` (
   `id_display` int(11) NOT NULL AUTO_INCREMENT,
   `display_title_fo` tinyint(1) NOT NULL DEFAULT 0,
   `icon_form_content` mediumblob DEFAULT NULL,
-  `icon_form_mime_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `icon_form_mime_type` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `nb_weeks_to_display` int(11) NOT NULL DEFAULT 0,
   `is_displayed_on_portlet` tinyint(1) NOT NULL DEFAULT 1,
   `id_calendar_template` int(11) NOT NULL,
@@ -196,7 +196,7 @@ CREATE TABLE IF NOT EXISTS `appointment_display` (
   PRIMARY KEY (`id_display`),
   UNIQUE KEY `appointment_display_unique` (`id_form`),
   KEY `fk_appointment_display_appointment_calendar_template_idx` (`id_calendar_template`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `appointment_display` DISABLE KEYS */;
 INSERT INTO `appointment_display` (`id_display`, `display_title_fo`, `icon_form_content`, `icon_form_mime_type`, `nb_weeks_to_display`, `is_displayed_on_portlet`, `id_calendar_template`, `id_form`) VALUES
@@ -207,23 +207,23 @@ INSERT INTO `appointment_display` (`id_display`, `display_title_fo`, `icon_form_
 DROP TABLE IF EXISTS `appointment_form`;
 CREATE TABLE IF NOT EXISTS `appointment_form` (
   `id_form` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `reference` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `reference` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `id_category` int(11) DEFAULT NULL,
   `starting_validity_date` date DEFAULT NULL,
   `ending_validity_date` date DEFAULT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT 0,
   `id_workflow` int(11) DEFAULT NULL,
-  `workgroup` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `workgroup` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `is_multislot_appointment` tinyint(1) NOT NULL DEFAULT 0,
-  `role_fo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `role_fo` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `capacity_per_slot` int(11) NOT NULL DEFAULT 5,
   PRIMARY KEY (`id_form`),
   KEY `starting_validity_date_idx` (`starting_validity_date`),
   KEY `ending_validity_date_idx` (`ending_validity_date`),
   KEY `fk_appointment_form_appointment_category_idx` (`id_category`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `appointment_form` DISABLE KEYS */;
 INSERT INTO `appointment_form` (`id_form`, `title`, `description`, `reference`, `id_category`, `starting_validity_date`, `ending_validity_date`, `is_active`, `id_workflow`, `workgroup`, `is_multislot_appointment`, `role_fo`, `capacity_per_slot`) VALUES
@@ -234,27 +234,27 @@ INSERT INTO `appointment_form` (`id_form`, `title`, `description`, `reference`, 
 DROP TABLE IF EXISTS `appointment_form_message`;
 CREATE TABLE IF NOT EXISTS `appointment_form_message` (
   `id_form_message` int(11) NOT NULL AUTO_INCREMENT,
-  `calendar_title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `field_firstname_title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `field_firstname_help` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `field_lastname_title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `field_lastname_help` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `field_email_title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `field_email_help` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `field_confirmationEmail_title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `field_confirmationEmail_help` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `text_appointment_created` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `url_redirect_after_creation` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `text_appointment_canceled` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `label_button_redirection` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `no_available_slot` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `calendar_description` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `calendar_reserve_label` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `calendar_full_label` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `calendar_title` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `field_firstname_title` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `field_firstname_help` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `field_lastname_title` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `field_lastname_help` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `field_email_title` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `field_email_help` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `field_confirmationEmail_title` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `field_confirmationEmail_help` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `text_appointment_created` mediumtext COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `url_redirect_after_creation` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `text_appointment_canceled` mediumtext COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `label_button_redirection` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `no_available_slot` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `calendar_description` mediumtext COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `calendar_reserve_label` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `calendar_full_label` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `id_form` int(11) NOT NULL,
   PRIMARY KEY (`id_form_message`),
   KEY `fk_appointment_form_message_appointment_form_idx` (`id_form`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `appointment_form_message` DISABLE KEYS */;
 INSERT INTO `appointment_form_message` (`id_form_message`, `calendar_title`, `field_firstname_title`, `field_firstname_help`, `field_lastname_title`, `field_lastname_help`, `field_email_title`, `field_email_help`, `field_confirmationEmail_title`, `field_confirmationEmail_help`, `text_appointment_created`, `url_redirect_after_creation`, `text_appointment_canceled`, `label_button_redirection`, `no_available_slot`, `calendar_description`, `calendar_reserve_label`, `calendar_full_label`, `id_form`) VALUES
@@ -268,7 +268,7 @@ CREATE TABLE IF NOT EXISTS `appointment_form_portlet` (
   `id_form` int(11) NOT NULL,
   PRIMARY KEY (`id_portlet`,`id_form`),
   KEY `fk_appointment_form_portlet_appointment_form_idx` (`id_form`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `appointment_form_portlet` DISABLE KEYS */;
 /*!40000 ALTER TABLE `appointment_form_portlet` ENABLE KEYS */;
@@ -287,7 +287,7 @@ CREATE TABLE IF NOT EXISTS `appointment_form_rule` (
   `id_form` int(11) NOT NULL,
   PRIMARY KEY (`id_form_rule`),
   UNIQUE KEY `appointment_form_rule_unique` (`id_form`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `appointment_form_rule` DISABLE KEYS */;
 INSERT INTO `appointment_form_rule` (`id_form_rule`, `is_captcha_enabled`, `is_mandatory_email_enabled`, `is_active_authentication`, `nb_days_before_new_appointment`, `min_time_before_appointment`, `nb_max_appointments_per_user`, `nb_days_for_max_appointments_per_user`, `bo_overbooking`, `id_form`) VALUES
@@ -300,11 +300,11 @@ CREATE TABLE IF NOT EXISTS `appointment_localization` (
   `id_localization` int(11) NOT NULL AUTO_INCREMENT,
   `longitude` float DEFAULT NULL,
   `latitude` float DEFAULT NULL,
-  `address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `id_form` int(11) NOT NULL,
   PRIMARY KEY (`id_localization`),
   KEY `fk_appointment_localization_appointment_form_idx` (`id_form`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `appointment_localization` DISABLE KEYS */;
 INSERT INTO `appointment_localization` (`id_localization`, `longitude`, `latitude`, `address`, `id_form`) VALUES
@@ -339,9 +339,9 @@ DROP TABLE IF EXISTS `appointment_resource_app_res`;
 CREATE TABLE IF NOT EXISTS `appointment_resource_app_res` (
   `id_appointment` int(11) NOT NULL DEFAULT 0,
   `id_app_form_res_type` int(11) NOT NULL DEFAULT 0,
-  `id_resource` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `id_resource` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id_appointment`,`id_app_form_res_type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `appointment_resource_app_res` DISABLE KEYS */;
 /*!40000 ALTER TABLE `appointment_resource_app_res` ENABLE KEYS */;
@@ -350,14 +350,14 @@ DROP TABLE IF EXISTS `appointment_resource_form_rt`;
 CREATE TABLE IF NOT EXISTS `appointment_resource_form_rt` (
   `id` int(11) NOT NULL DEFAULT 0,
   `id_appointment_form` int(11) NOT NULL DEFAULT 0,
-  `resource_type_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `resource_type_name` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `description` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
   `is_app_admin_user` smallint(6) NOT NULL DEFAULT 0,
   `is_localization` smallint(6) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `idx_appointment_resource_form_rt_name` (`resource_type_name`),
   KEY `fk_appointment_res_form_rt_id_form` (`id_appointment_form`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `appointment_resource_form_rt` DISABLE KEYS */;
 /*!40000 ALTER TABLE `appointment_resource_form_rt` ENABLE KEYS */;
@@ -380,7 +380,7 @@ CREATE TABLE IF NOT EXISTS `appointment_slot` (
   KEY `fk_appointment_slot_appointment_form_idx` (`id_form`),
   KEY `starting_date_time_idx` (`starting_date_time`),
   KEY `ending_date_time_idx` (`ending_date_time`)
-) ENGINE=InnoDB AUTO_INCREMENT=3661 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3661 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `appointment_slot` DISABLE KEYS */;
 INSERT INTO `appointment_slot` (`id_slot`, `starting_date_time`, `ending_date_time`, `is_open`, `is_specific`, `max_capacity`, `nb_remaining_places`, `nb_potential_remaining_places`, `nb_places_taken`, `id_form`) VALUES
@@ -904,14 +904,14 @@ INSERT INTO `appointment_time_slot` (`id_time_slot`, `starting_time`, `ending_ti
 DROP TABLE IF EXISTS `appointment_user`;
 CREATE TABLE IF NOT EXISTS `appointment_user` (
   `id_user` int(11) NOT NULL AUTO_INCREMENT,
-  `guid` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `first_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `last_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `phone_number` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `guid` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `first_name` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `last_name` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `phone_number` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id_user`),
   KEY `email_idx` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `appointment_user` DISABLE KEYS */;
 INSERT INTO `appointment_user` (`id_user`, `guid`, `first_name`, `last_name`, `email`, `phone_number`) VALUES
@@ -996,11 +996,11 @@ INSERT INTO `appointment_working_day` (`id_working_day`, `day_of_week`, `id_rese
 
 DROP TABLE IF EXISTS `core_admin_dashboard`;
 CREATE TABLE IF NOT EXISTS `core_admin_dashboard` (
-  `dashboard_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `dashboard_name` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `dashboard_column` int(11) NOT NULL,
   `dashboard_order` int(11) NOT NULL,
   PRIMARY KEY (`dashboard_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_admin_dashboard` DISABLE KEYS */;
 INSERT INTO `core_admin_dashboard` (`dashboard_name`, `dashboard_column`, `dashboard_order`) VALUES
@@ -1017,11 +1017,11 @@ INSERT INTO `core_admin_dashboard` (`dashboard_name`, `dashboard_column`, `dashb
 DROP TABLE IF EXISTS `core_admin_mailinglist`;
 CREATE TABLE IF NOT EXISTS `core_admin_mailinglist` (
   `id_mailinglist` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `workgroup` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `workgroup` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   PRIMARY KEY (`id_mailinglist`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_admin_mailinglist` DISABLE KEYS */;
 /*!40000 ALTER TABLE `core_admin_mailinglist` ENABLE KEYS */;
@@ -1029,31 +1029,31 @@ CREATE TABLE IF NOT EXISTS `core_admin_mailinglist` (
 DROP TABLE IF EXISTS `core_admin_mailinglist_filter`;
 CREATE TABLE IF NOT EXISTS `core_admin_mailinglist_filter` (
   `id_mailinglist` int(11) NOT NULL DEFAULT 0,
-  `workgroup` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `role` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `workgroup` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `role` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   PRIMARY KEY (`id_mailinglist`,`workgroup`,`role`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_admin_mailinglist_filter` DISABLE KEYS */;
 /*!40000 ALTER TABLE `core_admin_mailinglist_filter` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `core_admin_right`;
 CREATE TABLE IF NOT EXISTS `core_admin_right` (
-  `id_right` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id_right` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `name` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `level_right` smallint(6) DEFAULT NULL,
-  `admin_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `admin_url` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `is_updatable` int(11) NOT NULL DEFAULT 0,
-  `plugin_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `id_feature_group` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `icon_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `documentation_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `plugin_name` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `id_feature_group` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `icon_url` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `documentation_url` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `id_order` int(11) DEFAULT NULL,
   `is_external_feature` smallint(6) DEFAULT 0,
   PRIMARY KEY (`id_right`),
   KEY `index_right` (`level_right`,`admin_url`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_admin_right` DISABLE KEYS */;
 INSERT INTO `core_admin_right` (`id_right`, `name`, `level_right`, `admin_url`, `description`, `is_updatable`, `plugin_name`, `id_feature_group`, `icon_url`, `documentation_url`, `id_order`, `is_external_feature`) VALUES
@@ -1109,10 +1109,10 @@ INSERT INTO `core_admin_right` (`id_right`, `name`, `level_right`, `admin_url`, 
 
 DROP TABLE IF EXISTS `core_admin_role`;
 CREATE TABLE IF NOT EXISTS `core_admin_role` (
-  `role_key` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `role_description` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `role_key` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `role_description` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`role_key`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_admin_role` DISABLE KEYS */;
 INSERT INTO `core_admin_role` (`role_key`, `role_description`) VALUES
@@ -1145,12 +1145,12 @@ INSERT INTO `core_admin_role` (`role_key`, `role_description`) VALUES
 DROP TABLE IF EXISTS `core_admin_role_resource`;
 CREATE TABLE IF NOT EXISTS `core_admin_role_resource` (
   `rbac_id` int(11) NOT NULL AUTO_INCREMENT,
-  `role_key` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `resource_type` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `resource_id` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `permission` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `role_key` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `resource_type` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `resource_id` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `permission` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`rbac_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1174 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1174 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_admin_role_resource` DISABLE KEYS */;
 INSERT INTO `core_admin_role_resource` (`rbac_id`, `role_key`, `resource_type`, `resource_id`, `permission`) VALUES
@@ -1240,13 +1240,13 @@ INSERT INTO `core_admin_role_resource` (`rbac_id`, `role_key`, `resource_type`, 
 DROP TABLE IF EXISTS `core_admin_user`;
 CREATE TABLE IF NOT EXISTS `core_admin_user` (
   `id_user` int(11) NOT NULL AUTO_INCREMENT,
-  `access_code` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `last_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `first_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `email` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
+  `access_code` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `last_name` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `first_name` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `email` varchar(256) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '0',
   `status` smallint(6) NOT NULL DEFAULT 0,
-  `password` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
-  `locale` varchar(10) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'fr',
+  `password` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `locale` varchar(10) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT 'fr',
   `level_user` smallint(6) NOT NULL DEFAULT 0,
   `reset_password` smallint(6) NOT NULL DEFAULT 0,
   `accessibility_mode` smallint(6) NOT NULL DEFAULT 0,
@@ -1254,9 +1254,9 @@ CREATE TABLE IF NOT EXISTS `core_admin_user` (
   `account_max_valid_date` bigint(20) DEFAULT NULL,
   `nb_alerts_sent` int(11) NOT NULL DEFAULT 0,
   `last_login` timestamp NOT NULL DEFAULT '1980-01-01 00:00:00',
-  `workgroup_key` varchar(50) COLLATE utf8_unicode_ci DEFAULT 'all',
+  `workgroup_key` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT 'all',
   PRIMARY KEY (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_admin_user` DISABLE KEYS */;
 INSERT INTO `core_admin_user` (`id_user`, `access_code`, `last_name`, `first_name`, `email`, `status`, `password`, `locale`, `level_user`, `reset_password`, `accessibility_mode`, `password_max_valid_date`, `account_max_valid_date`, `nb_alerts_sent`, `last_login`, `workgroup_key`) VALUES
@@ -1265,10 +1265,10 @@ INSERT INTO `core_admin_user` (`id_user`, `access_code`, `last_name`, `first_nam
 
 DROP TABLE IF EXISTS `core_admin_user_anonymize_field`;
 CREATE TABLE IF NOT EXISTS `core_admin_user_anonymize_field` (
-  `field_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `field_name` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `anonymize` smallint(6) NOT NULL,
   PRIMARY KEY (`field_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_admin_user_anonymize_field` DISABLE KEYS */;
 INSERT INTO `core_admin_user_anonymize_field` (`field_name`, `anonymize`) VALUES
@@ -1285,10 +1285,10 @@ CREATE TABLE IF NOT EXISTS `core_admin_user_field` (
   `id_attribute` int(11) DEFAULT NULL,
   `id_field` int(11) DEFAULT NULL,
   `id_file` int(11) DEFAULT NULL,
-  `user_field_value` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `user_field_value` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id_user_field`),
   KEY `core_admin_user_field_idx_file` (`id_file`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_admin_user_field` DISABLE KEYS */;
 INSERT INTO `core_admin_user_field` (`id_user_field`, `id_user`, `id_attribute`, `id_field`, `id_file`, `user_field_value`) VALUES
@@ -1300,32 +1300,32 @@ INSERT INTO `core_admin_user_field` (`id_user_field`, `id_user`, `id_attribute`,
 
 DROP TABLE IF EXISTS `core_admin_user_preferences`;
 CREATE TABLE IF NOT EXISTS `core_admin_user_preferences` (
-  `id_user` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `pref_key` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `pref_value` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id_user` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `pref_key` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `pref_value` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id_user`,`pref_key`),
   KEY `index_admin_user_preferences` (`id_user`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_admin_user_preferences` DISABLE KEYS */;
 /*!40000 ALTER TABLE `core_admin_user_preferences` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `core_admin_workgroup`;
 CREATE TABLE IF NOT EXISTS `core_admin_workgroup` (
-  `workgroup_key` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `workgroup_description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `workgroup_key` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `workgroup_description` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`workgroup_key`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_admin_workgroup` DISABLE KEYS */;
 /*!40000 ALTER TABLE `core_admin_workgroup` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `core_admin_workgroup_user`;
 CREATE TABLE IF NOT EXISTS `core_admin_workgroup_user` (
-  `workgroup_key` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `workgroup_key` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `id_user` int(11) NOT NULL,
   PRIMARY KEY (`workgroup_key`,`id_user`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_admin_workgroup_user` DISABLE KEYS */;
 INSERT INTO `core_admin_workgroup_user` (`workgroup_key`, `id_user`) VALUES
@@ -1569,18 +1569,18 @@ INSERT INTO `core_admin_workgroup_user` (`workgroup_key`, `id_user`) VALUES
 DROP TABLE IF EXISTS `core_attribute`;
 CREATE TABLE IF NOT EXISTS `core_attribute` (
   `id_attribute` int(11) NOT NULL AUTO_INCREMENT,
-  `type_class_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `title` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
-  `help_message` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `type_class_name` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `title` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `help_message` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `is_mandatory` smallint(6) DEFAULT 0,
   `is_shown_in_search` smallint(6) DEFAULT 0,
   `is_shown_in_result_list` smallint(6) DEFAULT 0,
   `is_field_in_line` smallint(6) DEFAULT 0,
   `attribute_position` int(11) DEFAULT 0,
-  `plugin_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `plugin_name` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `anonymize` smallint(6) DEFAULT NULL,
   PRIMARY KEY (`id_attribute`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_attribute` DISABLE KEYS */;
 INSERT INTO `core_attribute` (`id_attribute`, `type_class_name`, `title`, `help_message`, `is_mandatory`, `is_shown_in_search`, `is_shown_in_result_list`, `is_field_in_line`, `attribute_position`, `plugin_name`, `anonymize`) VALUES
@@ -1591,8 +1591,8 @@ DROP TABLE IF EXISTS `core_attribute_field`;
 CREATE TABLE IF NOT EXISTS `core_attribute_field` (
   `id_field` int(11) NOT NULL AUTO_INCREMENT,
   `id_attribute` int(11) DEFAULT NULL,
-  `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `DEFAULT_value` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `DEFAULT_value` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `is_DEFAULT_value` smallint(6) DEFAULT 0,
   `height` int(11) DEFAULT NULL,
   `width` int(11) DEFAULT NULL,
@@ -1600,7 +1600,7 @@ CREATE TABLE IF NOT EXISTS `core_attribute_field` (
   `is_multiple` smallint(6) DEFAULT 0,
   `field_position` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_field`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_attribute_field` DISABLE KEYS */;
 INSERT INTO `core_attribute_field` (`id_field`, `id_attribute`, `title`, `DEFAULT_value`, `is_DEFAULT_value`, `height`, `width`, `max_size_enter`, `is_multiple`, `field_position`) VALUES
@@ -1616,12 +1616,12 @@ INSERT INTO `core_attribute_field` (`id_field`, `id_attribute`, `title`, `DEFAUL
 
 DROP TABLE IF EXISTS `core_connections_log`;
 CREATE TABLE IF NOT EXISTS `core_connections_log` (
-  `access_code` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `ip_address` varchar(63) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `access_code` varchar(100) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `ip_address` varchar(63) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `date_login` timestamp NOT NULL DEFAULT current_timestamp(),
   `login_status` int(11) DEFAULT NULL,
   KEY `index_connections_log` (`ip_address`,`date_login`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_connections_log` DISABLE KEYS */;
 INSERT INTO `core_connections_log` (`access_code`, `ip_address`, `date_login`, `login_status`) VALUES
@@ -1872,11 +1872,11 @@ INSERT INTO `core_connections_log` (`access_code`, `ip_address`, `date_login`, `
 
 DROP TABLE IF EXISTS `core_dashboard`;
 CREATE TABLE IF NOT EXISTS `core_dashboard` (
-  `dashboard_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `dashboard_name` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `dashboard_column` int(11) NOT NULL,
   `dashboard_order` int(11) NOT NULL,
   PRIMARY KEY (`dashboard_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_dashboard` DISABLE KEYS */;
 INSERT INTO `core_dashboard` (`dashboard_name`, `dashboard_column`, `dashboard_order`) VALUES
@@ -1891,10 +1891,10 @@ INSERT INTO `core_dashboard` (`dashboard_name`, `dashboard_column`, `dashboard_o
 
 DROP TABLE IF EXISTS `core_datastore`;
 CREATE TABLE IF NOT EXISTS `core_datastore` (
-  `entity_key` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `entity_value` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `entity_key` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `entity_value` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`entity_key`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_datastore` DISABLE KEYS */;
 INSERT INTO `core_datastore` (`entity_key`, `entity_value`) VALUES
@@ -2337,12 +2337,12 @@ INSERT INTO `core_datastore` (`entity_key`, `entity_value`) VALUES
 
 DROP TABLE IF EXISTS `core_feature_group`;
 CREATE TABLE IF NOT EXISTS `core_feature_group` (
-  `id_feature_group` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `feature_group_description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `feature_group_label` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id_feature_group` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `feature_group_description` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `feature_group_label` varchar(100) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `feature_group_order` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_feature_group`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_feature_group` DISABLE KEYS */;
 INSERT INTO `core_feature_group` (`id_feature_group`, `feature_group_description`, `feature_group_label`, `feature_group_order`) VALUES
@@ -2358,13 +2358,13 @@ INSERT INTO `core_feature_group` (`id_feature_group`, `feature_group_description
 DROP TABLE IF EXISTS `core_file`;
 CREATE TABLE IF NOT EXISTS `core_file` (
   `id_file` int(11) NOT NULL AUTO_INCREMENT,
-  `title` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `title` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `id_physical_file` int(11) DEFAULT NULL,
   `file_size` int(11) DEFAULT NULL,
-  `mime_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `mime_type` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `date_creation` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_file`)
-) ENGINE=InnoDB AUTO_INCREMENT=204 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=204 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_file` DISABLE KEYS */;
 INSERT INTO `core_file` (`id_file`, `title`, `id_physical_file`, `file_size`, `mime_type`, `date_creation`) VALUES
@@ -2375,10 +2375,10 @@ INSERT INTO `core_file` (`id_file`, `title`, `id_physical_file`, `file_size`, `m
 
 DROP TABLE IF EXISTS `core_id_generator`;
 CREATE TABLE IF NOT EXISTS `core_id_generator` (
-  `class_name` varchar(250) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `class_name` varchar(250) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
   `current_value` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`class_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_id_generator` DISABLE KEYS */;
 /*!40000 ALTER TABLE `core_id_generator` ENABLE KEYS */;
@@ -2386,12 +2386,12 @@ CREATE TABLE IF NOT EXISTS `core_id_generator` (
 DROP TABLE IF EXISTS `core_indexer_action`;
 CREATE TABLE IF NOT EXISTS `core_indexer_action` (
   `id_action` int(11) NOT NULL AUTO_INCREMENT,
-  `id_document` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `id_document` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `id_task` int(11) NOT NULL DEFAULT 0,
-  `indexer_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `indexer_name` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `id_portlet` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_action`)
-) ENGINE=InnoDB AUTO_INCREMENT=1437 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1437 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_indexer_action` DISABLE KEYS */;
 /*!40000 ALTER TABLE `core_indexer_action` ENABLE KEYS */;
@@ -2399,9 +2399,9 @@ CREATE TABLE IF NOT EXISTS `core_indexer_action` (
 DROP TABLE IF EXISTS `core_level_right`;
 CREATE TABLE IF NOT EXISTS `core_level_right` (
   `id_level` smallint(6) NOT NULL DEFAULT 0,
-  `name` varchar(80) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(80) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id_level`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_level_right` DISABLE KEYS */;
 INSERT INTO `core_level_right` (`id_level`, `name`) VALUES
@@ -2416,7 +2416,7 @@ CREATE TABLE IF NOT EXISTS `core_mail_item` (
   `id_mail_queue` int(11) NOT NULL DEFAULT 0,
   `mail_item` mediumblob DEFAULT NULL,
   PRIMARY KEY (`id_mail_queue`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_mail_item` DISABLE KEYS */;
 /*!40000 ALTER TABLE `core_mail_item` ENABLE KEYS */;
@@ -2427,7 +2427,7 @@ CREATE TABLE IF NOT EXISTS `core_mail_queue` (
   `is_locked` smallint(6) DEFAULT 0,
   PRIMARY KEY (`id_mail_queue`),
   KEY `is_locked_core_mail_queue` (`is_locked`)
-) ENGINE=InnoDB AUTO_INCREMENT=435 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=435 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_mail_queue` DISABLE KEYS */;
 /*!40000 ALTER TABLE `core_mail_queue` ENABLE KEYS */;
@@ -2435,17 +2435,17 @@ CREATE TABLE IF NOT EXISTS `core_mail_queue` (
 DROP TABLE IF EXISTS `core_mode`;
 CREATE TABLE IF NOT EXISTS `core_mode` (
   `id_mode` int(11) NOT NULL DEFAULT 0,
-  `description_mode` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `path` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `output_xsl_method` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `output_xsl_version` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `output_xsl_media_type` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `output_xsl_encoding` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `output_xsl_indent` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `output_xsl_omit_xml_dec` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `output_xsl_standalone` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description_mode` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `path` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `output_xsl_method` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `output_xsl_version` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `output_xsl_media_type` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `output_xsl_encoding` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `output_xsl_indent` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `output_xsl_omit_xml_dec` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `output_xsl_standalone` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id_mode`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_mode` DISABLE KEYS */;
 INSERT INTO `core_mode` (`id_mode`, `description_mode`, `path`, `output_xsl_method`, `output_xsl_version`, `output_xsl_media_type`, `output_xsl_encoding`, `output_xsl_indent`, `output_xsl_omit_xml_dec`, `output_xsl_standalone`) VALUES
@@ -2458,27 +2458,27 @@ DROP TABLE IF EXISTS `core_page`;
 CREATE TABLE IF NOT EXISTS `core_page` (
   `id_page` int(11) NOT NULL AUTO_INCREMENT,
   `id_parent` int(11) DEFAULT 0,
-  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `description` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `description` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `date_update` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` smallint(6) DEFAULT NULL,
   `page_order` int(11) DEFAULT 0,
   `id_template` int(11) DEFAULT NULL,
   `date_creation` timestamp NULL DEFAULT NULL,
-  `role` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `code_theme` varchar(80) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `role` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `code_theme` varchar(80) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `node_status` smallint(6) NOT NULL DEFAULT 1,
   `image_content` mediumblob DEFAULT NULL,
-  `mime_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'NULL',
-  `meta_keywords` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `meta_description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `mime_type` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT 'NULL',
+  `meta_keywords` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `meta_description` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `id_authorization_node` int(11) DEFAULT NULL,
   `display_date_update` smallint(6) NOT NULL DEFAULT 0,
   `is_manual_date_update` smallint(6) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_page`),
   KEY `index_page` (`id_template`,`id_parent`),
   KEY `index_childpage` (`id_parent`,`page_order`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_page` DISABLE KEYS */;
 INSERT INTO `core_page` (`id_page`, `id_parent`, `name`, `description`, `date_update`, `status`, `page_order`, `id_template`, `date_creation`, `role`, `code_theme`, `node_status`, `image_content`, `mime_type`, `meta_keywords`, `meta_description`, `id_authorization_node`, `display_date_update`, `is_manual_date_update`) VALUES
@@ -2488,11 +2488,11 @@ INSERT INTO `core_page` (`id_page`, `id_parent`, `name`, `description`, `date_up
 DROP TABLE IF EXISTS `core_page_template`;
 CREATE TABLE IF NOT EXISTS `core_page_template` (
   `id_template` int(11) NOT NULL AUTO_INCREMENT,
-  `description` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `file_name` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `picture` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `file_name` varchar(100) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `picture` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id_template`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_page_template` DISABLE KEYS */;
 INSERT INTO `core_page_template` (`id_template`, `description`, `file_name`, `picture`) VALUES
@@ -2509,7 +2509,7 @@ CREATE TABLE IF NOT EXISTS `core_physical_file` (
   `id_physical_file` int(11) NOT NULL AUTO_INCREMENT,
   `file_value` mediumblob DEFAULT NULL,
   PRIMARY KEY (`id_physical_file`)
-) ENGINE=InnoDB AUTO_INCREMENT=292 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=292 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_physical_file` DISABLE KEYS */;
 INSERT INTO `core_physical_file` (`id_physical_file`, `file_value`) VALUES
@@ -2521,9 +2521,9 @@ INSERT INTO `core_physical_file` (`id_physical_file`, `file_value`) VALUES
 DROP TABLE IF EXISTS `core_portal_component`;
 CREATE TABLE IF NOT EXISTS `core_portal_component` (
   `id_portal_component` int(11) NOT NULL DEFAULT 0,
-  `name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id_portal_component`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_portal_component` DISABLE KEYS */;
 INSERT INTO `core_portal_component` (`id_portal_component`, `name`) VALUES
@@ -2541,9 +2541,9 @@ INSERT INTO `core_portal_component` (`id_portal_component`, `name`) VALUES
 DROP TABLE IF EXISTS `core_portlet`;
 CREATE TABLE IF NOT EXISTS `core_portlet` (
   `id_portlet` int(11) NOT NULL AUTO_INCREMENT,
-  `id_portlet_type` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id_portlet_type` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `id_page` int(11) DEFAULT NULL,
-  `name` varchar(70) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(70) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `date_update` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` smallint(6) NOT NULL DEFAULT 0,
   `portlet_order` int(11) DEFAULT NULL,
@@ -2552,11 +2552,11 @@ CREATE TABLE IF NOT EXISTS `core_portlet` (
   `accept_alias` smallint(6) DEFAULT NULL,
   `date_creation` timestamp NULL DEFAULT NULL,
   `display_portlet_title` int(11) NOT NULL DEFAULT 0,
-  `role` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `role` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `device_display_flags` int(11) NOT NULL DEFAULT 15,
   PRIMARY KEY (`id_portlet`),
   KEY `index_portlet` (`id_page`,`id_portlet_type`,`id_style`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_portlet` DISABLE KEYS */;
 INSERT INTO `core_portlet` (`id_portlet`, `id_portlet_type`, `id_page`, `name`, `date_update`, `status`, `portlet_order`, `column_no`, `id_style`, `accept_alias`, `date_creation`, `display_portlet_title`, `role`, `device_display_flags`) VALUES
@@ -2570,29 +2570,29 @@ CREATE TABLE IF NOT EXISTS `core_portlet_alias` (
   `id_portlet` int(11) NOT NULL DEFAULT 0,
   `id_alias` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_portlet`,`id_alias`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_portlet_alias` DISABLE KEYS */;
 /*!40000 ALTER TABLE `core_portlet_alias` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `core_portlet_type`;
 CREATE TABLE IF NOT EXISTS `core_portlet_type` (
-  `id_portlet_type` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
-  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `url_creation` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `url_update` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `home_class` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `plugin_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `url_docreate` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `create_script` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `create_specific` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `create_specific_form` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `url_domodify` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `modify_script` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `modify_specific` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `modify_specific_form` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id_portlet_type` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '0',
+  `name` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `url_creation` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `url_update` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `home_class` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `plugin_name` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `url_docreate` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `create_script` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `create_specific` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `create_specific_form` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `url_domodify` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `modify_script` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `modify_specific` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `modify_specific_form` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id_portlet_type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_portlet_type` DISABLE KEYS */;
 INSERT INTO `core_portlet_type` (`id_portlet_type`, `name`, `url_creation`, `url_update`, `home_class`, `plugin_name`, `url_docreate`, `create_script`, `create_specific`, `create_specific_form`, `url_domodify`, `modify_script`, `modify_specific`, `modify_specific_form`) VALUES
@@ -2608,11 +2608,11 @@ INSERT INTO `core_portlet_type` (`id_portlet_type`, `name`, `url_creation`, `url
 
 DROP TABLE IF EXISTS `core_role`;
 CREATE TABLE IF NOT EXISTS `core_role` (
-  `role` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `role_description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `workgroup_key` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `role` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `role_description` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `workgroup_key` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`role`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_role` DISABLE KEYS */;
 INSERT INTO `core_role` (`role`, `role_description`, `workgroup_key`) VALUES
@@ -2622,10 +2622,10 @@ INSERT INTO `core_role` (`role`, `role_description`, `workgroup_key`) VALUES
 
 DROP TABLE IF EXISTS `core_search_parameter`;
 CREATE TABLE IF NOT EXISTS `core_search_parameter` (
-  `parameter_key` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `parameter_value` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `parameter_key` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `parameter_value` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`parameter_key`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_search_parameter` DISABLE KEYS */;
 INSERT INTO `core_search_parameter` (`parameter_key`, `parameter_value`) VALUES
@@ -2640,12 +2640,12 @@ INSERT INTO `core_search_parameter` (`parameter_key`, `parameter_value`) VALUES
 DROP TABLE IF EXISTS `core_style`;
 CREATE TABLE IF NOT EXISTS `core_style` (
   `id_style` int(11) NOT NULL DEFAULT 0,
-  `description_style` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `id_portlet_type` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description_style` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `id_portlet_type` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `id_portal_component` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_style`),
   KEY `index_style` (`id_portlet_type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_style` DISABLE KEYS */;
 INSERT INTO `core_style` (`id_style`, `description_style`, `id_portlet_type`, `id_portal_component`) VALUES
@@ -2663,11 +2663,11 @@ INSERT INTO `core_style` (`id_style`, `description_style`, `id_portlet_type`, `i
 DROP TABLE IF EXISTS `core_stylesheet`;
 CREATE TABLE IF NOT EXISTS `core_stylesheet` (
   `id_stylesheet` int(11) NOT NULL AUTO_INCREMENT,
-  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `file_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `file_name` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `source` mediumblob DEFAULT NULL,
   PRIMARY KEY (`id_stylesheet`)
-) ENGINE=InnoDB AUTO_INCREMENT=311 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=311 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_stylesheet` DISABLE KEYS */;
 INSERT INTO `core_stylesheet` (`id_stylesheet`, `description`, `file_name`, `source`) VALUES
@@ -2689,7 +2689,7 @@ CREATE TABLE IF NOT EXISTS `core_style_mode_stylesheet` (
   `id_stylesheet` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_style`,`id_mode`,`id_stylesheet`),
   KEY `index_style_mode_stylesheet` (`id_stylesheet`,`id_mode`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_style_mode_stylesheet` DISABLE KEYS */;
 INSERT INTO `core_style_mode_stylesheet` (`id_style`, `id_mode`, `id_stylesheet`) VALUES
@@ -2706,10 +2706,10 @@ INSERT INTO `core_style_mode_stylesheet` (`id_style`, `id_mode`, `id_stylesheet`
 
 DROP TABLE IF EXISTS `core_template`;
 CREATE TABLE IF NOT EXISTS `core_template` (
-  `template_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `template_value` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `template_name` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `template_value` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`template_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_template` DISABLE KEYS */;
 INSERT INTO `core_template` (`template_name`, `template_value`) VALUES
@@ -2722,11 +2722,11 @@ INSERT INTO `core_template` (`template_name`, `template_value`) VALUES
 
 DROP TABLE IF EXISTS `core_text_editor`;
 CREATE TABLE IF NOT EXISTS `core_text_editor` (
-  `editor_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `editor_description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `editor_name` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `editor_description` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `backOffice` smallint(6) NOT NULL,
   PRIMARY KEY (`editor_name`,`backOffice`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_text_editor` DISABLE KEYS */;
 INSERT INTO `core_text_editor` (`editor_name`, `editor_description`, `backOffice`) VALUES
@@ -2739,10 +2739,10 @@ INSERT INTO `core_text_editor` (`editor_name`, `editor_description`, `backOffice
 DROP TABLE IF EXISTS `core_user_password_history`;
 CREATE TABLE IF NOT EXISTS `core_user_password_history` (
   `id_user` int(11) NOT NULL,
-  `password` mediumtext COLLATE utf8_unicode_ci NOT NULL,
+  `password` mediumtext COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `date_password_change` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id_user`,`date_password_change`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_user_password_history` DISABLE KEYS */;
 INSERT INTO `core_user_password_history` (`id_user`, `password`, `date_password_change`) VALUES
@@ -2757,12 +2757,12 @@ INSERT INTO `core_user_password_history` (`id_user`, `password`, `date_password_
 
 DROP TABLE IF EXISTS `core_user_preferences`;
 CREATE TABLE IF NOT EXISTS `core_user_preferences` (
-  `id_user` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `pref_key` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `pref_value` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id_user` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `pref_key` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `pref_value` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id_user`,`pref_key`),
   KEY `index_user_preferences` (`id_user`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_user_preferences` DISABLE KEYS */;
 INSERT INTO `core_user_preferences` (`id_user`, `pref_key`, `pref_value`) VALUES
@@ -2771,11 +2771,11 @@ INSERT INTO `core_user_preferences` (`id_user`, `pref_key`, `pref_value`) VALUES
 
 DROP TABLE IF EXISTS `core_user_right`;
 CREATE TABLE IF NOT EXISTS `core_user_right` (
-  `id_right` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `id_right` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
   `id_user` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_right`,`id_user`),
   KEY `index_user_right` (`id_user`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_user_right` DISABLE KEYS */;
 INSERT INTO `core_user_right` (`id_right`, `id_user`) VALUES
@@ -2829,10 +2829,10 @@ INSERT INTO `core_user_right` (`id_right`, `id_user`) VALUES
 
 DROP TABLE IF EXISTS `core_user_role`;
 CREATE TABLE IF NOT EXISTS `core_user_role` (
-  `role_key` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `role_key` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
   `id_user` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`role_key`,`id_user`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_user_role` DISABLE KEYS */;
 INSERT INTO `core_user_role` (`role_key`, `id_user`) VALUES
@@ -2886,13 +2886,13 @@ INSERT INTO `core_user_role` (`role_key`, `id_user`) VALUES
 DROP TABLE IF EXISTS `core_xsl_export`;
 CREATE TABLE IF NOT EXISTS `core_xsl_export` (
   `id_xsl_export` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `extension` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `extension` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `id_file` int(11) DEFAULT NULL,
-  `plugin` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
+  `plugin` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT '',
   PRIMARY KEY (`id_xsl_export`)
-) ENGINE=InnoDB AUTO_INCREMENT=127 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=127 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `core_xsl_export` DISABLE KEYS */;
 INSERT INTO `core_xsl_export` (`id_xsl_export`, `title`, `description`, `extension`, `id_file`, `plugin`) VALUES
@@ -2905,7 +2905,7 @@ CREATE TABLE IF NOT EXISTS `crm_client_crm_item` (
   `id_crm_queue` int(11) NOT NULL DEFAULT 0,
   `crm_item` mediumblob DEFAULT NULL,
   PRIMARY KEY (`id_crm_queue`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `crm_client_crm_item` DISABLE KEYS */;
 /*!40000 ALTER TABLE `crm_client_crm_item` ENABLE KEYS */;
@@ -2916,7 +2916,7 @@ CREATE TABLE IF NOT EXISTS `crm_client_crm_queue` (
   `is_locked` smallint(6) DEFAULT 0,
   PRIMARY KEY (`id_crm_queue`),
   KEY `is_locked_crm_client_crm_queue` (`is_locked`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `crm_client_crm_queue` DISABLE KEYS */;
 /*!40000 ALTER TABLE `crm_client_crm_queue` ENABLE KEYS */;
@@ -2953,14 +2953,14 @@ DROP TABLE IF EXISTS `filegen_temporary_file`;
 CREATE TABLE IF NOT EXISTS `filegen_temporary_file` (
   `id_file` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL DEFAULT 0,
-  `title` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
-  `description` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `title` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `description` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `id_physical_file` int(11) DEFAULT NULL,
   `file_size` int(11) DEFAULT NULL,
-  `mime_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `mime_type` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `date_creation` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id_file`)
-) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `filegen_temporary_file` DISABLE KEYS */;
 /*!40000 ALTER TABLE `filegen_temporary_file` ENABLE KEYS */;
@@ -2969,21 +2969,21 @@ DROP TABLE IF EXISTS `genatt_entry`;
 CREATE TABLE IF NOT EXISTS `genatt_entry` (
   `id_entry` int(11) NOT NULL AUTO_INCREMENT,
   `id_resource` int(11) NOT NULL DEFAULT 0,
-  `resource_type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `resource_type` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `id_type` int(11) NOT NULL DEFAULT 0,
   `id_parent` int(11) DEFAULT NULL,
-  `title` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
-  `code` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `help_message` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
-  `comment` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `title` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `code` varchar(100) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `help_message` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `comment` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `mandatory` smallint(6) DEFAULT NULL,
   `fields_in_line` smallint(6) DEFAULT NULL,
   `pos` int(11) DEFAULT NULL,
   `id_field_depend` int(11) DEFAULT NULL,
   `field_unique` smallint(6) DEFAULT NULL,
-  `css_class` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `css_class` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `pos_conditional` int(11) DEFAULT 0,
-  `error_message` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `error_message` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `is_only_display_back` smallint(6) DEFAULT 0,
   `is_editable_back` smallint(6) DEFAULT 0,
   `is_indexed` smallint(6) DEFAULT 0,
@@ -2992,7 +2992,7 @@ CREATE TABLE IF NOT EXISTS `genatt_entry` (
   KEY `index_genatt_entry_parent` (`id_parent`),
   KEY `index_genatt_code` (`code`),
   KEY `fk_genatt_entry_type` (`id_type`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `genatt_entry` DISABLE KEYS */;
 /*!40000 ALTER TABLE `genatt_entry` ENABLE KEYS */;
@@ -3000,18 +3000,18 @@ CREATE TABLE IF NOT EXISTS `genatt_entry` (
 DROP TABLE IF EXISTS `genatt_entry_type`;
 CREATE TABLE IF NOT EXISTS `genatt_entry_type` (
   `id_type` int(11) NOT NULL DEFAULT 0,
-  `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `is_group` smallint(6) DEFAULT NULL,
   `is_comment` int(11) DEFAULT NULL,
   `is_mylutece_user` smallint(6) DEFAULT NULL,
-  `class_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `icon_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `plugin` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `class_name` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `icon_name` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `plugin` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `display_order` int(11) DEFAULT 0,
   `inactive` int(11) DEFAULT 0,
   PRIMARY KEY (`id_type`),
   KEY `index_genatt_entry_type_plugin` (`plugin`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `genatt_entry_type` DISABLE KEYS */;
 INSERT INTO `genatt_entry_type` (`id_type`, `title`, `is_group`, `is_comment`, `is_mylutece_user`, `class_name`, `icon_name`, `plugin`, `display_order`, `inactive`) VALUES
@@ -3037,18 +3037,18 @@ DROP TABLE IF EXISTS `genatt_field`;
 CREATE TABLE IF NOT EXISTS `genatt_field` (
   `id_field` int(11) NOT NULL AUTO_INCREMENT,
   `id_entry` int(11) NOT NULL DEFAULT 0,
-  `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `code` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `value` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `code` varchar(100) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `value` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `height` int(11) DEFAULT NULL,
   `default_value` smallint(6) DEFAULT NULL,
   `pos` int(11) DEFAULT NULL,
   `value_type_date` date DEFAULT NULL,
   `no_display_title` smallint(6) DEFAULT NULL,
-  `comment` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `comment` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id_field`),
   KEY `index_genatt_field_entry` (`id_entry`)
-) ENGINE=InnoDB AUTO_INCREMENT=316 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=316 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `genatt_field` DISABLE KEYS */;
 /*!40000 ALTER TABLE `genatt_field` ENABLE KEYS */;
@@ -3066,7 +3066,7 @@ CREATE TABLE IF NOT EXISTS `genatt_referenceitem_field` (
 DROP TABLE IF EXISTS `genatt_response`;
 CREATE TABLE IF NOT EXISTS `genatt_response` (
   `id_response` int(11) NOT NULL AUTO_INCREMENT,
-  `response_value` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `response_value` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `id_entry` int(11) DEFAULT NULL,
   `iteration_number` int(11) DEFAULT -1,
   `id_field` int(11) DEFAULT NULL,
@@ -3074,7 +3074,7 @@ CREATE TABLE IF NOT EXISTS `genatt_response` (
   `status` smallint(6) DEFAULT 1,
   PRIMARY KEY (`id_response`),
   KEY `index_genatt_response_entry` (`id_entry`)
-) ENGINE=InnoDB AUTO_INCREMENT=1334 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1334 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `genatt_response` DISABLE KEYS */;
 /*!40000 ALTER TABLE `genatt_response` ENABLE KEYS */;
@@ -3085,7 +3085,7 @@ CREATE TABLE IF NOT EXISTS `genatt_verify_by` (
   `id_expression` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_field`,`id_expression`),
   KEY `index_genatt_verify_by_field` (`id_field`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `genatt_verify_by` DISABLE KEYS */;
 /*!40000 ALTER TABLE `genatt_verify_by` ENABLE KEYS */;
@@ -3114,9 +3114,9 @@ DROP TABLE IF EXISTS `gfa_config`;
 CREATE TABLE IF NOT EXISTS `gfa_config` (
   `id_workflow` int(11) NOT NULL DEFAULT 0,
   `id_form` int(11) NOT NULL DEFAULT 0,
-  `title` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `title` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id_form`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `gfa_config` DISABLE KEYS */;
 /*!40000 ALTER TABLE `gfa_config` ENABLE KEYS */;
@@ -3144,7 +3144,7 @@ CREATE TABLE IF NOT EXISTS `gfa_workflow_mapping` (
   `action_wf_begin` int(11) NOT NULL,
   `action_wf_relaunch` int(11) NOT NULL,
   PRIMARY KEY (`id_form`,`action_wf_begin`,`action_wf_relaunch`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `gfa_workflow_mapping` DISABLE KEYS */;
 /*!40000 ALTER TABLE `gfa_workflow_mapping` ENABLE KEYS */;
@@ -3170,9 +3170,9 @@ INSERT INTO `htmlpage` (`id_htmlpage`, `description`, `html_content`, `status`, 
 DROP TABLE IF EXISTS `html_portlet`;
 CREATE TABLE IF NOT EXISTS `html_portlet` (
   `id_portlet` int(11) NOT NULL DEFAULT 0,
-  `html` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `html` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id_portlet`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `html_portlet` DISABLE KEYS */;
 INSERT INTO `html_portlet` (`id_portlet`, `html`) VALUES
@@ -3184,14 +3184,14 @@ INSERT INTO `html_portlet` (`id_portlet`, `html`) VALUES
 DROP TABLE IF EXISTS `identitystore_attribute`;
 CREATE TABLE IF NOT EXISTS `identitystore_attribute` (
   `id_attribute` int(11) NOT NULL,
-  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `key_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `description` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `key_name` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `description` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `key_type` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_attribute`),
   UNIQUE KEY `name` (`name`),
   UNIQUE KEY `key_name` (`key_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `identitystore_attribute` DISABLE KEYS */;
 INSERT INTO `identitystore_attribute` (`id_attribute`, `name`, `key_name`, `description`, `key_type`) VALUES
@@ -3225,12 +3225,12 @@ INSERT INTO `identitystore_attribute` (`id_attribute`, `name`, `key_name`, `desc
 DROP TABLE IF EXISTS `identitystore_attribute_certificate`;
 CREATE TABLE IF NOT EXISTS `identitystore_attribute_certificate` (
   `id_attribute_certificate` int(11) NOT NULL AUTO_INCREMENT,
-  `certifier_code` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `certifier_code` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
   `certificate_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `certificate_level` int(11) NOT NULL DEFAULT 0,
   `expiration_date` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_attribute_certificate`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `identitystore_attribute_certificate` DISABLE KEYS */;
 /*!40000 ALTER TABLE `identitystore_attribute_certificate` ENABLE KEYS */;
@@ -3245,7 +3245,7 @@ CREATE TABLE IF NOT EXISTS `identitystore_attribute_right` (
   `searchable` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_client_app`,`id_attribute`),
   KEY `fk_attribute_right_id_attribute` (`id_attribute`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `identitystore_attribute_right` DISABLE KEYS */;
 INSERT INTO `identitystore_attribute_right` (`id_client_app`, `id_attribute`, `readable`, `writable`, `certifiable`, `searchable`) VALUES
@@ -3272,13 +3272,13 @@ INSERT INTO `identitystore_attribute_right` (`id_client_app`, `id_attribute`, `r
 DROP TABLE IF EXISTS `identitystore_client_application`;
 CREATE TABLE IF NOT EXISTS `identitystore_client_application` (
   `id_client_app` int(11) NOT NULL,
-  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `code` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `code` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `is_application_authorized_to_delete_value` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_client_app`),
   UNIQUE KEY `name` (`name`),
   UNIQUE KEY `code` (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `identitystore_client_application` DISABLE KEYS */;
 INSERT INTO `identitystore_client_application` (`id_client_app`, `name`, `code`, `is_application_authorized_to_delete_value`) VALUES
@@ -3288,10 +3288,10 @@ INSERT INTO `identitystore_client_application` (`id_client_app`, `name`, `code`,
 DROP TABLE IF EXISTS `identitystore_client_application_certifiers`;
 CREATE TABLE IF NOT EXISTS `identitystore_client_application_certifiers` (
   `id_client_app` int(11) NOT NULL,
-  `certifier_code` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `certifier_code` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id_client_app`,`certifier_code`),
   KEY `id_client_app` (`id_client_app`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `identitystore_client_application_certifiers` DISABLE KEYS */;
 /*!40000 ALTER TABLE `identitystore_client_application_certifiers` ENABLE KEYS */;
@@ -3301,18 +3301,18 @@ CREATE TABLE IF NOT EXISTS `identitystore_history_identity_attribute` (
   `id_history` int(11) NOT NULL AUTO_INCREMENT,
   `change_type` int(11) NOT NULL,
   `id_identity` int(11) NOT NULL,
-  `identity_connection_id` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `attribute_key` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `attribute_new_value` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `attribute_old_value` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `author_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
+  `identity_connection_id` varchar(100) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `attribute_key` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `attribute_new_value` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `attribute_old_value` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `author_id` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT '',
   `author_type` int(11) NOT NULL,
-  `author_application` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
-  `certifier_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
+  `author_application` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT '',
+  `certifier_name` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT '',
   `modification_date` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id_history`),
   KEY `fk_history_identity_attribute_id_identity` (`id_identity`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `identitystore_history_identity_attribute` DISABLE KEYS */;
 /*!40000 ALTER TABLE `identitystore_history_identity_attribute` ENABLE KEYS */;
@@ -3320,8 +3320,8 @@ CREATE TABLE IF NOT EXISTS `identitystore_history_identity_attribute` (
 DROP TABLE IF EXISTS `identitystore_identity`;
 CREATE TABLE IF NOT EXISTS `identitystore_identity` (
   `id_identity` int(11) NOT NULL AUTO_INCREMENT,
-  `connection_id` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `customer_id` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `connection_id` varchar(100) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `customer_id` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `date_create` timestamp NOT NULL DEFAULT current_timestamp(),
   `is_deleted` smallint(6) DEFAULT 0,
   `date_delete` timestamp NULL DEFAULT NULL,
@@ -3330,7 +3330,7 @@ CREATE TABLE IF NOT EXISTS `identitystore_identity` (
   UNIQUE KEY `customer_id` (`customer_id`),
   KEY `connection_id_2` (`connection_id`),
   KEY `customer_id_2` (`customer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `identitystore_identity` DISABLE KEYS */;
 INSERT INTO `identitystore_identity` (`id_identity`, `connection_id`, `customer_id`, `date_create`, `is_deleted`, `date_delete`) VALUES
@@ -3341,15 +3341,15 @@ DROP TABLE IF EXISTS `identitystore_identity_attribute`;
 CREATE TABLE IF NOT EXISTS `identitystore_identity_attribute` (
   `id_identity` int(11) NOT NULL DEFAULT 0,
   `id_attribute` int(11) NOT NULL DEFAULT 0,
-  `attribute_value` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `attribute_value` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `id_certification` int(11) NOT NULL DEFAULT 0,
   `id_file` int(11) DEFAULT 0,
   `lastupdate_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `lastupdate_application` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `lastupdate_application` varchar(100) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id_identity`,`id_attribute`),
   KEY `fk_identity_attribute_id_attribute` (`id_attribute`),
   KEY `ix_attribute_value` (`attribute_value`(50)) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `identitystore_identity_attribute` DISABLE KEYS */;
 INSERT INTO `identitystore_identity_attribute` (`id_identity`, `id_attribute`, `attribute_value`, `id_certification`, `id_file`, `lastupdate_date`, `lastupdate_application`) VALUES
@@ -3390,12 +3390,12 @@ INSERT INTO `kibana_dashboard` (`id_dashboard`, `idkibanadashboard`, `title`, `d
 
 DROP TABLE IF EXISTS `mydashboard_configuration`;
 CREATE TABLE IF NOT EXISTS `mydashboard_configuration` (
-  `my_dashboard_component_id` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `id_config` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `my_dashboard_component_id` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `id_config` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `dashboard_order` int(11) NOT NULL,
   `hide_dashboard` smallint(6) NOT NULL,
   PRIMARY KEY (`my_dashboard_component_id`,`id_config`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `mydashboard_configuration` DISABLE KEYS */;
 INSERT INTO `mydashboard_configuration` (`my_dashboard_component_id`, `id_config`, `dashboard_order`, `hide_dashboard`) VALUES
@@ -3407,12 +3407,12 @@ INSERT INTO `mydashboard_configuration` (`my_dashboard_component_id`, `id_config
 DROP TABLE IF EXISTS `mydashboard_dashboard_association`;
 CREATE TABLE IF NOT EXISTS `mydashboard_dashboard_association` (
   `id_dashboard_association` int(11) NOT NULL,
-  `id_dashboard` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
+  `id_dashboard` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '0',
   `id_panel` int(11) NOT NULL DEFAULT 0,
   `position` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_dashboard_association`),
   KEY `fk_id_panel` (`id_panel`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `mydashboard_dashboard_association` DISABLE KEYS */;
 /*!40000 ALTER TABLE `mydashboard_dashboard_association` ENABLE KEYS */;
@@ -3420,12 +3420,12 @@ CREATE TABLE IF NOT EXISTS `mydashboard_dashboard_association` (
 DROP TABLE IF EXISTS `mydashboard_panel`;
 CREATE TABLE IF NOT EXISTS `mydashboard_panel` (
   `id_panel` int(11) NOT NULL,
-  `code` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `description` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `code` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `title` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `description` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `is_default` smallint(6) NOT NULL,
   PRIMARY KEY (`id_panel`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `mydashboard_panel` DISABLE KEYS */;
 /*!40000 ALTER TABLE `mydashboard_panel` ENABLE KEYS */;
@@ -3435,7 +3435,7 @@ CREATE TABLE IF NOT EXISTS `mydashboard_portlet_panel` (
   `id_portlet` int(11) NOT NULL,
   `id_panel` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_portlet`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `mydashboard_portlet_panel` DISABLE KEYS */;
 /*!40000 ALTER TABLE `mydashboard_portlet_panel` ENABLE KEYS */;
@@ -3443,16 +3443,16 @@ CREATE TABLE IF NOT EXISTS `mydashboard_portlet_panel` (
 DROP TABLE IF EXISTS `mylutece_attribute`;
 CREATE TABLE IF NOT EXISTS `mylutece_attribute` (
   `id_attribute` int(11) NOT NULL DEFAULT 0,
-  `type_class_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `title` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
-  `help_message` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `type_class_name` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `title` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `help_message` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `is_mandatory` smallint(6) DEFAULT 0,
   `is_shown_in_search` smallint(6) DEFAULT 0,
   `attribute_position` int(11) DEFAULT 0,
-  `plugin_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `plugin_name` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `anonymize` smallint(6) DEFAULT NULL,
   PRIMARY KEY (`id_attribute`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `mylutece_attribute` DISABLE KEYS */;
 /*!40000 ALTER TABLE `mylutece_attribute` ENABLE KEYS */;
@@ -3461,8 +3461,8 @@ DROP TABLE IF EXISTS `mylutece_attribute_field`;
 CREATE TABLE IF NOT EXISTS `mylutece_attribute_field` (
   `id_field` int(11) NOT NULL DEFAULT 0,
   `id_attribute` int(11) DEFAULT NULL,
-  `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `DEFAULT_value` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `DEFAULT_value` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `is_DEFAULT_value` smallint(6) DEFAULT 0,
   `height` int(11) DEFAULT NULL,
   `width` int(11) DEFAULT NULL,
@@ -3470,47 +3470,47 @@ CREATE TABLE IF NOT EXISTS `mylutece_attribute_field` (
   `is_multiple` smallint(6) DEFAULT 0,
   `field_position` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_field`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `mylutece_attribute_field` DISABLE KEYS */;
 /*!40000 ALTER TABLE `mylutece_attribute_field` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `mylutece_connections_log`;
 CREATE TABLE IF NOT EXISTS `mylutece_connections_log` (
-  `ip_address` varchar(63) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ip_address` varchar(63) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `date_login` timestamp NOT NULL DEFAULT current_timestamp(),
   `login_status` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `mylutece_connections_log` DISABLE KEYS */;
 /*!40000 ALTER TABLE `mylutece_connections_log` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `mylutece_database_group`;
 CREATE TABLE IF NOT EXISTS `mylutece_database_group` (
-  `group_key` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
-  `group_description` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `group_key` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '0',
+  `group_description` varchar(200) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`group_key`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `mylutece_database_group` DISABLE KEYS */;
 /*!40000 ALTER TABLE `mylutece_database_group` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `mylutece_database_group_role`;
 CREATE TABLE IF NOT EXISTS `mylutece_database_group_role` (
-  `group_key` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
-  `role_key` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
+  `group_key` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '0',
+  `role_key` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`group_key`,`role_key`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `mylutece_database_group_role` DISABLE KEYS */;
 /*!40000 ALTER TABLE `mylutece_database_group_role` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `mylutece_database_key`;
 CREATE TABLE IF NOT EXISTS `mylutece_database_key` (
-  `mylutece_database_user_key` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `mylutece_database_user_key` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `mylutece_database_user_id` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`mylutece_database_user_key`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `mylutece_database_key` DISABLE KEYS */;
 /*!40000 ALTER TABLE `mylutece_database_key` ENABLE KEYS */;
@@ -3518,11 +3518,11 @@ CREATE TABLE IF NOT EXISTS `mylutece_database_key` (
 DROP TABLE IF EXISTS `mylutece_database_user`;
 CREATE TABLE IF NOT EXISTS `mylutece_database_user` (
   `mylutece_database_user_id` int(11) NOT NULL,
-  `login` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `password` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `name_given` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `name_family` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `email` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `login` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `password` mediumtext COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `name_given` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `name_family` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `email` varchar(100) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `is_active` smallint(6) NOT NULL DEFAULT 0,
   `reset_password` smallint(6) NOT NULL DEFAULT 0,
   `password_max_valid_date` timestamp NULL DEFAULT NULL,
@@ -3530,7 +3530,7 @@ CREATE TABLE IF NOT EXISTS `mylutece_database_user` (
   `nb_alerts_sent` int(11) NOT NULL DEFAULT 0,
   `last_login` timestamp NOT NULL DEFAULT '1980-01-01 00:00:00',
   PRIMARY KEY (`mylutece_database_user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `mylutece_database_user` DISABLE KEYS */;
 INSERT INTO `mylutece_database_user` (`mylutece_database_user_id`, `login`, `password`, `name_given`, `name_family`, `email`, `is_active`, `reset_password`, `password_max_valid_date`, `account_max_valid_date`, `nb_alerts_sent`, `last_login`) VALUES
@@ -3540,19 +3540,19 @@ INSERT INTO `mylutece_database_user` (`mylutece_database_user_id`, `login`, `pas
 DROP TABLE IF EXISTS `mylutece_database_user_group`;
 CREATE TABLE IF NOT EXISTS `mylutece_database_user_group` (
   `mylutece_database_user_id` int(11) NOT NULL DEFAULT 0,
-  `group_key` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `group_key` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`mylutece_database_user_id`,`group_key`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `mylutece_database_user_group` DISABLE KEYS */;
 /*!40000 ALTER TABLE `mylutece_database_user_group` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `mylutece_database_user_parameter`;
 CREATE TABLE IF NOT EXISTS `mylutece_database_user_parameter` (
-  `parameter_key` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `parameter_value` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `parameter_key` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `parameter_value` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   PRIMARY KEY (`parameter_key`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `mylutece_database_user_parameter` DISABLE KEYS */;
 INSERT INTO `mylutece_database_user_parameter` (`parameter_key`, `parameter_value`) VALUES
@@ -3599,10 +3599,10 @@ INSERT INTO `mylutece_database_user_parameter` (`parameter_key`, `parameter_valu
 DROP TABLE IF EXISTS `mylutece_database_user_password_history`;
 CREATE TABLE IF NOT EXISTS `mylutece_database_user_password_history` (
   `mylutece_database_user_id` int(11) NOT NULL,
-  `password` mediumtext COLLATE utf8_unicode_ci NOT NULL,
+  `password` mediumtext COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `date_password_change` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`mylutece_database_user_id`,`date_password_change`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `mylutece_database_user_password_history` DISABLE KEYS */;
 /*!40000 ALTER TABLE `mylutece_database_user_password_history` ENABLE KEYS */;
@@ -3610,19 +3610,19 @@ CREATE TABLE IF NOT EXISTS `mylutece_database_user_password_history` (
 DROP TABLE IF EXISTS `mylutece_database_user_role`;
 CREATE TABLE IF NOT EXISTS `mylutece_database_user_role` (
   `mylutece_database_user_id` int(11) NOT NULL DEFAULT 0,
-  `role_key` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `role_key` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`mylutece_database_user_id`,`role_key`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `mylutece_database_user_role` DISABLE KEYS */;
 /*!40000 ALTER TABLE `mylutece_database_user_role` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `mylutece_user_anonymize_field`;
 CREATE TABLE IF NOT EXISTS `mylutece_user_anonymize_field` (
-  `field_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `field_name` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `anonymize` smallint(6) NOT NULL,
   PRIMARY KEY (`field_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `mylutece_user_anonymize_field` DISABLE KEYS */;
 /*!40000 ALTER TABLE `mylutece_user_anonymize_field` ENABLE KEYS */;
@@ -3633,9 +3633,9 @@ CREATE TABLE IF NOT EXISTS `mylutece_user_field` (
   `id_user` int(11) DEFAULT NULL,
   `id_attribute` int(11) DEFAULT NULL,
   `id_field` int(11) DEFAULT NULL,
-  `user_field_value` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `user_field_value` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id_user_field`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `mylutece_user_field` DISABLE KEYS */;
 /*!40000 ALTER TABLE `mylutece_user_field` ENABLE KEYS */;
@@ -3645,9 +3645,9 @@ CREATE TABLE IF NOT EXISTS `notifyesirius_workflow_save_appointement_created` (
   `id_take_appointment` int(11) NOT NULL,
   `id_appointment` int(11) NOT NULL,
   `id_workflow` int(11) NOT NULL,
-  `code_appointment_esirius` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `code_appointment_esirius` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id_appointment`,`id_take_appointment`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `notifyesirius_workflow_save_appointement_created` DISABLE KEYS */;
 INSERT INTO `notifyesirius_workflow_save_appointement_created` (`id_take_appointment`, `id_appointment`, `id_workflow`, `code_appointment_esirius`) VALUES
@@ -4048,14 +4048,14 @@ INSERT INTO `notifyesirius_workflow_save_appointement_created` (`id_take_appoint
 DROP TABLE IF EXISTS `notifyesirius_workflow_task_take_appointement_cf`;
 CREATE TABLE IF NOT EXISTS `notifyesirius_workflow_task_take_appointement_cf` (
   `id_task_take_appointment` int(11) NOT NULL,
-  `organization` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `group_of_site` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `site` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `service` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `reason` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `organization` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `group_of_site` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `site` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `service` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `reason` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
   `entry_motif` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_task_take_appointment`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `notifyesirius_workflow_task_take_appointement_cf` DISABLE KEYS */;
 INSERT INTO `notifyesirius_workflow_task_take_appointement_cf` (`id_task_take_appointment`, `organization`, `group_of_site`, `site`, `service`, `reason`, `entry_motif`) VALUES
@@ -4121,11 +4121,11 @@ INSERT INTO `notifyesirius_workflow_task_take_appointement_cf` (`id_task_take_ap
 
 DROP TABLE IF EXISTS `openamidentityclient_key`;
 CREATE TABLE IF NOT EXISTS `openamidentityclient_key` (
-  `user_key` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
-  `user_id` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
-  `key_type` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `user_key` varchar(150) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `user_id` varchar(150) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `key_type` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`user_key`,`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `openamidentityclient_key` DISABLE KEYS */;
 /*!40000 ALTER TABLE `openamidentityclient_key` ENABLE KEYS */;
@@ -4375,13 +4375,13 @@ CREATE TABLE IF NOT EXISTS `profile_workgroup` (
 DROP TABLE IF EXISTS `regularexpression_regular_expression`;
 CREATE TABLE IF NOT EXISTS `regularexpression_regular_expression` (
   `id_expression` int(11) NOT NULL DEFAULT 0,
-  `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `regular_expression_value` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
-  `valid_exemple` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
-  `information_message` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
-  `error_message` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `regular_expression_value` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `valid_exemple` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `information_message` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `error_message` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id_expression`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `regularexpression_regular_expression` DISABLE KEYS */;
 INSERT INTO `regularexpression_regular_expression` (`id_expression`, `title`, `regular_expression_value`, `valid_exemple`, `information_message`, `error_message`) VALUES
@@ -4396,21 +4396,21 @@ INSERT INTO `regularexpression_regular_expression` (`id_expression`, `title`, `r
 DROP TABLE IF EXISTS `resource_resource`;
 CREATE TABLE IF NOT EXISTS `resource_resource` (
   `id_resource` int(11) NOT NULL DEFAULT 0,
-  `resource_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `resource_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `resource_type` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `resource_name` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id_resource`),
   KEY `resource_resource_type_idx` (`resource_type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `resource_resource` DISABLE KEYS */;
 /*!40000 ALTER TABLE `resource_resource` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `resource_resource_type`;
 CREATE TABLE IF NOT EXISTS `resource_resource_type` (
-  `resource_type_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `resource_type_description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `resource_type_name` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `resource_type_description` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`resource_type_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `resource_resource_type` DISABLE KEYS */;
 /*!40000 ALTER TABLE `resource_resource_type` ENABLE KEYS */;
@@ -4419,7 +4419,7 @@ DROP TABLE IF EXISTS `solr_facet_intersection`;
 CREATE TABLE IF NOT EXISTS `solr_facet_intersection` (
   `id_field1` int(11) DEFAULT NULL,
   `id_field2` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `solr_facet_intersection` DISABLE KEYS */;
 /*!40000 ALTER TABLE `solr_facet_intersection` ENABLE KEYS */;
@@ -4427,9 +4427,9 @@ CREATE TABLE IF NOT EXISTS `solr_facet_intersection` (
 DROP TABLE IF EXISTS `solr_fields`;
 CREATE TABLE IF NOT EXISTS `solr_fields` (
   `id_field` int(11) NOT NULL,
-  `name` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `label` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(30) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `label` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `is_facet` tinyint(1) DEFAULT 0,
   `enable_facet` tinyint(1) DEFAULT 0,
   `is_sort` tinyint(1) DEFAULT 0,
@@ -4437,9 +4437,9 @@ CREATE TABLE IF NOT EXISTS `solr_fields` (
   `default_sort` tinyint(1) DEFAULT 0,
   `weight` float DEFAULT 0,
   `facet_mincount` int(11) DEFAULT 1,
-  `operator_type` varchar(30) COLLATE utf8_unicode_ci DEFAULT 'OR',
+  `operator_type` varchar(30) COLLATE utf8mb4_unicode_520_ci DEFAULT 'OR',
   PRIMARY KEY (`id_field`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `solr_fields` DISABLE KEYS */;
 INSERT INTO `solr_fields` (`id_field`, `name`, `label`, `description`, `is_facet`, `enable_facet`, `is_sort`, `enable_sort`, `default_sort`, `weight`, `facet_mincount`, `operator_type`) VALUES
@@ -4456,12 +4456,12 @@ INSERT INTO `solr_fields` (`id_field`, `name`, `label`, `description`, `is_facet
 DROP TABLE IF EXISTS `solr_indexer_action`;
 CREATE TABLE IF NOT EXISTS `solr_indexer_action` (
   `id_action` int(11) NOT NULL DEFAULT 0,
-  `id_document` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `id_document` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `id_task` int(11) NOT NULL DEFAULT 0,
-  `type_ressource` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `type_ressource` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `id_portlet` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_action`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `solr_indexer_action` DISABLE KEYS */;
 INSERT INTO `solr_indexer_action` (`id_action`, `id_document`, `id_task`, `type_ressource`, `id_portlet`) VALUES
@@ -4472,8 +4472,8 @@ INSERT INTO `solr_indexer_action` (`id_action`, `id_document`, `id_task`, `type_
 DROP TABLE IF EXISTS `workflow_action`;
 CREATE TABLE IF NOT EXISTS `workflow_action` (
   `id_action` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `description` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `description` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `id_workflow` int(11) DEFAULT NULL,
   `id_state_before` int(11) DEFAULT NULL,
   `id_state_after` int(11) DEFAULT NULL,
@@ -4487,7 +4487,7 @@ CREATE TABLE IF NOT EXISTS `workflow_action` (
   KEY `action_id_state_before_fk` (`id_state_before`),
   KEY `action_id_state_after_fk` (`id_state_after`),
   KEY `action_id_icon_fk` (`id_icon`)
-) ENGINE=InnoDB AUTO_INCREMENT=250 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=250 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_action` DISABLE KEYS */;
 INSERT INTO `workflow_action` (`id_action`, `name`, `description`, `id_workflow`, `id_state_before`, `id_state_after`, `id_icon`, `is_automatic`, `is_mass_action`, `display_order`, `is_automatic_reflexive_action`) VALUES
@@ -4512,7 +4512,7 @@ CREATE TABLE IF NOT EXISTS `workflow_action_action` (
   `id_action` int(11) NOT NULL DEFAULT 0,
   `id_linked_action` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_action`,`id_linked_action`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_action_action` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workflow_action_action` ENABLE KEYS */;
@@ -4525,14 +4525,14 @@ CREATE TABLE IF NOT EXISTS `workflow_appointment_reminder` (
   `time_to_alert` int(11) NOT NULL,
   `email_notify` smallint(6) NOT NULL,
   `sms_notify` smallint(6) NOT NULL,
-  `email_alert_message` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
-  `sms_alert_message` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
-  `alert_subject` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `email_cc` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `phone_number` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email_alert_message` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `sms_alert_message` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `alert_subject` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `email_cc` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `phone_number` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `id_state_after` int(11) NOT NULL,
   PRIMARY KEY (`id_task`,`id_form`,`rank`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_appointment_reminder` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workflow_appointment_reminder` ENABLE KEYS */;
@@ -4541,11 +4541,11 @@ DROP TABLE IF EXISTS `workflow_assignment_history`;
 CREATE TABLE IF NOT EXISTS `workflow_assignment_history` (
   `id_history` int(11) NOT NULL DEFAULT 0,
   `id_task` int(11) NOT NULL,
-  `workgroup_key` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `workgroup_key` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   PRIMARY KEY (`id_history`,`id_task`,`workgroup_key`),
   KEY `assignment_id_history_fk` (`id_history`),
   KEY `assignment_id_task_fk` (`id_task`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_assignment_history` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workflow_assignment_history` ENABLE KEYS */;
@@ -4553,13 +4553,13 @@ CREATE TABLE IF NOT EXISTS `workflow_assignment_history` (
 DROP TABLE IF EXISTS `workflow_icon`;
 CREATE TABLE IF NOT EXISTS `workflow_icon` (
   `id_icon` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `mime_type` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `mime_type` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `file_value` mediumblob DEFAULT NULL,
   `width` int(11) DEFAULT NULL,
   `height` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_icon`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_icon` DISABLE KEYS */;
 INSERT INTO `workflow_icon` (`id_icon`, `name`, `mime_type`, `file_value`, `width`, `height`) VALUES
@@ -4578,9 +4578,9 @@ DROP TABLE IF EXISTS `workflow_prerequisite`;
 CREATE TABLE IF NOT EXISTS `workflow_prerequisite` (
   `id_prerequisite` int(11) NOT NULL AUTO_INCREMENT,
   `id_action` int(11) NOT NULL,
-  `prerequisite_type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `prerequisite_type` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   PRIMARY KEY (`id_prerequisite`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_prerequisite` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workflow_prerequisite` ENABLE KEYS */;
@@ -4590,7 +4590,7 @@ CREATE TABLE IF NOT EXISTS `workflow_prerequisite_duration_cf` (
   `id_prerequisite` int(11) NOT NULL,
   `duration` int(11) NOT NULL,
   PRIMARY KEY (`id_prerequisite`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_prerequisite_duration_cf` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workflow_prerequisite_duration_cf` ENABLE KEYS */;
@@ -4599,15 +4599,15 @@ DROP TABLE IF EXISTS `workflow_resource_history`;
 CREATE TABLE IF NOT EXISTS `workflow_resource_history` (
   `id_history` int(11) NOT NULL AUTO_INCREMENT,
   `id_resource` int(11) DEFAULT NULL,
-  `resource_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `resource_type` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `id_workflow` int(11) DEFAULT NULL,
   `id_action` int(11) DEFAULT NULL,
   `creation_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `user_access_code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `user_access_code` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id_history`),
   KEY `history_id_workflow_fk` (`id_workflow`),
   KEY `history_id_action_fk` (`id_action`)
-) ENGINE=InnoDB AUTO_INCREMENT=4277 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4277 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_resource_history` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workflow_resource_history` ENABLE KEYS */;
@@ -4615,13 +4615,13 @@ CREATE TABLE IF NOT EXISTS `workflow_resource_history` (
 DROP TABLE IF EXISTS `workflow_resource_user_history`;
 CREATE TABLE IF NOT EXISTS `workflow_resource_user_history` (
   `id_history` int(11) NOT NULL,
-  `user_access_code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
-  `first_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
-  `last_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
-  `realm` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
+  `user_access_code` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT '',
+  `first_name` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT '',
+  `last_name` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT '',
+  `realm` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT '',
   PRIMARY KEY (`id_history`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_resource_user_history` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workflow_resource_user_history` ENABLE KEYS */;
@@ -4629,7 +4629,7 @@ CREATE TABLE IF NOT EXISTS `workflow_resource_user_history` (
 DROP TABLE IF EXISTS `workflow_resource_workflow`;
 CREATE TABLE IF NOT EXISTS `workflow_resource_workflow` (
   `id_resource` int(11) NOT NULL DEFAULT 0,
-  `resource_type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `resource_type` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `id_state` int(11) DEFAULT NULL,
   `id_workflow` int(11) NOT NULL,
   `id_external_parent` int(11) DEFAULT NULL,
@@ -4639,7 +4639,7 @@ CREATE TABLE IF NOT EXISTS `workflow_resource_workflow` (
   KEY `workflow_resource_workflow_resource_type_fk` (`resource_type`),
   KEY `workflow_resource_workflow_id_workflow_fk` (`id_workflow`),
   KEY `fk_document_id_state` (`id_state`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_resource_workflow` DISABLE KEYS */;
 INSERT INTO `workflow_resource_workflow` (`id_resource`, `resource_type`, `id_state`, `id_workflow`, `id_external_parent`, `is_associated_workgroups`) VALUES
@@ -4659,13 +4659,13 @@ INSERT INTO `workflow_resource_workflow` (`id_resource`, `resource_type`, `id_st
 DROP TABLE IF EXISTS `workflow_resource_workgroup`;
 CREATE TABLE IF NOT EXISTS `workflow_resource_workgroup` (
   `id_resource` int(11) NOT NULL DEFAULT 0,
-  `resource_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `resource_type` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `id_workflow` int(11) DEFAULT NULL,
-  `workgroup_key` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `workgroup_key` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   KEY `workflow_resource_workgroup_id_resource_fk` (`id_resource`),
   KEY `workflow_resource_workgroup_resource_type_fk` (`resource_type`),
   KEY `workflow_resource_workgroup_id_workflow_fk` (`id_workflow`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_resource_workgroup` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workflow_resource_workgroup` ENABLE KEYS */;
@@ -4673,8 +4673,8 @@ CREATE TABLE IF NOT EXISTS `workflow_resource_workgroup` (
 DROP TABLE IF EXISTS `workflow_state`;
 CREATE TABLE IF NOT EXISTS `workflow_state` (
   `id_state` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `description` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `description` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `id_workflow` int(11) DEFAULT NULL,
   `is_initial_state` smallint(6) DEFAULT 0,
   `is_required_workgroup_assigned` smallint(6) DEFAULT 0,
@@ -4682,7 +4682,7 @@ CREATE TABLE IF NOT EXISTS `workflow_state` (
   `display_order` int(11) DEFAULT 0,
   PRIMARY KEY (`id_state`),
   KEY `fk_state_id_workflow` (`id_workflow`)
-) ENGINE=InnoDB AUTO_INCREMENT=177 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=177 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_state` DISABLE KEYS */;
 INSERT INTO `workflow_state` (`id_state`, `name`, `description`, `id_workflow`, `is_initial_state`, `is_required_workgroup_assigned`, `id_icon`, `display_order`) VALUES
@@ -4697,12 +4697,12 @@ INSERT INTO `workflow_state` (`id_state`, `name`, `description`, `id_workflow`, 
 DROP TABLE IF EXISTS `workflow_task`;
 CREATE TABLE IF NOT EXISTS `workflow_task` (
   `id_task` int(11) NOT NULL AUTO_INCREMENT,
-  `task_type_key` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `task_type_key` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `id_action` int(11) NOT NULL DEFAULT 0,
   `display_order` int(11) DEFAULT 0,
   PRIMARY KEY (`id_task`),
   KEY `task_id_action_fk` (`id_action`)
-) ENGINE=InnoDB AUTO_INCREMENT=437 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=437 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_task` DISABLE KEYS */;
 INSERT INTO `workflow_task` (`id_task`, `task_type_key`, `id_action`, `display_order`) VALUES
@@ -4720,46 +4720,46 @@ INSERT INTO `workflow_task` (`id_task`, `task_type_key`, `id_action`, `display_o
 DROP TABLE IF EXISTS `workflow_task_alert_gru_cf`;
 CREATE TABLE IF NOT EXISTS `workflow_task_alert_gru_cf` (
   `id_task` int(11) NOT NULL,
-  `id_spring_provider` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `marker_provider_ids` varchar(1000) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id_spring_provider` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `marker_provider_ids` varchar(1000) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `demand_status` int(11) DEFAULT NULL,
   `crm_status_id` int(11) DEFAULT 1,
   `set_onglet` smallint(6) DEFAULT NULL,
-  `message_guichet` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `status_text_guichet` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `sender_name_guichet` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `subject_guichet` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `message_guichet` text COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `status_text_guichet` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `sender_name_guichet` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `subject_guichet` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `demand_max_step_guichet` smallint(6) DEFAULT 1,
   `demand_user_current_step_guichet` smallint(6) DEFAULT 1,
   `is_active_onglet_guichet` smallint(6) DEFAULT 0,
-  `status_text_agent` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `message_agent` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `status_text_agent` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `message_agent` text COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `is_active_onglet_agent` smallint(6) NOT NULL DEFAULT 0,
-  `subject_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `message_email` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `sender_name_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `recipients_cc_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `recipients_cci_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `subject_email` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `message_email` text COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `sender_name_email` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `recipients_cc_email` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `recipients_cci_email` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `is_active_onglet_email` smallint(6) DEFAULT 0,
-  `message_sms` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `billing_account_sms` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `billing_group_sms` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `message_sms` text COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `billing_account_sms` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `billing_group_sms` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `is_active_onglet_sms` smallint(6) NOT NULL DEFAULT 0,
   `id_mailing_list_broadcast` int(11) DEFAULT NULL,
-  `email_broadcast` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `sender_name_broadcast` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `subject_broadcast` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `message_broadcast` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `recipients_cc_broadcast` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `recipients_cci_broadcast` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email_broadcast` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `sender_name_broadcast` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `subject_broadcast` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `message_broadcast` text COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `recipients_cc_broadcast` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `recipients_cci_broadcast` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `is_active_onglet_broadcast` smallint(6) DEFAULT 0,
   `days_to_alert` int(11) DEFAULT NULL,
   `id_state_after` int(11) DEFAULT NULL,
-  `alert_subject` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `marker_alert` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `alert_after_before` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `alert_subject` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `marker_alert` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `alert_after_before` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id_task`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_task_alert_gru_cf` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workflow_task_alert_gru_cf` ENABLE KEYS */;
@@ -4769,36 +4769,36 @@ CREATE TABLE IF NOT EXISTS `workflow_task_alert_gru_history` (
   `id_history` int(11) NOT NULL,
   `id_task` int(11) NOT NULL,
   `crm_status_id` int(11) DEFAULT 1,
-  `message_guichet` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `status_text_guichet` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `sender_name_guichet` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `subject_guichet` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `message_guichet` text COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `status_text_guichet` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `sender_name_guichet` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `subject_guichet` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `demand_max_step_guichet` smallint(6) DEFAULT 1,
   `demand_user_current_step_guichet` smallint(6) DEFAULT 1,
   `is_active_onglet_guichet` smallint(6) DEFAULT 0,
-  `status_text_agent` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `message_agent` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `status_text_agent` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `message_agent` text COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `is_active_onglet_agent` smallint(6) NOT NULL DEFAULT 0,
-  `subject_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `message_email` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `sender_name_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `recipients_cc_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `recipients_cci_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `subject_email` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `message_email` text COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `sender_name_email` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `recipients_cc_email` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `recipients_cci_email` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `is_active_onglet_email` smallint(6) DEFAULT 0,
-  `message_sms` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `billing_account_sms` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `billing_group_sms` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `message_sms` text COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `billing_account_sms` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `billing_group_sms` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `is_active_onglet_sms` smallint(6) NOT NULL DEFAULT 0,
   `id_mailing_list_broadcast` int(11) DEFAULT NULL,
-  `email_broadcast` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `sender_name_broadcast` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `subject_broadcast` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `message_broadcast` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `recipients_cc_broadcast` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `recipients_cci_broadcast` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email_broadcast` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `sender_name_broadcast` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `subject_broadcast` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `message_broadcast` text COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `recipients_cc_broadcast` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `recipients_cci_broadcast` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `is_active_onglet_broadcast` smallint(6) DEFAULT 0,
   PRIMARY KEY (`id_history`,`id_task`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_task_alert_gru_history` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workflow_task_alert_gru_history` ENABLE KEYS */;
@@ -4807,10 +4807,10 @@ DROP TABLE IF EXISTS `workflow_task_archive_cf`;
 CREATE TABLE IF NOT EXISTS `workflow_task_archive_cf` (
   `id_task` int(11) NOT NULL DEFAULT 0,
   `next_state` int(11) NOT NULL,
-  `type_archival` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `type_archival` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `delay_archival` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_task`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_task_archive_cf` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workflow_task_archive_cf` ENABLE KEYS */;
@@ -4823,7 +4823,7 @@ CREATE TABLE IF NOT EXISTS `workflow_task_archive_resource` (
   `archival_date` timestamp NULL DEFAULT NULL,
   `is_archived` smallint(6) DEFAULT 0,
   PRIMARY KEY (`id_resource`,`id_task`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_task_archive_resource` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workflow_task_archive_resource` ENABLE KEYS */;
@@ -4831,14 +4831,14 @@ CREATE TABLE IF NOT EXISTS `workflow_task_archive_resource` (
 DROP TABLE IF EXISTS `workflow_task_assignment_cf`;
 CREATE TABLE IF NOT EXISTS `workflow_task_assignment_cf` (
   `id_task` int(11) NOT NULL DEFAULT 0,
-  `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `is_multiple_owner` smallint(6) DEFAULT 0,
   `is_notify` smallint(6) DEFAULT 0,
-  `message` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `subject` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `message` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `subject` varchar(45) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `is_use_user_name` smallint(6) DEFAULT 0,
   PRIMARY KEY (`id_task`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_task_assignment_cf` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workflow_task_assignment_cf` ENABLE KEYS */;
@@ -4848,7 +4848,7 @@ CREATE TABLE IF NOT EXISTS `workflow_task_change_appointment_status_cf` (
   `id_task` int(11) NOT NULL,
   `appointment_status` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_task`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_task_change_appointment_status_cf` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workflow_task_change_appointment_status_cf` ENABLE KEYS */;
@@ -4875,11 +4875,11 @@ CREATE TABLE IF NOT EXISTS `workflow_task_change_state_information` (
 DROP TABLE IF EXISTS `workflow_task_comment_config`;
 CREATE TABLE IF NOT EXISTS `workflow_task_comment_config` (
   `id_task` int(11) NOT NULL DEFAULT 0,
-  `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `is_mandatory` smallint(6) DEFAULT 0,
   `is_richtext` smallint(6) DEFAULT 0,
   PRIMARY KEY (`id_task`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_task_comment_config` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workflow_task_comment_config` ENABLE KEYS */;
@@ -4888,11 +4888,11 @@ DROP TABLE IF EXISTS `workflow_task_comment_value`;
 CREATE TABLE IF NOT EXISTS `workflow_task_comment_value` (
   `id_history` int(11) NOT NULL DEFAULT 0,
   `id_task` int(11) NOT NULL,
-  `comment_value` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `comment_value` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id_history`,`id_task`),
   KEY `comment_value_id_history_fk` (`id_history`),
   KEY `comment_value_id_task_fk` (`id_task`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_task_comment_value` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workflow_task_comment_value` ENABLE KEYS */;
@@ -4902,12 +4902,12 @@ CREATE TABLE IF NOT EXISTS `workflow_task_manual_app_notify` (
   `id_notif` int(11) NOT NULL,
   `id_history` int(11) DEFAULT NULL,
   `id_appointment` int(11) DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `subject` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `message` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `subject` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `message` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id_notif`),
   KEY `idx_wf_task_manual_app_notify` (`id_appointment`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_task_manual_app_notify` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workflow_task_manual_app_notify` ENABLE KEYS */;
@@ -4916,11 +4916,11 @@ DROP TABLE IF EXISTS `workflow_task_notification_cf`;
 CREATE TABLE IF NOT EXISTS `workflow_task_notification_cf` (
   `id_task` int(11) NOT NULL DEFAULT 0,
   `id_mailing_list` int(11) DEFAULT NULL,
-  `sender_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `subject` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `message` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sender_name` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `subject` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `message` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id_task`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_task_notification_cf` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workflow_task_notification_cf` ENABLE KEYS */;
@@ -4929,19 +4929,19 @@ DROP TABLE IF EXISTS `workflow_task_notify_admin_appointment_cf`;
 CREATE TABLE IF NOT EXISTS `workflow_task_notify_admin_appointment_cf` (
   `id_task` int(11) NOT NULL,
   `id_admin_user` int(11) DEFAULT NULL,
-  `sender_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `sender_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `subject` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `message` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
-  `recipients_cc` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `recipients_bcc` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `sender_name` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `sender_email` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `subject` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `message` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `recipients_cc` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `recipients_bcc` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
   `id_action_cancel` int(11) DEFAULT NULL,
   `id_action_validate` int(11) DEFAULT NULL,
   `ical_notification` smallint(6) DEFAULT 0,
   `create_notif` smallint(6) DEFAULT 0,
-  `location` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `location` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id_task`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_task_notify_admin_appointment_cf` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workflow_task_notify_admin_appointment_cf` ENABLE KEYS */;
@@ -4949,19 +4949,19 @@ CREATE TABLE IF NOT EXISTS `workflow_task_notify_admin_appointment_cf` (
 DROP TABLE IF EXISTS `workflow_task_notify_appointment_cf`;
 CREATE TABLE IF NOT EXISTS `workflow_task_notify_appointment_cf` (
   `id_task` int(11) NOT NULL,
-  `sender_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `sender_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `subject` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `message` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
-  `recipients_cc` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `recipients_bcc` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `sender_name` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `sender_email` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `subject` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `message` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `recipients_cc` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `recipients_bcc` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
   `id_action_cancel` int(11) DEFAULT NULL,
   `ical_notification` smallint(6) DEFAULT 0,
   `create_notif` smallint(6) DEFAULT 0,
-  `location` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `location` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
   `is_sms` smallint(6) DEFAULT 0,
   PRIMARY KEY (`id_task`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_task_notify_appointment_cf` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workflow_task_notify_appointment_cf` ENABLE KEYS */;
@@ -4969,15 +4969,15 @@ CREATE TABLE IF NOT EXISTS `workflow_task_notify_appointment_cf` (
 DROP TABLE IF EXISTS `workflow_task_notify_appointment_crm`;
 CREATE TABLE IF NOT EXISTS `workflow_task_notify_appointment_crm` (
   `id_task` int(11) NOT NULL,
-  `id_demand_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `data` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `status_text` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `id_status_crm` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `object` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `message` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `sender` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id_demand_type` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `data` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `status_text` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `id_status_crm` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `object` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `message` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `sender` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id_task`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_task_notify_appointment_crm` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workflow_task_notify_appointment_crm` ENABLE KEYS */;
@@ -4985,41 +4985,41 @@ CREATE TABLE IF NOT EXISTS `workflow_task_notify_appointment_crm` (
 DROP TABLE IF EXISTS `workflow_task_notify_gru_cf`;
 CREATE TABLE IF NOT EXISTS `workflow_task_notify_gru_cf` (
   `id_task` int(11) NOT NULL,
-  `id_spring_provider` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `marker_provider_ids` varchar(1000) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id_spring_provider` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `marker_provider_ids` varchar(1000) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `demand_status` int(11) DEFAULT NULL,
   `crm_status_id` int(11) DEFAULT 1,
   `set_onglet` smallint(6) DEFAULT NULL,
-  `message_guichet` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `status_text_guichet` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `sender_name_guichet` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `subject_guichet` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `message_guichet` text COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `status_text_guichet` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `sender_name_guichet` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `subject_guichet` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `demand_max_step_guichet` smallint(6) DEFAULT 1,
   `demand_user_current_step_guichet` smallint(6) DEFAULT 1,
   `is_active_onglet_guichet` smallint(6) DEFAULT 0,
-  `status_text_agent` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `message_agent` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `status_text_agent` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `message_agent` text COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `is_active_onglet_agent` smallint(6) NOT NULL DEFAULT 0,
-  `subject_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `message_email` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `sender_name_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `recipients_cc_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `recipients_cci_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `subject_email` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `message_email` text COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `sender_name_email` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `recipients_cc_email` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `recipients_cci_email` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `is_active_onglet_email` smallint(6) DEFAULT 0,
-  `message_sms` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `billing_account_sms` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `billing_group_sms` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `message_sms` text COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `billing_account_sms` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `billing_group_sms` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `is_active_onglet_sms` smallint(6) NOT NULL DEFAULT 0,
   `id_mailing_list_broadcast` int(11) DEFAULT NULL,
-  `email_broadcast` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `sender_name_broadcast` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `subject_broadcast` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `message_broadcast` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `recipients_cc_broadcast` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `recipients_cci_broadcast` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email_broadcast` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `sender_name_broadcast` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `subject_broadcast` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `message_broadcast` text COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `recipients_cc_broadcast` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `recipients_cci_broadcast` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `is_active_onglet_broadcast` smallint(6) DEFAULT 0,
   PRIMARY KEY (`id_task`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_task_notify_gru_cf` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workflow_task_notify_gru_cf` ENABLE KEYS */;
@@ -5029,39 +5029,39 @@ CREATE TABLE IF NOT EXISTS `workflow_task_notify_gru_history` (
   `id_history` int(11) NOT NULL,
   `id_task` int(11) NOT NULL,
   `crm_status_id` int(11) DEFAULT 1,
-  `message_guichet` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `status_text_guichet` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `sender_name_guichet` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `subject_guichet` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `message_guichet` text COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `status_text_guichet` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `sender_name_guichet` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `subject_guichet` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `demand_max_step_guichet` smallint(6) DEFAULT 1,
   `demand_user_current_step_guichet` smallint(6) DEFAULT 1,
   `is_active_onglet_guichet` smallint(6) DEFAULT 0,
-  `status_text_agent` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `message_agent` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `status_text_agent` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `message_agent` text COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `is_active_onglet_agent` smallint(6) NOT NULL DEFAULT 0,
-  `subject_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `message_email` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `sender_name_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `recipients_cc_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `recipients_cci_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `subject_email` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `message_email` text COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `sender_name_email` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `recipients_cc_email` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `recipients_cci_email` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `is_active_onglet_email` smallint(6) DEFAULT 0,
-  `message_sms` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `billing_account_sms` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `billing_group_sms` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `message_sms` text COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `billing_account_sms` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `billing_group_sms` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `is_active_onglet_sms` smallint(6) NOT NULL DEFAULT 0,
   `id_mailing_list_broadcast` int(11) DEFAULT NULL,
-  `email_broadcast` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `sender_name_broadcast` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `subject_broadcast` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `message_broadcast` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `recipients_cc_broadcast` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `recipients_cci_broadcast` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email_broadcast` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `sender_name_broadcast` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `subject_broadcast` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `message_broadcast` text COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `recipients_cc_broadcast` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `recipients_cci_broadcast` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `is_active_onglet_broadcast` smallint(6) DEFAULT 0,
-  `code_event` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `type_event` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `message_event` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `code_event` varchar(45) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `type_event` varchar(45) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `message_event` text COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id_history`,`id_task`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_task_notify_gru_history` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workflow_task_notify_gru_history` ENABLE KEYS */;
@@ -5069,7 +5069,7 @@ CREATE TABLE IF NOT EXISTS `workflow_task_notify_gru_history` (
 DROP TABLE IF EXISTS `workflow_task_notify_gru_mapping_manager`;
 CREATE TABLE IF NOT EXISTS `workflow_task_notify_gru_mapping_manager` (
   `id_notifygrumappingmanager` int(11) NOT NULL,
-  `beankey` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `beankey` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
   `connection_id` int(11) NOT NULL DEFAULT 0,
   `customer_id` int(11) NOT NULL DEFAULT 0,
   `mobilephonenumber` int(11) NOT NULL DEFAULT 0,
@@ -5078,7 +5078,7 @@ CREATE TABLE IF NOT EXISTS `workflow_task_notify_gru_mapping_manager` (
   `demandetype` int(11) NOT NULL DEFAULT 0,
   `demand_reference` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_notifygrumappingmanager`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_task_notify_gru_mapping_manager` DISABLE KEYS */;
 INSERT INTO `workflow_task_notify_gru_mapping_manager` (`id_notifygrumappingmanager`, `beankey`, `connection_id`, `customer_id`, `mobilephonenumber`, `fixedphonenumber`, `email`, `demandetype`, `demand_reference`) VALUES
@@ -5091,7 +5091,7 @@ CREATE TABLE IF NOT EXISTS `workflow_task_notify_reminder_cf` (
   `id_form` int(11) NOT NULL DEFAULT 0,
   `nb_alerts` int(11) DEFAULT 0,
   PRIMARY KEY (`id_task`,`id_form`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_task_notify_reminder_cf` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workflow_task_notify_reminder_cf` ENABLE KEYS */;
@@ -5101,11 +5101,11 @@ CREATE TABLE IF NOT EXISTS `workflow_task_set_appointment_resource_history` (
   `id` int(11) NOT NULL DEFAULT 0,
   `id_history` int(11) NOT NULL DEFAULT 0,
   `id_appointment` int(11) NOT NULL DEFAULT 0,
-  `id_resource` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `id_resource` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
   `id_form_resource_type` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `fk_wf_set_app_res_hist_id_hist` (`id_history`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_task_set_appointment_resource_history` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workflow_task_set_appointment_resource_history` ENABLE KEYS */;
@@ -5116,7 +5116,7 @@ CREATE TABLE IF NOT EXISTS `workflow_task_set_app_resource_cf` (
   `id_form_resource_type` int(11) NOT NULL DEFAULT 0,
   `is_mandatory` smallint(6) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_task`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_task_set_app_resource_cf` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workflow_task_set_app_resource_cf` ENABLE KEYS */;
@@ -5129,7 +5129,7 @@ CREATE TABLE IF NOT EXISTS `workflow_task_update_admin_appointment` (
   `id_admin_user` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_update`),
   KEY `idx_wf_task_update_admin_app` (`id_appointment`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_task_update_admin_appointment` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workflow_task_update_admin_appointment` ENABLE KEYS */;
@@ -5141,7 +5141,7 @@ CREATE TABLE IF NOT EXISTS `workflow_task_update_appointment_cancel_cf` (
   `id_action_report` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_task`),
   KEY `fk_wf_task_up_app_cancel_cf` (`id_action_cancel`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_task_update_appointment_cancel_cf` DISABLE KEYS */;
 INSERT INTO `workflow_task_update_appointment_cancel_cf` (`id_task`, `id_action_cancel`, `id_action_report`) VALUES
@@ -5151,13 +5151,13 @@ INSERT INTO `workflow_task_update_appointment_cancel_cf` (`id_task`, `id_action_
 DROP TABLE IF EXISTS `workflow_workflow`;
 CREATE TABLE IF NOT EXISTS `workflow_workflow` (
   `id_workflow` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `description` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `description` mediumtext COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `creation_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `is_enabled` smallint(6) DEFAULT 0,
-  `workgroup_key` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `workgroup_key` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id_workflow`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_workflow` DISABLE KEYS */;
 INSERT INTO `workflow_workflow` (`id_workflow`, `name`, `description`, `creation_date`, `is_enabled`, `workgroup_key`) VALUES
@@ -5167,10 +5167,10 @@ INSERT INTO `workflow_workflow` (`id_workflow`, `name`, `description`, `creation
 DROP TABLE IF EXISTS `workflow_workgroup_cf`;
 CREATE TABLE IF NOT EXISTS `workflow_workgroup_cf` (
   `id_task` int(11) NOT NULL DEFAULT 0,
-  `workgroup_key` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `workgroup_key` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `id_mailing_list` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_task`,`workgroup_key`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 /*!40000 ALTER TABLE `workflow_workgroup_cf` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workflow_workgroup_cf` ENABLE KEYS */;

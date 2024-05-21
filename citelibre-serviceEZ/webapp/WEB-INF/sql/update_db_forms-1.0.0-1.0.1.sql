@@ -10,7 +10,7 @@ ALTER TABLE forms_group	ADD COLUMN iteration_add_label varchar(255) default '' A
 ALTER TABLE forms_group	ADD COLUMN iteration_remove_label varchar(255) default '' AFTER iteration_add_label;
 ALTER TABLE forms_group DROP COLUMN collapsible;
 
-ALTER TABLE forms_question	CHANGE COLUMN description description LONGTEXT NULL COLLATE 'utf8_unicode_ci' AFTER title;
+ALTER TABLE forms_question	CHANGE COLUMN description description LONGTEXT NULL COLLATE 'utf8mb4_unicode_520_ci' AFTER title;
 
 
 ALTER TABLE forms_form DROP COLUMN end_message;
