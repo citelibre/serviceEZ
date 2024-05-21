@@ -414,11 +414,11 @@ DROP TABLE IF EXISTS `core_admin_mailinglist`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `core_admin_mailinglist` (
   `id_mailinglist` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) COLLATE utf8mb3_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8mb3_unicode_ci NOT NULL,
-  `workgroup` varchar(50) COLLATE utf8mb3_unicode_ci NOT NULL,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `workgroup` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id_mailinglist`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -524,12 +524,12 @@ DROP TABLE IF EXISTS `core_admin_role_resource`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `core_admin_role_resource` (
   `rbac_id` int NOT NULL AUTO_INCREMENT,
-  `role_key` varchar(50) COLLATE utf8mb3_unicode_ci NOT NULL DEFAULT '',
-  `resource_type` varchar(50) COLLATE utf8mb3_unicode_ci NOT NULL DEFAULT '',
-  `resource_id` varchar(50) COLLATE utf8mb3_unicode_ci NOT NULL DEFAULT '',
-  `permission` varchar(50) COLLATE utf8mb3_unicode_ci NOT NULL DEFAULT '',
+  `role_key` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `resource_type` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `resource_id` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `permission` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`rbac_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1931 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=1931 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -551,13 +551,13 @@ DROP TABLE IF EXISTS `core_admin_user`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `core_admin_user` (
   `id_user` int NOT NULL AUTO_INCREMENT,
-  `access_code` varchar(100) COLLATE utf8mb3_unicode_ci NOT NULL DEFAULT '',
-  `last_name` varchar(100) COLLATE utf8mb3_unicode_ci NOT NULL DEFAULT '',
-  `first_name` varchar(100) COLLATE utf8mb3_unicode_ci NOT NULL DEFAULT '',
-  `email` varchar(256) COLLATE utf8mb3_unicode_ci NOT NULL DEFAULT '0',
+  `access_code` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `last_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `first_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `email` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
   `status` smallint NOT NULL DEFAULT '0',
-  `password` mediumtext COLLATE utf8mb3_unicode_ci,
-  `locale` varchar(10) COLLATE utf8mb3_unicode_ci NOT NULL DEFAULT 'fr',
+  `password` mediumtext COLLATE utf8_unicode_ci,
+  `locale` varchar(10) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'fr',
   `level_user` smallint NOT NULL DEFAULT '0',
   `reset_password` smallint NOT NULL DEFAULT '0',
   `accessibility_mode` smallint NOT NULL DEFAULT '0',
@@ -565,9 +565,9 @@ CREATE TABLE `core_admin_user` (
   `account_max_valid_date` bigint DEFAULT NULL,
   `nb_alerts_sent` int NOT NULL DEFAULT '0',
   `last_login` timestamp NULL DEFAULT NULL,
-  `workgroup_key` varchar(50) COLLATE utf8mb3_unicode_ci DEFAULT 'all',
+  `workgroup_key` varchar(50) COLLATE utf8_unicode_ci DEFAULT 'all',
   PRIMARY KEY (`id_user`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -712,18 +712,18 @@ DROP TABLE IF EXISTS `core_attribute`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `core_attribute` (
   `id_attribute` int NOT NULL AUTO_INCREMENT,
-  `type_class_name` varchar(255) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
-  `title` mediumtext COLLATE utf8mb3_unicode_ci,
-  `help_message` mediumtext COLLATE utf8mb3_unicode_ci,
+  `type_class_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `title` mediumtext COLLATE utf8_unicode_ci,
+  `help_message` mediumtext COLLATE utf8_unicode_ci,
   `is_mandatory` smallint DEFAULT '0',
   `is_shown_in_search` smallint DEFAULT '0',
   `is_shown_in_result_list` smallint DEFAULT '0',
   `is_field_in_line` smallint DEFAULT '0',
   `attribute_position` int DEFAULT '0',
-  `plugin_name` varchar(255) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `plugin_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `anonymize` smallint DEFAULT NULL,
   PRIMARY KEY (`id_attribute`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -746,8 +746,8 @@ DROP TABLE IF EXISTS `core_attribute_field`;
 CREATE TABLE `core_attribute_field` (
   `id_field` int NOT NULL AUTO_INCREMENT,
   `id_attribute` int DEFAULT NULL,
-  `title` varchar(255) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
-  `DEFAULT_value` mediumtext COLLATE utf8mb3_unicode_ci,
+  `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `DEFAULT_value` mediumtext COLLATE utf8_unicode_ci,
   `is_DEFAULT_value` smallint DEFAULT '0',
   `height` int DEFAULT NULL,
   `width` int DEFAULT NULL,
@@ -755,7 +755,7 @@ CREATE TABLE `core_attribute_field` (
   `is_multiple` smallint DEFAULT '0',
   `field_position` int DEFAULT NULL,
   PRIMARY KEY (`id_field`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -879,14 +879,14 @@ DROP TABLE IF EXISTS `core_file`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `core_file` (
   `id_file` int NOT NULL AUTO_INCREMENT,
-  `title` mediumtext COLLATE utf8mb3_unicode_ci,
+  `title` mediumtext COLLATE utf8_unicode_ci,
   `id_physical_file` int DEFAULT NULL,
   `file_size` int DEFAULT NULL,
-  `mime_type` varchar(255) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `mime_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `date_creation` timestamp NULL DEFAULT NULL,
-  `origin` varchar(255) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `origin` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_file`)
-) ENGINE=MyISAM AUTO_INCREMENT=127 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=127 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1061,27 +1061,27 @@ DROP TABLE IF EXISTS `core_page`;
 CREATE TABLE `core_page` (
   `id_page` int NOT NULL AUTO_INCREMENT,
   `id_parent` int DEFAULT '0',
-  `name` varchar(50) COLLATE utf8mb3_unicode_ci NOT NULL DEFAULT '',
-  `description` mediumtext COLLATE utf8mb3_unicode_ci,
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `description` mediumtext COLLATE utf8_unicode_ci,
   `date_update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` smallint DEFAULT NULL,
   `page_order` int DEFAULT '0',
   `id_template` int DEFAULT NULL,
   `date_creation` timestamp NULL DEFAULT NULL,
-  `role` varchar(50) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
-  `code_theme` varchar(80) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `role` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `code_theme` varchar(80) COLLATE utf8_unicode_ci DEFAULT NULL,
   `node_status` smallint NOT NULL DEFAULT '1',
   `image_content` mediumblob,
-  `mime_type` varchar(255) COLLATE utf8mb3_unicode_ci DEFAULT 'NULL',
-  `meta_keywords` varchar(255) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
-  `meta_description` varchar(255) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `mime_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'NULL',
+  `meta_keywords` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `meta_description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `id_authorization_node` int DEFAULT NULL,
   `display_date_update` smallint NOT NULL DEFAULT '0',
   `is_manual_date_update` smallint NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_page`),
   KEY `index_page` (`id_template`,`id_parent`),
   KEY `index_childpage` (`id_parent`,`page_order`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1103,11 +1103,11 @@ DROP TABLE IF EXISTS `core_page_template`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `core_page_template` (
   `id_template` int NOT NULL AUTO_INCREMENT,
-  `description` varchar(50) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
-  `file_name` varchar(100) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
-  `picture` varchar(50) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `description` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `file_name` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `picture` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_template`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1131,7 +1131,7 @@ CREATE TABLE `core_physical_file` (
   `id_physical_file` int NOT NULL AUTO_INCREMENT,
   `file_value` mediumblob,
   PRIMARY KEY (`id_physical_file`)
-) ENGINE=MyISAM AUTO_INCREMENT=127 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=127 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1177,9 +1177,9 @@ DROP TABLE IF EXISTS `core_portlet`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `core_portlet` (
   `id_portlet` int NOT NULL AUTO_INCREMENT,
-  `id_portlet_type` varchar(50) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `id_portlet_type` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `id_page` int DEFAULT NULL,
-  `name` varchar(70) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `name` varchar(70) COLLATE utf8_unicode_ci DEFAULT NULL,
   `date_update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` smallint NOT NULL DEFAULT '0',
   `portlet_order` int DEFAULT NULL,
@@ -1188,11 +1188,11 @@ CREATE TABLE `core_portlet` (
   `accept_alias` smallint DEFAULT NULL,
   `date_creation` timestamp NULL DEFAULT NULL,
   `display_portlet_title` int NOT NULL DEFAULT '0',
-  `role` varchar(50) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `role` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `device_display_flags` int NOT NULL DEFAULT '15',
   PRIMARY KEY (`id_portlet`),
   KEY `index_portlet` (`id_page`,`id_portlet_type`,`id_style`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1376,11 +1376,11 @@ DROP TABLE IF EXISTS `core_stylesheet`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `core_stylesheet` (
   `id_stylesheet` int NOT NULL AUTO_INCREMENT,
-  `description` varchar(255) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
-  `file_name` varchar(255) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `file_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `source` mediumblob,
   PRIMARY KEY (`id_stylesheet`)
-) ENGINE=MyISAM AUTO_INCREMENT=311 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=311 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1550,13 +1550,13 @@ DROP TABLE IF EXISTS `core_xsl_export`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `core_xsl_export` (
   `id_xsl_export` int NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
-  `description` varchar(255) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
-  `extension` varchar(255) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `extension` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `id_file` int DEFAULT NULL,
-  `plugin` varchar(255) COLLATE utf8mb3_unicode_ci DEFAULT '',
+  `plugin` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
   PRIMARY KEY (`id_xsl_export`)
-) ENGINE=MyISAM AUTO_INCREMENT=127 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=127 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3606,10 +3606,10 @@ CREATE TABLE `template_display` (
   `id_composite` int DEFAULT '0',
   `id_parent` int DEFAULT '0',
   `display_order` int DEFAULT '0',
-  `composite_type` varchar(255) COLLATE utf8mb3_unicode_ci DEFAULT '',
+  `composite_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
   `display_depth` int DEFAULT '0',
   PRIMARY KEY (`id_display`)
-) ENGINE=MyISAM AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3668,16 +3668,16 @@ DROP TABLE IF EXISTS `template_field`;
 CREATE TABLE `template_field` (
   `id_field` int NOT NULL AUTO_INCREMENT,
   `id_entry` int NOT NULL DEFAULT '0',
-  `title` varchar(255) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
-  `code` varchar(100) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
-  `value` mediumtext COLLATE utf8mb3_unicode_ci,
+  `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `code` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `value` mediumtext COLLATE utf8_unicode_ci,
   `default_value` smallint DEFAULT NULL,
   `pos` int DEFAULT NULL,
   `value_type_date` date DEFAULT NULL,
   `no_display_title` smallint DEFAULT NULL,
-  `comment` mediumtext COLLATE utf8mb3_unicode_ci,
+  `comment` mediumtext COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id_field`)
-) ENGINE=MyISAM AUTO_INCREMENT=744 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=744 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3728,19 +3728,19 @@ DROP TABLE IF EXISTS `template_question`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `template_question` (
   `id_question` int NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) COLLATE utf8mb3_unicode_ci NOT NULL DEFAULT '',
-  `code` varchar(100) COLLATE utf8mb3_unicode_ci NOT NULL DEFAULT '',
-  `description` mediumtext COLLATE utf8mb3_unicode_ci,
+  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `code` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `description` mediumtext COLLATE utf8_unicode_ci,
   `id_entry` int DEFAULT '0',
   `id_template` int DEFAULT '0',
   `is_visible_multiview_global` smallint NOT NULL DEFAULT '0',
   `is_visible_multiview_form_selected` smallint NOT NULL DEFAULT '0',
   `multiview_column_order` int NOT NULL DEFAULT '0',
-  `column_title` varchar(255) COLLATE utf8mb3_unicode_ci NOT NULL DEFAULT '',
+  `column_title` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `is_filterable_multiview_global` smallint NOT NULL DEFAULT '0',
   `is_filterable_multiview_form_selected` smallint NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_question`)
-) ENGINE=MyISAM AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4218,13 +4218,13 @@ DROP TABLE IF EXISTS `workflow_icon`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `workflow_icon` (
   `id_icon` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
-  `mime_type` varchar(50) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `mime_type` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `file_value` mediumblob,
   `width` int DEFAULT NULL,
   `height` int DEFAULT NULL,
   PRIMARY KEY (`id_icon`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5137,12 +5137,12 @@ DROP TABLE IF EXISTS `workflow_task_formspdf_template`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `workflow_task_formspdf_template` (
   `id_template` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb3_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `id_form` int NOT NULL DEFAULT '-1',
   `is_generic` smallint NOT NULL DEFAULT '1',
-  `content` longtext COLLATE utf8mb3_unicode_ci,
+  `content` longtext COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id_template`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
