@@ -71,8 +71,8 @@ services:
     mem_limit: 2g
     volumes:
       - type: volume
-        source: rendezvous-data
-        target: /usr/local/tomcat/webapps/rendezvous
+        source: serviceEZ-data
+        target: /usr/local/tomcat/webapps/serviceEZ
 
   kibana:
     image: ${REPO}/kibana
@@ -108,5 +108,5 @@ services:
 
 volumes:
   elasticsearch-data:
-  rendezvous-data:
+  serviceEZ-data:
     #  solr-data:
