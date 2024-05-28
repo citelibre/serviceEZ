@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.3.0, for Linux (x86_64)
+-- MariaDB dump 10.19  Distrib 10.6.17-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: lutece
 -- ------------------------------------------------------
--- Server version	8.3.0
+-- Server version	10.6.17-MariaDB-1:10.6.17+maria~ubu2004
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8mb4 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -15,23 +15,19 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-CREATE DATABASE lutece;
-
-USE lutece;
-
 --
 -- Table structure for table `accesscontrol_accesscontrol`
 --
 
 DROP TABLE IF EXISTS `accesscontrol_accesscontrol`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `accesscontrol_accesscontrol` (
-  `id_access_control` int NOT NULL AUTO_INCREMENT,
+  `id_access_control` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT '',
-  `description` mediumtext,
-  `creation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `is_enabled` smallint NOT NULL DEFAULT '0',
+  `description` mediumtext DEFAULT NULL,
+  `creation_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `is_enabled` smallint(6) NOT NULL DEFAULT 0,
   `workgroup_key` varchar(255) DEFAULT '',
   `return_url` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_access_control`)
@@ -53,13 +49,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `accesscontrol_accesscontroller`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `accesscontrol_accesscontroller` (
-  `id_access_controller` int NOT NULL AUTO_INCREMENT,
+  `id_access_controller` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(255) DEFAULT NULL,
-  `id_access_control` int DEFAULT NULL,
+  `id_access_control` int(11) DEFAULT NULL,
   `bool_cond` varchar(50) DEFAULT NULL,
-  `display_order` int DEFAULT NULL,
+  `display_order` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_access_controller`),
   KEY `index_ac_accontroller_id` (`id_access_control`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -80,12 +76,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `accesscontrol_controller_age_config`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `accesscontrol_controller_age_config` (
-  `id_access_controller` int NOT NULL,
-  `comment` mediumtext,
-  `age_min` int DEFAULT NULL,
-  `age_max` int DEFAULT NULL,
+  `id_access_controller` int(11) NOT NULL,
+  `comment` mediumtext DEFAULT NULL,
+  `age_min` int(11) DEFAULT NULL,
+  `age_max` int(11) DEFAULT NULL,
   `error_message` varchar(100) DEFAULT NULL,
   `data_handler` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_access_controller`)
@@ -107,10 +103,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `accesscontrol_controller_comment_config`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `accesscontrol_controller_comment_config` (
-  `id_access_controller` int NOT NULL,
-  `comment` mediumtext,
+  `id_access_controller` int(11) NOT NULL,
+  `comment` mediumtext DEFAULT NULL,
   PRIMARY KEY (`id_access_controller`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -130,10 +126,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `accesscontrol_controller_tos_config`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `accesscontrol_controller_tos_config` (
-  `id_access_controller` int NOT NULL,
-  `comment` mediumtext,
+  `id_access_controller` int(11) NOT NULL,
+  `comment` mediumtext DEFAULT NULL,
   `error_message` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id_access_controller`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -154,10 +150,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `accesscontrol_controller_user_code_config`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `accesscontrol_controller_user_code_config` (
-  `id_access_controller` int NOT NULL,
-  `comment` mediumtext,
+  `id_access_controller` int(11) NOT NULL,
+  `comment` mediumtext DEFAULT NULL,
   `error_message` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id_access_controller`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -178,10 +174,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `accesscontrol_controller_user_code_data`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `accesscontrol_controller_user_code_data` (
   `userId` varchar(100) NOT NULL,
-  `id_access_control` int NOT NULL,
+  `id_access_control` int(11) NOT NULL,
   `code` varchar(100) DEFAULT NULL,
   `date_validity` date DEFAULT NULL,
   PRIMARY KEY (`userId`,`id_access_control`)
@@ -203,9 +199,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `accesscontrol_forms_controller_entrytype_datahandler_config`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `accesscontrol_forms_controller_entrytype_datahandler_config` (
-  `id_access_controller` int NOT NULL,
+  `id_access_controller` int(11) NOT NULL,
   `code_question` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id_access_controller`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -226,11 +222,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `accesscontrol_resource_accesscontrol`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `accesscontrol_resource_accesscontrol` (
-  `id_resource` int NOT NULL,
+  `id_resource` int(11) NOT NULL,
   `resource_type` varchar(255) NOT NULL,
-  `id_access_control` int NOT NULL,
+  `id_access_control` int(11) NOT NULL,
   PRIMARY KEY (`id_resource`,`resource_type`,`id_access_control`),
   KEY `index_ac_accontroller_resource` (`id_resource`,`resource_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -251,9 +247,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `archive_item`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `archive_item` (
-  `id_archive_item` int NOT NULL DEFAULT '0',
+  `id_archive_item` int(11) NOT NULL DEFAULT 0,
   `folder_to_archive` varchar(255) DEFAULT NULL,
   `archive_destination` varchar(255) DEFAULT NULL,
   `archive_name` varchar(255) DEFAULT NULL,
@@ -280,10 +276,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `blobstore_blobstore`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `blobstore_blobstore` (
   `id_blob` varchar(255) NOT NULL DEFAULT '',
-  `blob_value` mediumblob,
+  `blob_value` mediumblob DEFAULT NULL,
   PRIMARY KEY (`id_blob`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -303,13 +299,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `contact`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `contact` (
-  `id_contact` int NOT NULL DEFAULT '0',
+  `id_contact` int(11) NOT NULL DEFAULT 0,
   `description` varchar(50) NOT NULL DEFAULT '',
   `email` varchar(100) NOT NULL DEFAULT '',
   `workgroup_key` varchar(50) NOT NULL DEFAULT 'all',
-  `hits` int NOT NULL DEFAULT '0',
+  `hits` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_contact`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -330,15 +326,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `contact_list`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `contact_list` (
-  `id_contact_list` int NOT NULL DEFAULT '0',
+  `id_contact_list` int(11) NOT NULL DEFAULT 0,
   `label_contact_list` varchar(50) NOT NULL DEFAULT '',
   `description_contact_list` varchar(255) NOT NULL DEFAULT '',
   `workgroup_key` varchar(50) NOT NULL DEFAULT 'all',
   `role` varchar(50) NOT NULL DEFAULT 'none',
-  `contact_list_order` int NOT NULL DEFAULT '0',
-  `is_tos_active` smallint NOT NULL DEFAULT '0',
+  `contact_list_order` int(11) NOT NULL DEFAULT 0,
+  `is_tos_active` smallint(6) NOT NULL DEFAULT 0,
   `tos_message` mediumtext NOT NULL,
   PRIMARY KEY (`id_contact_list`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -360,12 +356,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `contact_list_contact`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `contact_list_contact` (
-  `id_contact_list` int NOT NULL DEFAULT '0',
-  `id_contact` int NOT NULL DEFAULT '0',
-  `contact_order` int NOT NULL DEFAULT '0',
-  `hits` int NOT NULL DEFAULT '0',
+  `id_contact_list` int(11) NOT NULL DEFAULT 0,
+  `id_contact` int(11) NOT NULL DEFAULT 0,
+  `contact_order` int(11) NOT NULL DEFAULT 0,
+  `hits` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_contact_list`,`id_contact`,`contact_order`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -386,11 +382,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_admin_dashboard`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_admin_dashboard` (
   `dashboard_name` varchar(100) NOT NULL,
-  `dashboard_column` int NOT NULL,
-  `dashboard_order` int NOT NULL,
+  `dashboard_column` int(11) NOT NULL,
+  `dashboard_order` int(11) NOT NULL,
   PRIMARY KEY (`dashboard_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -411,12 +407,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_admin_mailinglist`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_admin_mailinglist` (
-  `id_mailinglist` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
-  `workgroup` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `id_mailinglist` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `workgroup` varchar(50) NOT NULL,
   PRIMARY KEY (`id_mailinglist`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -437,9 +433,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_admin_mailinglist_filter`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_admin_mailinglist_filter` (
-  `id_mailinglist` int NOT NULL DEFAULT '0',
+  `id_mailinglist` int(11) NOT NULL DEFAULT 0,
   `workgroup` varchar(50) NOT NULL,
   `role` varchar(50) NOT NULL,
   PRIMARY KEY (`id_mailinglist`,`workgroup`,`role`)
@@ -462,20 +458,20 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_admin_right`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_admin_right` (
   `id_right` varchar(255) NOT NULL DEFAULT '',
   `name` varchar(255) DEFAULT NULL,
-  `level_right` smallint DEFAULT NULL,
+  `level_right` smallint(6) DEFAULT NULL,
   `admin_url` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `is_updatable` int NOT NULL DEFAULT '0',
+  `is_updatable` int(11) NOT NULL DEFAULT 0,
   `plugin_name` varchar(50) DEFAULT NULL,
   `id_feature_group` varchar(50) DEFAULT NULL,
   `icon_url` varchar(255) DEFAULT NULL,
   `documentation_url` varchar(255) DEFAULT NULL,
-  `id_order` int DEFAULT NULL,
-  `is_external_feature` smallint DEFAULT '0',
+  `id_order` int(11) DEFAULT NULL,
+  `is_external_feature` smallint(6) DEFAULT 0,
   PRIMARY KEY (`id_right`),
   KEY `index_right` (`level_right`,`admin_url`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -497,7 +493,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_admin_role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_admin_role` (
   `role_key` varchar(50) NOT NULL DEFAULT '',
   `role_description` varchar(100) NOT NULL DEFAULT '',
@@ -521,13 +517,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_admin_role_resource`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_admin_role_resource` (
-  `rbac_id` int NOT NULL AUTO_INCREMENT,
-  `role_key` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
-  `resource_type` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
-  `resource_id` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
-  `permission` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
+  `rbac_id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_key` varchar(50) NOT NULL DEFAULT '',
+  `resource_type` varchar(50) NOT NULL DEFAULT '',
+  `resource_id` varchar(50) NOT NULL DEFAULT '',
+  `permission` varchar(50) NOT NULL DEFAULT '',
   PRIMARY KEY (`rbac_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1931 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -548,24 +544,24 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_admin_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_admin_user` (
-  `id_user` int NOT NULL AUTO_INCREMENT,
-  `access_code` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
-  `last_name` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
-  `first_name` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
-  `email` varchar(256) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '0',
-  `status` smallint NOT NULL DEFAULT '0',
-  `password` mediumtext COLLATE utf8mb4_unicode_520_ci,
-  `locale` varchar(10) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT 'fr',
-  `level_user` smallint NOT NULL DEFAULT '0',
-  `reset_password` smallint NOT NULL DEFAULT '0',
-  `accessibility_mode` smallint NOT NULL DEFAULT '0',
+  `id_user` int(11) NOT NULL AUTO_INCREMENT,
+  `access_code` varchar(100) NOT NULL DEFAULT '',
+  `last_name` varchar(100) NOT NULL DEFAULT '',
+  `first_name` varchar(100) NOT NULL DEFAULT '',
+  `email` varchar(256) NOT NULL DEFAULT '0',
+  `status` smallint(6) NOT NULL DEFAULT 0,
+  `password` mediumtext DEFAULT NULL,
+  `locale` varchar(10) NOT NULL DEFAULT 'fr',
+  `level_user` smallint(6) NOT NULL DEFAULT 0,
+  `reset_password` smallint(6) NOT NULL DEFAULT 0,
+  `accessibility_mode` smallint(6) NOT NULL DEFAULT 0,
   `password_max_valid_date` timestamp NULL DEFAULT NULL,
-  `account_max_valid_date` bigint DEFAULT NULL,
-  `nb_alerts_sent` int NOT NULL DEFAULT '0',
+  `account_max_valid_date` bigint(20) DEFAULT NULL,
+  `nb_alerts_sent` int(11) NOT NULL DEFAULT 0,
   `last_login` timestamp NULL DEFAULT NULL,
-  `workgroup_key` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT 'all',
+  `workgroup_key` varchar(50) DEFAULT 'all',
   PRIMARY KEY (`id_user`)
 ) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -576,7 +572,7 @@ CREATE TABLE `core_admin_user` (
 
 LOCK TABLES `core_admin_user` WRITE;
 /*!40000 ALTER TABLE `core_admin_user` DISABLE KEYS */;
-INSERT INTO `core_admin_user` VALUES (1,'admin','Admin','admin','admin@lutece.fr',0,'PBKDF2WITHHMACSHA512:40000:5213a247b2f7d70cf70a6082b4e69fbe:fc97c6be27b5f4a0489e5bbc4ff6576f8fe7c92ce74f250e92b5efa2f7cfec616a74be367120abd6108bba2f1e04cd7c1df74bdff2777c89cf112b8375d6eacce656ca73ee3cc00130a0cc1166b4973baf847d44bda348b17a418fb3adddf4ec43a23400392de8ce47e6a3bf771bb4415e40b4bc0dd39623da37664adb3f9332','fr',0,0,0,NULL,1742039135000,0,'2024-03-15 11:45:35','all'),(2,'lutece','Lutece','lutece','lutece@lutece.fr',1,'PLAINTEXT:adminadmin','fr',1,0,0,NULL,NULL,0,'1979-12-31 23:00:00','all'),(3,'redac','redac','redac','redac@lutece.fr',1,'PLAINTEXT:adminadmin','fr',2,0,0,NULL,NULL,0,'1979-12-31 23:00:00','all'),(4,'valid','valid','valid','valid@lutece.fr',1,'PLAINTEXT:adminadmin','fr',3,0,0,NULL,NULL,0,'1979-12-31 23:00:00','all'),(5,'direction','Direction','Agent','agent.direction@citelibre.org',0,'PBKDF2WITHHMACSHA512:40000:cb27f86b760365f5b91d1486796a252a:07d28d07a75f6b41ae435085e5be63ebfbc3ab331ac08cca8e0978400f7feeb86824b86f7a2b381e50a11ac9e0bcef782b9aefddb66edb6e02b57cc20e640d3390b0f4365eb059ba23a344114f3ebeeab4ad59b124ff90a18fb306cc5059f72f6471f382014937a6c1be51b405fabbf0bfe7d219dead1d87eaa75b5780f71f3f','fr',1,0,0,'2024-07-10 15:37:52',1741793877224,0,'2024-03-12 15:37:57','all'),(6,'espacepublic','EspacePublic','Agent','agent.espacepublic@citelibre.org',0,'PBKDF2WITHHMACSHA512:40000:423e23bba77c71fad7b25844a82d19e3:b655d85f8f7a10be0006d653a299691ea4c5ff93fb834853c9d72c7c52cca4afd27b6936595605745392b656727194a9042a6ff28e25976f5bba9121f19710954dae14ab2bd35c1dc20b39b829c16aa3996df18f50b22ca1f1e9f8e9afb48bfa3f9477a4b3f2effdeccb0539a1b5015953475361f1fbf5673d7dfd94b57c1b3d','fr',2,0,0,'2024-07-10 15:36:36',1741794199513,0,'2024-03-12 15:43:20','all'),(7,'voirie','Voirie','Agent','agent.voirie@citelibre.org',0,'PBKDF2WITHHMACSHA512:40000:ed0fbc804a9612f983bef9d25593a85b:860171e61e7609ddeec428b4127182eceb368b42439ead08ffafea9880f84329d78b52abda75f6b5cecfe66743c823d10b6878ff90a470516263a0472bb38bdb2798de4b3fbd920cf5ea51e358b2d93d3052d5e972d6a6a3e0b29d37e2b3fcbcf14e7c77936cbd05d0f3b1aa45a6ca8ef474752f8ee04dbdea64b4c31f8eb36c','fr',3,0,0,'2024-07-10 15:34:50',1741796310742,0,'2024-03-12 16:18:31','all'),(8,'petiteenfance','PetiteEnfance','Agent','agent.petiteenfance@citelibre.org',0,'PBKDF2WITHHMACSHA512:40000:dfe26e33fa61efb67333567beea45ad0:b08687413cea5337dda4dd6bcc9fcde0b64a8c39d5083cbf1ade620b3e5f28c8eee944ea9b3e20f9387130ee9881814ae315c8fdaea8aab6533036d8aa47885aa1c4dae1b1475a2f25fff28f783bd90c22878cbce57b27a9894e7c087856a170f76b6662c5f7250134fdfa4308ed80791836d2c7f22376819acadcccb7fd3080','fr',3,0,0,'2024-07-10 15:44:52',1741794297655,0,'2024-03-12 15:44:58','all');
+INSERT INTO `core_admin_user` VALUES (1,'admin','Admin','admin','admin@lutece.fr',0,'PBKDF2WITHHMACSHA512:40000:5213a247b2f7d70cf70a6082b4e69fbe:fc97c6be27b5f4a0489e5bbc4ff6576f8fe7c92ce74f250e92b5efa2f7cfec616a74be367120abd6108bba2f1e04cd7c1df74bdff2777c89cf112b8375d6eacce656ca73ee3cc00130a0cc1166b4973baf847d44bda348b17a418fb3adddf4ec43a23400392de8ce47e6a3bf771bb4415e40b4bc0dd39623da37664adb3f9332','fr',0,0,0,NULL,1748451860817,0,'2024-05-28 17:04:20','all'),(2,'lutece','Lutece','lutece','lutece@lutece.fr',1,'PLAINTEXT:adminadmin','fr',1,0,0,NULL,NULL,0,'1979-12-31 23:00:00','all'),(3,'redac','redac','redac','redac@lutece.fr',1,'PLAINTEXT:adminadmin','fr',2,0,0,NULL,NULL,0,'1979-12-31 23:00:00','all'),(4,'valid','valid','valid','valid@lutece.fr',1,'PLAINTEXT:adminadmin','fr',3,0,0,NULL,NULL,0,'1979-12-31 23:00:00','all'),(5,'direction','Direction','Agent','agent.direction@citelibre.org',0,'PBKDF2WITHHMACSHA512:40000:cb27f86b760365f5b91d1486796a252a:07d28d07a75f6b41ae435085e5be63ebfbc3ab331ac08cca8e0978400f7feeb86824b86f7a2b381e50a11ac9e0bcef782b9aefddb66edb6e02b57cc20e640d3390b0f4365eb059ba23a344114f3ebeeab4ad59b124ff90a18fb306cc5059f72f6471f382014937a6c1be51b405fabbf0bfe7d219dead1d87eaa75b5780f71f3f','fr',1,0,0,'2024-07-10 15:37:52',1741793877224,0,'2024-03-12 15:37:57','all'),(6,'espacepublic','EspacePublic','Agent','agent.espacepublic@citelibre.org',0,'PBKDF2WITHHMACSHA512:40000:423e23bba77c71fad7b25844a82d19e3:b655d85f8f7a10be0006d653a299691ea4c5ff93fb834853c9d72c7c52cca4afd27b6936595605745392b656727194a9042a6ff28e25976f5bba9121f19710954dae14ab2bd35c1dc20b39b829c16aa3996df18f50b22ca1f1e9f8e9afb48bfa3f9477a4b3f2effdeccb0539a1b5015953475361f1fbf5673d7dfd94b57c1b3d','fr',2,0,0,'2024-07-10 15:36:36',1741794199513,0,'2024-03-12 15:43:20','all'),(7,'voirie','Voirie','Agent','agent.voirie@citelibre.org',0,'PBKDF2WITHHMACSHA512:40000:ed0fbc804a9612f983bef9d25593a85b:860171e61e7609ddeec428b4127182eceb368b42439ead08ffafea9880f84329d78b52abda75f6b5cecfe66743c823d10b6878ff90a470516263a0472bb38bdb2798de4b3fbd920cf5ea51e358b2d93d3052d5e972d6a6a3e0b29d37e2b3fcbcf14e7c77936cbd05d0f3b1aa45a6ca8ef474752f8ee04dbdea64b4c31f8eb36c','fr',3,0,0,'2024-07-10 15:34:50',1741796310742,0,'2024-03-12 16:18:31','all'),(8,'petiteenfance','PetiteEnfance','Agent','agent.petiteenfance@citelibre.org',0,'PBKDF2WITHHMACSHA512:40000:dfe26e33fa61efb67333567beea45ad0:b08687413cea5337dda4dd6bcc9fcde0b64a8c39d5083cbf1ade620b3e5f28c8eee944ea9b3e20f9387130ee9881814ae315c8fdaea8aab6533036d8aa47885aa1c4dae1b1475a2f25fff28f783bd90c22878cbce57b27a9894e7c087856a170f76b6662c5f7250134fdfa4308ed80791836d2c7f22376819acadcccb7fd3080','fr',3,0,0,'2024-07-10 15:44:52',1741794297655,0,'2024-03-12 15:44:58','all');
 /*!40000 ALTER TABLE `core_admin_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -586,10 +582,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_admin_user_anonymize_field`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_admin_user_anonymize_field` (
   `field_name` varchar(100) NOT NULL,
-  `anonymize` smallint NOT NULL,
+  `anonymize` smallint(6) NOT NULL,
   PRIMARY KEY (`field_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -610,14 +606,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_admin_user_field`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_admin_user_field` (
-  `id_user_field` int NOT NULL AUTO_INCREMENT,
-  `id_user` int DEFAULT NULL,
-  `id_attribute` int DEFAULT NULL,
-  `id_field` int DEFAULT NULL,
-  `id_file` int DEFAULT NULL,
-  `user_field_value` mediumtext,
+  `id_user_field` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user` int(11) DEFAULT NULL,
+  `id_attribute` int(11) DEFAULT NULL,
+  `id_field` int(11) DEFAULT NULL,
+  `id_file` int(11) DEFAULT NULL,
+  `user_field_value` mediumtext DEFAULT NULL,
   PRIMARY KEY (`id_user_field`),
   KEY `core_admin_user_field_idx_file` (`id_file`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -638,11 +634,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_admin_user_preferences`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_admin_user_preferences` (
   `id_user` varchar(100) NOT NULL,
   `pref_key` varchar(100) NOT NULL,
-  `pref_value` mediumtext,
+  `pref_value` mediumtext DEFAULT NULL,
   PRIMARY KEY (`id_user`,`pref_key`),
   KEY `index_admin_user_preferences` (`id_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -663,7 +659,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_admin_workgroup`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_admin_workgroup` (
   `workgroup_key` varchar(50) NOT NULL,
   `workgroup_description` varchar(255) DEFAULT NULL,
@@ -686,10 +682,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_admin_workgroup_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_admin_workgroup_user` (
   `workgroup_key` varchar(50) NOT NULL,
-  `id_user` int NOT NULL,
+  `id_user` int(11) NOT NULL,
   PRIMARY KEY (`workgroup_key`,`id_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -709,19 +705,19 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_attribute`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_attribute` (
-  `id_attribute` int NOT NULL AUTO_INCREMENT,
-  `type_class_name` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `title` mediumtext COLLATE utf8mb4_unicode_520_ci,
-  `help_message` mediumtext COLLATE utf8mb4_unicode_520_ci,
-  `is_mandatory` smallint DEFAULT '0',
-  `is_shown_in_search` smallint DEFAULT '0',
-  `is_shown_in_result_list` smallint DEFAULT '0',
-  `is_field_in_line` smallint DEFAULT '0',
-  `attribute_position` int DEFAULT '0',
-  `plugin_name` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `anonymize` smallint DEFAULT NULL,
+  `id_attribute` int(11) NOT NULL AUTO_INCREMENT,
+  `type_class_name` varchar(255) DEFAULT NULL,
+  `title` mediumtext DEFAULT NULL,
+  `help_message` mediumtext DEFAULT NULL,
+  `is_mandatory` smallint(6) DEFAULT 0,
+  `is_shown_in_search` smallint(6) DEFAULT 0,
+  `is_shown_in_result_list` smallint(6) DEFAULT 0,
+  `is_field_in_line` smallint(6) DEFAULT 0,
+  `attribute_position` int(11) DEFAULT 0,
+  `plugin_name` varchar(255) DEFAULT NULL,
+  `anonymize` smallint(6) DEFAULT NULL,
   PRIMARY KEY (`id_attribute`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -742,18 +738,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_attribute_field`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_attribute_field` (
-  `id_field` int NOT NULL AUTO_INCREMENT,
-  `id_attribute` int DEFAULT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `DEFAULT_value` mediumtext COLLATE utf8mb4_unicode_520_ci,
-  `is_DEFAULT_value` smallint DEFAULT '0',
-  `height` int DEFAULT NULL,
-  `width` int DEFAULT NULL,
-  `max_size_enter` int DEFAULT NULL,
-  `is_multiple` smallint DEFAULT '0',
-  `field_position` int DEFAULT NULL,
+  `id_field` int(11) NOT NULL AUTO_INCREMENT,
+  `id_attribute` int(11) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `DEFAULT_value` mediumtext DEFAULT NULL,
+  `is_DEFAULT_value` smallint(6) DEFAULT 0,
+  `height` int(11) DEFAULT NULL,
+  `width` int(11) DEFAULT NULL,
+  `max_size_enter` int(11) DEFAULT NULL,
+  `is_multiple` smallint(6) DEFAULT 0,
+  `field_position` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_field`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -774,12 +770,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_connections_log`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_connections_log` (
   `access_code` varchar(100) DEFAULT NULL,
   `ip_address` varchar(63) DEFAULT NULL,
-  `date_login` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `login_status` int DEFAULT NULL,
+  `date_login` timestamp NOT NULL DEFAULT current_timestamp(),
+  `login_status` int(11) DEFAULT NULL,
   KEY `index_connections_log` (`ip_address`,`date_login`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -800,11 +796,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_dashboard`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_dashboard` (
   `dashboard_name` varchar(100) NOT NULL,
-  `dashboard_column` int NOT NULL,
-  `dashboard_order` int NOT NULL,
+  `dashboard_column` int(11) NOT NULL,
+  `dashboard_order` int(11) NOT NULL,
   PRIMARY KEY (`dashboard_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -825,10 +821,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_datastore`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_datastore` (
   `entity_key` varchar(255) NOT NULL,
-  `entity_value` mediumtext,
+  `entity_value` mediumtext DEFAULT NULL,
   PRIMARY KEY (`entity_key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -839,7 +835,7 @@ CREATE TABLE `core_datastore` (
 
 LOCK TABLES `core_datastore` WRITE;
 /*!40000 ALTER TABLE `core_datastore` DISABLE KEYS */;
-INSERT INTO `core_datastore` VALUES ('adminavatar.site_property.avatarserver.Url',''),('captcha.defaultProvider','JCaptcha'),('core_banned_domain_names','yopmail.com'),('core.advanced_parameters.access_failures_captcha','1'),('core.advanced_parameters.access_failures_interval','10'),('core.advanced_parameters.access_failures_max','3'),('core.advanced_parameters.account_life_time','12'),('core.advanced_parameters.account_reactivated_mail_sender','lutece@nowhere.com'),('core.advanced_parameters.account_reactivated_mail_subject','Votre compte a bien été réactivé'),('core.advanced_parameters.default_user_language','fr'),('core.advanced_parameters.default_user_level','0'),('core.advanced_parameters.default_user_notification','1'),('core.advanced_parameters.default_user_status','0'),('core.advanced_parameters.email_pattern','^[\\w_.\\-!\\#\\$\\%\\&\'\\*\\+\\/\\=\\?\\^\\\\}\\{\\|\\~]+@[\\w_.\\-]+\\.[\\w]+$'),('core.advanced_parameters.email_pattern_verify_by',''),('core.advanced_parameters.expired_alert_mail_sender','lutece@nowhere.com'),('core.advanced_parameters.expired_alert_mail_subject','Votre compte a expiré'),('core.advanced_parameters.first_alert_mail_sender','lutece@nowhere.com'),('core.advanced_parameters.first_alert_mail_subject','Votre compte va bientôt expirer'),('core.advanced_parameters.force_change_password_reinit','false'),('core.advanced_parameters.lock_reset_token_to_session','false'),('core.advanced_parameters.maximum_number_password_change',''),('core.advanced_parameters.nb_alert_account','2'),('core.advanced_parameters.notify_user_password_expired',''),('core.advanced_parameters.other_alert_mail_sender','lutece@nowhere.com'),('core.advanced_parameters.other_alert_mail_subject','Votre compte va bientôt expirer'),('core.advanced_parameters.password_duration','120'),('core.advanced_parameters.password_expired_mail_sender','lutece@nowhere.com'),('core.advanced_parameters.password_expired_mail_subject','Votre mot de passe a expiré'),('core.advanced_parameters.password_format_numero','false'),('core.advanced_parameters.password_format_special_characters','false'),('core.advanced_parameters.password_format_upper_lower_case','false'),('core.advanced_parameters.password_history_size',''),('core.advanced_parameters.password_minimum_length','8'),('core.advanced_parameters.reset_token_validity','60'),('core.advanced_parameters.time_before_alert_account','30'),('core.advanced_parameters.time_between_alerts_account','10'),('core.advanced_parameters.tsw_size_password_change',''),('core.advanced_parameters.use_advanced_security_parameters',''),('core.backOffice.defaultEditor','tinymce'),('core.cache.status.AccessRulesCacheService.enabled','1'),('core.cache.status.asynchronousupload.asynchronousUploadCacheService.enabled','0'),('core.cache.status.BaseUserPreferencesCacheService.enabled','1'),('core.cache.status.BaseUserPreferencesCacheService.maxElementsInMemory','1000'),('core.cache.status.DatastoreCacheService.enabled','0'),('core.cache.status.EntryTypeServiceManagerCache.enabled','1'),('core.cache.status.formsCacheService.enabled','1'),('core.cache.status.formsCacheService.overflowToDisk','0'),('core.cache.status.formsCacheService.timeToIdleSeconds','86400'),('core.cache.status.formsCacheService.timeToLiveSeconds','86400'),('core.cache.status.LinksIncludeCacheService.enabled','1'),('core.cache.status.LuteceUserCacheService.enabled','1'),('core.cache.status.LuteceUserCacheService.maxElementsInMemory','1000'),('core.cache.status.MailAttachmentCacheService.diskPersistent','true'),('core.cache.status.MailAttachmentCacheService.enabled','1'),('core.cache.status.MailAttachmentCacheService.maxElementsInMemory','10'),('core.cache.status.MailAttachmentCacheService.overflowToDisk','true'),('core.cache.status.MailAttachmentCacheService.timeToLiveSeconds','7200'),('core.cache.status.MyPortalWidgetContentService.enabled','1'),('core.cache.status.MyPortalWidgetService.enabled','1'),('core.cache.status.PageCacheService.enabled','1'),('core.cache.status.PageCachingFilter.enabled','0'),('core.cache.status.PageCachingFilter(CAUTION:NEVERUSEWITHUSERDYNAMICDATA).enabled','0'),('core.cache.status.pathCacheService.enabled','1'),('core.cache.status.PortalMenuService.enabled','1'),('core.cache.status.PortletCacheService.enabled','0'),('core.cache.status.public_image_resource.enabled','0'),('core.cache.status.SEOFriendlyUrlCacheService.enabled','0'),('core.cache.status.SiteMapService.enabled','1'),('core.cache.status.StaticFilesCachingFilter.enabled','1'),('core.cache.status.StaticFilesCachingFilter.timeToLiveSeconds','604800'),('core.cache.status.workflow.alertGruConfigCacheService.enabled','0'),('core.cache.status.workflow.notifyGruConfigCacheService.enabled','0'),('core.crypto.key','0be4ef16cbc6a541c08c7d68caf113685e4950b4cfbca94e71813c71a1fc0bf7'),('core.daemon.accountLifeTimeDaemon.interval','86400'),('core.daemon.accountLifeTimeDaemon.onStartUp','true'),('core.daemon.alert.interval','43200'),('core.daemon.alert.onStartUp','true'),('core.daemon.alertCleaner.interval','43200'),('core.daemon.alertCleaner.onStartUp','true'),('core.daemon.AlertGruDaemon.interval','86400'),('core.daemon.AlertGruDaemon.onStartUp','true'),('core.daemon.anonymizationDaemon.interval','86400'),('core.daemon.anonymizationDaemon.onStartUp','false'),('core.daemon.archiveDaemon.interval','30'),('core.daemon.archiveDaemon.onStartUp','true'),('core.daemon.archiveIndexer.interval','360'),('core.daemon.archiveIndexer.onStartUp','true'),('core.daemon.automaticActionDaemon.interval','30'),('core.daemon.automaticActionDaemon.onStartUp','true'),('core.daemon.changeStateDaemon.interval','10'),('core.daemon.changeStateDaemon.onStartUp','false'),('core.daemon.chooseStateActionDaemon.interval','10'),('core.daemon.chooseStateActionDaemon.onStartUp','false'),('core.daemon.fullIndexingDaemon.interval','86400'),('core.daemon.fullIndexingDaemon.onStartUp','true'),('core.daemon.incrementalIndexingDaemon.interval','3000'),('core.daemon.incrementalIndexingDaemon.onStartUp','true'),('core.daemon.indexer.interval','300'),('core.daemon.indexer.onStartUp','true'),('core.daemon.mailSender.interval','86400'),('core.daemon.mailSender.onStartUp','true'),('core.daemon.notifyHistoryCleanerDaemon.interval','10'),('core.daemon.notifyHistoryCleanerDaemon.onStartUp','false'),('core.daemon.seoFriendlyUrlGenerator.interval','3600'),('core.daemon.seoFriendlyUrlGenerator.onStartUp','true'),('core.daemon.seoSitemapGenerator.interval','3600'),('core.daemon.seoSitemapGenerator.onStartUp','true'),('core.daemon.solrindexer.interval','86400'),('core.daemon.solrindexer.onStartUp','true'),('core.daemon.temporaryfilesDaemon.interval','86400'),('core.daemon.temporaryfilesDaemon.onStartUp','false'),('core.daemon.threadLauncherDaemon.interval','86400'),('core.daemon.threadLauncherDaemon.onStartUp','true'),('core.daemon.userControllerCodeDataDaemon.interval','10'),('core.daemon.userControllerCodeDataDaemon.onStartUp','false'),('core.frontOffice.defaultEditor','sceeditor'),('core.plugins.status.accesscontrol-forms.installed','true'),('core.plugins.status.accesscontrol-forms.pool','portal'),('core.plugins.status.accesscontrol.installed','true'),('core.plugins.status.accesscontrol.pool','portal'),('core.plugins.status.address-autocomplete.installed','true'),('core.plugins.status.address.installed','true'),('core.plugins.status.adminavatar.installed','true'),('core.plugins.status.archive-client.installed','true'),('core.plugins.status.archive.installed','true'),('core.plugins.status.archive.pool','portal'),('core.plugins.status.asynchronous-upload.installed','true'),('core.plugins.status.asynchronous-upload.pool','portal'),('core.plugins.status.automaticroleprovider.installed','true'),('core.plugins.status.avatar.installed','true'),('core.plugins.status.blobstore.installed','true'),('core.plugins.status.blobstore.pool','portal'),('core.plugins.status.blobstoreclient.installed','true'),('core.plugins.status.captcha.installed','true'),('core.plugins.status.contact.installed','true'),('core.plugins.status.contact.pool','portal'),('core.plugins.status.filegenerator.installed','true'),('core.plugins.status.filegenerator.pool','portal'),('core.plugins.status.forms-breadcrumbaccordion.installed','true'),('core.plugins.status.forms-breadcrumbaccordion.pool','portal'),('core.plugins.status.forms-documentproducer.installed','true'),('core.plugins.status.forms-documentproducer.pool','portal'),('core.plugins.status.forms-multiviewmapleaflet.installed','true'),('core.plugins.status.forms-solr.installed','true'),('core.plugins.status.forms-template.installed','true'),('core.plugins.status.forms-template.pool','portal'),('core.plugins.status.forms-unittree.installed','true'),('core.plugins.status.forms-unittree.pool','portal'),('core.plugins.status.forms-userassignment.installed','true'),('core.plugins.status.forms-userassignment.pool','portal'),('core.plugins.status.forms.installed','true'),('core.plugins.status.forms.pool','portal'),('core.plugins.status.genericattributes-address.installed','true'),('core.plugins.status.genericattributes-openstreetmap.installed','true'),('core.plugins.status.genericattributes.installed','true'),('core.plugins.status.genericattributes.pool','portal'),('core.plugins.status.html.installed','true'),('core.plugins.status.htmlpage.installed','true'),('core.plugins.status.htmlpage.pool','portal'),('core.plugins.status.htmltopdf.installed','true'),('core.plugins.status.jcaptcha.installed','true'),('core.plugins.status.leaflet.installed','true'),('core.plugins.status.limitconnectedusers.installed','true'),('core.plugins.status.matomo.installed','true'),('core.plugins.status.mermaidjs.installed','true'),('core.plugins.status.mermaidjs.pool','portal'),('core.plugins.status.modulenotifygrumappingmanager.installed','true'),('core.plugins.status.modulenotifygrumappingmanager.pool','portal'),('core.plugins.status.mylutece-cacheuserattribute.installed','true'),('core.plugins.status.mylutece-cacheuserattribute.pool','portal'),('core.plugins.status.mylutece-oauth2.installed','true'),('core.plugins.status.mylutece.installed','true'),('core.plugins.status.mylutece.pool','portal'),('core.plugins.status.myluteceaccessrules.installed','true'),('core.plugins.status.myluteceaccessrules.pool','portal'),('core.plugins.status.notifygru-forms.installed','true'),('core.plugins.status.notifygru-forms.pool','portal'),('core.plugins.status.oauth2.installed','true'),('core.plugins.status.poll.installed','true'),('core.plugins.status.poll.pool','portal'),('core.plugins.status.profiles.installed','true'),('core.plugins.status.profiles.pool','portal'),('core.plugins.status.referencelist.installed','true'),('core.plugins.status.referencelist.pool','portal'),('core.plugins.status.regularexpression.installed','true'),('core.plugins.status.regularexpression.pool','portal'),('core.plugins.status.rest.installed','true'),('core.plugins.status.seo.installed','true'),('core.plugins.status.seo.pool','portal'),('core.plugins.status.solr.installed','true'),('core.plugins.status.solr.pool','portal'),('core.plugins.status.systeminfo.installed','true'),('core.plugins.status.termofservice.installed','true'),('core.plugins.status.termofservice.pool','portal'),('core.plugins.status.themecitelibre.installed','true'),('core.plugins.status.unittree.installed','true'),('core.plugins.status.unittree.pool','portal'),('core.plugins.status.unittreeuserassignment.installed','true'),('core.plugins.status.unittreeuserassignment.pool','portal'),('core.plugins.status.userassignment.installed','true'),('core.plugins.status.userassignment.pool','portal'),('core.plugins.status.verifybackurl.installed','true'),('core.plugins.status.verifybackurl.pool','portal'),('core.plugins.status.workflow-alertforms.installed','true'),('core.plugins.status.workflow-alertforms.pool','portal'),('core.plugins.status.workflow-alertgru.installed','true'),('core.plugins.status.workflow-alertgru.pool','portal'),('core.plugins.status.workflow-forms.installed','true'),('core.plugins.status.workflow-forms.pool','portal'),('core.plugins.status.workflow-formsautomaticassignment.installed','true'),('core.plugins.status.workflow-formsautomaticassignment.pool','portal'),('core.plugins.status.workflow-formspdf.installed','true'),('core.plugins.status.workflow-formspdf.pool','portal'),('core.plugins.status.workflow-notifygru.installed','true'),('core.plugins.status.workflow-notifygru.pool','portal'),('core.plugins.status.workflow-rest.installed','true'),('core.plugins.status.workflow-unittree.installed','true'),('core.plugins.status.workflow-unittree.pool','portal'),('core.plugins.status.workflow-userassignment.installed','true'),('core.plugins.status.workflow-userassignment.pool','portal'),('core.plugins.status.workflow.installed','true'),('core.plugins.status.workflow.pool','portal'),('core.startup.time','Mar 15, 2024, 2:08:50 PM'),('core.templates.currentCommonsInclude','Bootstrap5Tabler'),('forms.display.form.columnTitle','true'),('forms.display.form.csv.separator',';'),('leaflet.icon.icons.default.installed','true'),('leaflet.icon.icons.green.installed','true'),('leaflet.icon.icons.red.installed','true'),('leaflet.icon.icons.yellow.installed','true'),('limitconnectedusers.site_property.limit_message.textblock','<div class=\'alert alert-danger\'>Le nombre maximal d\'utilisateur connecté simultanément a été atteint</div>'),('limitconnectedusers.site_property.limit_notification_mailing_list.textblock',''),('limitconnectedusers.site_property.limit_notification_message.textblock','Le nombre maximal d\'utilisateur connecté simultanément a été atteint'),('limitconnectedusers.site_property.limit_notification_sender_name','LUTECE'),('limitconnectedusers.site_property.limit_notification_subject.textblock','Le nombre maximal d\'utilisateur connecté simultanément a été atteint'),('matomo.site_property.server.http.url','http://localhost/'),('matomo.site_property.server.https.url','http://localhost/'),('matomo.site_property.site.id','1'),('matomo.site_property.widget.auth.token','cfa9a798abd584817e2eb94d7bc14bb0'),('mylutece.security.public_url.mylutece.url.createAccount.page','jsp/site/Portal.jsp?page=mylutece&action=createAccount'),('mylutece.security.public_url.mylutece.url.doActionsAll','jsp/site/plugins/mylutece/Do*'),('mylutece.security.public_url.mylutece.url.doLogin','jsp/site/plugins/mylutece/DoMyLuteceLogin.jsp'),('mylutece.security.public_url.mylutece.url.doLogout','jsp/site/plugins/mylutece/DoMyLuteceLogout.jsp'),('mylutece.security.public_url.mylutece.url.login.page','jsp/site/Portal.jsp?page=mylutece&action=login'),('mylutece.security.public_url.mylutece.url.lostLogin.page','jsp/site/Portal.jsp?page=mylutecedatabase&action=lostLogin'),('mylutece.security.public_url.mylutece.url.lostPassword.page','jsp/site/Portal.jsp?page=mylutece&action=lostPassword'),('mylutece.security.public_url.mylutece.url.modifyAccount.page','jsp/site/Portal.jsp?page=mylutece&action=modifyAccount'),('myluteceaccessrules.site_property.application_code',''),('portal.site.site_property.admin_home_url','jsp/admin/AdminMenu.jsp'),('portal.site.site_property.avatar_default','themes/admin/shared/images/unknown.svg'),('portal.site.site_property.back_images','themes/admin/tabler/images/bg_login1.svg, themes/admin/tabler/images/bg_login2.svg'),('portal.site.site_property.bo.showXs.checkbox','1'),('portal.site.site_property.bo.showXsWarning.checkbox','0'),('portal.site.site_property.email','<webmaster email>'),('portal.site.site_property.home_url','jsp/site/Portal.jsp'),('portal.site.site_property.layout.darkmode.checkbox','0'),('portal.site.site_property.layout.menu.checkbox','0'),('portal.site.site_property.layout.readmode.checkbox','0'),('portal.site.site_property.layout.user.darkmode.show.checkbox','1'),('portal.site.site_property.layout.user.menumode.show.checkbox','1'),('portal.site.site_property.layout.user.readmode.show.checkbox','0'),('portal.site.site_property.locale.default','fr'),('portal.site.site_property.login.image',''),('portal.site.site_property.logo_url','themes/admin/shared/images/logo-header-icon.svg'),('portal.site.site_property.meta.author','<author>'),('portal.site.site_property.meta.copyright','<copyright>'),('portal.site.site_property.meta.description','<description>'),('portal.site.site_property.meta.keywords','<keywords>'),('portal.site.site_property.name','CiteLibre ServiceEZ'),('portal.site.site_property.noreply_email','no-reply@citelibre.org'),('portal.site.site_property.popup_credits.textblock','&lt;credits text&gt;'),('portal.site.site_property.popup_legal_info.copyright.textblock','&lt;copyright text&gt;'),('portal.site.site_property.popup_legal_info.privacy.textblock','&lt;privacy text&gt;'),('portal.site.site_property.portlet.title.maxlength','75'),('seo.canonicalUrls.enabled','true'),('seo.config.uptodate','true'),('seo.generator.daemon.enabled','true'),('seo.generator.option.addHtmlSuffix','true'),('seo.generator.option.addPath','false'),('seo.replaceUrl.enabled','true'),('seo.rewrite.config.lastUpdate','Last update : Mar 15, 2024, 2:09:18 PM Urls count : 8 Result : OK'),('seo.sitemap.update.log','Last generation : Mar 15, 2024, 2:08:57 PM Urls count : 5 Result : OK'),('seo.sitmap.daemon.enabled','true'),('themecitelibre.site_property.bannerMessage.CloseButton.checkbox','1'),('themecitelibre.site_property.bannerMessage.htmlblock',''),('themecitelibre.site_property.bannerMessage.Position','bottom-right'),('themecitelibre.site_property.bannerMessage.Title',''),('themecitelibre.site_property.bannerMessage.Type','info'),('themecitelibre.site_property.footer.about','CiteLibre is made for cities, by cities, upon open source principals. <br> <a class=\"btn btn-link ps-0\" href=\"//:lutece.paris.fr\" title=\"[#i18n{portal.site.portal_footer.newWindow}] LUTECE website\" target=\"_blank><img src=\"images/poweredby.png\" alt=\"Powered by LUTECE\"></a> '),('themecitelibre.site_property.footer.about.title','A propos'),('themecitelibre.site_property.footer.cookieLabel','Cookies management'),('themecitelibre.site_property.footer.cookieLink','#cookiecitelibrepack'),('themecitelibre.site_property.footer.links.title','Liens importants'),('themecitelibre.site_property.robotIndex.checkbox','1');
+INSERT INTO `core_datastore` VALUES ('adminavatar.site_property.avatarserver.Url',''),('captcha.defaultProvider','JCaptcha'),('core_banned_domain_names','yopmail.com'),('core.advanced_parameters.access_failures_captcha','1'),('core.advanced_parameters.access_failures_interval','10'),('core.advanced_parameters.access_failures_max','3'),('core.advanced_parameters.account_life_time','12'),('core.advanced_parameters.account_reactivated_mail_sender','lutece@nowhere.com'),('core.advanced_parameters.account_reactivated_mail_subject','Votre compte a bien été réactivé'),('core.advanced_parameters.default_user_language','fr'),('core.advanced_parameters.default_user_level','0'),('core.advanced_parameters.default_user_notification','1'),('core.advanced_parameters.default_user_status','0'),('core.advanced_parameters.email_pattern','^[\\w_.\\-!\\#\\$\\%\\&\'\\*\\+\\/\\=\\?\\^\\\\}\\{\\|\\~]+@[\\w_.\\-]+\\.[\\w]+$'),('core.advanced_parameters.email_pattern_verify_by',''),('core.advanced_parameters.expired_alert_mail_sender','lutece@nowhere.com'),('core.advanced_parameters.expired_alert_mail_subject','Votre compte a expiré'),('core.advanced_parameters.first_alert_mail_sender','lutece@nowhere.com'),('core.advanced_parameters.first_alert_mail_subject','Votre compte va bientôt expirer'),('core.advanced_parameters.force_change_password_reinit','false'),('core.advanced_parameters.lock_reset_token_to_session','false'),('core.advanced_parameters.maximum_number_password_change',''),('core.advanced_parameters.nb_alert_account','2'),('core.advanced_parameters.notify_user_password_expired',''),('core.advanced_parameters.other_alert_mail_sender','lutece@nowhere.com'),('core.advanced_parameters.other_alert_mail_subject','Votre compte va bientôt expirer'),('core.advanced_parameters.password_duration','120'),('core.advanced_parameters.password_expired_mail_sender','lutece@nowhere.com'),('core.advanced_parameters.password_expired_mail_subject','Votre mot de passe a expiré'),('core.advanced_parameters.password_format_numero','false'),('core.advanced_parameters.password_format_special_characters','false'),('core.advanced_parameters.password_format_upper_lower_case','false'),('core.advanced_parameters.password_history_size',''),('core.advanced_parameters.password_minimum_length','8'),('core.advanced_parameters.reset_token_validity','60'),('core.advanced_parameters.time_before_alert_account','30'),('core.advanced_parameters.time_between_alerts_account','10'),('core.advanced_parameters.tsw_size_password_change',''),('core.advanced_parameters.use_advanced_security_parameters',''),('core.backOffice.defaultEditor','tinymce'),('core.cache.status.AccessRulesCacheService.enabled','1'),('core.cache.status.asynchronousupload.asynchronousUploadCacheService.enabled','0'),('core.cache.status.BaseUserPreferencesCacheService.enabled','1'),('core.cache.status.BaseUserPreferencesCacheService.maxElementsInMemory','1000'),('core.cache.status.DatastoreCacheService.enabled','0'),('core.cache.status.EntryTypeServiceManagerCache.enabled','1'),('core.cache.status.formsCacheService.enabled','1'),('core.cache.status.formsCacheService.overflowToDisk','0'),('core.cache.status.formsCacheService.timeToIdleSeconds','86400'),('core.cache.status.formsCacheService.timeToLiveSeconds','86400'),('core.cache.status.LinksIncludeCacheService.enabled','1'),('core.cache.status.LuteceUserCacheService.enabled','1'),('core.cache.status.LuteceUserCacheService.maxElementsInMemory','1000'),('core.cache.status.MailAttachmentCacheService.diskPersistent','true'),('core.cache.status.MailAttachmentCacheService.enabled','1'),('core.cache.status.MailAttachmentCacheService.maxElementsInMemory','10'),('core.cache.status.MailAttachmentCacheService.overflowToDisk','true'),('core.cache.status.MailAttachmentCacheService.timeToLiveSeconds','7200'),('core.cache.status.MyPortalWidgetContentService.enabled','1'),('core.cache.status.MyPortalWidgetService.enabled','1'),('core.cache.status.PageCacheService.enabled','1'),('core.cache.status.PageCachingFilter.enabled','0'),('core.cache.status.PageCachingFilter(CAUTION:NEVERUSEWITHUSERDYNAMICDATA).enabled','0'),('core.cache.status.pathCacheService.enabled','1'),('core.cache.status.PortalMenuService.enabled','1'),('core.cache.status.PortletCacheService.enabled','0'),('core.cache.status.public_image_resource.enabled','0'),('core.cache.status.SEOFriendlyUrlCacheService.enabled','0'),('core.cache.status.SiteMapService.enabled','1'),('core.cache.status.StaticFilesCachingFilter.enabled','1'),('core.cache.status.StaticFilesCachingFilter.timeToLiveSeconds','604800'),('core.cache.status.workflow.alertGruConfigCacheService.enabled','0'),('core.cache.status.workflow.notifyGruConfigCacheService.enabled','0'),('core.crypto.key','0be4ef16cbc6a541c08c7d68caf113685e4950b4cfbca94e71813c71a1fc0bf7'),('core.daemon.accountLifeTimeDaemon.interval','86400'),('core.daemon.accountLifeTimeDaemon.onStartUp','true'),('core.daemon.alert.interval','43200'),('core.daemon.alert.onStartUp','true'),('core.daemon.alertCleaner.interval','43200'),('core.daemon.alertCleaner.onStartUp','true'),('core.daemon.AlertGruDaemon.interval','86400'),('core.daemon.AlertGruDaemon.onStartUp','true'),('core.daemon.anonymizationDaemon.interval','86400'),('core.daemon.anonymizationDaemon.onStartUp','false'),('core.daemon.archiveDaemon.interval','30'),('core.daemon.archiveDaemon.onStartUp','true'),('core.daemon.archiveIndexer.interval','360'),('core.daemon.archiveIndexer.onStartUp','true'),('core.daemon.automaticActionDaemon.interval','30'),('core.daemon.automaticActionDaemon.onStartUp','true'),('core.daemon.changeStateDaemon.interval','10'),('core.daemon.changeStateDaemon.onStartUp','false'),('core.daemon.chooseStateActionDaemon.interval','10'),('core.daemon.chooseStateActionDaemon.onStartUp','false'),('core.daemon.fullIndexingDaemon.interval','86400'),('core.daemon.fullIndexingDaemon.onStartUp','true'),('core.daemon.incrementalIndexingDaemon.interval','3000'),('core.daemon.incrementalIndexingDaemon.onStartUp','true'),('core.daemon.indexer.interval','300'),('core.daemon.indexer.onStartUp','true'),('core.daemon.mailSender.interval','86400'),('core.daemon.mailSender.onStartUp','true'),('core.daemon.notifyHistoryCleanerDaemon.interval','10'),('core.daemon.notifyHistoryCleanerDaemon.onStartUp','false'),('core.daemon.seoFriendlyUrlGenerator.interval','3600'),('core.daemon.seoFriendlyUrlGenerator.onStartUp','true'),('core.daemon.seoSitemapGenerator.interval','3600'),('core.daemon.seoSitemapGenerator.onStartUp','true'),('core.daemon.solrindexer.interval','86400'),('core.daemon.solrindexer.onStartUp','true'),('core.daemon.temporaryfilesDaemon.interval','86400'),('core.daemon.temporaryfilesDaemon.onStartUp','false'),('core.daemon.threadLauncherDaemon.interval','86400'),('core.daemon.threadLauncherDaemon.onStartUp','true'),('core.daemon.userControllerCodeDataDaemon.interval','10'),('core.daemon.userControllerCodeDataDaemon.onStartUp','false'),('core.frontOffice.defaultEditor','sceeditor'),('core.plugins.status.accesscontrol-forms.installed','true'),('core.plugins.status.accesscontrol-forms.pool','portal'),('core.plugins.status.accesscontrol.installed','true'),('core.plugins.status.accesscontrol.pool','portal'),('core.plugins.status.address-autocomplete.installed','true'),('core.plugins.status.address.installed','true'),('core.plugins.status.adminavatar.installed','true'),('core.plugins.status.archive-client.installed','true'),('core.plugins.status.archive.installed','true'),('core.plugins.status.archive.pool','portal'),('core.plugins.status.asynchronous-upload.installed','true'),('core.plugins.status.asynchronous-upload.pool','portal'),('core.plugins.status.automaticroleprovider.installed','true'),('core.plugins.status.avatar.installed','true'),('core.plugins.status.blobstore.installed','true'),('core.plugins.status.blobstore.pool','portal'),('core.plugins.status.blobstoreclient.installed','true'),('core.plugins.status.captcha.installed','true'),('core.plugins.status.contact.installed','true'),('core.plugins.status.contact.pool','portal'),('core.plugins.status.filegenerator.installed','true'),('core.plugins.status.filegenerator.pool','portal'),('core.plugins.status.forms-breadcrumbaccordion.installed','true'),('core.plugins.status.forms-breadcrumbaccordion.pool','portal'),('core.plugins.status.forms-documentproducer.installed','true'),('core.plugins.status.forms-documentproducer.pool','portal'),('core.plugins.status.forms-multiviewmapleaflet.installed','true'),('core.plugins.status.forms-solr.installed','true'),('core.plugins.status.forms-template.installed','true'),('core.plugins.status.forms-template.pool','portal'),('core.plugins.status.forms-unittree.installed','true'),('core.plugins.status.forms-unittree.pool','portal'),('core.plugins.status.forms-userassignment.installed','true'),('core.plugins.status.forms-userassignment.pool','portal'),('core.plugins.status.forms.installed','true'),('core.plugins.status.forms.pool','portal'),('core.plugins.status.genericattributes-address.installed','true'),('core.plugins.status.genericattributes-openstreetmap.installed','true'),('core.plugins.status.genericattributes.installed','true'),('core.plugins.status.genericattributes.pool','portal'),('core.plugins.status.html.installed','true'),('core.plugins.status.htmlpage.installed','true'),('core.plugins.status.htmlpage.pool','portal'),('core.plugins.status.htmltopdf.installed','true'),('core.plugins.status.jcaptcha.installed','true'),('core.plugins.status.leaflet.installed','true'),('core.plugins.status.limitconnectedusers.installed','true'),('core.plugins.status.matomo.installed','true'),('core.plugins.status.mermaidjs.installed','true'),('core.plugins.status.mermaidjs.pool','portal'),('core.plugins.status.modulenotifygrumappingmanager.installed','true'),('core.plugins.status.modulenotifygrumappingmanager.pool','portal'),('core.plugins.status.mylutece-cacheuserattribute.installed','true'),('core.plugins.status.mylutece-cacheuserattribute.pool','portal'),('core.plugins.status.mylutece-oauth2.installed','true'),('core.plugins.status.mylutece.installed','true'),('core.plugins.status.mylutece.pool','portal'),('core.plugins.status.myluteceaccessrules.installed','true'),('core.plugins.status.myluteceaccessrules.pool','portal'),('core.plugins.status.notifygru-forms.installed','true'),('core.plugins.status.notifygru-forms.pool','portal'),('core.plugins.status.oauth2.installed','true'),('core.plugins.status.poll.installed','true'),('core.plugins.status.poll.pool','portal'),('core.plugins.status.profiles.installed','true'),('core.plugins.status.profiles.pool','portal'),('core.plugins.status.referencelist.installed','true'),('core.plugins.status.referencelist.pool','portal'),('core.plugins.status.regularexpression.installed','true'),('core.plugins.status.regularexpression.pool','portal'),('core.plugins.status.rest.installed','true'),('core.plugins.status.seo.installed','true'),('core.plugins.status.seo.pool','portal'),('core.plugins.status.solr.installed','true'),('core.plugins.status.solr.pool','portal'),('core.plugins.status.systeminfo.installed','true'),('core.plugins.status.termofservice.installed','true'),('core.plugins.status.termofservice.pool','portal'),('core.plugins.status.themecitelibre.installed','true'),('core.plugins.status.unittree.installed','true'),('core.plugins.status.unittree.pool','portal'),('core.plugins.status.unittreeuserassignment.installed','true'),('core.plugins.status.unittreeuserassignment.pool','portal'),('core.plugins.status.userassignment.installed','true'),('core.plugins.status.userassignment.pool','portal'),('core.plugins.status.verifybackurl.installed','true'),('core.plugins.status.verifybackurl.pool','portal'),('core.plugins.status.workflow-alertforms.installed','true'),('core.plugins.status.workflow-alertforms.pool','portal'),('core.plugins.status.workflow-alertgru.installed','true'),('core.plugins.status.workflow-alertgru.pool','portal'),('core.plugins.status.workflow-forms.installed','true'),('core.plugins.status.workflow-forms.pool','portal'),('core.plugins.status.workflow-formsautomaticassignment.installed','true'),('core.plugins.status.workflow-formsautomaticassignment.pool','portal'),('core.plugins.status.workflow-formspdf.installed','true'),('core.plugins.status.workflow-formspdf.pool','portal'),('core.plugins.status.workflow-notifygru.installed','true'),('core.plugins.status.workflow-notifygru.pool','portal'),('core.plugins.status.workflow-rest.installed','true'),('core.plugins.status.workflow-unittree.installed','true'),('core.plugins.status.workflow-unittree.pool','portal'),('core.plugins.status.workflow-userassignment.installed','true'),('core.plugins.status.workflow-userassignment.pool','portal'),('core.plugins.status.workflow.installed','true'),('core.plugins.status.workflow.pool','portal'),('core.startup.time','May 28, 2024, 5:00:55 PM'),('core.templates.currentCommonsInclude','Bootstrap5Tabler'),('forms.display.form.columnTitle','true'),('forms.display.form.csv.separator',';'),('leaflet.icon.icons.default.installed','true'),('leaflet.icon.icons.green.installed','true'),('leaflet.icon.icons.red.installed','true'),('leaflet.icon.icons.yellow.installed','true'),('limitconnectedusers.site_property.limit_message.textblock','<div class=\'alert alert-danger\'>Le nombre maximal d\'utilisateur connecté simultanément a été atteint</div>'),('limitconnectedusers.site_property.limit_notification_mailing_list.textblock',''),('limitconnectedusers.site_property.limit_notification_message.textblock','Le nombre maximal d\'utilisateur connecté simultanément a été atteint'),('limitconnectedusers.site_property.limit_notification_sender_name','LUTECE'),('limitconnectedusers.site_property.limit_notification_subject.textblock','Le nombre maximal d\'utilisateur connecté simultanément a été atteint'),('matomo.site_property.server.http.url','http://localhost/'),('matomo.site_property.server.https.url','http://localhost/'),('matomo.site_property.site.id','1'),('matomo.site_property.widget.auth.token','cfa9a798abd584817e2eb94d7bc14bb0'),('mylutece.security.public_url.mylutece.url.createAccount.page','jsp/site/Portal.jsp?page=mylutece&action=createAccount'),('mylutece.security.public_url.mylutece.url.doActionsAll','jsp/site/plugins/mylutece/Do*'),('mylutece.security.public_url.mylutece.url.doLogin','jsp/site/plugins/mylutece/DoMyLuteceLogin.jsp'),('mylutece.security.public_url.mylutece.url.doLogout','jsp/site/plugins/mylutece/DoMyLuteceLogout.jsp'),('mylutece.security.public_url.mylutece.url.login.page','jsp/site/Portal.jsp?page=mylutece&action=login'),('mylutece.security.public_url.mylutece.url.lostLogin.page','jsp/site/Portal.jsp?page=mylutecedatabase&action=lostLogin'),('mylutece.security.public_url.mylutece.url.lostPassword.page','jsp/site/Portal.jsp?page=mylutece&action=lostPassword'),('mylutece.security.public_url.mylutece.url.modifyAccount.page','jsp/site/Portal.jsp?page=mylutece&action=modifyAccount'),('myluteceaccessrules.site_property.application_code',''),('portal.site.site_property.admin_home_url','jsp/admin/AdminMenu.jsp'),('portal.site.site_property.avatar_default','themes/admin/shared/images/unknown.svg'),('portal.site.site_property.back_images','themes/admin/tabler/images/bg_login1.svg, themes/admin/tabler/images/bg_login2.svg'),('portal.site.site_property.bo.showXs.checkbox','1'),('portal.site.site_property.bo.showXsWarning.checkbox','0'),('portal.site.site_property.email','<webmaster email>'),('portal.site.site_property.home_url','jsp/site/Portal.jsp'),('portal.site.site_property.layout.darkmode.checkbox','0'),('portal.site.site_property.layout.menu.checkbox','0'),('portal.site.site_property.layout.readmode.checkbox','0'),('portal.site.site_property.layout.user.darkmode.show.checkbox','1'),('portal.site.site_property.layout.user.menumode.show.checkbox','1'),('portal.site.site_property.layout.user.readmode.show.checkbox','0'),('portal.site.site_property.locale.default','fr'),('portal.site.site_property.login.image',''),('portal.site.site_property.logo_url','themes/admin/shared/images/logo-header-icon.svg'),('portal.site.site_property.meta.author','<author>'),('portal.site.site_property.meta.copyright','<copyright>'),('portal.site.site_property.meta.description','<description>'),('portal.site.site_property.meta.keywords','<keywords>'),('portal.site.site_property.name','CiteLibre ServiceEZ'),('portal.site.site_property.noreply_email','no-reply@citelibre.org'),('portal.site.site_property.popup_credits.textblock','&lt;credits text&gt;'),('portal.site.site_property.popup_legal_info.copyright.textblock','&lt;copyright text&gt;'),('portal.site.site_property.popup_legal_info.privacy.textblock','&lt;privacy text&gt;'),('portal.site.site_property.portlet.title.maxlength','75'),('seo.canonicalUrls.enabled','true'),('seo.config.uptodate','true'),('seo.generator.daemon.enabled','true'),('seo.generator.option.addHtmlSuffix','true'),('seo.generator.option.addPath','false'),('seo.replaceUrl.enabled','true'),('seo.rewrite.config.lastUpdate','Last update : May 28, 2024, 5:01:23 PM Urls count : 9 Result : OK'),('seo.sitemap.update.log','Last generation : May 28, 2024, 5:01:01 PM Urls count : 5 Result : OK'),('seo.sitmap.daemon.enabled','true'),('themecitelibre.site_property.bannerMessage.CloseButton.checkbox','1'),('themecitelibre.site_property.bannerMessage.htmlblock',''),('themecitelibre.site_property.bannerMessage.Position','bottom-right'),('themecitelibre.site_property.bannerMessage.Title',''),('themecitelibre.site_property.bannerMessage.Type','info'),('themecitelibre.site_property.footer.about','CiteLibre is made for cities, by cities, upon open source principals. <br> <a class=\"btn btn-link ps-0\" href=\"//:lutece.paris.fr\" title=\"[#i18n{portal.site.portal_footer.newWindow}] LUTECE website\" target=\"_blank><img src=\"images/poweredby.png\" alt=\"Powered by LUTECE\"></a> '),('themecitelibre.site_property.footer.about.title','A propos'),('themecitelibre.site_property.footer.cookieLabel','Cookies management'),('themecitelibre.site_property.footer.cookieLink','#cookiecitelibrepack'),('themecitelibre.site_property.footer.links.title','Liens importants'),('themecitelibre.site_property.robotIndex.checkbox','1');
 /*!40000 ALTER TABLE `core_datastore` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -849,12 +845,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_feature_group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_feature_group` (
   `id_feature_group` varchar(50) NOT NULL DEFAULT '',
   `feature_group_description` varchar(255) DEFAULT NULL,
   `feature_group_label` varchar(100) DEFAULT NULL,
-  `feature_group_order` int DEFAULT NULL,
+  `feature_group_order` int(11) DEFAULT NULL,
   `feature_group_icon` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_feature_group`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -876,15 +872,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_file`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_file` (
-  `id_file` int NOT NULL AUTO_INCREMENT,
-  `title` mediumtext COLLATE utf8mb4_unicode_520_ci,
-  `id_physical_file` int DEFAULT NULL,
-  `file_size` int DEFAULT NULL,
-  `mime_type` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `id_file` int(11) NOT NULL AUTO_INCREMENT,
+  `title` mediumtext DEFAULT NULL,
+  `id_physical_file` int(11) DEFAULT NULL,
+  `file_size` int(11) DEFAULT NULL,
+  `mime_type` varchar(255) DEFAULT NULL,
   `date_creation` timestamp NULL DEFAULT NULL,
-  `origin` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `origin` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_file`)
 ) ENGINE=MyISAM AUTO_INCREMENT=127 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -905,10 +901,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_id_generator`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_id_generator` (
   `class_name` varchar(250) NOT NULL DEFAULT '',
-  `current_value` int NOT NULL DEFAULT '0',
+  `current_value` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`class_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -928,13 +924,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_indexer_action`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_indexer_action` (
-  `id_action` int NOT NULL AUTO_INCREMENT,
+  `id_action` int(11) NOT NULL AUTO_INCREMENT,
   `id_document` varchar(255) NOT NULL,
-  `id_task` int NOT NULL DEFAULT '0',
+  `id_task` int(11) NOT NULL DEFAULT 0,
   `indexer_name` varchar(255) NOT NULL,
-  `id_portlet` int NOT NULL DEFAULT '0',
+  `id_portlet` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_action`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -954,9 +950,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_level_right`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_level_right` (
-  `id_level` smallint NOT NULL DEFAULT '0',
+  `id_level` smallint(6) NOT NULL DEFAULT 0,
   `name` varchar(80) DEFAULT NULL,
   PRIMARY KEY (`id_level`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -978,10 +974,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_mail_item`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_mail_item` (
-  `id_mail_queue` int NOT NULL DEFAULT '0',
-  `mail_item` mediumblob,
+  `id_mail_queue` int(11) NOT NULL DEFAULT 0,
+  `mail_item` mediumblob DEFAULT NULL,
   PRIMARY KEY (`id_mail_queue`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1001,10 +997,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_mail_queue`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_mail_queue` (
-  `id_mail_queue` int NOT NULL AUTO_INCREMENT,
-  `is_locked` smallint DEFAULT '0',
+  `id_mail_queue` int(11) NOT NULL AUTO_INCREMENT,
+  `is_locked` smallint(6) DEFAULT 0,
   PRIMARY KEY (`id_mail_queue`),
   KEY `is_locked_core_mail_queue` (`is_locked`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -1025,9 +1021,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_mode`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_mode` (
-  `id_mode` int NOT NULL DEFAULT '0',
+  `id_mode` int(11) NOT NULL DEFAULT 0,
   `description_mode` varchar(255) DEFAULT NULL,
   `path` varchar(50) NOT NULL DEFAULT '',
   `output_xsl_method` varchar(50) DEFAULT NULL,
@@ -1057,31 +1053,31 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_page`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_page` (
-  `id_page` int NOT NULL AUTO_INCREMENT,
-  `id_parent` int DEFAULT '0',
-  `name` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
-  `description` mediumtext COLLATE utf8mb4_unicode_520_ci,
-  `date_update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `status` smallint DEFAULT NULL,
-  `page_order` int DEFAULT '0',
-  `id_template` int DEFAULT NULL,
+  `id_page` int(11) NOT NULL AUTO_INCREMENT,
+  `id_parent` int(11) DEFAULT 0,
+  `name` varchar(50) NOT NULL DEFAULT '',
+  `description` mediumtext DEFAULT NULL,
+  `date_update` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` smallint(6) DEFAULT NULL,
+  `page_order` int(11) DEFAULT 0,
+  `id_template` int(11) DEFAULT NULL,
   `date_creation` timestamp NULL DEFAULT NULL,
-  `role` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `code_theme` varchar(80) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `node_status` smallint NOT NULL DEFAULT '1',
-  `image_content` mediumblob,
-  `mime_type` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT 'NULL',
-  `meta_keywords` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `meta_description` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `id_authorization_node` int DEFAULT NULL,
-  `display_date_update` smallint NOT NULL DEFAULT '0',
-  `is_manual_date_update` smallint NOT NULL DEFAULT '0',
+  `role` varchar(50) DEFAULT NULL,
+  `code_theme` varchar(80) DEFAULT NULL,
+  `node_status` smallint(6) NOT NULL DEFAULT 1,
+  `image_content` mediumblob DEFAULT NULL,
+  `mime_type` varchar(255) DEFAULT 'NULL',
+  `meta_keywords` varchar(255) DEFAULT NULL,
+  `meta_description` varchar(255) DEFAULT NULL,
+  `id_authorization_node` int(11) DEFAULT NULL,
+  `display_date_update` smallint(6) NOT NULL DEFAULT 0,
+  `is_manual_date_update` smallint(6) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_page`),
   KEY `index_page` (`id_template`,`id_parent`),
   KEY `index_childpage` (`id_parent`,`page_order`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1090,7 +1086,7 @@ CREATE TABLE `core_page` (
 
 LOCK TABLES `core_page` WRITE;
 /*!40000 ALTER TABLE `core_page` DISABLE KEYS */;
-INSERT INTO `core_page` VALUES (1,0,'Home','Home Page','2024-01-19 15:25:52',1,1,1,'2024-01-19 15:25:52','none','default',0,'','application/octet-stream',NULL,NULL,1,0,0);
+INSERT INTO `core_page` VALUES (1,0,'Home','Home Page','2024-01-19 15:25:52',1,1,1,'2024-01-19 15:25:52','none','default',0,'','application/octet-stream',NULL,NULL,1,0,0),(3,1,'Liens Utiles','','2024-05-28 16:37:33',0,1,2,'2024-05-28 16:37:33','none','default',1,NULL,'application/octet-stream',NULL,NULL,1,0,0);
 /*!40000 ALTER TABLE `core_page` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1100,12 +1096,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_page_template`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_page_template` (
-  `id_template` int NOT NULL AUTO_INCREMENT,
-  `description` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `file_name` varchar(100) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `picture` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `id_template` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(50) DEFAULT NULL,
+  `file_name` varchar(100) DEFAULT NULL,
+  `picture` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_template`)
 ) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1126,10 +1122,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_physical_file`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_physical_file` (
-  `id_physical_file` int NOT NULL AUTO_INCREMENT,
-  `file_value` mediumblob,
+  `id_physical_file` int(11) NOT NULL AUTO_INCREMENT,
+  `file_value` mediumblob DEFAULT NULL,
   PRIMARY KEY (`id_physical_file`)
 ) ENGINE=MyISAM AUTO_INCREMENT=127 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1140,7 +1136,7 @@ CREATE TABLE `core_physical_file` (
 
 LOCK TABLES `core_physical_file` WRITE;
 /*!40000 ALTER TABLE `core_physical_file` DISABLE KEYS */;
-INSERT INTO `core_physical_file` VALUES (125,_binary '<?xml version=\"1.0\"?>\r\n<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\r\n	<xsl:output method=\"text\"/>\r\n	\r\n	<xsl:template match=\"users\">\r\n		<xsl:apply-templates select=\"user\" />\r\n	</xsl:template>\r\n	\r\n	<xsl:template match=\"user\">\r\n		<xsl:text>\"</xsl:text>\r\n		<xsl:value-of select=\"access_code\" />\r\n		<xsl:text>\";\"</xsl:text>\r\n		<xsl:value-of select=\"last_name\" />\r\n		<xsl:text>\";\"</xsl:text>\r\n		<xsl:value-of select=\"first_name\" />\r\n		<xsl:text>\";\"</xsl:text>\r\n		<xsl:value-of select=\"email\" />\r\n		<xsl:text>\";\"</xsl:text>\r\n		<xsl:value-of select=\"status\" />\r\n		<xsl:text>\";\"</xsl:text>\r\n		<xsl:value-of select=\"locale\" />\r\n		<xsl:text>\";\"</xsl:text>\r\n		<xsl:value-of select=\"level\" />\r\n		<xsl:text>\";\"</xsl:text>\r\n		<xsl:value-of select=\"must_change_password\" />\r\n		<xsl:text>\";\"</xsl:text>\r\n		<xsl:value-of select=\"accessibility_mode\" />\r\n		<xsl:text>\";\"</xsl:text>\r\n		<xsl:value-of select=\"password_max_valid_date\" />\r\n		<xsl:text>\";\"</xsl:text>\r\n		<xsl:value-of select=\"account_max_valid_date\" />\r\n		<xsl:text>\";\"</xsl:text>\r\n		<xsl:value-of select=\"date_last_login\" />\r\n		<xsl:text>\"</xsl:text>\r\n		<xsl:apply-templates select=\"roles\" />\r\n		<xsl:apply-templates select=\"rights\" />\r\n		<xsl:apply-templates select=\"workgroups\" />\r\n		<xsl:apply-templates select=\"attributes\" />\r\n		<xsl:text>&#10;</xsl:text>\r\n	</xsl:template>\r\n	\r\n	<xsl:template match=\"roles\">\r\n		<xsl:apply-templates select=\"role\" />\r\n	</xsl:template>\r\n	\r\n	<xsl:template match=\"role\">\r\n		<xsl:text>;\"role:</xsl:text>\r\n		<xsl:value-of select=\"current()\" />\r\n		<xsl:text>\"</xsl:text>\r\n	</xsl:template>\r\n	\r\n	<xsl:template match=\"rights\">\r\n		<xsl:apply-templates select=\"right\" />\r\n	</xsl:template>\r\n	\r\n	<xsl:template match=\"right\">\r\n		<xsl:text>;\"right:</xsl:text>\r\n		<xsl:value-of select=\"current()\" />\r\n		<xsl:text>\"</xsl:text>\r\n	</xsl:template>\r\n	\r\n	<xsl:template match=\"workgroups\">\r\n		<xsl:apply-templates select=\"workgroup\" />\r\n	</xsl:template>\r\n	\r\n	<xsl:template match=\"workgroup\">\r\n		<xsl:text>;\"workgroup:</xsl:text>\r\n		<xsl:value-of select=\"current()\" />\r\n		<xsl:text>\"</xsl:text>\r\n	</xsl:template>\r\n	\r\n	<xsl:template match=\"attributes\">\r\n		<xsl:apply-templates select=\"attribute\" />\r\n	</xsl:template>\r\n	\r\n	<xsl:template match=\"attribute\">\r\n		<xsl:text>;\"</xsl:text>\r\n		<xsl:value-of select=\"attribute-id\" />\r\n		<xsl:text>:</xsl:text>\r\n		<xsl:value-of select=\"attribute-field-id\" />\r\n		<xsl:text>:</xsl:text>\r\n		<xsl:value-of select=\"attribute-value\" />\r\n		<xsl:text>\"</xsl:text>\r\n	</xsl:template>\r\n	\r\n</xsl:stylesheet>'),(126,_binary '<?xml version=\"1.0\" ?>\r\n<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\r\n	<xsl:template match=\"/ | @* | node()\">\r\n		<xsl:copy>\r\n			<xsl:apply-templates select=\"@* | node()\" />\r\n		</xsl:copy>\r\n	</xsl:template>\r\n</xsl:stylesheet>');
+INSERT INTO `core_physical_file` VALUES (125,'<?xml version=\"1.0\"?>\r\n<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\r\n	<xsl:output method=\"text\"/>\r\n	\r\n	<xsl:template match=\"users\">\r\n		<xsl:apply-templates select=\"user\" />\r\n	</xsl:template>\r\n	\r\n	<xsl:template match=\"user\">\r\n		<xsl:text>\"</xsl:text>\r\n		<xsl:value-of select=\"access_code\" />\r\n		<xsl:text>\";\"</xsl:text>\r\n		<xsl:value-of select=\"last_name\" />\r\n		<xsl:text>\";\"</xsl:text>\r\n		<xsl:value-of select=\"first_name\" />\r\n		<xsl:text>\";\"</xsl:text>\r\n		<xsl:value-of select=\"email\" />\r\n		<xsl:text>\";\"</xsl:text>\r\n		<xsl:value-of select=\"status\" />\r\n		<xsl:text>\";\"</xsl:text>\r\n		<xsl:value-of select=\"locale\" />\r\n		<xsl:text>\";\"</xsl:text>\r\n		<xsl:value-of select=\"level\" />\r\n		<xsl:text>\";\"</xsl:text>\r\n		<xsl:value-of select=\"must_change_password\" />\r\n		<xsl:text>\";\"</xsl:text>\r\n		<xsl:value-of select=\"accessibility_mode\" />\r\n		<xsl:text>\";\"</xsl:text>\r\n		<xsl:value-of select=\"password_max_valid_date\" />\r\n		<xsl:text>\";\"</xsl:text>\r\n		<xsl:value-of select=\"account_max_valid_date\" />\r\n		<xsl:text>\";\"</xsl:text>\r\n		<xsl:value-of select=\"date_last_login\" />\r\n		<xsl:text>\"</xsl:text>\r\n		<xsl:apply-templates select=\"roles\" />\r\n		<xsl:apply-templates select=\"rights\" />\r\n		<xsl:apply-templates select=\"workgroups\" />\r\n		<xsl:apply-templates select=\"attributes\" />\r\n		<xsl:text>&#10;</xsl:text>\r\n	</xsl:template>\r\n	\r\n	<xsl:template match=\"roles\">\r\n		<xsl:apply-templates select=\"role\" />\r\n	</xsl:template>\r\n	\r\n	<xsl:template match=\"role\">\r\n		<xsl:text>;\"role:</xsl:text>\r\n		<xsl:value-of select=\"current()\" />\r\n		<xsl:text>\"</xsl:text>\r\n	</xsl:template>\r\n	\r\n	<xsl:template match=\"rights\">\r\n		<xsl:apply-templates select=\"right\" />\r\n	</xsl:template>\r\n	\r\n	<xsl:template match=\"right\">\r\n		<xsl:text>;\"right:</xsl:text>\r\n		<xsl:value-of select=\"current()\" />\r\n		<xsl:text>\"</xsl:text>\r\n	</xsl:template>\r\n	\r\n	<xsl:template match=\"workgroups\">\r\n		<xsl:apply-templates select=\"workgroup\" />\r\n	</xsl:template>\r\n	\r\n	<xsl:template match=\"workgroup\">\r\n		<xsl:text>;\"workgroup:</xsl:text>\r\n		<xsl:value-of select=\"current()\" />\r\n		<xsl:text>\"</xsl:text>\r\n	</xsl:template>\r\n	\r\n	<xsl:template match=\"attributes\">\r\n		<xsl:apply-templates select=\"attribute\" />\r\n	</xsl:template>\r\n	\r\n	<xsl:template match=\"attribute\">\r\n		<xsl:text>;\"</xsl:text>\r\n		<xsl:value-of select=\"attribute-id\" />\r\n		<xsl:text>:</xsl:text>\r\n		<xsl:value-of select=\"attribute-field-id\" />\r\n		<xsl:text>:</xsl:text>\r\n		<xsl:value-of select=\"attribute-value\" />\r\n		<xsl:text>\"</xsl:text>\r\n	</xsl:template>\r\n	\r\n</xsl:stylesheet>'),(126,'<?xml version=\"1.0\" ?>\r\n<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\r\n	<xsl:template match=\"/ | @* | node()\">\r\n		<xsl:copy>\r\n			<xsl:apply-templates select=\"@* | node()\" />\r\n		</xsl:copy>\r\n	</xsl:template>\r\n</xsl:stylesheet>');
 /*!40000 ALTER TABLE `core_physical_file` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1150,9 +1146,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_portal_component`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_portal_component` (
-  `id_portal_component` int NOT NULL DEFAULT '0',
+  `id_portal_component` int(11) NOT NULL DEFAULT 0,
   `name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_portal_component`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -1174,25 +1170,25 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_portlet`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_portlet` (
-  `id_portlet` int NOT NULL AUTO_INCREMENT,
-  `id_portlet_type` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `id_page` int DEFAULT NULL,
-  `name` varchar(70) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `date_update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `status` smallint NOT NULL DEFAULT '0',
-  `portlet_order` int DEFAULT NULL,
-  `column_no` int DEFAULT NULL,
-  `id_style` int DEFAULT NULL,
-  `accept_alias` smallint DEFAULT NULL,
+  `id_portlet` int(11) NOT NULL AUTO_INCREMENT,
+  `id_portlet_type` varchar(50) DEFAULT NULL,
+  `id_page` int(11) DEFAULT NULL,
+  `name` varchar(70) DEFAULT NULL,
+  `date_update` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` smallint(6) NOT NULL DEFAULT 0,
+  `portlet_order` int(11) DEFAULT NULL,
+  `column_no` int(11) DEFAULT NULL,
+  `id_style` int(11) DEFAULT NULL,
+  `accept_alias` smallint(6) DEFAULT NULL,
   `date_creation` timestamp NULL DEFAULT NULL,
-  `display_portlet_title` int NOT NULL DEFAULT '0',
-  `role` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `device_display_flags` int NOT NULL DEFAULT '15',
+  `display_portlet_title` int(11) NOT NULL DEFAULT 0,
+  `role` varchar(50) DEFAULT NULL,
+  `device_display_flags` int(11) NOT NULL DEFAULT 15,
   PRIMARY KEY (`id_portlet`),
   KEY `index_portlet` (`id_page`,`id_portlet_type`,`id_style`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1201,7 +1197,7 @@ CREATE TABLE `core_portlet` (
 
 LOCK TABLES `core_portlet` WRITE;
 /*!40000 ALTER TABLE `core_portlet` DISABLE KEYS */;
-INSERT INTO `core_portlet` VALUES (1,'HTML_PORTLET',1,'Qu\'est-ce que Lutece ?','2019-05-31 14:28:04',0,2,1,100,0,'2011-03-14 12:13:39',1,'none',273),(2,'HTML_PORTLET',1,'Infos','2019-05-31 13:51:57',0,1,3,100,0,'2015-05-15 13:26:01',1,'none',273),(4,'HTML_PORTLET',1,'Lutece','2019-06-03 08:23:25',0,1,4,100,0,'2019-05-31 09:55:16',1,'none',4369),(5,'HTML_PORTLET',1,'Autres informations','2019-05-31 14:51:33',0,1,5,100,0,'2019-05-31 13:01:47',1,'none',4369);
+INSERT INTO `core_portlet` VALUES (6,'HTML_UNTRANSFORMED_PORTLET',1,'Intro','2024-05-28 16:48:29',0,1,1,0,0,'2024-05-28 16:25:40',0,'none',4369),(2,'HTML_PORTLET',1,'Infos','2019-05-31 13:51:57',0,1,3,100,0,'2015-05-15 13:26:01',1,'none',273),(4,'HTML_PORTLET',1,'Lutece','2019-06-03 08:23:25',0,1,4,100,0,'2019-05-31 09:55:16',1,'none',4369),(5,'HTML_PORTLET',1,'Autres informations','2019-05-31 14:51:33',0,1,5,100,0,'2019-05-31 13:01:47',1,'none',4369),(7,'HTML_UNTRANSFORMED_PORTLET',1,'Administration','2024-05-28 16:32:17',0,2,1,0,0,'2024-05-28 16:32:17',1,'none',4369),(8,'HTML_UNTRANSFORMED_PORTLET',1,'Forms','2024-05-28 16:36:09',0,3,1,0,0,'2024-05-28 16:36:09',0,'none',4369),(10,'HTML_UNTRANSFORMED_PORTLET',3,'Links','2024-05-28 16:50:58',0,2,1,0,0,'2024-05-28 16:44:20',1,'none',4369);
 /*!40000 ALTER TABLE `core_portlet` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1211,10 +1207,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_portlet_alias`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_portlet_alias` (
-  `id_portlet` int NOT NULL DEFAULT '0',
-  `id_alias` int NOT NULL DEFAULT '0',
+  `id_portlet` int(11) NOT NULL DEFAULT 0,
+  `id_alias` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_portlet`,`id_alias`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1234,7 +1230,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_portlet_type`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_portlet_type` (
   `id_portlet_type` varchar(50) NOT NULL DEFAULT '0',
   `name` varchar(255) DEFAULT NULL,
@@ -1271,7 +1267,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_role` (
   `role` varchar(50) NOT NULL DEFAULT '',
   `role_description` varchar(255) DEFAULT NULL,
@@ -1296,10 +1292,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_search_parameter`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_search_parameter` (
   `parameter_key` varchar(100) NOT NULL,
-  `parameter_value` mediumtext,
+  `parameter_value` mediumtext DEFAULT NULL,
   PRIMARY KEY (`parameter_key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1320,12 +1316,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_style`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_style` (
-  `id_style` int NOT NULL DEFAULT '0',
+  `id_style` int(11) NOT NULL DEFAULT 0,
   `description_style` varchar(100) NOT NULL DEFAULT '',
   `id_portlet_type` varchar(50) DEFAULT NULL,
-  `id_portal_component` int NOT NULL DEFAULT '0',
+  `id_portal_component` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_style`),
   KEY `index_style` (`id_portlet_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -1347,11 +1343,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_style_mode_stylesheet`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_style_mode_stylesheet` (
-  `id_style` int NOT NULL DEFAULT '0',
-  `id_mode` int NOT NULL DEFAULT '0',
-  `id_stylesheet` int NOT NULL DEFAULT '0',
+  `id_style` int(11) NOT NULL DEFAULT 0,
+  `id_mode` int(11) NOT NULL DEFAULT 0,
+  `id_stylesheet` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_style`,`id_mode`,`id_stylesheet`),
   KEY `index_style_mode_stylesheet` (`id_stylesheet`,`id_mode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -1363,7 +1359,7 @@ CREATE TABLE `core_style_mode_stylesheet` (
 
 LOCK TABLES `core_style_mode_stylesheet` WRITE;
 /*!40000 ALTER TABLE `core_style_mode_stylesheet` DISABLE KEYS */;
-INSERT INTO `core_style_mode_stylesheet` VALUES (100,0,10),(3,0,211),(4,0,213),(5,0,215),(6,0,217),(7,0,253),(8,1,279),(101,0,285),(200,0,310);
+INSERT INTO `core_style_mode_stylesheet` VALUES (3,0,211),(4,0,213),(5,0,215),(6,0,217),(7,0,253),(8,1,279),(100,0,10),(101,0,285),(200,0,310);
 /*!40000 ALTER TABLE `core_style_mode_stylesheet` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1373,12 +1369,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_stylesheet`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_stylesheet` (
-  `id_stylesheet` int NOT NULL AUTO_INCREMENT,
-  `description` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `file_name` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `source` mediumblob,
+  `id_stylesheet` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(255) DEFAULT NULL,
+  `file_name` varchar(255) DEFAULT NULL,
+  `source` mediumblob DEFAULT NULL,
   PRIMARY KEY (`id_stylesheet`)
 ) ENGINE=MyISAM AUTO_INCREMENT=311 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1389,7 +1385,7 @@ CREATE TABLE `core_stylesheet` (
 
 LOCK TABLES `core_stylesheet` WRITE;
 /*!40000 ALTER TABLE `core_stylesheet` DISABLE KEYS */;
-INSERT INTO `core_stylesheet` VALUES (211,'Menu Init','menu_init.xsl',_binary '<?xml version=\"1.0\"?>\r\n<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\r\n\r\n<xsl:param name=\"site-path\" select=\"site-path\" />\r\n\r\n<xsl:template match=\"menu-list\">\r\n<br /><br />\r\n	<div id=\"menu-init\">\r\n		<div id=\"menu-init-content\">\r\n            <ul id=\"menu-verti\">\r\n                <xsl:apply-templates select=\"menu\" />\r\n            </ul>\r\n        </div>\r\n     </div>\r\n</xsl:template>\r\n\r\n\r\n<xsl:template match=\"menu\">\r\n    <xsl:variable name=\"index\">\r\n    	<xsl:number level=\"single\" value=\"position()\" />\r\n    </xsl:variable>\r\n\r\n    <xsl:if test=\"$index &gt; 7\">\r\n        <li class=\"first-verti\">\r\n        	<a href=\"{$site-path}?page_id={page-id}\" target=\"_top\">\r\n          		<xsl:value-of select=\"page-name\" />\r\n	        </a>\r\n    	    <xsl:apply-templates select=\"sublevel-menu-list\" />\r\n        </li>\r\n   </xsl:if>\r\n</xsl:template>\r\n\r\n<xsl:template match=\"sublevel-menu-list\" >\r\n	<ul>\r\n    	<li class=\"last-verti\">\r\n		 	<xsl:apply-templates select=\"sublevel-menu\" />\r\n 	    </li>\r\n    </ul>\r\n</xsl:template>\r\n\r\n<xsl:template match=\"sublevel-menu\">\r\n   <xsl:variable name=\"index_sous_menu\">\r\n         <xsl:number level=\"single\" value=\"position()\" />\r\n   </xsl:variable>\r\n\r\n   <a href=\"{$site-path}?page_id={page-id}\" target=\"_top\">\r\n		<span><xsl:value-of select=\"page-name\" /></span>\r\n   </a>\r\n</xsl:template>\r\n\r\n</xsl:stylesheet>\r\n'),(213,'Main Menu','menu_main.xsl',_binary '<?xml version=\"1.0\"?>\r\n<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\r\n    <xsl:param name=\"site-path\" select=\"site-path\" />\r\n    <xsl:template match=\"menu-list\">\r\n        <xsl:apply-templates select=\"menu\" />\r\n    </xsl:template>\r\n    <xsl:template match=\"menu\">\r\n        <li class=\"nav-item\">\r\n            <a href=\"{$site-path}?page_id={page-id}\" class=\"nav-link\" target=\"_top\">\r\n                <xsl:value-of select=\"page-name\" />\r\n            </a>\r\n        </li>\r\n    </xsl:template>\r\n</xsl:stylesheet>'),(215,'Breadcrumb','page_path.xsl',_binary '<?xml version=\"1.0\"?>\r\n<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\r\n\r\n<xsl:param name=\"site-path\" select=\"site-path\" />\r\n\r\n\r\n<xsl:template match=\"page\">\r\n		<xsl:if test=\"position()!=last()-1\">\r\n			<a href=\"{$site-path}?page_id={page-id}\" target=\"_top\"><xsl:value-of select=\"page-name\" /></a> >\r\n		</xsl:if>\r\n		<xsl:if test=\"position()=last()-1\">\r\n			<xsl:value-of select=\"page-name\" />\r\n		</xsl:if>\r\n</xsl:template>\r\n\r\n\r\n<xsl:template match=\"page_link\">\r\n		<xsl:if test=\"position()!=last()-1\">\r\n			<a href=\"{$site-path}?{page-url}\" target=\"_top\"><xsl:value-of select=\"page-name\" /></a> >\r\n		</xsl:if>\r\n		<xsl:if test=\"position()=last()-1\">\r\n			<xsl:value-of select=\"page-name\" />\r\n		</xsl:if>\r\n</xsl:template>\r\n\r\n\r\n</xsl:stylesheet>'),(217,'Site Map','site_map.xsl',_binary '<?xml version=\"1.0\"?> <xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"> 	<xsl:param name=\"site-path\" select=\"site-path\" /> 	<xsl:variable name=\"current-page-id\" select=\"current-page-id\" /> 	<xsl:template match=\"page[page-level=0]\"> 		<div id=\"lutece-map-tree\" class=\"lutece-tree\"> 			<ul> 				<li id=\"node-{page-id}\" class=\"lutece-tree-node\" data-tree-icon=\"home\"> 					<xsl:value-of select=\"page-name\" /> 					<xsl:if test=\"not(string(page-role)=\'none\')\"> 						<strong> 							<xsl:text disable-output-escaping=\"yes\">- #i18n{portal.site.admin_page.tabAdminMapRoleReserved}</xsl:text> 							<xsl:value-of select=\"page-role\" /> 						</strong> 					</xsl:if> 					<a href=\"{$site-path}?page_id={page-id}\" title=\"{page-description}\"><span class=\"ti ti-home-link ms-2\"></span></a> 					<ul> 						<xsl:apply-templates select=\"child-pages-list\" /> 					</ul> 				</li> 			</ul> 		</div> 	</xsl:template> 	<xsl:template match=\"page[page-level>0]\"> 		<xsl:variable name=\"index\" select=\"page-id\" /> 		<xsl:variable name=\"description\" select=\"page-description\" /> 		<xsl:choose> 			<xsl:when test=\"count(child-pages-list/*)>0\"> 			<li id=\"node-{$index}\" class=\"lutece-tree-node\" data-tree-icon=\"folder\"> 				<span class=\"node-name\"> 					<xsl:value-of select=\"page-name\" /> 					<xsl:if test=\"not(string(page-role)=\'none\')\"> 						<strong> 							<xsl:text disable-output-escaping=\"yes\">#i18n{portal.site.admin_page.tabAdminMapRoleReserved}</xsl:text> 							<xsl:value-of select=\"page-role\" /> 						</strong> 					</xsl:if> 					<a href=\"{$site-path}?page_id={page-id}\" title=\"{page-name } - {$description}\"><span class=\"ti ti-link mx-2\"></span></a> 				</span> 				<ul> 					<xsl:apply-templates select=\"child-pages-list\" /> 				</ul> 			</li> 			</xsl:when> 			<xsl:otherwise> 				<li id=\"node-{$index}\" class=\"lutece-tree-item\" data-tree-icon=\"file-symlink\"> 					<a href=\"{$site-path}?page_id={page-id}\" title=\"{$description}\"> 						<span class=\"leaf-name\"><xsl:value-of select=\"page-name\" /></span> 						<xsl:if test=\"not(string(page-role)=\'none\')\"> 							<strong> 								<xsl:text disable-output-escaping=\"yes\">#i18n{portal.site.admin_page.tabAdminMapRoleReserved}</xsl:text> 								<xsl:value-of select=\"page-role\" /> 							</strong> 						</xsl:if> 					</a> 				</li>    			</xsl:otherwise> 		</xsl:choose> 	</xsl:template> 	<xsl:template match=\"child-pages-list\"> 		<xsl:apply-templates select=\"page\" /> 	</xsl:template> </xsl:stylesheet>'),(253,'Tree View Menu','menu_tree.xsl',_binary '<?xml version=\"1.0\"?>\r\n<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\r\n\r\n<xsl:param name=\"site-path\" select=\"site-path\" />\r\n\r\n<xsl:template match=\"menu-list\">\r\n	<xsl:variable name=\"menu-list\" select=\"menu\" />\r\n\r\n	<script type=\"text/javascript\">\r\n		$(document).ready(function(){\r\n			$(\"#tree\").treeview({\r\n				animated: \"fast\",\r\n				collapsed: false,\r\n				unique: true,\r\n				persist: \"cookie\"\r\n			});\r\n		\r\n		});\r\n	</script>    \r\n	\r\n	<xsl:if test=\"not(string(menu)=\'\')\">\r\n	    <xsl:text disable-output-escaping=\"yes\">		    \r\n            <div class=\"tree4\">		\r\n			<h2>&#160;</h2>\r\n			<ul id=\"tree\" class=\"tree4\">\r\n                <xsl:apply-templates select=\"menu\" />        \r\n			</ul>	\r\n			</div>\r\n		 	 <br />\r\n		</xsl:text> \r\n	</xsl:if>\r\n</xsl:template>\r\n\r\n\r\n<xsl:template match=\"menu\">\r\n    <xsl:variable name=\"index\">\r\n    	<xsl:number level=\"single\" value=\"position()\" />\r\n    </xsl:variable>\r\n		<li>\r\n          <a href=\"{$site-path}?page_id={page-id}\" target=\"_top\" >\r\n               <xsl:value-of select=\"page-name\" />\r\n           </a>	   \r\n		   <br />\r\n		   <xsl:value-of select=\"page-description\" />\r\n			<xsl:apply-templates select=\"sublevel-menu-list\" /> \r\n			\r\n		</li> 	\r\n		\r\n</xsl:template>\r\n\r\n<xsl:template match=\"sublevel-menu-list\" > \r\n	\r\n	<xsl:apply-templates select=\"sublevel-menu\" /> 	    	\r\n\r\n</xsl:template>\r\n\r\n\r\n<xsl:template match=\"sublevel-menu\">\r\n   <xsl:variable name=\"index_sous_menu\">\r\n         <xsl:number level=\"single\" value=\"position()\" />\r\n   </xsl:variable>\r\n		 <ul >\r\n			<li>\r\n				<a href=\"{$site-path}?page_id={page-id}\" target=\"_top\">\r\n					<xsl:value-of select=\"page-name\" />\r\n				</a>\r\n			</li>			\r\n		</ul>\r\n		\r\n   \r\n</xsl:template>\r\n\r\n</xsl:stylesheet>\r\n'),(279,'Site Map (Admin mode)','admin_site_map_admin.xsl',_binary '<?xml version=\"1.0\"?>\r\n<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\r\n    <xsl:param name=\"site-path\" select=\"site-path\" />\r\n    <xsl:variable name=\"current-page-id\" select=\"current-page-id\" />\r\n    <xsl:template match=\"page[page-level=0]\">\r\n        <div id=\"lutece-map-tree\" class=\"lutece-tree\">\r\n            <ul>\r\n                <li class=\"lutece-tree-node\" data-tree-icon=\"home\">\r\n                    <xsl:value-of select=\"page-name\" />\r\n                    <xsl:if test=\"not(string(page-role)=\'none\')\">\r\n                        <strong>\r\n                            <xsl:text disable-output-escaping=\"yes\">- #i18n{portal.site.admin_page.tabAdminMapRoleReserved}</xsl:text>\r\n                            <xsl:value-of select=\"page-role\" />\r\n                        </strong>\r\n                    </xsl:if>\r\n                    <a href=\"{$site-path}?page_id={page-id}\" title=\"{page-description}\"><span class=\"ti ti-link\"></span></a>\r\n                    <ul>\r\n                        <xsl:apply-templates select=\"child-pages-list\" />\r\n                    </ul>\r\n                </li>\r\n            </ul>\r\n        </div>\r\n    </xsl:template>\r\n    <xsl:template match=\"page[page-level>0]\">\r\n        <xsl:variable name=\"index\" select=\"page-id\" />\r\n        <xsl:variable name=\"description\" select=\"page-description\" />\r\n        <xsl:choose>\r\n            <xsl:when test=\"count(child-pages-list/*)>0\">\r\n            <li id=\"node-{$index}\" class=\"lutece-tree-node\" data-tree-icon=\"folder\">\r\n                <xsl:value-of select=\"page-name\" />\r\n                <xsl:if test=\"not(string(page-role)=\'none\')\">\r\n                    <strong>\r\n                        <xsl:text disable-output-escaping=\"yes\">#i18n{portal.site.admin_page.tabAdminMapRoleReserved}</xsl:text>\r\n                        <xsl:value-of select=\"page-role\" />\r\n                    </strong>\r\n                </xsl:if>\r\n                <a href=\"{$site-path}?page_id={page-id}\" title=\"{$description}\"><span class=\"ti ti-link\"></span></a>\r\n                <ul>\r\n                    <xsl:apply-templates select=\"child-pages-list\" />\r\n                </ul>\r\n                </li>   \r\n            </xsl:when>\r\n            <xsl:otherwise>\r\n            <li id=\"node-{$index}\" class=\"lutece-tree-item\" data-tree-icon=\"file\">\r\n                <xsl:value-of select=\"page-name\" />\r\n                <xsl:if test=\"not(string(page-role)=\'none\')\">\r\n                    <strong>\r\n                        <xsl:text disable-output-escaping=\"yes\">#i18n{portal.site.admin_page.tabAdminMapRoleReserved}</xsl:text>\r\n                        <xsl:value-of select=\"page-role\" />\r\n                    </strong>\r\n                </xsl:if>\r\n                <a href=\"{$site-path}?page_id={page-id}\" title=\"{$description}\"><span class=\"ti ti-link\"></span></a>\r\n                <xsl:apply-templates select=\"child-pages-list\" />\r\n            </li>    \r\n            </xsl:otherwise>\r\n        </xsl:choose>\r\n    </xsl:template>\r\n    <xsl:template match=\"child-pages-list\">\r\n        <xsl:apply-templates select=\"page\" />\r\n    </xsl:template>\r\n</xsl:stylesheet>'),(10,'Rubrique HTML - Défaut','portlet_html.xsl',_binary '<?xml version=\"1.0\"?>\r\n<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\r\n<xsl:output method=\"html\" indent=\"yes\"/>\r\n\r\n<xsl:template match=\"portlet\">\r\n<xsl:variable name=\"device_class\">\r\n<xsl:choose>\r\n	<xsl:when test=\"string(display-on-small-device)=\'0\'\">hidden-phone</xsl:when>\r\n	<xsl:when test=\"string(display-on-normal-device)=\'0\'\">hidden-tablet</xsl:when>\r\n	<xsl:when test=\"string(display-on-large-device)=\'0\'\">hidden-desktop</xsl:when>\r\n	<xsl:otherwise></xsl:otherwise>\r\n</xsl:choose>\r\n</xsl:variable>\r\n\r\n	<div class=\"portlet {$device_class}\">\r\n	<xsl:choose>\r\n	<xsl:when test=\"not(string(display-portlet-title)=\'1\')\">\r\n	<h3><xsl:value-of disable-output-escaping=\"yes\" select=\"portlet-name\" /></h3>\r\n	<xsl:apply-templates select=\"html-portlet\" />\r\n	</xsl:when>\r\n	<xsl:otherwise>\r\n	<xsl:apply-templates select=\"html-portlet\" />\r\n	</xsl:otherwise>\r\n</xsl:choose>\r\n</div>\r\n</xsl:template>\r\n	\r\n<xsl:template match=\"html-portlet\">\r\n	<xsl:apply-templates select=\"html-portlet-content\" />\r\n</xsl:template>\r\n	\r\n<xsl:template match=\"html-portlet-content\">\r\n	<xsl:value-of disable-output-escaping=\"yes\" select=\".\" />\r\n</xsl:template>\r\n\r\n</xsl:stylesheet>\r\n\r\n\r\n\r\n\r\n'),(285,'Rubrique HTML - Fond coloré','portlet_html_background.xsl',_binary '<?xml version=\"1.0\"?>\r\n<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\r\n\r\n<xsl:output method=\"html\" indent=\"yes\"/>\r\n\r\n<xsl:template match=\"portlet\">\r\n\r\n	<xsl:variable name=\"device_class\">\r\n	<xsl:choose>\r\n		<xsl:when test=\"string(display-on-small-device)=\'0\'\">hidden-phone</xsl:when>\r\n		<xsl:when test=\"string(display-on-normal-device)=\'0\'\">hidden-tablet</xsl:when>\r\n		<xsl:when test=\"string(display-on-large-device)=\'0\'\">hidden-desktop</xsl:when>\r\n		<xsl:otherwise></xsl:otherwise>\r\n	</xsl:choose>\r\n	</xsl:variable>\r\n	\r\n	<div class=\"portlet {$device_class}\">\r\n		<div class=\"well\">\r\n		<xsl:choose>\r\n			<xsl:when test=\"not(string(display-portlet-title)=\'1\')\">\r\n				<h2>\r\n					<xsl:value-of disable-output-escaping=\"yes\" select=\"portlet-name\" />\r\n				</h2>\r\n				<div class=\"portlet-background-content -lutece-border-radius-bottom\">\r\n					<xsl:apply-templates select=\"html-portlet\" />\r\n				</div>\r\n			</xsl:when>\r\n			<xsl:otherwise>\r\n				<div class=\"portlet-background-content -lutece-border-radius\">\r\n					<xsl:apply-templates select=\"html-portlet\" />\r\n				</div>\r\n			</xsl:otherwise>\r\n		</xsl:choose>\r\n		</div>\r\n    </div>\r\n</xsl:template>\r\n\r\n<xsl:template match=\"html-portlet\">\r\n	<xsl:apply-templates select=\"html-portlet-content\" />\r\n</xsl:template>\r\n\r\n<xsl:template match=\"html-portlet-content\">\r\n	<xsl:value-of disable-output-escaping=\"yes\" select=\".\" />\r\n</xsl:template>\r\n\r\n</xsl:stylesheet>'),(310,'Rubrique MyLutece - Défaut','portlet_mylutece.xsl',_binary '<?xml version=\"1.0\"?>\r\n<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\r\n\r\n<xsl:template match=\"portlet\">\r\n\r\n	<xsl:variable name=\"device_class\">\r\n	<xsl:choose>\r\n		<xsl:when test=\"string(display-on-small-device)=\'0\'\">hidden-phone</xsl:when>\r\n		<xsl:when test=\"string(display-on-normal-device)=\'0\'\">hidden-tablet</xsl:when>\r\n		<xsl:when test=\"string(display-on-large-device)=\'0\'\">hidden-desktop</xsl:when>\r\n		<xsl:otherwise></xsl:otherwise>\r\n	</xsl:choose>\r\n	</xsl:variable>\r\n\r\n	<div class=\"portlet {$device_class}\">\r\n		<div class=\"well\">\r\n			<xsl:choose>\r\n	        <xsl:when test=\"not(string(display-portlet-title)=\'1\')\">\r\n				<h3><xsl:value-of disable-output-escaping=\"yes\" select=\"portlet-name\" /></h3>\r\n				<xsl:apply-templates select=\"mylutece-portlet\" />\r\n	        </xsl:when>\r\n	        <xsl:otherwise>\r\n				<xsl:apply-templates select=\"mylutece-portlet\" />\r\n	        </xsl:otherwise>\r\n			</xsl:choose>\r\n			<div class=\"clearfix\">&#160;</div>\r\n		</div>\r\n	</div>\r\n</xsl:template>\r\n\r\n\r\n<xsl:template match=\"mylutece-portlet\">\r\n	<xsl:apply-templates select=\"user-not-signed\" />\r\n	<xsl:apply-templates select=\"lutece-user\" />\r\n</xsl:template>\r\n\r\n\r\n<xsl:template match=\"user-not-signed\">\r\n	<form class=\"form\" action=\"jsp/site/plugins/mylutece/DoMyLuteceLogin.jsp\" method=\"post\">\r\n		<xsl:apply-templates select=\"lutece-user-authentication-service[@delegated=\'true\']\" />\r\n		<xsl:apply-templates select=\"lutece-user-authentication-service[@loginpassword-required=\'true\']\" />\r\n		<xsl:if test=\"count(lutece-user-authentication-service[@loginpassword-required=\'true\']) &gt;= 1\">\r\n			<label for=\"username\">Code d\'acc&#232;s :</label>\r\n			<input name=\"username\" class=\"input-normal\" id=\"username\" autocomplete=\"off\" tabindex=\"1\" type=\"text\"/><br />\r\n			<label for=\"password\">Mot de passe :</label>\r\n			<input name=\"password\" class=\"input-normal\" id=\"password\" autocomplete=\"off\" tabindex=\"2\" type=\"password\" />\r\n			<button class=\"btn btn-small\" tabindex=\"3\" type=\"submit\"><i class=\"icon-user\">&#160;</i>&#160;Connexion</button>\r\n		</xsl:if>\r\n	</form>\r\n	<xsl:apply-templates select=\"lutece-user-new-account-url\" />\r\n	<xsl:apply-templates select=\"lutece-user-lost-password-url\" />\r\n</xsl:template>\r\n\r\n<xsl:template match=\"lutece-user-authentication-service[@loginpassword-required=\'true\']\">\r\n	<label class=\"radio\" for=\"auth_provider\" >\r\n		<input type=\"radio\" name=\"auth_provider\" value=\"{name}\" checked=\"checked\" />\r\n		<xsl:value-of select=\"display-name\" />\r\n	</label>\r\n</xsl:template>\r\n\r\n<xsl:template match=\"lutece-user-authentication-service[@delegated=\'true\']\">\r\n	<a href=\"{url}?auth_provider={name}\">\r\n		<img src=\"{icon-url}\" alt=\"{display-name}\" title=\"{display-name}\"/>\r\n	</a>\r\n</xsl:template>\r\n\r\n\r\n<xsl:template match=\"lutece-user\">\r\n    <p>\r\n	<strong>Bienvenue&#160;\r\n		<xsl:value-of disable-output-escaping=\"yes\" select=\"lutece-user-name-given\" />&#160;\r\n		<xsl:value-of disable-output-escaping=\"yes\" select=\"lutece-user-name-family\" />\r\n	</strong>\r\n	</p>\r\n    <xsl:apply-templates select=\"lutece-user-logout-url\" />\r\n    <xsl:apply-templates select=\"lutece-user-view-account-url\" />\r\n</xsl:template>\r\n\r\n\r\n<xsl:template match=\"lutece-user-logout-url\">\r\n   <form class=\"form-inline pull-left\" name=\"logout\" action=\"{.}\" method=\"post\">\r\n   	<button type=\"submit\" class=\"btn\"><i class=\"icon-off\">&#160;</i>&#160;D&#233;connexion</button>&#160;\r\n   </form>\r\n</xsl:template>\r\n\r\n\r\n<xsl:template match=\"lutece-user-new-account-url\">\r\n	<form class=\"form-inline pull-left\" name=\"logout\" action=\"{.}\" method=\"post\">\r\n		<button type=\"submit\" class=\"btn\"><i class=\"icon-plus\">&#160;</i>&#160;Cr&#233;er un compte</button>&#160;\r\n    </form>\r\n</xsl:template>\r\n\r\n\r\n<xsl:template match=\"lutece-user-lost-password-url\">\r\n	<form class=\"form-inline pull-left\" name=\"logout\" action=\"{.}\" method=\"post\">\r\n	   	<button type=\"submit\" class=\"btn\"><i class=\"icon-lock\">&#160;</i>&#160;Mot de passe perdu</button>&#160;\r\n   </form>\r\n</xsl:template>\r\n\r\n<xsl:template match=\"lutece-user-view-account-url\">\r\n	<form class=\"form-inline pull-left\" name=\"logout\" action=\"{.}\" method=\"post\">\r\n	   	<button type=\"submit\" class=\"btn\"><i class=\"icon-edit\">&#160;</i>&#160;Voir mon compte</button>&#160;\r\n	</form>\r\n</xsl:template>\r\n\r\n</xsl:stylesheet>\r\n\r\n');
+INSERT INTO `core_stylesheet` VALUES (211,'Menu Init','menu_init.xsl','<?xml version=\"1.0\"?>\r\n<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\r\n\r\n<xsl:param name=\"site-path\" select=\"site-path\" />\r\n\r\n<xsl:template match=\"menu-list\">\r\n<br /><br />\r\n	<div id=\"menu-init\">\r\n		<div id=\"menu-init-content\">\r\n            <ul id=\"menu-verti\">\r\n                <xsl:apply-templates select=\"menu\" />\r\n            </ul>\r\n        </div>\r\n     </div>\r\n</xsl:template>\r\n\r\n\r\n<xsl:template match=\"menu\">\r\n    <xsl:variable name=\"index\">\r\n    	<xsl:number level=\"single\" value=\"position()\" />\r\n    </xsl:variable>\r\n\r\n    <xsl:if test=\"$index &gt; 7\">\r\n        <li class=\"first-verti\">\r\n        	<a href=\"{$site-path}?page_id={page-id}\" target=\"_top\">\r\n          		<xsl:value-of select=\"page-name\" />\r\n	        </a>\r\n    	    <xsl:apply-templates select=\"sublevel-menu-list\" />\r\n        </li>\r\n   </xsl:if>\r\n</xsl:template>\r\n\r\n<xsl:template match=\"sublevel-menu-list\" >\r\n	<ul>\r\n    	<li class=\"last-verti\">\r\n		 	<xsl:apply-templates select=\"sublevel-menu\" />\r\n 	    </li>\r\n    </ul>\r\n</xsl:template>\r\n\r\n<xsl:template match=\"sublevel-menu\">\r\n   <xsl:variable name=\"index_sous_menu\">\r\n         <xsl:number level=\"single\" value=\"position()\" />\r\n   </xsl:variable>\r\n\r\n   <a href=\"{$site-path}?page_id={page-id}\" target=\"_top\">\r\n		<span><xsl:value-of select=\"page-name\" /></span>\r\n   </a>\r\n</xsl:template>\r\n\r\n</xsl:stylesheet>\r\n'),(213,'Main Menu','menu_main.xsl','<?xml version=\"1.0\"?>\r\n<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\r\n    <xsl:param name=\"site-path\" select=\"site-path\" />\r\n    <xsl:template match=\"menu-list\">\r\n        <xsl:apply-templates select=\"menu\" />\r\n    </xsl:template>\r\n    <xsl:template match=\"menu\">\r\n        <li class=\"nav-item\">\r\n            <a href=\"{$site-path}?page_id={page-id}\" class=\"nav-link\" target=\"_top\">\r\n                <xsl:value-of select=\"page-name\" />\r\n            </a>\r\n        </li>\r\n    </xsl:template>\r\n</xsl:stylesheet>'),(215,'Breadcrumb','page_path.xsl','<?xml version=\"1.0\"?>\r\n<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\r\n\r\n<xsl:param name=\"site-path\" select=\"site-path\" />\r\n\r\n\r\n<xsl:template match=\"page\">\r\n		<xsl:if test=\"position()!=last()-1\">\r\n			<a href=\"{$site-path}?page_id={page-id}\" target=\"_top\"><xsl:value-of select=\"page-name\" /></a> >\r\n		</xsl:if>\r\n		<xsl:if test=\"position()=last()-1\">\r\n			<xsl:value-of select=\"page-name\" />\r\n		</xsl:if>\r\n</xsl:template>\r\n\r\n\r\n<xsl:template match=\"page_link\">\r\n		<xsl:if test=\"position()!=last()-1\">\r\n			<a href=\"{$site-path}?{page-url}\" target=\"_top\"><xsl:value-of select=\"page-name\" /></a> >\r\n		</xsl:if>\r\n		<xsl:if test=\"position()=last()-1\">\r\n			<xsl:value-of select=\"page-name\" />\r\n		</xsl:if>\r\n</xsl:template>\r\n\r\n\r\n</xsl:stylesheet>'),(217,'Site Map','site_map.xsl','<?xml version=\"1.0\"?> <xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"> 	<xsl:param name=\"site-path\" select=\"site-path\" /> 	<xsl:variable name=\"current-page-id\" select=\"current-page-id\" /> 	<xsl:template match=\"page[page-level=0]\"> 		<div id=\"lutece-map-tree\" class=\"lutece-tree\"> 			<ul> 				<li id=\"node-{page-id}\" class=\"lutece-tree-node\" data-tree-icon=\"home\"> 					<xsl:value-of select=\"page-name\" /> 					<xsl:if test=\"not(string(page-role)=\'none\')\"> 						<strong> 							<xsl:text disable-output-escaping=\"yes\">- #i18n{portal.site.admin_page.tabAdminMapRoleReserved}</xsl:text> 							<xsl:value-of select=\"page-role\" /> 						</strong> 					</xsl:if> 					<a href=\"{$site-path}?page_id={page-id}\" title=\"{page-description}\"><span class=\"ti ti-home-link ms-2\"></span></a> 					<ul> 						<xsl:apply-templates select=\"child-pages-list\" /> 					</ul> 				</li> 			</ul> 		</div> 	</xsl:template> 	<xsl:template match=\"page[page-level>0]\"> 		<xsl:variable name=\"index\" select=\"page-id\" /> 		<xsl:variable name=\"description\" select=\"page-description\" /> 		<xsl:choose> 			<xsl:when test=\"count(child-pages-list/*)>0\"> 			<li id=\"node-{$index}\" class=\"lutece-tree-node\" data-tree-icon=\"folder\"> 				<span class=\"node-name\"> 					<xsl:value-of select=\"page-name\" /> 					<xsl:if test=\"not(string(page-role)=\'none\')\"> 						<strong> 							<xsl:text disable-output-escaping=\"yes\">#i18n{portal.site.admin_page.tabAdminMapRoleReserved}</xsl:text> 							<xsl:value-of select=\"page-role\" /> 						</strong> 					</xsl:if> 					<a href=\"{$site-path}?page_id={page-id}\" title=\"{page-name } - {$description}\"><span class=\"ti ti-link mx-2\"></span></a> 				</span> 				<ul> 					<xsl:apply-templates select=\"child-pages-list\" /> 				</ul> 			</li> 			</xsl:when> 			<xsl:otherwise> 				<li id=\"node-{$index}\" class=\"lutece-tree-item\" data-tree-icon=\"file-symlink\"> 					<a href=\"{$site-path}?page_id={page-id}\" title=\"{$description}\"> 						<span class=\"leaf-name\"><xsl:value-of select=\"page-name\" /></span> 						<xsl:if test=\"not(string(page-role)=\'none\')\"> 							<strong> 								<xsl:text disable-output-escaping=\"yes\">#i18n{portal.site.admin_page.tabAdminMapRoleReserved}</xsl:text> 								<xsl:value-of select=\"page-role\" /> 							</strong> 						</xsl:if> 					</a> 				</li>    			</xsl:otherwise> 		</xsl:choose> 	</xsl:template> 	<xsl:template match=\"child-pages-list\"> 		<xsl:apply-templates select=\"page\" /> 	</xsl:template> </xsl:stylesheet>'),(253,'Tree View Menu','menu_tree.xsl','<?xml version=\"1.0\"?>\r\n<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\r\n\r\n<xsl:param name=\"site-path\" select=\"site-path\" />\r\n\r\n<xsl:template match=\"menu-list\">\r\n	<xsl:variable name=\"menu-list\" select=\"menu\" />\r\n\r\n	<script type=\"text/javascript\">\r\n		$(document).ready(function(){\r\n			$(\"#tree\").treeview({\r\n				animated: \"fast\",\r\n				collapsed: false,\r\n				unique: true,\r\n				persist: \"cookie\"\r\n			});\r\n		\r\n		});\r\n	</script>    \r\n	\r\n	<xsl:if test=\"not(string(menu)=\'\')\">\r\n	    <xsl:text disable-output-escaping=\"yes\">		    \r\n            <div class=\"tree4\">		\r\n			<h2>&#160;</h2>\r\n			<ul id=\"tree\" class=\"tree4\">\r\n                <xsl:apply-templates select=\"menu\" />        \r\n			</ul>	\r\n			</div>\r\n		 	 <br />\r\n		</xsl:text> \r\n	</xsl:if>\r\n</xsl:template>\r\n\r\n\r\n<xsl:template match=\"menu\">\r\n    <xsl:variable name=\"index\">\r\n    	<xsl:number level=\"single\" value=\"position()\" />\r\n    </xsl:variable>\r\n		<li>\r\n          <a href=\"{$site-path}?page_id={page-id}\" target=\"_top\" >\r\n               <xsl:value-of select=\"page-name\" />\r\n           </a>	   \r\n		   <br />\r\n		   <xsl:value-of select=\"page-description\" />\r\n			<xsl:apply-templates select=\"sublevel-menu-list\" /> \r\n			\r\n		</li> 	\r\n		\r\n</xsl:template>\r\n\r\n<xsl:template match=\"sublevel-menu-list\" > \r\n	\r\n	<xsl:apply-templates select=\"sublevel-menu\" /> 	    	\r\n\r\n</xsl:template>\r\n\r\n\r\n<xsl:template match=\"sublevel-menu\">\r\n   <xsl:variable name=\"index_sous_menu\">\r\n         <xsl:number level=\"single\" value=\"position()\" />\r\n   </xsl:variable>\r\n		 <ul >\r\n			<li>\r\n				<a href=\"{$site-path}?page_id={page-id}\" target=\"_top\">\r\n					<xsl:value-of select=\"page-name\" />\r\n				</a>\r\n			</li>			\r\n		</ul>\r\n		\r\n   \r\n</xsl:template>\r\n\r\n</xsl:stylesheet>\r\n'),(279,'Site Map (Admin mode)','admin_site_map_admin.xsl','<?xml version=\"1.0\"?>\r\n<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\r\n    <xsl:param name=\"site-path\" select=\"site-path\" />\r\n    <xsl:variable name=\"current-page-id\" select=\"current-page-id\" />\r\n    <xsl:template match=\"page[page-level=0]\">\r\n        <div id=\"lutece-map-tree\" class=\"lutece-tree\">\r\n            <ul>\r\n                <li class=\"lutece-tree-node\" data-tree-icon=\"home\">\r\n                    <xsl:value-of select=\"page-name\" />\r\n                    <xsl:if test=\"not(string(page-role)=\'none\')\">\r\n                        <strong>\r\n                            <xsl:text disable-output-escaping=\"yes\">- #i18n{portal.site.admin_page.tabAdminMapRoleReserved}</xsl:text>\r\n                            <xsl:value-of select=\"page-role\" />\r\n                        </strong>\r\n                    </xsl:if>\r\n                    <a href=\"{$site-path}?page_id={page-id}\" title=\"{page-description}\"><span class=\"ti ti-link\"></span></a>\r\n                    <ul>\r\n                        <xsl:apply-templates select=\"child-pages-list\" />\r\n                    </ul>\r\n                </li>\r\n            </ul>\r\n        </div>\r\n    </xsl:template>\r\n    <xsl:template match=\"page[page-level>0]\">\r\n        <xsl:variable name=\"index\" select=\"page-id\" />\r\n        <xsl:variable name=\"description\" select=\"page-description\" />\r\n        <xsl:choose>\r\n            <xsl:when test=\"count(child-pages-list/*)>0\">\r\n            <li id=\"node-{$index}\" class=\"lutece-tree-node\" data-tree-icon=\"folder\">\r\n                <xsl:value-of select=\"page-name\" />\r\n                <xsl:if test=\"not(string(page-role)=\'none\')\">\r\n                    <strong>\r\n                        <xsl:text disable-output-escaping=\"yes\">#i18n{portal.site.admin_page.tabAdminMapRoleReserved}</xsl:text>\r\n                        <xsl:value-of select=\"page-role\" />\r\n                    </strong>\r\n                </xsl:if>\r\n                <a href=\"{$site-path}?page_id={page-id}\" title=\"{$description}\"><span class=\"ti ti-link\"></span></a>\r\n                <ul>\r\n                    <xsl:apply-templates select=\"child-pages-list\" />\r\n                </ul>\r\n                </li>   \r\n            </xsl:when>\r\n            <xsl:otherwise>\r\n            <li id=\"node-{$index}\" class=\"lutece-tree-item\" data-tree-icon=\"file\">\r\n                <xsl:value-of select=\"page-name\" />\r\n                <xsl:if test=\"not(string(page-role)=\'none\')\">\r\n                    <strong>\r\n                        <xsl:text disable-output-escaping=\"yes\">#i18n{portal.site.admin_page.tabAdminMapRoleReserved}</xsl:text>\r\n                        <xsl:value-of select=\"page-role\" />\r\n                    </strong>\r\n                </xsl:if>\r\n                <a href=\"{$site-path}?page_id={page-id}\" title=\"{$description}\"><span class=\"ti ti-link\"></span></a>\r\n                <xsl:apply-templates select=\"child-pages-list\" />\r\n            </li>    \r\n            </xsl:otherwise>\r\n        </xsl:choose>\r\n    </xsl:template>\r\n    <xsl:template match=\"child-pages-list\">\r\n        <xsl:apply-templates select=\"page\" />\r\n    </xsl:template>\r\n</xsl:stylesheet>'),(10,'Rubrique HTML - Défaut','portlet_html.xsl','<?xml version=\"1.0\"?>\r\n<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\r\n<xsl:output method=\"html\" indent=\"yes\"/>\r\n\r\n<xsl:template match=\"portlet\">\r\n<xsl:variable name=\"device_class\">\r\n<xsl:choose>\r\n	<xsl:when test=\"string(display-on-small-device)=\'0\'\">hidden-phone</xsl:when>\r\n	<xsl:when test=\"string(display-on-normal-device)=\'0\'\">hidden-tablet</xsl:when>\r\n	<xsl:when test=\"string(display-on-large-device)=\'0\'\">hidden-desktop</xsl:when>\r\n	<xsl:otherwise></xsl:otherwise>\r\n</xsl:choose>\r\n</xsl:variable>\r\n\r\n	<div class=\"portlet {$device_class}\">\r\n	<xsl:choose>\r\n	<xsl:when test=\"not(string(display-portlet-title)=\'1\')\">\r\n	<h3><xsl:value-of disable-output-escaping=\"yes\" select=\"portlet-name\" /></h3>\r\n	<xsl:apply-templates select=\"html-portlet\" />\r\n	</xsl:when>\r\n	<xsl:otherwise>\r\n	<xsl:apply-templates select=\"html-portlet\" />\r\n	</xsl:otherwise>\r\n</xsl:choose>\r\n</div>\r\n</xsl:template>\r\n	\r\n<xsl:template match=\"html-portlet\">\r\n	<xsl:apply-templates select=\"html-portlet-content\" />\r\n</xsl:template>\r\n	\r\n<xsl:template match=\"html-portlet-content\">\r\n	<xsl:value-of disable-output-escaping=\"yes\" select=\".\" />\r\n</xsl:template>\r\n\r\n</xsl:stylesheet>\r\n\r\n\r\n\r\n\r\n'),(285,'Rubrique HTML - Fond coloré','portlet_html_background.xsl','<?xml version=\"1.0\"?>\r\n<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\r\n\r\n<xsl:output method=\"html\" indent=\"yes\"/>\r\n\r\n<xsl:template match=\"portlet\">\r\n\r\n	<xsl:variable name=\"device_class\">\r\n	<xsl:choose>\r\n		<xsl:when test=\"string(display-on-small-device)=\'0\'\">hidden-phone</xsl:when>\r\n		<xsl:when test=\"string(display-on-normal-device)=\'0\'\">hidden-tablet</xsl:when>\r\n		<xsl:when test=\"string(display-on-large-device)=\'0\'\">hidden-desktop</xsl:when>\r\n		<xsl:otherwise></xsl:otherwise>\r\n	</xsl:choose>\r\n	</xsl:variable>\r\n	\r\n	<div class=\"portlet {$device_class}\">\r\n		<div class=\"well\">\r\n		<xsl:choose>\r\n			<xsl:when test=\"not(string(display-portlet-title)=\'1\')\">\r\n				<h2>\r\n					<xsl:value-of disable-output-escaping=\"yes\" select=\"portlet-name\" />\r\n				</h2>\r\n				<div class=\"portlet-background-content -lutece-border-radius-bottom\">\r\n					<xsl:apply-templates select=\"html-portlet\" />\r\n				</div>\r\n			</xsl:when>\r\n			<xsl:otherwise>\r\n				<div class=\"portlet-background-content -lutece-border-radius\">\r\n					<xsl:apply-templates select=\"html-portlet\" />\r\n				</div>\r\n			</xsl:otherwise>\r\n		</xsl:choose>\r\n		</div>\r\n    </div>\r\n</xsl:template>\r\n\r\n<xsl:template match=\"html-portlet\">\r\n	<xsl:apply-templates select=\"html-portlet-content\" />\r\n</xsl:template>\r\n\r\n<xsl:template match=\"html-portlet-content\">\r\n	<xsl:value-of disable-output-escaping=\"yes\" select=\".\" />\r\n</xsl:template>\r\n\r\n</xsl:stylesheet>'),(310,'Rubrique MyLutece - Défaut','portlet_mylutece.xsl','<?xml version=\"1.0\"?>\r\n<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\r\n\r\n<xsl:template match=\"portlet\">\r\n\r\n	<xsl:variable name=\"device_class\">\r\n	<xsl:choose>\r\n		<xsl:when test=\"string(display-on-small-device)=\'0\'\">hidden-phone</xsl:when>\r\n		<xsl:when test=\"string(display-on-normal-device)=\'0\'\">hidden-tablet</xsl:when>\r\n		<xsl:when test=\"string(display-on-large-device)=\'0\'\">hidden-desktop</xsl:when>\r\n		<xsl:otherwise></xsl:otherwise>\r\n	</xsl:choose>\r\n	</xsl:variable>\r\n\r\n	<div class=\"portlet {$device_class}\">\r\n		<div class=\"well\">\r\n			<xsl:choose>\r\n	        <xsl:when test=\"not(string(display-portlet-title)=\'1\')\">\r\n				<h3><xsl:value-of disable-output-escaping=\"yes\" select=\"portlet-name\" /></h3>\r\n				<xsl:apply-templates select=\"mylutece-portlet\" />\r\n	        </xsl:when>\r\n	        <xsl:otherwise>\r\n				<xsl:apply-templates select=\"mylutece-portlet\" />\r\n	        </xsl:otherwise>\r\n			</xsl:choose>\r\n			<div class=\"clearfix\">&#160;</div>\r\n		</div>\r\n	</div>\r\n</xsl:template>\r\n\r\n\r\n<xsl:template match=\"mylutece-portlet\">\r\n	<xsl:apply-templates select=\"user-not-signed\" />\r\n	<xsl:apply-templates select=\"lutece-user\" />\r\n</xsl:template>\r\n\r\n\r\n<xsl:template match=\"user-not-signed\">\r\n	<form class=\"form\" action=\"jsp/site/plugins/mylutece/DoMyLuteceLogin.jsp\" method=\"post\">\r\n		<xsl:apply-templates select=\"lutece-user-authentication-service[@delegated=\'true\']\" />\r\n		<xsl:apply-templates select=\"lutece-user-authentication-service[@loginpassword-required=\'true\']\" />\r\n		<xsl:if test=\"count(lutece-user-authentication-service[@loginpassword-required=\'true\']) &gt;= 1\">\r\n			<label for=\"username\">Code d\'acc&#232;s :</label>\r\n			<input name=\"username\" class=\"input-normal\" id=\"username\" autocomplete=\"off\" tabindex=\"1\" type=\"text\"/><br />\r\n			<label for=\"password\">Mot de passe :</label>\r\n			<input name=\"password\" class=\"input-normal\" id=\"password\" autocomplete=\"off\" tabindex=\"2\" type=\"password\" />\r\n			<button class=\"btn btn-small\" tabindex=\"3\" type=\"submit\"><i class=\"icon-user\">&#160;</i>&#160;Connexion</button>\r\n		</xsl:if>\r\n	</form>\r\n	<xsl:apply-templates select=\"lutece-user-new-account-url\" />\r\n	<xsl:apply-templates select=\"lutece-user-lost-password-url\" />\r\n</xsl:template>\r\n\r\n<xsl:template match=\"lutece-user-authentication-service[@loginpassword-required=\'true\']\">\r\n	<label class=\"radio\" for=\"auth_provider\" >\r\n		<input type=\"radio\" name=\"auth_provider\" value=\"{name}\" checked=\"checked\" />\r\n		<xsl:value-of select=\"display-name\" />\r\n	</label>\r\n</xsl:template>\r\n\r\n<xsl:template match=\"lutece-user-authentication-service[@delegated=\'true\']\">\r\n	<a href=\"{url}?auth_provider={name}\">\r\n		<img src=\"{icon-url}\" alt=\"{display-name}\" title=\"{display-name}\"/>\r\n	</a>\r\n</xsl:template>\r\n\r\n\r\n<xsl:template match=\"lutece-user\">\r\n    <p>\r\n	<strong>Bienvenue&#160;\r\n		<xsl:value-of disable-output-escaping=\"yes\" select=\"lutece-user-name-given\" />&#160;\r\n		<xsl:value-of disable-output-escaping=\"yes\" select=\"lutece-user-name-family\" />\r\n	</strong>\r\n	</p>\r\n    <xsl:apply-templates select=\"lutece-user-logout-url\" />\r\n    <xsl:apply-templates select=\"lutece-user-view-account-url\" />\r\n</xsl:template>\r\n\r\n\r\n<xsl:template match=\"lutece-user-logout-url\">\r\n   <form class=\"form-inline pull-left\" name=\"logout\" action=\"{.}\" method=\"post\">\r\n   	<button type=\"submit\" class=\"btn\"><i class=\"icon-off\">&#160;</i>&#160;D&#233;connexion</button>&#160;\r\n   </form>\r\n</xsl:template>\r\n\r\n\r\n<xsl:template match=\"lutece-user-new-account-url\">\r\n	<form class=\"form-inline pull-left\" name=\"logout\" action=\"{.}\" method=\"post\">\r\n		<button type=\"submit\" class=\"btn\"><i class=\"icon-plus\">&#160;</i>&#160;Cr&#233;er un compte</button>&#160;\r\n    </form>\r\n</xsl:template>\r\n\r\n\r\n<xsl:template match=\"lutece-user-lost-password-url\">\r\n	<form class=\"form-inline pull-left\" name=\"logout\" action=\"{.}\" method=\"post\">\r\n	   	<button type=\"submit\" class=\"btn\"><i class=\"icon-lock\">&#160;</i>&#160;Mot de passe perdu</button>&#160;\r\n   </form>\r\n</xsl:template>\r\n\r\n<xsl:template match=\"lutece-user-view-account-url\">\r\n	<form class=\"form-inline pull-left\" name=\"logout\" action=\"{.}\" method=\"post\">\r\n	   	<button type=\"submit\" class=\"btn\"><i class=\"icon-edit\">&#160;</i>&#160;Voir mon compte</button>&#160;\r\n	</form>\r\n</xsl:template>\r\n\r\n</xsl:stylesheet>\r\n\r\n');
 /*!40000 ALTER TABLE `core_stylesheet` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1399,10 +1395,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_template`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_template` (
   `template_name` varchar(100) NOT NULL,
-  `template_value` mediumtext,
+  `template_value` mediumtext DEFAULT NULL,
   PRIMARY KEY (`template_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1423,11 +1419,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_text_editor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_text_editor` (
   `editor_name` varchar(255) NOT NULL,
   `editor_description` varchar(255) NOT NULL,
-  `backOffice` smallint NOT NULL,
+  `backOffice` smallint(6) NOT NULL,
   PRIMARY KEY (`editor_name`,`backOffice`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1448,11 +1444,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_user_password_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_user_password_history` (
-  `id_user` int NOT NULL,
+  `id_user` int(11) NOT NULL,
   `password` mediumtext NOT NULL,
-  `date_password_change` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_password_change` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id_user`,`date_password_change`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1473,11 +1469,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_user_preferences`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_user_preferences` (
   `id_user` varchar(100) NOT NULL,
   `pref_key` varchar(100) NOT NULL,
-  `pref_value` mediumtext,
+  `pref_value` mediumtext DEFAULT NULL,
   PRIMARY KEY (`id_user`,`pref_key`),
   KEY `index_user_preferences` (`id_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -1498,10 +1494,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_user_right`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_user_right` (
   `id_right` varchar(255) NOT NULL DEFAULT '',
-  `id_user` int NOT NULL DEFAULT '0',
+  `id_user` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_right`,`id_user`),
   KEY `index_user_right` (`id_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -1513,7 +1509,7 @@ CREATE TABLE `core_user_right` (
 
 LOCK TABLES `core_user_right` WRITE;
 /*!40000 ALTER TABLE `core_user_right` DISABLE KEYS */;
-INSERT INTO `core_user_right` VALUES ('ACCESSCONTROL_MANAGEMENT',1),('ACCESSRULES_MANAGEMENT',1),('ADMINAVATAR_MANAGEMENT',1),('BREADCRUMBACCORDION_MANAGEMENT',1),('CONFIG_DOCUMENT_PRODUCER_MANAGEMENT',1),('CONTACT_MANAGEMENT',1),('CORE_ADMIN_SITE',1),('CORE_ADMINDASHBOARD_MANAGEMENT',1),('CORE_CACHE_MANAGEMENT',1),('CORE_DAEMONS_MANAGEMENT',1),('CORE_DASHBOARD_MANAGEMENT',1),('CORE_EDITORS_MANAGEMENT',1),('CORE_FEATURES_MANAGEMENT',1),('CORE_LEVEL_RIGHT_MANAGEMENT',1),('CORE_LINK_SERVICE_MANAGEMENT',1),('CORE_LOGS_VISUALISATION',1),('CORE_MAILINGLISTS_MANAGEMENT',1),('CORE_MODES_MANAGEMENT',1),('CORE_PAGE_TEMPLATE_MANAGEMENT',1),('CORE_PLUGINS_MANAGEMENT',1),('CORE_PROPERTIES_MANAGEMENT',1),('CORE_RBAC_MANAGEMENT',1),('CORE_RIGHT_MANAGEMENT',1),('CORE_ROLES_MANAGEMENT',1),('CORE_SEARCH_INDEXATION',1),('CORE_SEARCH_MANAGEMENT',1),('CORE_STYLES_MANAGEMENT',1),('CORE_STYLESHEET_MANAGEMENT',1),('CORE_TEMPLATES_AUTO_INCLUDES_MANAGEMENT',1),('CORE_USERS_MANAGEMENT',1),('CORE_WORKGROUPS_MANAGEMENT',1),('CORE_XSL_EXPORT_MANAGEMENT',1),('ELASTICDATA_MANAGEMENT',1),('ENTRY_TYPE_MANAGEMENT',1),('FORMS_CATEGORIES',1),('FORMS_MANAGEMENT',1),('FORMS_MULTIVIEW',1),('FORMS_QUESTION_EXPORT_ORDER_MANAGEMENT',1),('GIS_MANAGEMENT',1),('HTMLPAGE_MANAGEMENT',1),('KIBANA_MANAGEMENT',1),('KIBANA_RBAC_MANAGEMENT',1),('MATOMO_MANAGEMENT',1),('MODULENOTIFYGRUMAPPINGMANAGER_MANAGEMENT',1),('MYLUTECE_CACHEUSERATTRIBUTE_MANAGEMENT',1),('MYLUTECE_MANAGE_AUTHENTICATION_FILTER',1),('MYLUTECE_MANAGE_EXTERNAL_APPLICATION',1),('MYLUTECE_MANAGEMENT',1),('POLL_MANAGEMENT',1),('PROFILES_MANAGEMENT',1),('PROFILES_VIEWS_MANAGEMENT',1),('REFERENCELIST_MANAGEMENT',1),('REGULAR_EXPRESSION_MANAGEMENT',1),('SEO_MANAGEMENT',1),('SOLR_CONFIGURATION_MANAGEMENT',1),('SOLR_FIELDS_MANAGEMENT',1),('SOLR_INDEX_MANAGEMENT',1),('SYSTEMINFO_MANAGEMENT',1),('TEMPLATE_STEP_MANAGEMENT',1),('TERMOFSERVICE_MANAGEMENT',1),('UNITS_MANAGEMENT',1),('USERCODES_MANAGEMENT',1),('VERIFYBACKURL_MANAGEMENT',1),('VIEW_TEMP_FILES',1),('WORKFLOW_MANAGEMENT',1),('CORE_ADMIN_SITE',2),('CORE_LINK_SERVICE_MANAGEMENT',2),('CORE_PAGE_TEMPLATE_MANAGEMENT',2),('CORE_PROPERTIES_MANAGEMENT',2),('CORE_ROLES_MANAGEMENT',2),('CORE_SEARCH_INDEXATION',2),('CORE_SEARCH_MANAGEMENT',2),('CORE_USERS_MANAGEMENT',2),('CORE_WORKGROUPS_MANAGEMENT',2),('GIS_MANAGEMENT',2),('BREADCRUMBACCORDION_MANAGEMENT',5),('CORE_ADMIN_SITE',5),('CORE_MAILINGLISTS_MANAGEMENT',5),('CORE_PROPERTIES_MANAGEMENT',5),('FORMS_MANAGEMENT',5),('FORMS_MULTIVIEW',5),('MATOMO_MANAGEMENT',5),('UNITS_MANAGEMENT',5),('VIEW_TEMP_FILES',5),('WORKFLOW_MANAGEMENT',5),('FORMS_MANAGEMENT',6),('FORMS_MULTIVIEW',6),('VIEW_TEMP_FILES',6),('FORMS_MULTIVIEW',7),('FORMS_MULTIVIEW',8);
+INSERT INTO `core_user_right` VALUES ('ACCESSCONTROL_MANAGEMENT',1),('ACCESSRULES_MANAGEMENT',1),('ADMINAVATAR_MANAGEMENT',1),('BREADCRUMBACCORDION_MANAGEMENT',1),('BREADCRUMBACCORDION_MANAGEMENT',5),('CONFIG_DOCUMENT_PRODUCER_MANAGEMENT',1),('CONTACT_MANAGEMENT',1),('CORE_ADMIN_SITE',1),('CORE_ADMIN_SITE',2),('CORE_ADMIN_SITE',5),('CORE_ADMINDASHBOARD_MANAGEMENT',1),('CORE_CACHE_MANAGEMENT',1),('CORE_DAEMONS_MANAGEMENT',1),('CORE_DASHBOARD_MANAGEMENT',1),('CORE_EDITORS_MANAGEMENT',1),('CORE_FEATURES_MANAGEMENT',1),('CORE_LEVEL_RIGHT_MANAGEMENT',1),('CORE_LINK_SERVICE_MANAGEMENT',1),('CORE_LINK_SERVICE_MANAGEMENT',2),('CORE_LOGS_VISUALISATION',1),('CORE_MAILINGLISTS_MANAGEMENT',1),('CORE_MAILINGLISTS_MANAGEMENT',5),('CORE_MODES_MANAGEMENT',1),('CORE_PAGE_TEMPLATE_MANAGEMENT',1),('CORE_PAGE_TEMPLATE_MANAGEMENT',2),('CORE_PLUGINS_MANAGEMENT',1),('CORE_PROPERTIES_MANAGEMENT',1),('CORE_PROPERTIES_MANAGEMENT',2),('CORE_PROPERTIES_MANAGEMENT',5),('CORE_RBAC_MANAGEMENT',1),('CORE_RIGHT_MANAGEMENT',1),('CORE_ROLES_MANAGEMENT',1),('CORE_ROLES_MANAGEMENT',2),('CORE_SEARCH_INDEXATION',1),('CORE_SEARCH_INDEXATION',2),('CORE_SEARCH_MANAGEMENT',1),('CORE_SEARCH_MANAGEMENT',2),('CORE_STYLES_MANAGEMENT',1),('CORE_STYLESHEET_MANAGEMENT',1),('CORE_TEMPLATES_AUTO_INCLUDES_MANAGEMENT',1),('CORE_USERS_MANAGEMENT',1),('CORE_USERS_MANAGEMENT',2),('CORE_WORKGROUPS_MANAGEMENT',1),('CORE_WORKGROUPS_MANAGEMENT',2),('CORE_XSL_EXPORT_MANAGEMENT',1),('ELASTICDATA_MANAGEMENT',1),('ENTRY_TYPE_MANAGEMENT',1),('FORMS_CATEGORIES',1),('FORMS_MANAGEMENT',1),('FORMS_MANAGEMENT',5),('FORMS_MANAGEMENT',6),('FORMS_MULTIVIEW',1),('FORMS_MULTIVIEW',5),('FORMS_MULTIVIEW',6),('FORMS_MULTIVIEW',7),('FORMS_MULTIVIEW',8),('FORMS_QUESTION_EXPORT_ORDER_MANAGEMENT',1),('GIS_MANAGEMENT',1),('GIS_MANAGEMENT',2),('HTMLPAGE_MANAGEMENT',1),('KIBANA_MANAGEMENT',1),('KIBANA_RBAC_MANAGEMENT',1),('MATOMO_MANAGEMENT',1),('MATOMO_MANAGEMENT',5),('MODULENOTIFYGRUMAPPINGMANAGER_MANAGEMENT',1),('MYLUTECE_CACHEUSERATTRIBUTE_MANAGEMENT',1),('MYLUTECE_MANAGE_AUTHENTICATION_FILTER',1),('MYLUTECE_MANAGE_EXTERNAL_APPLICATION',1),('MYLUTECE_MANAGEMENT',1),('POLL_MANAGEMENT',1),('PROFILES_MANAGEMENT',1),('PROFILES_VIEWS_MANAGEMENT',1),('REFERENCELIST_MANAGEMENT',1),('REGULAR_EXPRESSION_MANAGEMENT',1),('SEO_MANAGEMENT',1),('SOLR_CONFIGURATION_MANAGEMENT',1),('SOLR_FIELDS_MANAGEMENT',1),('SOLR_INDEX_MANAGEMENT',1),('SYSTEMINFO_MANAGEMENT',1),('TEMPLATE_STEP_MANAGEMENT',1),('TERMOFSERVICE_MANAGEMENT',1),('UNITS_MANAGEMENT',1),('UNITS_MANAGEMENT',5),('USERCODES_MANAGEMENT',1),('VERIFYBACKURL_MANAGEMENT',1),('VIEW_TEMP_FILES',1),('VIEW_TEMP_FILES',5),('VIEW_TEMP_FILES',6),('WORKFLOW_MANAGEMENT',1),('WORKFLOW_MANAGEMENT',5);
 /*!40000 ALTER TABLE `core_user_right` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1523,10 +1519,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_user_role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_user_role` (
   `role_key` varchar(50) NOT NULL DEFAULT '',
-  `id_user` int NOT NULL DEFAULT '0',
+  `id_user` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`role_key`,`id_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1547,14 +1543,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `core_xsl_export`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_xsl_export` (
-  `id_xsl_export` int NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `extension` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `id_file` int DEFAULT NULL,
-  `plugin` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT '',
+  `id_xsl_export` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `extension` varchar(255) DEFAULT NULL,
+  `id_file` int(11) DEFAULT NULL,
+  `plugin` varchar(255) DEFAULT '',
   PRIMARY KEY (`id_xsl_export`)
 ) ENGINE=MyISAM AUTO_INCREMENT=127 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1575,11 +1571,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `elasticdata_forms_optionalquestionresponse`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `elasticdata_forms_optionalquestionresponse` (
-  `id_optional_question_indexation` int NOT NULL AUTO_INCREMENT,
-  `id_form` int NOT NULL DEFAULT '0',
-  `id_question` int NOT NULL DEFAULT '0',
+  `id_optional_question_indexation` int(11) NOT NULL AUTO_INCREMENT,
+  `id_form` int(11) NOT NULL DEFAULT 0,
+  `id_question` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_optional_question_indexation`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1599,11 +1595,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `elasticdata_indexer_action`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `elasticdata_indexer_action` (
-  `id_action` int NOT NULL AUTO_INCREMENT,
+  `id_action` int(11) NOT NULL AUTO_INCREMENT,
   `id_resource` varchar(255) NOT NULL,
-  `id_task` int NOT NULL DEFAULT '0',
+  `id_task` int(11) NOT NULL DEFAULT 0,
   `id_datasource` varchar(255) NOT NULL,
   PRIMARY KEY (`id_action`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -1625,16 +1621,16 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `filegen_temporary_file`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `filegen_temporary_file` (
-  `id_file` int NOT NULL AUTO_INCREMENT,
-  `id_user` int NOT NULL DEFAULT '0',
-  `title` mediumtext,
-  `description` mediumtext,
+  `id_file` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user` int(11) NOT NULL DEFAULT 0,
+  `title` mediumtext DEFAULT NULL,
+  `description` mediumtext DEFAULT NULL,
   `id_physical_file` varchar(255) DEFAULT NULL,
-  `file_size` int DEFAULT NULL,
+  `file_size` int(11) DEFAULT NULL,
   `mime_type` varchar(255) DEFAULT NULL,
-  `date_creation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_creation` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id_file`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1654,15 +1650,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `forms_action`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `forms_action` (
-  `id_action` int NOT NULL DEFAULT '0',
+  `id_action` int(11) NOT NULL DEFAULT 0,
   `name_key` varchar(100) DEFAULT NULL,
   `description_key` varchar(100) DEFAULT NULL,
   `action_url` varchar(255) DEFAULT NULL,
   `icon_url` varchar(255) DEFAULT NULL,
   `action_permission` varchar(255) DEFAULT NULL,
-  `form_state` smallint DEFAULT NULL,
+  `form_state` smallint(6) DEFAULT NULL,
   PRIMARY KEY (`id_action`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1683,11 +1679,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `forms_breadcrumbaccordion_config_item`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `forms_breadcrumbaccordion_config_item` (
-  `id_form` int NOT NULL DEFAULT '0',
-  `id_step` int NOT NULL DEFAULT '0',
-  `position` int NOT NULL DEFAULT '0',
+  `id_form` int(11) NOT NULL DEFAULT 0,
+  `id_step` int(11) NOT NULL DEFAULT 0,
+  `position` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_form`,`id_step`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1708,9 +1704,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `forms_category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `forms_category` (
-  `id_category` int NOT NULL AUTO_INCREMENT,
+  `id_category` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(100) NOT NULL,
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (`id_category`)
@@ -1732,16 +1728,16 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `forms_config_producer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `forms_config_producer` (
-  `id_config` int NOT NULL,
+  `id_config` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `id_question_name_file` int DEFAULT NULL,
-  `id_form` int DEFAULT NULL,
+  `id_question_name_file` int(11) DEFAULT NULL,
+  `id_form` int(11) DEFAULT NULL,
   `config_type` varchar(255) DEFAULT NULL,
   `text_file_name` varchar(255) DEFAULT NULL,
   `type_config_file_name` varchar(255) DEFAULT NULL,
-  `extract_empty` int DEFAULT '0',
+  `extract_empty` int(11) DEFAULT 0,
   PRIMARY KEY (`id_config`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1761,10 +1757,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `forms_config_question`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `forms_config_question` (
-  `id_config` int NOT NULL,
-  `id_question` int NOT NULL,
+  `id_config` int(11) NOT NULL,
+  `id_question` int(11) NOT NULL,
   PRIMARY KEY (`id_config`,`id_question`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1784,15 +1780,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `forms_control`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `forms_control` (
-  `id_control` int NOT NULL AUTO_INCREMENT,
+  `id_control` int(11) NOT NULL AUTO_INCREMENT,
   `value` varchar(255) DEFAULT NULL,
   `error_message` varchar(512) DEFAULT '',
   `validator_name` varchar(255) NOT NULL,
   `control_type` varchar(255) NOT NULL,
-  `id_control_target` int NOT NULL DEFAULT '0',
-  `id_control_group` int DEFAULT NULL,
+  `id_control_target` int(11) NOT NULL DEFAULT 0,
+  `id_control_group` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_control`),
   KEY `index_fc_id_control_target` (`id_control_target`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -1814,9 +1810,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `forms_control_group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `forms_control_group` (
-  `id_control_group` int NOT NULL AUTO_INCREMENT,
+  `id_control_group` int(11) NOT NULL AUTO_INCREMENT,
   `logical_operator` varchar(50) NOT NULL,
   PRIMARY KEY (`id_control_group`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -1837,10 +1833,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `forms_control_question`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `forms_control_question` (
-  `id_control` int NOT NULL,
-  `id_question` int NOT NULL,
+  `id_control` int(11) NOT NULL,
+  `id_question` int(11) NOT NULL,
   PRIMARY KEY (`id_control`,`id_question`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1861,10 +1857,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `forms_control_question_mapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `forms_control_question_mapping` (
-  `id_control` int NOT NULL,
-  `id_question` int NOT NULL,
+  `id_control` int(11) NOT NULL,
+  `id_question` int(11) NOT NULL,
   `value` varchar(255) NOT NULL,
   PRIMARY KEY (`id_control`,`id_question`,`value`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -1885,10 +1881,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `forms_default_config`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `forms_default_config` (
-  `id_config` int NOT NULL,
-  `id_form` int NOT NULL,
+  `id_config` int(11) NOT NULL,
+  `id_form` int(11) NOT NULL,
   `config_type` varchar(255) NOT NULL,
   PRIMARY KEY (`id_config`,`id_form`,`config_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -1909,16 +1905,16 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `forms_display`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `forms_display` (
-  `id_display` int NOT NULL AUTO_INCREMENT,
-  `id_form` int DEFAULT '0',
-  `id_step` int DEFAULT '0',
-  `id_composite` int DEFAULT '0',
-  `id_parent` int DEFAULT '0',
-  `display_order` int DEFAULT '0',
+  `id_display` int(11) NOT NULL AUTO_INCREMENT,
+  `id_form` int(11) DEFAULT 0,
+  `id_step` int(11) DEFAULT 0,
+  `id_composite` int(11) DEFAULT 0,
+  `id_parent` int(11) DEFAULT 0,
+  `display_order` int(11) DEFAULT 0,
   `composite_type` varchar(255) DEFAULT '',
-  `display_depth` int DEFAULT '0',
+  `display_depth` int(11) DEFAULT 0,
   PRIMARY KEY (`id_display`),
   KEY `index_fd_id_form` (`id_form`),
   KEY `index_fd_id_step` (`id_step`),
@@ -1943,12 +1939,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `forms_export_config`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `forms_export_config` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `id_form` int DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_form` int(11) DEFAULT NULL,
   `field` varchar(255) DEFAULT NULL,
-  `display_order` int DEFAULT NULL,
+  `display_order` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1968,33 +1964,33 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `forms_form`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `forms_form` (
-  `id_form` int NOT NULL AUTO_INCREMENT,
+  `id_form` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL DEFAULT '',
   `description` varchar(255) DEFAULT '',
-  `creation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `creation_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `update_date` timestamp NOT NULL DEFAULT '1979-12-31 23:00:00',
   `availability_start_date` timestamp NULL DEFAULT NULL,
   `availability_end_date` timestamp NULL DEFAULT NULL,
-  `max_number_response` int DEFAULT '0',
+  `max_number_response` int(11) DEFAULT 0,
   `workgroup` varchar(255) DEFAULT NULL,
-  `id_workflow` int DEFAULT NULL,
-  `authentification_needed` smallint DEFAULT NULL,
-  `one_response_by_user` smallint DEFAULT '0',
+  `id_workflow` int(11) DEFAULT NULL,
+  `authentification_needed` smallint(6) DEFAULT NULL,
+  `one_response_by_user` smallint(6) DEFAULT 0,
   `breadcrumb_name` varchar(255) NOT NULL DEFAULT '',
-  `display_summary` smallint NOT NULL DEFAULT '0',
+  `display_summary` smallint(6) NOT NULL DEFAULT 0,
   `return_url` varchar(255) DEFAULT '',
-  `captcha_step_initial` smallint DEFAULT '0',
-  `captcha_step_final` smallint DEFAULT '0',
-  `captcha_recap` smallint DEFAULT '0',
-  `count_responses` smallint DEFAULT '0',
+  `captcha_step_initial` smallint(6) DEFAULT 0,
+  `captcha_step_final` smallint(6) DEFAULT 0,
+  `captcha_recap` smallint(6) DEFAULT 0,
+  `count_responses` smallint(6) DEFAULT 0,
   `label_final_button` varchar(255) DEFAULT NULL,
   `unavailable_message` varchar(255) DEFAULT NULL,
-  `id_logo` int NOT NULL DEFAULT '0',
-  `id_category` int DEFAULT NULL,
-  `backup_enabled` smallint NOT NULL DEFAULT '0',
-  `access_to_responses_by_role` smallint DEFAULT '0',
+  `id_logo` int(11) NOT NULL DEFAULT 0,
+  `id_category` int(11) DEFAULT NULL,
+  `backup_enabled` smallint(6) NOT NULL DEFAULT 0,
+  `access_to_responses_by_role` smallint(6) DEFAULT 0,
   PRIMARY KEY (`id_form`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2015,9 +2011,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `forms_global_action`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `forms_global_action` (
-  `id_action` int NOT NULL DEFAULT '0',
+  `id_action` int(11) NOT NULL DEFAULT 0,
   `code` varchar(100) DEFAULT NULL,
   `name_key` varchar(100) DEFAULT NULL,
   `description_key` varchar(100) DEFAULT NULL,
@@ -2044,14 +2040,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `forms_group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `forms_group` (
-  `id_group` int NOT NULL AUTO_INCREMENT,
+  `id_group` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL DEFAULT '',
   `description` varchar(512) DEFAULT '',
-  `id_step` int DEFAULT '0',
-  `iteration_min` int DEFAULT '1',
-  `iteration_max` int DEFAULT '1',
+  `id_step` int(11) DEFAULT 0,
+  `iteration_min` int(11) DEFAULT 1,
+  `iteration_max` int(11) DEFAULT 1,
   `iteration_add_label` varchar(255) DEFAULT '',
   `iteration_remove_label` varchar(255) DEFAULT '',
   PRIMARY KEY (`id_group`)
@@ -2074,11 +2070,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `forms_indexer_action`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `forms_indexer_action` (
-  `id_action` int NOT NULL AUTO_INCREMENT,
-  `id_form_response` int NOT NULL DEFAULT '0',
-  `id_task` int NOT NULL DEFAULT '0',
+  `id_action` int(11) NOT NULL AUTO_INCREMENT,
+  `id_form_response` int(11) NOT NULL DEFAULT 0,
+  `id_task` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_action`),
   KEY `idx_fia_id_form_response` (`id_form_response`),
   KEY `idx_fia_id_task` (`id_task`)
@@ -2100,11 +2096,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `forms_message`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `forms_message` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `id_form` int NOT NULL,
-  `end_message_display` smallint DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_form` int(11) NOT NULL,
+  `end_message_display` smallint(6) DEFAULT NULL,
   `end_message` varchar(3000) DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `index_fm_id_form` (`id_form`)
@@ -2127,21 +2123,21 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `forms_question`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `forms_question` (
-  `id_question` int NOT NULL AUTO_INCREMENT,
+  `id_question` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL DEFAULT '',
   `code` varchar(100) NOT NULL DEFAULT '',
-  `description` mediumtext,
-  `id_entry` int DEFAULT '0',
-  `id_step` int DEFAULT '0',
-  `is_visible_multiview_global` smallint NOT NULL DEFAULT '0',
-  `is_visible_multiview_form_selected` smallint NOT NULL DEFAULT '0',
-  `multiview_column_order` int NOT NULL DEFAULT '0',
+  `description` mediumtext DEFAULT NULL,
+  `id_entry` int(11) DEFAULT 0,
+  `id_step` int(11) DEFAULT 0,
+  `is_visible_multiview_global` smallint(6) NOT NULL DEFAULT 0,
+  `is_visible_multiview_form_selected` smallint(6) NOT NULL DEFAULT 0,
+  `multiview_column_order` int(11) NOT NULL DEFAULT 0,
   `column_title` varchar(255) NOT NULL DEFAULT '',
-  `is_filterable_multiview_global` smallint NOT NULL DEFAULT '0',
-  `is_filterable_multiview_form_selected` smallint NOT NULL DEFAULT '0',
-  `export_display_order` int DEFAULT '0',
+  `is_filterable_multiview_global` smallint(6) NOT NULL DEFAULT 0,
+  `is_filterable_multiview_form_selected` smallint(6) NOT NULL DEFAULT 0,
+  `export_display_order` int(11) DEFAULT 0,
   PRIMARY KEY (`id_question`),
   KEY `index_fq_code` (`code`),
   KEY `index_fq_id_entry` (`id_entry`),
@@ -2166,11 +2162,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `forms_question_entry_response`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `forms_question_entry_response` (
-  `id_question_entry_response` int NOT NULL AUTO_INCREMENT,
-  `id_question_response` int NOT NULL DEFAULT '0',
-  `id_entry_response` int NOT NULL DEFAULT '0',
+  `id_question_entry_response` int(11) NOT NULL AUTO_INCREMENT,
+  `id_question_response` int(11) NOT NULL DEFAULT 0,
+  `id_entry_response` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_question_entry_response`),
   KEY `idx_fqer_id_question_response` (`id_question_response`),
   KEY `idx_fqer_id_entry_response` (`id_entry_response`)
@@ -2193,13 +2189,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `forms_question_response`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `forms_question_response` (
-  `id_question_response` int NOT NULL AUTO_INCREMENT,
-  `id_form_response` int NOT NULL DEFAULT '0',
-  `id_question` int NOT NULL DEFAULT '0',
-  `id_step` int NOT NULL DEFAULT '0',
-  `iteration_number` int DEFAULT '0',
+  `id_question_response` int(11) NOT NULL AUTO_INCREMENT,
+  `id_form_response` int(11) NOT NULL DEFAULT 0,
+  `id_question` int(11) NOT NULL DEFAULT 0,
+  `id_step` int(11) NOT NULL DEFAULT 0,
+  `iteration_number` int(11) DEFAULT 0,
   PRIMARY KEY (`id_question_response`),
   KEY `idx_fqr_id_form_response` (`id_form_response`),
   KEY `idx_fqr_id_question` (`id_question`),
@@ -2223,18 +2219,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `forms_response`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `forms_response` (
-  `id_response` int NOT NULL AUTO_INCREMENT,
-  `id_form` int NOT NULL DEFAULT '0',
+  `id_response` int(11) NOT NULL AUTO_INCREMENT,
+  `id_form` int(11) NOT NULL DEFAULT 0,
   `guid` varchar(255) DEFAULT NULL,
-  `creation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `creation_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `update_date` timestamp NOT NULL DEFAULT '1979-12-31 23:00:00',
-  `from_save` smallint DEFAULT '0',
-  `status` smallint NOT NULL DEFAULT '0',
+  `from_save` smallint(6) DEFAULT 0,
+  `status` smallint(6) NOT NULL DEFAULT 0,
   `role` varchar(50) DEFAULT NULL,
   `admin` varchar(50) DEFAULT NULL,
-  `update_date_status` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_date_status` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id_response`),
   KEY `idx_fr_id_form` (`id_form`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -2256,12 +2252,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `forms_response_step`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `forms_response_step` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `id_form_response` int NOT NULL DEFAULT '0',
-  `id_step` int NOT NULL DEFAULT '0',
-  `order_response` int NOT NULL DEFAULT '0',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_form_response` int(11) NOT NULL DEFAULT 0,
+  `id_step` int(11) NOT NULL DEFAULT 0,
+  `order_response` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `idx_frs_id_form_response` (`id_form_response`),
   KEY `idx_frs_id_step` (`id_step`)
@@ -2284,14 +2280,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `forms_step`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `forms_step` (
-  `id_step` int NOT NULL AUTO_INCREMENT,
+  `id_step` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL DEFAULT '',
   `description` varchar(255) DEFAULT '',
-  `id_form` int NOT NULL DEFAULT '0',
-  `is_initial` smallint NOT NULL DEFAULT '0',
-  `is_final` smallint NOT NULL DEFAULT '0',
+  `id_form` int(11) NOT NULL DEFAULT 0,
+  `is_initial` smallint(6) NOT NULL DEFAULT 0,
+  `is_final` smallint(6) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_step`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2312,12 +2308,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `forms_transition`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `forms_transition` (
-  `id_transition` int NOT NULL AUTO_INCREMENT,
-  `from_step` int NOT NULL,
-  `next_step` int NOT NULL,
-  `priority` int DEFAULT '0',
+  `id_transition` int(11) NOT NULL AUTO_INCREMENT,
+  `from_step` int(11) NOT NULL,
+  `next_step` int(11) NOT NULL,
+  `priority` int(11) DEFAULT 0,
   PRIMARY KEY (`id_transition`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2338,11 +2334,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `forms_unittree_unit_selection_config`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `forms_unittree_unit_selection_config` (
-  `id_config` int NOT NULL AUTO_INCREMENT,
-  `id_form` int NOT NULL DEFAULT '0',
-  `id_task` int NOT NULL DEFAULT '0',
+  `id_config` int(11) NOT NULL AUTO_INCREMENT,
+  `id_form` int(11) NOT NULL DEFAULT 0,
+  `id_task` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_config`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2363,15 +2359,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `forms_unittree_unit_selection_config_value`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `forms_unittree_unit_selection_config_value` (
-  `id_config_value` int NOT NULL AUTO_INCREMENT,
-  `id_config` int NOT NULL DEFAULT '0',
-  `id_step` int NOT NULL DEFAULT '0',
-  `id_question` int NOT NULL DEFAULT '0',
+  `id_config_value` int(11) NOT NULL AUTO_INCREMENT,
+  `id_config` int(11) NOT NULL DEFAULT 0,
+  `id_step` int(11) NOT NULL DEFAULT 0,
+  `id_question` int(11) NOT NULL DEFAULT 0,
   `response_value` varchar(255) DEFAULT NULL,
-  `id_unit` int NOT NULL DEFAULT '0',
-  `id_order` int NOT NULL DEFAULT '0',
+  `id_unit` int(11) NOT NULL DEFAULT 0,
+  `id_order` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_config_value`),
   KEY `index_unit_selection_conf_value` (`id_config`)
 ) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -2393,27 +2389,27 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `genatt_entry`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `genatt_entry` (
-  `id_entry` int NOT NULL AUTO_INCREMENT,
-  `id_resource` int NOT NULL DEFAULT '0',
+  `id_entry` int(11) NOT NULL AUTO_INCREMENT,
+  `id_resource` int(11) NOT NULL DEFAULT 0,
   `resource_type` varchar(255) NOT NULL,
-  `id_type` int NOT NULL DEFAULT '0',
-  `id_parent` int DEFAULT NULL,
-  `title` mediumtext,
+  `id_type` int(11) NOT NULL DEFAULT 0,
+  `id_parent` int(11) DEFAULT NULL,
+  `title` mediumtext DEFAULT NULL,
   `code` varchar(100) DEFAULT NULL,
-  `help_message` mediumtext,
-  `comment` mediumtext,
-  `mandatory` smallint DEFAULT NULL,
-  `fields_in_line` smallint DEFAULT NULL,
-  `pos` int DEFAULT NULL,
-  `id_field_depend` int DEFAULT NULL,
-  `field_unique` smallint DEFAULT NULL,
+  `help_message` mediumtext DEFAULT NULL,
+  `comment` mediumtext DEFAULT NULL,
+  `mandatory` smallint(6) DEFAULT NULL,
+  `fields_in_line` smallint(6) DEFAULT NULL,
+  `pos` int(11) DEFAULT NULL,
+  `id_field_depend` int(11) DEFAULT NULL,
+  `field_unique` smallint(6) DEFAULT NULL,
   `css_class` varchar(255) DEFAULT NULL,
-  `pos_conditional` int DEFAULT '0',
-  `error_message` mediumtext,
-  `is_only_display_back` smallint DEFAULT '0',
-  `is_indexed` smallint DEFAULT '0',
+  `pos_conditional` int(11) DEFAULT 0,
+  `error_message` mediumtext DEFAULT NULL,
+  `is_only_display_back` smallint(6) DEFAULT 0,
+  `is_indexed` smallint(6) DEFAULT 0,
   PRIMARY KEY (`id_entry`),
   KEY `index_genatt_entry_resource` (`id_resource`),
   KEY `index_genatt_entry_parent` (`id_parent`),
@@ -2438,18 +2434,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `genatt_entry_type`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `genatt_entry_type` (
-  `id_type` int NOT NULL DEFAULT '0',
+  `id_type` int(11) NOT NULL DEFAULT 0,
   `title` varchar(255) DEFAULT NULL,
-  `is_group` smallint DEFAULT NULL,
-  `is_comment` int DEFAULT NULL,
-  `is_mylutece_user` smallint DEFAULT NULL,
+  `is_group` smallint(6) DEFAULT NULL,
+  `is_comment` int(11) DEFAULT NULL,
+  `is_mylutece_user` smallint(6) DEFAULT NULL,
   `class_name` varchar(255) DEFAULT NULL,
   `icon_name` varchar(255) DEFAULT NULL,
   `plugin` varchar(255) NOT NULL,
-  `display_order` int DEFAULT '0',
-  `inactive` int DEFAULT '0',
+  `display_order` int(11) DEFAULT 0,
+  `inactive` int(11) DEFAULT 0,
   PRIMARY KEY (`id_type`),
   KEY `index_genatt_entry_type_plugin` (`plugin`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -2471,18 +2467,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `genatt_field`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `genatt_field` (
-  `id_field` int NOT NULL AUTO_INCREMENT,
-  `id_entry` int NOT NULL DEFAULT '0',
+  `id_field` int(11) NOT NULL AUTO_INCREMENT,
+  `id_entry` int(11) NOT NULL DEFAULT 0,
   `title` varchar(255) DEFAULT NULL,
   `code` varchar(100) DEFAULT NULL,
-  `value` mediumtext,
-  `default_value` smallint DEFAULT NULL,
-  `pos` int DEFAULT NULL,
+  `value` mediumtext DEFAULT NULL,
+  `default_value` smallint(6) DEFAULT NULL,
+  `pos` int(11) DEFAULT NULL,
   `value_type_date` date DEFAULT NULL,
-  `no_display_title` smallint DEFAULT NULL,
-  `comment` mediumtext,
+  `no_display_title` smallint(6) DEFAULT NULL,
+  `comment` mediumtext DEFAULT NULL,
   `id_file_key` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_field`),
   KEY `index_genatt_field_entry` (`id_entry`)
@@ -2505,10 +2501,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `genatt_referenceitem_field`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `genatt_referenceitem_field` (
-  `id_field` int NOT NULL DEFAULT '0',
-  `id_item` int NOT NULL DEFAULT '0',
+  `id_field` int(11) NOT NULL DEFAULT 0,
+  `id_item` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_field`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2529,16 +2525,16 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `genatt_response`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `genatt_response` (
-  `id_response` int NOT NULL AUTO_INCREMENT,
-  `response_value` mediumtext,
-  `id_entry` int DEFAULT NULL,
-  `iteration_number` int DEFAULT '-1',
-  `id_field` int DEFAULT NULL,
-  `id_file` int DEFAULT NULL,
-  `status` smallint DEFAULT '1',
-  `sort_order` int DEFAULT '0',
+  `id_response` int(11) NOT NULL AUTO_INCREMENT,
+  `response_value` mediumtext DEFAULT NULL,
+  `id_entry` int(11) DEFAULT NULL,
+  `iteration_number` int(11) DEFAULT -1,
+  `id_field` int(11) DEFAULT NULL,
+  `id_file` int(11) DEFAULT NULL,
+  `status` smallint(6) DEFAULT 1,
+  `sort_order` int(11) DEFAULT 0,
   PRIMARY KEY (`id_response`),
   KEY `index_genatt_response_entry` (`id_entry`)
 ) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -2560,10 +2556,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `genatt_verify_by`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `genatt_verify_by` (
-  `id_field` int NOT NULL DEFAULT '0',
-  `id_expression` int NOT NULL DEFAULT '0',
+  `id_field` int(11) NOT NULL DEFAULT 0,
+  `id_expression` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_field`,`id_expression`),
   KEY `index_genatt_verify_by_field` (`id_field`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -2584,10 +2580,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `html_portlet`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `html_portlet` (
-  `id_portlet` int NOT NULL DEFAULT '0',
-  `html` mediumtext,
+  `id_portlet` int(11) NOT NULL DEFAULT 0,
+  `html` mediumtext DEFAULT NULL,
   PRIMARY KEY (`id_portlet`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2598,7 +2594,7 @@ CREATE TABLE `html_portlet` (
 
 LOCK TABLES `html_portlet` WRITE;
 /*!40000 ALTER TABLE `html_portlet` DISABLE KEYS */;
-INSERT INTO `html_portlet` VALUES (1,''),(2,'<ul class=\"features\"> \n <li>Lutece is FreeSoftware. Full OpenSource licensed under BSD.</li> \n <li>Full responsive design Back and Front</li> \n <li>Compliant with Twitter Bootstrap themes</li> \n <li>Very modular and flexible architecture based on plugins, APIs, IoC</li> \n <li>Over 300 plugins available for many needs : Content Management, Collaborative, Workflows, ...</li> \n <li>Runs on Java Platform and rely on powerful build tools such as Apache Maven</li> \n <li>Uses best of breed Java Open Source stacks : Lucene, Spring, Ehcache, Freemarker, ...</li> \n</ul> \n<p class=\"logo\">&nbsp;</p>'),(4,'<h2>Get into the Back Office of this demo site</h2> \n<p class=\"mb20\">Sign in as administrator with <em>admin/adminadmin</em>.</p> \n<p><a class=\"btn btn-primary\" title=\"Access to admin [Open  in new window]\" href=\"jsp/admin/AdminLogin.jsp\" target=\"\"><span class=\"fa fa-door-open\">&nbsp;</span> Enter Back Office</a></p> \n<p>&nbsp;</p>'),(5,'<h3>Resources</h3> \n<hr> \n<div class=\"row\"> \n <div class=\"col-xs-12 col-sm-6\"> \n  <div class=\"media\"> \n   <div class=\"media-left\">\n    <a title=\"GitHub site [Open  in new window]\" href=\"https://github.com/lutece-platform\" target=\"_blank\"><img class=\"media-object\" src=\"images/local/skin/github-logo.png\" alt=\"Github logo\" width=\"100px\"> </a>\n   </div> \n   <div class=\"media-body\"> \n    <h4 class=\"media-heading\">Access to our code repository</h4> \n   </div> \n  </div> \n  <div class=\"media\"> \n   <div class=\"media-left\">\n    <a title=\"Docker Hub site [Open  in new window]\" href=\"https://hub.docker.com/u/lutece\" target=\"_blank\"><img class=\"media-object\" src=\"images/local/skin/docker-logo.png\" alt=\"Docker images\" width=\"100px\"> </a>\n   </div> \n   <div class=\"media-body\"> \n    <h4 class=\"media-heading\">Grab some Docker images to run demos</h4> \n   </div> \n  </div> \n </div> \n <div class=\"col-xs-12 col-sm-6\"> \n  <div class=\"media\"> \n   <div class=\"media-left\">\n    <a title=\"Lutece Wiki site [Open  in new window]\" href=\"https://fr.lutece.paris.fr/fr/jsp/site/Portal.jsp?page=wiki&amp;action=changeLanguage&amp;page_name=home&amp;language=en\" target=\"_blank\"> <img class=\"media-object\" src=\"images/local/skin/wiki-logo.png\" alt=\"WIKI\" width=\"100px\"> </a>\n   </div> \n   <div class=\"media-body\"> \n    <h4 class=\"media-heading\">Read our technical documentation</h4> \n   </div> \n  </div> \n  <div class=\"media\"> \n   <div class=\"media-left\">\n    <a title=\" Twitter Site [Open  in new window]\" href=\"https://twitter.com/LuteceNews\" target=\"_blank\"> <img class=\"media-object\" src=\"images/local/skin/twitter-logo.png\" alt=\"Twitter logo\" width=\"100px\"> </a>\n   </div> \n   <div class=\"media-body\"> \n    <h4 class=\"media-heading\">Follow us on Twitter</h4> \n   </div> \n  </div> \n </div> \n</div>');
+INSERT INTO `html_portlet` VALUES (2,'<ul class=\"features\"> \n <li>Lutece is FreeSoftware. Full OpenSource licensed under BSD.</li> \n <li>Full responsive design Back and Front</li> \n <li>Compliant with Twitter Bootstrap themes</li> \n <li>Very modular and flexible architecture based on plugins, APIs, IoC</li> \n <li>Over 300 plugins available for many needs : Content Management, Collaborative, Workflows, ...</li> \n <li>Runs on Java Platform and rely on powerful build tools such as Apache Maven</li> \n <li>Uses best of breed Java Open Source stacks : Lucene, Spring, Ehcache, Freemarker, ...</li> \n</ul> \n<p class=\"logo\">&nbsp;</p>'),(4,'<h2>Get into the Back Office of this demo site</h2> \n<p class=\"mb20\">Sign in as administrator with <em>admin/adminadmin</em>.</p> \n<p><a class=\"btn btn-primary\" title=\"Access to admin [Open  in new window]\" href=\"jsp/admin/AdminLogin.jsp\" target=\"\"><span class=\"fa fa-door-open\">&nbsp;</span> Enter Back Office</a></p> \n<p>&nbsp;</p>'),(5,'<h3>Resources</h3> \n<hr> \n<div class=\"row\"> \n <div class=\"col-xs-12 col-sm-6\"> \n  <div class=\"media\"> \n   <div class=\"media-left\">\n    <a title=\"GitHub site [Open  in new window]\" href=\"https://github.com/lutece-platform\" target=\"_blank\"><img class=\"media-object\" src=\"images/local/skin/github-logo.png\" alt=\"Github logo\" width=\"100px\"> </a>\n   </div> \n   <div class=\"media-body\"> \n    <h4 class=\"media-heading\">Access to our code repository</h4> \n   </div> \n  </div> \n  <div class=\"media\"> \n   <div class=\"media-left\">\n    <a title=\"Docker Hub site [Open  in new window]\" href=\"https://hub.docker.com/u/lutece\" target=\"_blank\"><img class=\"media-object\" src=\"images/local/skin/docker-logo.png\" alt=\"Docker images\" width=\"100px\"> </a>\n   </div> \n   <div class=\"media-body\"> \n    <h4 class=\"media-heading\">Grab some Docker images to run demos</h4> \n   </div> \n  </div> \n </div> \n <div class=\"col-xs-12 col-sm-6\"> \n  <div class=\"media\"> \n   <div class=\"media-left\">\n    <a title=\"Lutece Wiki site [Open  in new window]\" href=\"https://fr.lutece.paris.fr/fr/jsp/site/Portal.jsp?page=wiki&amp;action=changeLanguage&amp;page_name=home&amp;language=en\" target=\"_blank\"> <img class=\"media-object\" src=\"images/local/skin/wiki-logo.png\" alt=\"WIKI\" width=\"100px\"> </a>\n   </div> \n   <div class=\"media-body\"> \n    <h4 class=\"media-heading\">Read our technical documentation</h4> \n   </div> \n  </div> \n  <div class=\"media\"> \n   <div class=\"media-left\">\n    <a title=\" Twitter Site [Open  in new window]\" href=\"https://twitter.com/LuteceNews\" target=\"_blank\"> <img class=\"media-object\" src=\"images/local/skin/twitter-logo.png\" alt=\"Twitter logo\" width=\"100px\"> </a>\n   </div> \n   <div class=\"media-body\"> \n    <h4 class=\"media-heading\">Follow us on Twitter</h4> \n   </div> \n  </div> \n </div> \n</div>'),(6,'<section id=\"lutece\" class=\"lutece\">\r\n    <div class=\"container\">\r\n        <div class=\"row align-items-center\">\r\n            <div class=\"col-lg-6\">\r\n                <div class=\"lutece-content\">\r\n                    <h1 class=\"my-3\">CiteLibre Service\'EZ, votre outil clé en main</h1>\r\n                    <p class=\"font-weight-bold\" >\r\n                        FR : CiteLibre est la suite logicielle de services numériques clé en main réutilisant les composants du framework open source <a href=\"https://lutece.paris.fr/\" title=\"Site Lutece\" target=\"_blank\">Lutece</a>. Elle permet aux municipalités de tester, réutiliser et de paramétrer les services disponibles pour répondre à leurs besoins. CiteLibre est gratuit, open source, entièrement personnalisable et sécurisé.<br/>\r\nFélicitations, vous avez déployé votre service numérique de démarches en ligne paramétrable. Prochaine étape, créer votre propre formulaire. Toute la documentation est disponible <a href=\"https://lutece.paris.fr/support/wiki/howto-plugin-forms.html\" title=\"Wiki Lutece - Forms\" target=\"_blank\">ici</a>. <br/>\r\nAu fil de l\'utilisation de l\'application, vous pourrez exploiter des outils d\'aide à la décision (statistiques métier réalisées avec la couche ElasticSearch / Kibana). Mettez en place les règles de gestion propre à vos usages et appropriez-vous les détails des notifications envoyées à vos usagers.\r\n                    </p>\r\n                    <p class=\"font-weight-bold\">\r\n                        EN: <i>CiteLibre is the turnkey digital services software suite reusing components from the open source framework <a href=\"https://lutece.paris.fr/en/\" title=\"Site Lutece\" target=\"_blank\">Lutece</a>. It enables municipalities to test, reuse and parameterize the services available to meet their needs. CiteLibre is free, open source, fully customizable and secure.<br/>\r\nCongratulations, you\'ve deployed your digital administrative procedure system. Next step is to create your own agenda. The full documentation is available <a href=\"https://lutece.paris.fr/support/wiki/howto-plugin-forms.html\" title=\"Wiki Lutece - Forms\" target=\"_blank\">here</a>.<br/>\r\nAs you use the application, you\'ll be able to harness decision-making tools (business statistics produced with the ElasticSearch / Kibana suite). Set up management rules specific to your uses and take ownership of the details of notifications sent to your users.</i>\r\n                    </p>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-lg-6\">\r\n                <img src=\"images/site/city-home.svg\" alt=\"\">\r\n            </div>\r\n        </div>\r\n    </div>\r\n</section>'),(7,'<div class=\"lutece-content mt-5\">\r\n	<h2 class=\"my-3\">Connectez-vous à l\'administration de l\'application</h2>\r\n	<p class=\"font-weight-bold\">FR : Connectez-vous à l\'interface d\'administration en utilisant le login <strong>\"admin\"</strong> et le mot de passe <strong>\"adminadmin\"</strong> (vous serez invités à réinitialiser le mot de passe). Vous pourrez alors personnaliser l\'agenda de démo.<br/>Vous trouverez également tous les <a href=\"jsp/site/Portal.jsp?page_id=3\" title=\"Liens utiles\">liens utiles</a> avec les informations de connexion pour utiliser tous les services mis à disposition dans l\'application.</p>\r\n	<p class=\"font-weight-bold\">EN: <i>Log in to the administration interface using login <strong>\"admin\"</strong> and password <strong>\"adminadmin\"</strong> (you will be prompted to reset the password). You can test each of its features and customize the demo calendar.<br/>You will also find all <a href=\"jsp/site/Portal.jsp?page_id=3\" title=\"Useful links\">Useful links</a> with connection credentials to use all available features.</i></p>\r\n	<p class=\"text-center\">\r\n		<a class=\"btn-solid-reg\" href=\"jsp/admin/AdminLogin.jsp\" target=\"_blank\" title=\"Go to admin login page [Open in new window]\">\r\n			<span class=\"icon\"><i class=\"ti ti-user-cog\"></i></span>\r\n			<span class=\"text\">Administration</span>\r\n		</a>\r\n	</p>\r\n</div>'),(8,'<h2>Choisissez le meilleur parcours usager pour accéder à vos services numériques</h2>\r\n<p class=\"text-center\">\r\n	<a class=\"btn-solid-reg\" href=\"jsp/site/Portal.jsp?page=forms&view=stepView&id_form=4&init=true\" target=\"_blank\" title=\"Démo\">\r\n		<span class=\"icon\"><i class=\"ti ti-map-2\"></i></span>\r\n		<span class=\"text\">Acte de Mariage</span>\r\n	</a>\r\n	<a class=\"btn-solid-reg\" href=\"jsp/site/Portal.jsp?page=forms&view=stepView&id_form=1&init=true\" target=\"_blank\" title=\"Démo\">\r\n		<span class=\"icon\"><i class=\"ti ti-map-2\"></i></span>\r\n		<span class=\"text\">Contacter ma Mairie</span>\r\n	</a>\r\n</p>'),(10,'<p><strong>ServiceEZ</strong> est un service numérique qui comprend un ensemble de fonctionnalités rendues possibles grâce à l\'ajout de serveurs tiers permettant notamment les statistiques de visites (<strong>Matomo</strong>) et métier (<strong>ElasticSearch</strong> et <strong>Kibana</strong>), ou encore l\'authentification en back office (<strong>keycloak</strong>). Seuls les emails sont émulés par un outil (<strong>MailPit</strong>) permettant d\'intercepter tous les envois effectués depuis l\'application pour vous donner une bonne idée des possibilités. Ces envois seront à pérenniser en utilisant votre propre serveur de messagerie d\'entreprise.</p>\r\n<p>Voici l\'ensemble des liens vers ces applicatifs, avec les identifiants des comptes utilisateurs vous permettant de vous connecter aux interfaces d\'administration :</p>\r\n\r\n<style>\r\ntable {\r\n	font-family: arial, sans-serif;\r\n	border-collapse: collapse;\r\n	width: 100%;\r\n}\r\n\r\ntd, th {\r\n	border: 1px solid #dddddd;\r\n	text-align: left;\r\n	padding: 4px;\r\n}\r\n\r\n/*tr:nth-child(even) {\r\n	background-color: #ff3300;\r\n}*/\r\n</style>\r\n\r\n<table>\r\n	<tr style=\"background-color: #ff3300;\">\r\n		<th>Service</th>\r\n		<th>Identifiants</th>\r\n		<th>Commentaires</th>\r\n	</tr>\r\n	<tr>\r\n		<td><b>Back Office RendezVous</b><br/><a href=\"http://localhost:8080/serviceEZ/jsp/admin/site/AdminLogin.jsp\" target=\"_blank\">(lien)</a></td>\r\n		<td>Identifiant : admin<br/>Mot de passe : adminadmin<br/><i>Lors de la première connexion, il vous sera demandé de le modifier</i></td>\r\n		<td>Le \"back office\" est l\'interface d\'administration de votre application de gestion des démarches en ligne paramétrables. Il vous permet de gérer les comptes et leurs autorisations associées, l\'éditorial, le paramétrage de votre application, et de gérer les démarches des usagers au quotidien : créer vos nouvelles démarches, définissez votre flux de travail et les notifications à envoyer, et laissez l\'application faire le reste.</td>\r\n	</tr>\r\n	<tr>\r\n		<td><b>MailPit</b><br/><a href=\"http://localhost:1080/\" target=\"_blank\">(lien)</a></td>\r\n		<td>Pas d\'identifiant nécessaire</td>\r\n		<td>MailPit est un petit outil permettant d\'intercepter les notifications envoyées sur un port particulier pour en afficher le contenu avec une légère mise en forme. Il suffit de cliquer sur une ligne de notification pour déplier le contenu. Cela vous permet de tester les envois effectués par l\'application.</td>\r\n	</tr>\r\n	<tr>\r\n		<td>Matomo<br/><a href=\"http://localhost/\" target=\"_blank\">(lien)</a></td>\r\n		<td>Pas d\'identifiant nécessaire</td>\r\n		<td>Matomo est un logiciel libre et open source de mesure de statistiques d\'audience. Lorsqu\'un usager navigue sur l\'application, les pages qu\'il consulte, le temps passé, ainsi que les éléments techniques de son origine géographe, et son navigateur internet sont consultables depuis cette interface, mais également dans le back office de l\'application (menu \"Site\" -> \"Statistiques Web Matomo\").</td>\r\n	</tr>\r\n	<tr>\r\n		<td>SolR<br/><a href=\"http://localhost:8983/solr/#/\" target=\"_blank\">(lien)</a></td>\r\n		<td>Pas d\'identifiant nécessaire</td>\r\n		<td>SolR est une base de données optimisée pour la recherche, conçue sous licence libre. Elle est utilisée pour indexer les créneaux disponibles de façon optimisée et pour restituer ces disponibilités sur une carte géographique.</td>\r\n	</tr>\r\n	<tr>\r\n		<td>ElasticSearch / Kibana<br/><a href=\"http://localhost:5601/s/dev/app/home#/\" target=\"_blank\">(lien)</a></td>\r\n		<td>Pas d\'identifiant nécessaire</td>\r\n		<td>ElasticSearch est également une base de données permettant l\'indexation optimisée de données. Cette pile est utilisée pour stocker les statistiques métier liées à l\'utilisation du service (ex. combien de temps à l\'avance les rendez-vous sont-ils pris en moyenne, quels sont les créneaux les plus prisés, une répartition des rendez-vous sur votre territoire, les chiffres liés aux reports, annulations, surbooking, etc.)</td>\r\n	</tr>\r\n	<tr>\r\n		<td rowspan=\"2\">Keycloak<br/><a href=\"http://localhost:8081/admin/\" target=\"_blank\">(lien)</a></td>\r\n		<td>(<i>Compte admin</i>)<br/>Identifiant : admin<br/>Mot de passe : admin1234</td>\r\n		<td rowspan=\"2\">Keycloak est un outil open source permettant de l\'authentification unique et la gestion d\'identité, développé par la communauté WildFly et hébergé par RedHat.</td>\r\n	</tr>\r\n	<tr>\r\n		<td>(<i>Compte utilisateur de démo</i>)<br/>Identifiant : test@paris.fr<br/>Mot de passe : test1234=TEST1234</td>\r\n	</tr>\r\n</table>');
 /*!40000 ALTER TABLE `html_portlet` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2608,12 +2604,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `htmlpage`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `htmlpage` (
-  `id_htmlpage` int NOT NULL DEFAULT '0',
+  `id_htmlpage` int(11) NOT NULL DEFAULT 0,
   `description` varchar(255) NOT NULL DEFAULT '',
-  `html_content` mediumtext,
-  `status` int NOT NULL DEFAULT '0',
+  `html_content` mediumtext DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT 0,
   `workgroup_key` varchar(50) NOT NULL DEFAULT 'all',
   `role` varchar(50) NOT NULL DEFAULT 'none',
   PRIMARY KEY (`id_htmlpage`)
@@ -2635,12 +2631,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `kibana_dashboard`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `kibana_dashboard` (
-  `id_dashboard` int NOT NULL,
+  `id_dashboard` int(11) NOT NULL,
   `idkibanadashboard` varchar(255) NOT NULL DEFAULT '',
   `title` mediumtext NOT NULL,
-  `dataSourceName` mediumtext,
+  `dataSourceName` mediumtext DEFAULT NULL,
   PRIMARY KEY (`id_dashboard`),
   UNIQUE KEY `idkibanadashboard` (`idkibanadashboard`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -2661,17 +2657,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mylutece_accessrules_rule`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mylutece_accessrules_rule` (
-  `id_rule` int NOT NULL AUTO_INCREMENT,
+  `id_rule` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL DEFAULT '',
   `description` varchar(255) DEFAULT '',
-  `enable` smallint DEFAULT NULL,
-  `external` smallint DEFAULT NULL,
-  `messagetodisplay` mediumtext,
+  `enable` smallint(6) DEFAULT NULL,
+  `external` smallint(6) DEFAULT NULL,
+  `messagetodisplay` mediumtext DEFAULT NULL,
   `redirecturl` varchar(255) DEFAULT '',
   `backurl` varchar(255) DEFAULT '',
-  `priority_order` int DEFAULT '0',
+  `priority_order` int(11) DEFAULT 0,
   PRIMARY KEY (`id_rule`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2691,17 +2687,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mylutece_attribute`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mylutece_attribute` (
-  `id_attribute` int NOT NULL DEFAULT '0',
+  `id_attribute` int(11) NOT NULL DEFAULT 0,
   `type_class_name` varchar(255) DEFAULT NULL,
-  `title` mediumtext,
-  `help_message` mediumtext,
-  `is_mandatory` smallint DEFAULT '0',
-  `is_shown_in_search` smallint DEFAULT '0',
-  `attribute_position` int DEFAULT '0',
+  `title` mediumtext DEFAULT NULL,
+  `help_message` mediumtext DEFAULT NULL,
+  `is_mandatory` smallint(6) DEFAULT 0,
+  `is_shown_in_search` smallint(6) DEFAULT 0,
+  `attribute_position` int(11) DEFAULT 0,
   `plugin_name` varchar(255) DEFAULT NULL,
-  `anonymize` smallint DEFAULT NULL,
+  `anonymize` smallint(6) DEFAULT NULL,
   PRIMARY KEY (`id_attribute`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2721,18 +2717,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mylutece_attribute_field`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mylutece_attribute_field` (
-  `id_field` int NOT NULL DEFAULT '0',
-  `id_attribute` int DEFAULT NULL,
+  `id_field` int(11) NOT NULL DEFAULT 0,
+  `id_attribute` int(11) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
-  `DEFAULT_value` mediumtext,
-  `is_DEFAULT_value` smallint DEFAULT '0',
-  `height` int DEFAULT NULL,
-  `width` int DEFAULT NULL,
-  `max_size_enter` int DEFAULT NULL,
-  `is_multiple` smallint DEFAULT '0',
-  `field_position` int DEFAULT NULL,
+  `DEFAULT_value` mediumtext DEFAULT NULL,
+  `is_DEFAULT_value` smallint(6) DEFAULT 0,
+  `height` int(11) DEFAULT NULL,
+  `width` int(11) DEFAULT NULL,
+  `max_size_enter` int(11) DEFAULT NULL,
+  `is_multiple` smallint(6) DEFAULT 0,
+  `field_position` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_field`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2752,12 +2748,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mylutece_cacheuserattribute_attribute`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mylutece_cacheuserattribute_attribute` (
-  `id_cache_user_attribute` int NOT NULL AUTO_INCREMENT,
+  `id_cache_user_attribute` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` varchar(56) NOT NULL DEFAULT '',
-  `id_attribute` int NOT NULL DEFAULT '0',
-  `content` mediumtext,
+  `id_attribute` int(11) NOT NULL DEFAULT 0,
+  `content` mediumtext DEFAULT NULL,
   `create_date` date DEFAULT NULL,
   PRIMARY KEY (`id_cache_user_attribute`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -2778,11 +2774,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mylutece_connections_log`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mylutece_connections_log` (
   `ip_address` varchar(63) DEFAULT NULL,
-  `date_login` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `login_status` int DEFAULT NULL
+  `date_login` timestamp NOT NULL DEFAULT current_timestamp(),
+  `login_status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -2801,10 +2797,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mylutece_user_anonymize_field`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mylutece_user_anonymize_field` (
   `field_name` varchar(100) NOT NULL,
-  `anonymize` smallint NOT NULL,
+  `anonymize` smallint(6) NOT NULL,
   PRIMARY KEY (`field_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2824,13 +2820,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mylutece_user_field`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mylutece_user_field` (
-  `id_user_field` int NOT NULL DEFAULT '0',
-  `id_user` int DEFAULT NULL,
-  `id_attribute` int DEFAULT NULL,
-  `id_field` int DEFAULT NULL,
-  `user_field_value` mediumtext,
+  `id_user_field` int(11) NOT NULL DEFAULT 0,
+  `id_user` int(11) DEFAULT NULL,
+  `id_attribute` int(11) DEFAULT NULL,
+  `id_field` int(11) DEFAULT NULL,
+  `user_field_value` mediumtext DEFAULT NULL,
   PRIMARY KEY (`id_user_field`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2850,19 +2846,19 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `notifygru_alert_update_resource_state_queue`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `notifygru_alert_update_resource_state_queue` (
-  `id_resource_queue` int NOT NULL AUTO_INCREMENT,
-  `id_resource` int NOT NULL,
-  `id_resource_history` int NOT NULL,
-  `id_task` int NOT NULL,
+  `id_resource_queue` int(11) NOT NULL AUTO_INCREMENT,
+  `id_resource` int(11) NOT NULL,
+  `id_resource_history` int(11) NOT NULL,
+  `id_task` int(11) NOT NULL,
   `resource_type` varchar(255) NOT NULL DEFAULT '',
-  `id_external_parent` int NOT NULL DEFAULT '0',
-  `id_workflow` int NOT NULL,
-  `status` int NOT NULL DEFAULT '0',
-  `creation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `id_external_parent` int(11) NOT NULL DEFAULT 0,
+  `id_workflow` int(11) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 0,
+  `creation_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `alert_reference_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `id_state` int NOT NULL,
+  `id_state` int(11) NOT NULL,
   PRIMARY KEY (`id_resource_queue`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2882,15 +2878,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `poll_form`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `poll_form` (
-  `id_poll_form` int NOT NULL AUTO_INCREMENT,
-  `id_form` int NOT NULL DEFAULT '0',
-  `is_visible` smallint NOT NULL,
-  `title` mediumtext,
-  `btn_title` mediumtext,
-  `btn_url` mediumtext,
-  `btn_is_visible` smallint NOT NULL,
+  `id_poll_form` int(11) NOT NULL AUTO_INCREMENT,
+  `id_form` int(11) NOT NULL DEFAULT 0,
+  `is_visible` smallint(6) NOT NULL,
+  `title` mediumtext DEFAULT NULL,
+  `btn_title` mediumtext DEFAULT NULL,
+  `btn_url` mediumtext DEFAULT NULL,
+  `btn_is_visible` smallint(6) NOT NULL,
   PRIMARY KEY (`id_poll_form`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2910,15 +2906,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `poll_form_question`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `poll_form_question` (
-  `id_poll_form_question` int NOT NULL AUTO_INCREMENT,
-  `id_poll_form` int NOT NULL DEFAULT '0',
-  `id_form` int NOT NULL DEFAULT '0',
-  `id_question` int NOT NULL DEFAULT '0',
-  `chart_type` mediumtext,
-  `chart_is_toolbox` smallint NOT NULL,
-  `chart_is_checked` smallint NOT NULL,
+  `id_poll_form_question` int(11) NOT NULL AUTO_INCREMENT,
+  `id_poll_form` int(11) NOT NULL DEFAULT 0,
+  `id_form` int(11) NOT NULL DEFAULT 0,
+  `id_question` int(11) NOT NULL DEFAULT 0,
+  `chart_type` mediumtext DEFAULT NULL,
+  `chart_is_toolbox` smallint(6) NOT NULL,
+  `chart_is_checked` smallint(6) NOT NULL,
   PRIMARY KEY (`id_poll_form_question`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2938,9 +2934,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `profile_action`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `profile_action` (
-  `id_action` int NOT NULL DEFAULT '0',
+  `id_action` int(11) NOT NULL DEFAULT 0,
   `name_key` varchar(100) DEFAULT NULL,
   `description_key` varchar(100) DEFAULT NULL,
   `action_url` varchar(255) DEFAULT NULL,
@@ -2966,7 +2962,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `profile_profile`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `profile_profile` (
   `profile_key` varchar(50) NOT NULL DEFAULT '',
   `profile_description` varchar(255) DEFAULT NULL,
@@ -2989,7 +2985,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `profile_right`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `profile_right` (
   `profile_key` varchar(50) NOT NULL DEFAULT '',
   `id_right` varchar(50) NOT NULL DEFAULT '',
@@ -3012,7 +3008,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `profile_role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `profile_role` (
   `profile_key` varchar(50) NOT NULL DEFAULT '',
   `role_key` varchar(50) NOT NULL DEFAULT '',
@@ -3035,10 +3031,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `profile_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `profile_user` (
   `profile_key` varchar(50) NOT NULL DEFAULT '',
-  `id_user` int NOT NULL DEFAULT '0',
+  `id_user` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`profile_key`,`id_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -3058,7 +3054,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `profile_view`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `profile_view` (
   `view_key` varchar(50) NOT NULL DEFAULT '',
   `view_description` varchar(255) DEFAULT NULL,
@@ -3081,9 +3077,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `profile_view_action`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `profile_view_action` (
-  `id_action` int NOT NULL DEFAULT '0',
+  `id_action` int(11) NOT NULL DEFAULT 0,
   `name_key` varchar(100) DEFAULT NULL,
   `description_key` varchar(100) DEFAULT NULL,
   `action_url` varchar(255) DEFAULT NULL,
@@ -3109,12 +3105,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `profile_view_dashboard`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `profile_view_dashboard` (
   `view_key` varchar(50) NOT NULL DEFAULT '',
   `dashboard_name` varchar(100) NOT NULL,
-  `dashboard_column` int NOT NULL,
-  `dashboard_order` int NOT NULL,
+  `dashboard_column` int(11) NOT NULL,
+  `dashboard_order` int(11) NOT NULL,
   PRIMARY KEY (`view_key`,`dashboard_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -3134,7 +3130,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `profile_view_profile`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `profile_view_profile` (
   `view_key` varchar(50) NOT NULL DEFAULT '',
   `profile_key` varchar(50) NOT NULL DEFAULT '',
@@ -3157,7 +3153,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `profile_workgroup`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `profile_workgroup` (
   `profile_key` varchar(50) NOT NULL DEFAULT '',
   `workgroup_key` varchar(50) NOT NULL DEFAULT '',
@@ -3180,12 +3176,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `referencelist_item`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `referencelist_item` (
-  `id_reference_item` int NOT NULL AUTO_INCREMENT,
+  `id_reference_item` int(11) NOT NULL AUTO_INCREMENT,
   `name` mediumtext NOT NULL,
   `code` mediumtext NOT NULL,
-  `idreference` int NOT NULL DEFAULT '0',
+  `idreference` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_reference_item`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -3206,9 +3202,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `referencelist_reference`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `referencelist_reference` (
-  `id_reference` int NOT NULL AUTO_INCREMENT,
+  `id_reference` int(11) NOT NULL AUTO_INCREMENT,
   `name` mediumtext NOT NULL,
   `description` mediumtext NOT NULL,
   PRIMARY KEY (`id_reference`)
@@ -3231,12 +3227,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `referencelist_translation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `referencelist_translation` (
-  `id_translation` int NOT NULL AUTO_INCREMENT,
+  `id_translation` int(11) NOT NULL AUTO_INCREMENT,
   `lang` varchar(10) NOT NULL,
   `name` mediumtext NOT NULL,
-  `id_reference_item` int NOT NULL,
+  `id_reference_item` int(11) NOT NULL,
   PRIMARY KEY (`id_translation`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -3256,14 +3252,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `regularexpression_regular_expression`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `regularexpression_regular_expression` (
-  `id_expression` int NOT NULL DEFAULT '0',
+  `id_expression` int(11) NOT NULL DEFAULT 0,
   `title` varchar(255) DEFAULT NULL,
-  `regular_expression_value` mediumtext,
-  `valid_exemple` mediumtext,
-  `information_message` mediumtext,
-  `error_message` mediumtext,
+  `regular_expression_value` mediumtext DEFAULT NULL,
+  `valid_exemple` mediumtext DEFAULT NULL,
+  `information_message` mediumtext DEFAULT NULL,
+  `error_message` mediumtext DEFAULT NULL,
   PRIMARY KEY (`id_expression`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -3284,15 +3280,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `seo_friendly_url`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `seo_friendly_url` (
-  `id_url` int NOT NULL DEFAULT '0',
+  `id_url` int(11) NOT NULL DEFAULT 0,
   `friendly_url` varchar(255) NOT NULL DEFAULT '',
   `technical_url` varchar(255) NOT NULL DEFAULT '',
-  `date_creation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_creation` timestamp NOT NULL DEFAULT current_timestamp(),
   `date_modification` timestamp NOT NULL DEFAULT '2012-10-09 22:00:00',
-  `is_canonical` int NOT NULL DEFAULT '0',
-  `is_sitemap` int NOT NULL DEFAULT '0',
+  `is_canonical` int(11) NOT NULL DEFAULT 0,
+  `is_sitemap` int(11) NOT NULL DEFAULT 0,
   `sitemap_lastmod` varchar(255) DEFAULT '',
   `sitemap_changefreq` varchar(255) DEFAULT '',
   `sitemap_priority` varchar(255) DEFAULT '',
@@ -3306,7 +3302,7 @@ CREATE TABLE `seo_friendly_url` (
 
 LOCK TABLES `seo_friendly_url` WRITE;
 /*!40000 ALTER TABLE `seo_friendly_url` DISABLE KEYS */;
-INSERT INTO `seo_friendly_url` VALUES (1,'/sitemap.html','/jsp/site/Portal.jsp?page=map','2024-01-19 15:26:14','2012-10-09 22:00:00',1,1,'2012-10-10','monthly','0.8'),(2,'/contacts.html','/jsp/site/Portal.jsp?page=contact','2024-01-19 15:26:14','2012-10-09 22:00:00',1,1,'2012-10-10','monthly','0.8'),(3,'/credits.html','/jsp/site/PopupCredits.jsp','2024-01-19 15:26:14','2012-10-09 22:00:00',1,1,'2012-10-10','monthly','0.8'),(4,'/home.html','/jsp/site/Portal.jsp?page_id=1','2024-03-05 14:37:01','2012-10-09 22:00:00',1,1,'2024-01-19','weekly','0.7'),(5,'/page-1.html','/jsp/site/Portal.jsp?page_id=2','2024-03-05 14:37:01','2012-10-09 22:00:00',1,1,'2024-01-19','weekly','0.7');
+INSERT INTO `seo_friendly_url` VALUES (1,'/sitemap.html','/jsp/site/Portal.jsp?page=map','2024-01-19 15:26:14','2012-10-09 22:00:00',1,1,'2012-10-10','monthly','0.8'),(2,'/contacts.html','/jsp/site/Portal.jsp?page=contact','2024-01-19 15:26:14','2012-10-09 22:00:00',1,1,'2012-10-10','monthly','0.8'),(3,'/credits.html','/jsp/site/PopupCredits.jsp','2024-01-19 15:26:14','2012-10-09 22:00:00',1,1,'2012-10-10','monthly','0.8'),(4,'/home.html','/jsp/site/Portal.jsp?page_id=1','2024-03-05 14:37:01','2012-10-09 22:00:00',1,1,'2024-01-19','weekly','0.7'),(5,'/page-1.html','/jsp/site/Portal.jsp?page_id=2','2024-03-05 14:37:01','2012-10-09 22:00:00',1,1,'2024-01-19','weekly','0.7'),(6,'/liens-utiles.html','/jsp/site/Portal.jsp?page_id=3','2024-05-28 17:01:23','2012-10-09 22:00:00',1,1,'2024-05-28','weekly','0.7');
 /*!40000 ALTER TABLE `seo_friendly_url` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3316,7 +3312,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `seo_properties`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `seo_properties` (
   `property_key` varchar(255) NOT NULL,
   `property_value` varchar(255) NOT NULL DEFAULT '',
@@ -3339,9 +3335,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `seo_rule`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `seo_rule` (
-  `id_rule` int NOT NULL DEFAULT '0',
+  `id_rule` int(11) NOT NULL DEFAULT 0,
   `rule_from` varchar(255) NOT NULL DEFAULT '',
   `rule_to` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id_rule`)
@@ -3364,10 +3360,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `solr_facet_intersection`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `solr_facet_intersection` (
-  `id_field1` int DEFAULT NULL,
-  `id_field2` int DEFAULT NULL
+  `id_field1` int(11) DEFAULT NULL,
+  `id_field2` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -3386,19 +3382,19 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `solr_fields`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `solr_fields` (
-  `id_field` int NOT NULL,
+  `id_field` int(11) NOT NULL,
   `name` varchar(75) DEFAULT NULL,
   `label` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `is_facet` tinyint(1) DEFAULT '0',
-  `enable_facet` tinyint(1) DEFAULT '0',
-  `is_sort` tinyint(1) DEFAULT '0',
-  `enable_sort` tinyint(1) DEFAULT '0',
-  `default_sort` tinyint(1) DEFAULT '0',
-  `weight` float DEFAULT '0',
-  `facet_mincount` int DEFAULT '1',
+  `is_facet` tinyint(1) DEFAULT 0,
+  `enable_facet` tinyint(1) DEFAULT 0,
+  `is_sort` tinyint(1) DEFAULT 0,
+  `enable_sort` tinyint(1) DEFAULT 0,
+  `default_sort` tinyint(1) DEFAULT 0,
+  `weight` float DEFAULT 0,
+  `facet_mincount` int(11) DEFAULT 1,
   `operator_type` varchar(30) DEFAULT 'OR',
   PRIMARY KEY (`id_field`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -3420,13 +3416,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `solr_indexer_action`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `solr_indexer_action` (
-  `id_action` int NOT NULL DEFAULT '0',
+  `id_action` int(11) NOT NULL DEFAULT 0,
   `id_document` varchar(255) NOT NULL,
-  `id_task` int NOT NULL DEFAULT '0',
+  `id_task` int(11) NOT NULL DEFAULT 0,
   `type_ressource` varchar(255) NOT NULL,
-  `id_portlet` int NOT NULL DEFAULT '0',
+  `id_portlet` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_action`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -3447,13 +3443,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `task_alert`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `task_alert` (
-  `id_history` int NOT NULL DEFAULT '0',
-  `id_task` int NOT NULL DEFAULT '0',
+  `id_history` int(11) NOT NULL DEFAULT 0,
+  `id_task` int(11) NOT NULL DEFAULT 0,
   `reference_date` timestamp NULL DEFAULT NULL,
-  `is_active` smallint NOT NULL DEFAULT '1',
-  `is_executed` smallint NOT NULL DEFAULT '1',
+  `is_active` smallint(6) NOT NULL DEFAULT 1,
+  `is_executed` smallint(6) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id_history`,`id_task`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -3473,14 +3469,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `task_alert_cf`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `task_alert_cf` (
-  `id_task` int NOT NULL DEFAULT '0',
-  `id_form` int NOT NULL DEFAULT '0',
-  `id_state_after_deadline` int NOT NULL DEFAULT '0',
-  `id_question_date` int NOT NULL DEFAULT '0',
-  `nb_days_to_date` int NOT NULL DEFAULT '0',
-  `id_retrieval_type` smallint NOT NULL DEFAULT '0',
+  `id_task` int(11) NOT NULL DEFAULT 0,
+  `id_form` int(11) NOT NULL DEFAULT 0,
+  `id_state_after_deadline` int(11) NOT NULL DEFAULT 0,
+  `id_question_date` int(11) NOT NULL DEFAULT 0,
+  `nb_days_to_date` int(11) NOT NULL DEFAULT 0,
+  `id_retrieval_type` smallint(6) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_task`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -3500,12 +3496,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `task_create_pdf_cf`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `task_create_pdf_cf` (
-  `id_task` int NOT NULL,
-  `id_form` int DEFAULT NULL,
-  `id_question_url_pdf` int DEFAULT NULL,
-  `id_config` int DEFAULT NULL,
+  `id_task` int(11) NOT NULL,
+  `id_form` int(11) DEFAULT NULL,
+  `id_question_url_pdf` int(11) DEFAULT NULL,
+  `id_config` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_task`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -3525,14 +3521,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `template_control`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `template_control` (
-  `id_control` int NOT NULL AUTO_INCREMENT,
+  `id_control` int(11) NOT NULL AUTO_INCREMENT,
   `value` varchar(255) DEFAULT NULL,
   `error_message` varchar(512) DEFAULT '',
   `validator_name` varchar(255) NOT NULL,
   `control_type` varchar(255) NOT NULL,
-  `id_control_target` int NOT NULL DEFAULT '0',
+  `id_control_target` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_control`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -3552,10 +3548,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `template_control_question`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `template_control_question` (
-  `id_control` int NOT NULL,
-  `id_question` int NOT NULL,
+  `id_control` int(11) NOT NULL,
+  `id_question` int(11) NOT NULL,
   PRIMARY KEY (`id_control`,`id_question`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -3575,10 +3571,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `template_control_question_mapping`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `template_control_question_mapping` (
-  `id_control` int NOT NULL,
-  `id_question` int NOT NULL,
+  `id_control` int(11) NOT NULL,
+  `id_question` int(11) NOT NULL,
   `value` varchar(255) NOT NULL,
   PRIMARY KEY (`id_control`,`id_question`,`value`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -3599,15 +3595,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `template_display`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `template_display` (
-  `id_display` int NOT NULL AUTO_INCREMENT,
-  `id_template` int DEFAULT '0',
-  `id_composite` int DEFAULT '0',
-  `id_parent` int DEFAULT '0',
-  `display_order` int DEFAULT '0',
-  `composite_type` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT '',
-  `display_depth` int DEFAULT '0',
+  `id_display` int(11) NOT NULL AUTO_INCREMENT,
+  `id_template` int(11) DEFAULT 0,
+  `id_composite` int(11) DEFAULT 0,
+  `id_parent` int(11) DEFAULT 0,
+  `display_order` int(11) DEFAULT 0,
+  `composite_type` varchar(255) DEFAULT '',
+  `display_depth` int(11) DEFAULT 0,
   PRIMARY KEY (`id_display`)
 ) ENGINE=MyISAM AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -3628,23 +3624,23 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `template_entry`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `template_entry` (
-  `id_entry` int NOT NULL AUTO_INCREMENT,
-  `id_type` int NOT NULL DEFAULT '0',
-  `title` mediumtext,
+  `id_entry` int(11) NOT NULL AUTO_INCREMENT,
+  `id_type` int(11) NOT NULL DEFAULT 0,
+  `title` mediumtext DEFAULT NULL,
   `code` varchar(100) DEFAULT NULL,
-  `help_message` mediumtext,
-  `comment` mediumtext,
-  `mandatory` smallint DEFAULT NULL,
-  `fields_in_line` smallint DEFAULT NULL,
-  `pos` int DEFAULT NULL,
-  `field_unique` smallint DEFAULT NULL,
+  `help_message` mediumtext DEFAULT NULL,
+  `comment` mediumtext DEFAULT NULL,
+  `mandatory` smallint(6) DEFAULT NULL,
+  `fields_in_line` smallint(6) DEFAULT NULL,
+  `pos` int(11) DEFAULT NULL,
+  `field_unique` smallint(6) DEFAULT NULL,
   `css_class` varchar(255) DEFAULT NULL,
-  `pos_conditional` int DEFAULT '0',
-  `error_message` mediumtext,
-  `is_only_display_back` smallint DEFAULT '0',
-  `is_indexed` smallint DEFAULT '0',
+  `pos_conditional` int(11) DEFAULT 0,
+  `error_message` mediumtext DEFAULT NULL,
+  `is_only_display_back` smallint(6) DEFAULT 0,
+  `is_indexed` smallint(6) DEFAULT 0,
   PRIMARY KEY (`id_entry`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -3664,18 +3660,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `template_field`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `template_field` (
-  `id_field` int NOT NULL AUTO_INCREMENT,
-  `id_entry` int NOT NULL DEFAULT '0',
-  `title` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `code` varchar(100) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `value` mediumtext COLLATE utf8mb4_unicode_520_ci,
-  `default_value` smallint DEFAULT NULL,
-  `pos` int DEFAULT NULL,
+  `id_field` int(11) NOT NULL AUTO_INCREMENT,
+  `id_entry` int(11) NOT NULL DEFAULT 0,
+  `title` varchar(255) DEFAULT NULL,
+  `code` varchar(100) DEFAULT NULL,
+  `value` mediumtext DEFAULT NULL,
+  `default_value` smallint(6) DEFAULT NULL,
+  `pos` int(11) DEFAULT NULL,
   `value_type_date` date DEFAULT NULL,
-  `no_display_title` smallint DEFAULT NULL,
-  `comment` mediumtext COLLATE utf8mb4_unicode_520_ci,
+  `no_display_title` smallint(6) DEFAULT NULL,
+  `comment` mediumtext DEFAULT NULL,
   PRIMARY KEY (`id_field`)
 ) ENGINE=MyISAM AUTO_INCREMENT=744 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -3696,14 +3692,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `template_group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `template_group` (
-  `id_group` int NOT NULL AUTO_INCREMENT,
+  `id_group` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL DEFAULT '',
   `description` varchar(512) DEFAULT '',
-  `id_template` int DEFAULT '0',
-  `iteration_min` int DEFAULT '1',
-  `iteration_max` int DEFAULT '1',
+  `id_template` int(11) DEFAULT 0,
+  `iteration_min` int(11) DEFAULT 1,
+  `iteration_max` int(11) DEFAULT 1,
   `iteration_add_label` varchar(255) DEFAULT '',
   `iteration_remove_label` varchar(255) DEFAULT '',
   PRIMARY KEY (`id_group`)
@@ -3725,20 +3721,20 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `template_question`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `template_question` (
-  `id_question` int NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
-  `code` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
-  `description` mediumtext COLLATE utf8mb4_unicode_520_ci,
-  `id_entry` int DEFAULT '0',
-  `id_template` int DEFAULT '0',
-  `is_visible_multiview_global` smallint NOT NULL DEFAULT '0',
-  `is_visible_multiview_form_selected` smallint NOT NULL DEFAULT '0',
-  `multiview_column_order` int NOT NULL DEFAULT '0',
-  `column_title` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
-  `is_filterable_multiview_global` smallint NOT NULL DEFAULT '0',
-  `is_filterable_multiview_form_selected` smallint NOT NULL DEFAULT '0',
+  `id_question` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL DEFAULT '',
+  `code` varchar(100) NOT NULL DEFAULT '',
+  `description` mediumtext DEFAULT NULL,
+  `id_entry` int(11) DEFAULT 0,
+  `id_template` int(11) DEFAULT 0,
+  `is_visible_multiview_global` smallint(6) NOT NULL DEFAULT 0,
+  `is_visible_multiview_form_selected` smallint(6) NOT NULL DEFAULT 0,
+  `multiview_column_order` int(11) NOT NULL DEFAULT 0,
+  `column_title` varchar(255) NOT NULL DEFAULT '',
+  `is_filterable_multiview_global` smallint(6) NOT NULL DEFAULT 0,
+  `is_filterable_multiview_form_selected` smallint(6) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_question`)
 ) ENGINE=MyISAM AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -3759,10 +3755,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `template_referenceitem_field`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `template_referenceitem_field` (
-  `id_field` int NOT NULL DEFAULT '0',
-  `id_item` int NOT NULL DEFAULT '0',
+  `id_field` int(11) NOT NULL DEFAULT 0,
+  `id_item` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_field`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -3782,9 +3778,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `template_step`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `template_step` (
-  `id_template` int NOT NULL AUTO_INCREMENT,
+  `id_template` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL DEFAULT '',
   `description` varchar(255) DEFAULT '',
   PRIMARY KEY (`id_template`)
@@ -3806,11 +3802,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `termofservice_entry`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `termofservice_entry` (
-  `id_entry` int NOT NULL AUTO_INCREMENT,
+  `id_entry` int(11) NOT NULL AUTO_INCREMENT,
   `text` mediumtext NOT NULL,
-  `version` int DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_entry`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -3830,13 +3826,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `termofservice_user_accepted`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `termofservice_user_accepted` (
-  `id_user_accepted` int NOT NULL AUTO_INCREMENT,
+  `id_user_accepted` int(11) NOT NULL AUTO_INCREMENT,
   `guid` varchar(255) NOT NULL DEFAULT '',
-  `fk_id_entry` int NOT NULL DEFAULT '0',
+  `fk_id_entry` int(11) NOT NULL DEFAULT 0,
   `date_accepted` date NOT NULL,
-  `version` int DEFAULT '0',
+  `version` int(11) DEFAULT 0,
   PRIMARY KEY (`id_user_accepted`),
   KEY `guid` (`guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -3857,9 +3853,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `unittree_action`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `unittree_action` (
-  `id_action` int NOT NULL DEFAULT '0',
+  `id_action` int(11) NOT NULL DEFAULT 0,
   `name_key` varchar(100) NOT NULL DEFAULT '',
   `description_key` varchar(100) NOT NULL DEFAULT '',
   `action_url` varchar(255) NOT NULL DEFAULT '',
@@ -3886,10 +3882,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `unittree_unit`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `unittree_unit` (
-  `id_unit` int NOT NULL DEFAULT '0',
-  `id_parent` int NOT NULL DEFAULT '0',
+  `id_unit` int(11) NOT NULL DEFAULT 0,
+  `id_parent` int(11) NOT NULL DEFAULT 0,
   `code` varchar(255) NOT NULL DEFAULT '',
   `label` varchar(255) NOT NULL DEFAULT '',
   `description` varchar(255) NOT NULL DEFAULT '',
@@ -3914,16 +3910,16 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `unittree_unit_assignment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `unittree_unit_assignment` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `id_resource` int NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_resource` int(11) NOT NULL,
   `resource_type` varchar(255) NOT NULL,
-  `id_assignor_unit` int NOT NULL DEFAULT '0',
-  `id_assigned_unit` int NOT NULL DEFAULT '0',
+  `id_assignor_unit` int(11) NOT NULL DEFAULT 0,
+  `id_assigned_unit` int(11) NOT NULL DEFAULT 0,
   `assignment_type` varchar(50) NOT NULL,
   `assignment_date` timestamp NULL DEFAULT NULL,
-  `is_active` smallint NOT NULL DEFAULT '0',
+  `is_active` smallint(6) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `index_unittree_unit_assignment_resource` (`id_resource`,`resource_type`),
   KEY `index_unittree_unit_assignment_id_assigned_unit` (`id_assigned_unit`,`assignment_date`),
@@ -3947,10 +3943,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `unittree_unit_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `unittree_unit_user` (
-  `id_unit` int NOT NULL DEFAULT '0',
-  `id_user` int NOT NULL DEFAULT '0',
+  `id_unit` int(11) NOT NULL DEFAULT 0,
+  `id_user` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_unit`,`id_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -3971,14 +3967,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `userassignment_resource_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `userassignment_resource_user` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `id_resource` int NOT NULL DEFAULT '0',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_resource` int(11) NOT NULL DEFAULT 0,
   `resource_type` varchar(255) DEFAULT NULL,
-  `id_user` int DEFAULT NULL,
-  `assignment_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `is_active` smallint NOT NULL DEFAULT '0',
+  `id_user` int(11) DEFAULT NULL,
+  `assignment_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `is_active` smallint(6) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `userassignment_resource_user_id_resource_fk` (`id_resource`),
   KEY `userassignment_resource_user_resource_type_fk` (`resource_type`),
@@ -4001,9 +3997,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `verifybackurl_authorized_url`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `verifybackurl_authorized_url` (
-  `id_authorized_url` int NOT NULL,
+  `id_authorized_url` int(11) NOT NULL,
   `url` mediumtext NOT NULL,
   `name` mediumtext NOT NULL,
   `application_code` varchar(100) DEFAULT NULL,
@@ -4026,19 +4022,20 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_action`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_action` (
-  `id_action` int NOT NULL AUTO_INCREMENT,
+  `id_action` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
-  `description` mediumtext,
-  `id_workflow` int DEFAULT NULL,
-  `id_state_after` int DEFAULT NULL,
-  `id_alternative_state_after` int DEFAULT NULL,
-  `id_icon` int DEFAULT NULL,
-  `is_automatic` smallint DEFAULT '0',
-  `is_mass_action` smallint DEFAULT '0',
-  `display_order` int DEFAULT '0',
-  `is_automatic_reflexive_action` smallint DEFAULT '0',
+  `description` mediumtext DEFAULT NULL,
+  `id_workflow` int(11) DEFAULT NULL,
+  `id_state_after` int(11) DEFAULT NULL,
+  `id_alternative_state_after` int(11) DEFAULT NULL,
+  `id_icon` int(11) DEFAULT NULL,
+  `is_automatic` smallint(6) DEFAULT 0,
+  `is_mass_action` smallint(6) DEFAULT 0,
+  `display_order` int(11) DEFAULT 0,
+  `is_automatic_reflexive_action` smallint(6) DEFAULT 0,
+  `uid_action` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_action`),
   KEY `action_id_workflow_fk` (`id_workflow`),
   KEY `action_id_state_after_fk` (`id_state_after`),
@@ -4052,7 +4049,7 @@ CREATE TABLE `workflow_action` (
 
 LOCK TABLES `workflow_action` WRITE;
 /*!40000 ALTER TABLE `workflow_action` DISABLE KEYS */;
-INSERT INTO `workflow_action` VALUES (1,'Action d\'arriver sur l\'&#233;tat Demande de contact déposée','',1,1,-1,4,0,0,0,1),(2,'Accuser réception (automatique)','Envoi d\'un accusé de réception pour notifier l\'usager suite à l\'exécution de l\'action, la demande passe en instruction',1,2,-1,4,1,0,1,0),(3,'Transférer la sollicitation','L\'agent considère qu\'il n\'est pas le bon contact pour instruire la sollicitation et décide de la transférer au bon service',1,2,-1,6,0,0,2,0),(4,'Escalader la sollicitation','L\'agent transfère la sollicitation à sa hiérarchie',1,2,-1,6,0,0,3,0),(5,'Clôturer la sollicitation','Une fois traitée, la sollicitation prend fin',1,3,-1,5,0,0,4,0),(6,'Demander des précisions','La sollicitation initiale de l\'usager ne suffit pas à instruire la demande. L\'agent lui demande donc des compléments.',1,4,-1,6,0,0,5,0),(7,'Action d\'arriver sur l\'&#233;tat Demande en cours d\'instruction','',1,2,-1,4,0,0,0,1),(8,'Action d\'arriver sur l\'&#233;tat En attente d\'informations','',1,4,-1,4,0,0,0,1),(9,'Action d\'arriver sur l\'&#233;tat Demande clôturée','',1,3,-1,4,0,0,0,1),(10,'Réaffecter à l\'entité émettrice','La sollicitation a été traitée par un service tiers, elle retourne au principal service instructeur',1,2,-1,6,0,0,6,0),(11,'Accuser réception (automatique)','Envoi d\'un accusé de réception pour notifier l\'usager suite à l\'exécution de l\'action, la demande passe en instruction',2,7,-1,4,1,0,1,0),(12,'Demander d\'apporter une correction','La saisie de l\'usager ne permet pas de traiter la demande car elle semble erronée',2,10,-1,6,0,0,2,0),(13,'Demander d\'apporter un complément','La saisie de l\'usager ne permet pas de traiter la demande car elle semble incomplète',2,11,-1,6,0,0,3,0),(14,'Clôturer le dossier','La demande est traitée, l\'acte est envoyé, la demande est cloturée.',2,9,-1,4,0,0,4,0),(15,'Refus de la demande','Les éléments fournis ne permettent pas de traiter la demande. Un message est envoyé à l\'usager et la demande clôturée',2,8,-1,5,0,0,5,0),(16,'Action d\'arriver sur l\'&#233;tat Dossier déposé','',2,6,-1,4,0,0,0,1),(17,'Action d\'arriver sur l\'&#233;tat Dossier en instruction','',2,7,-1,4,0,0,0,1),(18,'Action d\'arriver sur l\'&#233;tat Demande refusée','',2,8,-1,4,0,0,0,1),(19,'Action d\'arriver sur l\'&#233;tat Dossier traité','',2,9,-1,4,0,0,0,1),(20,'Action d\'arriver sur l\'&#233;tat Dossier en attente de correction','',2,10,-1,4,0,0,0,1),(21,'Action d\'arriver sur l\'&#233;tat Dossier en attente de complément','',2,11,-1,4,0,0,0,1);
+INSERT INTO `workflow_action` VALUES (1,'Action d\'arriver sur l\'&#233;tat Demande de contact déposée','',1,1,-1,4,0,0,0,1,'9fc6a64e-1d0d-11ef-8590-0242ac180003'),(2,'Accuser réception (automatique)','Envoi d\'un accusé de réception pour notifier l\'usager suite à l\'exécution de l\'action, la demande passe en instruction',1,2,-1,4,1,0,1,0,'9fc6a914-1d0d-11ef-8590-0242ac180003'),(3,'Transférer la sollicitation','L\'agent considère qu\'il n\'est pas le bon contact pour instruire la sollicitation et décide de la transférer au bon service',1,2,-1,6,0,0,2,0,'9fc6a9f6-1d0d-11ef-8590-0242ac180003'),(4,'Escalader la sollicitation','L\'agent transfère la sollicitation à sa hiérarchie',1,2,-1,6,0,0,3,0,'9fc6aabc-1d0d-11ef-8590-0242ac180003'),(5,'Clôturer la sollicitation','Une fois traitée, la sollicitation prend fin',1,3,-1,5,0,0,4,0,'9fc6ab92-1d0d-11ef-8590-0242ac180003'),(6,'Demander des précisions','La sollicitation initiale de l\'usager ne suffit pas à instruire la demande. L\'agent lui demande donc des compléments.',1,4,-1,6,0,0,5,0,'9fc6ac41-1d0d-11ef-8590-0242ac180003'),(7,'Action d\'arriver sur l\'&#233;tat Demande en cours d\'instruction','',1,2,-1,4,0,0,0,1,'9fc6acc7-1d0d-11ef-8590-0242ac180003'),(8,'Action d\'arriver sur l\'&#233;tat En attente d\'informations','',1,4,-1,4,0,0,0,1,'9fc6ad4e-1d0d-11ef-8590-0242ac180003'),(9,'Action d\'arriver sur l\'&#233;tat Demande clôturée','',1,3,-1,4,0,0,0,1,'9fc6adc6-1d0d-11ef-8590-0242ac180003'),(10,'Réaffecter à l\'entité émettrice','La sollicitation a été traitée par un service tiers, elle retourne au principal service instructeur',1,2,-1,6,0,0,6,0,'9fc6ae48-1d0d-11ef-8590-0242ac180003'),(11,'Accuser réception (automatique)','Envoi d\'un accusé de réception pour notifier l\'usager suite à l\'exécution de l\'action, la demande passe en instruction',2,7,-1,4,1,0,1,0,'9fc6aec4-1d0d-11ef-8590-0242ac180003'),(12,'Demander d\'apporter une correction','La saisie de l\'usager ne permet pas de traiter la demande car elle semble erronée',2,10,-1,6,0,0,2,0,'9fc6af38-1d0d-11ef-8590-0242ac180003'),(13,'Demander d\'apporter un complément','La saisie de l\'usager ne permet pas de traiter la demande car elle semble incomplète',2,11,-1,6,0,0,3,0,'9fc6afaf-1d0d-11ef-8590-0242ac180003'),(14,'Clôturer le dossier','La demande est traitée, l\'acte est envoyé, la demande est cloturée.',2,9,-1,4,0,0,4,0,'9fc6b027-1d0d-11ef-8590-0242ac180003'),(15,'Refus de la demande','Les éléments fournis ne permettent pas de traiter la demande. Un message est envoyé à l\'usager et la demande clôturée',2,8,-1,5,0,0,5,0,'9fc6b0a3-1d0d-11ef-8590-0242ac180003'),(16,'Action d\'arriver sur l\'&#233;tat Dossier déposé','',2,6,-1,4,0,0,0,1,'9fc6b12b-1d0d-11ef-8590-0242ac180003'),(17,'Action d\'arriver sur l\'&#233;tat Dossier en instruction','',2,7,-1,4,0,0,0,1,'9fc6b1a8-1d0d-11ef-8590-0242ac180003'),(18,'Action d\'arriver sur l\'&#233;tat Demande refusée','',2,8,-1,4,0,0,0,1,'9fc6b21b-1d0d-11ef-8590-0242ac180003'),(19,'Action d\'arriver sur l\'&#233;tat Dossier traité','',2,9,-1,4,0,0,0,1,'9fc6b285-1d0d-11ef-8590-0242ac180003'),(20,'Action d\'arriver sur l\'&#233;tat Dossier en attente de correction','',2,10,-1,4,0,0,0,1,'9fc6b2ee-1d0d-11ef-8590-0242ac180003'),(21,'Action d\'arriver sur l\'&#233;tat Dossier en attente de complément','',2,11,-1,4,0,0,0,1,'9fc6b35c-1d0d-11ef-8590-0242ac180003');
 /*!40000 ALTER TABLE `workflow_action` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -4062,10 +4059,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_action_action`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_action_action` (
-  `id_action` int NOT NULL DEFAULT '0',
-  `id_linked_action` int NOT NULL DEFAULT '0',
+  `id_action` int(11) NOT NULL DEFAULT 0,
+  `id_linked_action` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_action`,`id_linked_action`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -4085,10 +4082,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_action_state_before`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_action_state_before` (
-  `id_action` int NOT NULL,
-  `id_state_before` int NOT NULL,
+  `id_action` int(11) NOT NULL,
+  `id_state_before` int(11) NOT NULL,
   PRIMARY KEY (`id_action`,`id_state_before`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -4109,10 +4106,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_assignment_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_assignment_history` (
-  `id_history` int NOT NULL DEFAULT '0',
-  `id_task` int NOT NULL,
+  `id_history` int(11) NOT NULL DEFAULT 0,
+  `id_task` int(11) NOT NULL,
   `workgroup_key` varchar(255) NOT NULL,
   PRIMARY KEY (`id_history`,`id_task`,`workgroup_key`),
   KEY `assignment_id_history_fk` (`id_history`),
@@ -4135,11 +4132,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_forms_auto_assignment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_forms_auto_assignment` (
-  `id_task` int NOT NULL,
-  `id_question` int NOT NULL,
-  `value` int NOT NULL,
+  `id_task` int(11) NOT NULL,
+  `id_question` int(11) NOT NULL,
+  `value` int(11) NOT NULL,
   `workgroup_key` varchar(255) NOT NULL,
   PRIMARY KEY (`id_task`,`id_question`,`value`,`workgroup_key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -4160,16 +4157,16 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_forms_auto_assignment_cf`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_forms_auto_assignment_cf` (
-  `id_task` int NOT NULL,
-  `id_form` int NOT NULL,
+  `id_task` int(11) NOT NULL,
+  `id_form` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
-  `is_notify` smallint DEFAULT '0',
+  `is_notify` smallint(6) DEFAULT 0,
   `sender_name` varchar(255) DEFAULT NULL,
-  `message` mediumtext,
+  `message` mediumtext DEFAULT NULL,
   `subject` varchar(255) DEFAULT NULL,
-  `is_view_form_response` smallint NOT NULL DEFAULT '0',
+  `is_view_form_response` smallint(6) NOT NULL DEFAULT 0,
   `label_link_view_form_response` varchar(255) DEFAULT NULL,
   `recipients_cc` varchar(255) NOT NULL DEFAULT '',
   `recipients_bcc` varchar(255) NOT NULL DEFAULT '',
@@ -4192,10 +4189,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_forms_auto_assignment_ef`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_forms_auto_assignment_ef` (
-  `id_task` int NOT NULL,
-  `position_form_question_file` int NOT NULL,
+  `id_task` int(11) NOT NULL,
+  `position_form_question_file` int(11) NOT NULL,
   PRIMARY KEY (`id_task`,`position_form_question_file`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -4215,14 +4212,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_icon`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_icon` (
-  `id_icon` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `mime_type` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `file_value` mediumblob,
-  `width` int DEFAULT NULL,
-  `height` int DEFAULT NULL,
+  `id_icon` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `mime_type` varchar(50) DEFAULT NULL,
+  `file_value` mediumblob DEFAULT NULL,
+  `width` int(11) DEFAULT NULL,
+  `height` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_icon`)
 ) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -4233,7 +4230,7 @@ CREATE TABLE `workflow_icon` (
 
 LOCK TABLES `workflow_icon` WRITE;
 /*!40000 ALTER TABLE `workflow_icon` DISABLE KEYS */;
-INSERT INTO `workflow_icon` VALUES (4,'Valider','image/png',_binary '�PNG\r\n\Z\n\0\0\0\rIHDR\0\0\0\0\0\0\0\0\0ש\�\�\0\0�PLTE���������������\�\�\�\�\�\�\�\�\����\�\�\�\�\�\�\�\�Ӳ\�۳�������Ώ�\�w��c��}}}O~�Gq�NNN\r���\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\��\�\�\�\�\�\�\�\�\�\�ʺ\�\�\�\�\�\�\�ï\�ϭ\�ة�֤�գ�Դ����������������ǧ����ɋ�ɣ�����������}���z��x��v�����r�����f��b��_��]�����Y��X��W��U��T��yyywwwuuuN}�sssLy�nnnIt�Hs�Gr�[htGl�Bj�Bi�___@f�]^^=b�<`�VY[<_~PZ`VVV5VtOOOKOR3Rn3Qk2Qm@LT:M^HHH<AC<?A)AX<<<1>I(=Q&<Q$:O\'9J&9I$7I,5;-01!2B&08,,,-=+:\'\'\'#(,%%%$$$(	\�S%\0\0\0tRNS\0@\�\�f\0\0\0�IDATx\�c`���Ffl�\\bb\Z�X$ll�Kx90\�\r�E���\����)�U\�/\�f�\�Ue⑺�\Z��u�;yY\�|V&�\Z\�S?\�Xu�7ؒ��Y�6��\�\�Z\�\�5pV�\�;�10�\�\�\�r#�fv\�\�c\�r\�Μ\�Ɖd�t��g�OtOX{��J\05\n�\���L\nTFq+Kz����}Tm�\�[BBE�%R5т�ɮN$&�R\�I\�\�2i	�z,��\�U\�!颈%�ٛ\'Gp�`�:%v5Vi���\0\0\�K+�; �\�\0\0\0\0IEND�B`�',14,14),(5,'Refuser','image/png',_binary '�PNG\r\n\Z\n\0\0\0\rIHDR\0\0\0\0\0\0\0\0\0ש\�\�\0\0CPLTE������������\�L6���\�\�\�\�\�\�\�\�\����\�\�\�\�\�\�;\"�:\"\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�Ǵ��;\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�ž��������������\�xhqqq\�N7\�M7\�M6mmm�;\"�;\"�;\"___�;\"�;\"�;\"�;$�9\"\\\\\\�8!WWWTTT�.NL<--���\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\����������������������������ݍ}������������\�p������������\�p[\�o[\�ra\�ra���\�m[�n^������\�fS\�cN\�_I~~~zzz�cTxxxvvv\�VA\�R:ttt�[Jrrrnnn\�M6llljjj\�F/\�A)ccc�F2�?\'�?(�=%\�;\"�>\'�<$�=&�:\"�:#�9\"�9\"�7 �6 �:&�5!QQQ�1�1�/�0�/�/�,�&�&>>>P3.;86e$F/*\\%50.W!B 9\";\Z&&&<N\rI$$$3A7\Z5.- ,.107%\Z&\Z/$(\n\"\r#%\n,!			V�o\0\0\0tRNS\0@\�\�f\0\0sIDATx\�c`�.��fc�q�\�1s\�k��A؁K\�qA��f�d��r0پkS�7K\�1�%�e\�Y�\nq00\�.��4\�\�\�\r\�\�<�ESK}F�8�\�x�I�T���\�\�YxxXf�lIn���L\�jW�5����讜�\�;���`Nd��b\�\�7,*\�\�W� \�\�\nw/+{�%/�j붩\�\��\�H^\�\�6Z�\�\�\�kl�!i�\�w&\�\r�5M��zmV�ܜH>��k\'l-\�\�n��fGؑ�P٠ww��(\�\�-k\�\�ʛ�\�l�\'[�[e���f\�j.�?�\�%\�\�\�(W�b�0�P�\�X%\"\��\����d�Y\�$L\�U�V	A\�b�[�]\'\�\�h\'��Ίu\�\�\�PK�\�Ed\���\�\�Uv��#���=\�\�l\�nN6H\�\�c3�q�\�K\071P\�\�\�\�\0\0\0\0IEND�B`�',14,14),(6,'Commentaire','image/png',_binary '�PNG\r\n\Z\n\0\0\0\rIHDR\0\0\0 \0\0\0 \0\0\0szz\�\0\0\0gAMA\0\0\�ܲ\�\0\0xIDATx�ŖMl\�\��\�e\�\�͇��\rd\��4��!(@\�\"N8J�{\�máj�H��Q��R7\�j�*=��*U��\�\�\n@|\�@L�l\�ކuL$\'1��g<�\�3\�>=�D٬\�v�~��\�4\�\�\�y\�y�\�\0�g	�nܿ\�\�ӧO\�<\�˲�\�4-\��\0+\�x\�ԩ����߬��\�\�۷\�x<�M$����	��\�H$\�m:�~�]\0�\�s\�\�ի�w:�wuu�\�\�vlA�$I�\�\�rH&�\�\�x��KKKQƘV\�l\"�$I\\ ���~Y	`\�\�\�l�\�T(H7ʛ&es9\�f��\�\�(�\�S�P�J511\�Ȱ�\�ܹs�޵kW��H\�2\�dln�\�	N�@������\�e\�q0Ms�\�\�j\r�B!�\\	x�GN\�����Lb~dz>��\Z \�q\�Z�1\�ܹ�vhh\�\�\�\�\�v����\�\�\�\�Y\n��P]Ws|ZK,}}\0c�\\aQq�p8�]$Y�=:244t\�ƍI$Y��\�\�\�\�\0\�\���,X\Z\Z�:0\0�iª\� �\�\�}\�Ń[,�\�ᘮ\�	\�ҥKWc��\�\�ŋ�utt\�����\�\�\�\�\�\�?-,,�cE?\�\�\�8\�\�\�4�\�\n\0�\�\�\�\0Y �\�`0����=�g\��޽{�aؚ��ۈ�����n��^Vd3\�<�\�\�%	*\��\r	�\0UU166v+�=\0茱��O��N�R����]���\�\�\�\�߽{W�o\�>�\�\�=��$a��/P�N�\�\�x\�ZY+]�$!�Hеk\�FE�f=�<\�^�z\�*\nٝN\�ޞ��\�\�\�nW>��(��$�\�\�_ce~m\�ðUU�\�v���`0�\Z�3�\�\�\Z\�\0�g�<y�X,�\�\�\�x<��(H�*ҙҟ|���|�������(\�ٳg�����\0d�^\"�R%899�e\�\�\�\�\�\�\�x\�\�p���?\��Q]U\"\�V\�\�\0/_�\\�}�\�\�\0\�X\�u�\�w\�\��R�e<�]�\�n�E�qx�/[\��׵�}K9a\�\�\�K���\�z����F4\Z��\�0\�ZP���Yo]��y��Ȯ�.� \�z��\�l�������Z����\'\�r�`h͖7\�\nSL�\0D�߿o�দ&:t����\�\�@(\���\08\0\�\�2,R�l6[\�\�\�\�\�T*EDD�a�a�(\n]�|�DQ�;vБ#G\�֭[DDd�&i�F��Q>��\�\�/[UURU�2�ݼy3\0��$@ggg�\�\�K&�\�0M���\�ݻG�w\�&\0\�\�\�JW�\\!UUI\�u\�4m#�:@&�!EQ��\��\�\�\�\0Ԕ8{\�\�o�\�,-//`3ě7ohpp�\0�\�\�L&C���\�UU\�دi\Z��I�?\�ZZZ�\0��HΟ?�\����s�\�v;\0���\�\�\�p\�\�I�|>\�\�\�B�$477\�j��1\�0 �\"\�\0c�@�8s\�\�W�D\�\0JΏ��N���Q\�4��\�\�ڣG�\�Ν;�)�\�S*�\"EQ(�JQ8�\�\�\�Y\0{�i^�1p��Z�\�\�~��1��	�\�q�\�ፎ \"躎l6���9H�\�0\0\�\��\�J\�\'� kjj��\�ŋ\�rC&c�L\�$]\�\�0\"\"Z]]�h4J<�H$BDDǎ�\�\�@?\�\�4$�ɕB�\�i9\�\�\�k�&\�\�4^�~�t:������@�e�F\�* \0��.�\�n���b>�� Q\�\�\�\�k\�nwC{{{CgggM__�V+\0`qq\�x<>_)��އB�?\�i��7@�Z�\�?r�\\n�\�\�\��|�����X,��\��\�O�\�%\0�\0\�\0\�\�h�0@�o\�z�*\����M]<6\�H \0\0\0\0IEND�B`�',14,14);
+INSERT INTO `workflow_icon` VALUES (4,'Valider','image/png','�PNG\r\n\Z\n\0\0\0\rIHDR\0\0\0\0\0\0\0\0\0ש��\0\0�PLTE�����������������������������������Ӳ�۳�������Ώ��w��c��}}}O~�Gq�NNN\r�����������������������������������������������������������������ʺ�������ï�ϭ�ة�֤�գ�Դ����������������ǧ����ɋ�ɣ�����������}���z��x��v�����r�����f��b��_��]�����Y��X��W��U��T��yyywwwuuuN}�sssLy�nnnIt�Hs�Gr�[htGl�Bj�Bi�___@f�]^^=b�<`�VY[<_~PZ`VVV5VtOOOKOR3Rn3Qk2Qm@LT:M^HHH<AC<?A)AX<<<1>I(=Q&<Q$:O\'9J&9I$7I,5;-01!2B&08,,,-=+:\'\'\'#(,%%%$$$(	�S%\0\0\0tRNS\0@��f\0\0\0�IDATx�c`���Ffl�\\bb\Z�X$ll�Kx90�\r�E�������)�U�/�f��Ue⑺�\Z��u�;yY�|V&�\Z�S?�Xu�7ؒ��Y�6����Z��5pV��;�10����r#�fv��c�r�Μ�Ɖd�t��g�OtOX{��J\05\n����L\nTFq+Kz����}Tm��[BBE�%R5т�ɮN$&�R�I��2i	�z,���U�!颈%�ٛ\'Gp�`�:%v5Vi���\0\0�K+�; ��\0\0\0\0IEND�B`�',14,14),(5,'Refuser','image/png','�PNG\r\n\Z\n\0\0\0\rIHDR\0\0\0\0\0\0\0\0\0ש��\0\0CPLTE�������������L6���������������������;\"�:\"�����������������Ǵ��;�����������������������ž���������������xhqqq�N7�M7�M6mmm�;\"�;\"�;\"___�;\"�;\"�;\"�;$�9\"\\\\\\�8!WWWTTT�.NL<--������������������������������������������������������������������������ݍ}�������������p�������������p[�o[�ra�ra����m[�n^�������fS�cN�_I~~~zzz�cTxxxvvv�VA�R:ttt�[Jrrrnnn�M6llljjj�F/�A)ccc�F2�?\'�?(�=%�;\"�>\'�<$�=&�:\"�:#�9\"�9\"�7 �6 �:&�5!QQQ�1�1�/�0�/�/�,�&�&>>>P3.;86e$F/*\\%50.W!B 9\";\Z&&&<N\rI$$$3A7\Z5.- ,.107%\Z&\Z/$(\n\"\r#%\n,!			V�o\0\0\0tRNS\0@��f\0\0sIDATx�c`�.��fc�q��1s�k��A؁K�qA��f�d��r0پkS�7K�1�%�e�Y�\nq00�.��4���\r��<�ESK}F�8��x�I�T�����YxxXf�lIn���L�jW�5����讜��;���`Nd��b��7,*��W� ��\nw/+{�%/�j붩����H^��6Z����kl�!i��w&�\r�5M��zmV�ܜH>��k\'l-��n��fGؑ�P٠ww��(��-k��ʛ��l�\'[�[e���f�j.�?��%���(W�b�0�P��X%\"������d�Y�$L�U�V	A�b�[�]\'��h\'��Ίu���PK��Ed�����Uv��#���=��l�nN6H��c3�q��K\071P����\0\0\0\0IEND�B`�',14,14),(6,'Commentaire','image/png','�PNG\r\n\Z\n\0\0\0\rIHDR\0\0\0 \0\0\0 \0\0\0szz�\0\0\0gAMA\0\0�ܲ�\0\0xIDATx�ŖMl����e��͇��\rd��4��!(@�\"N8J�{�máj�H��Q��R7�j�*=��*U����\n@|�@L�l�ކuL$\'1��g<��3�>=�D٬�v�~���4���y�y��\0�g	�nܿ��ӧO�<�˲��4-��\0+�x�ԩ����߬����۷�x<�M$����	���H$�m:�~�]\0��s��ի�w:�wuu���vlA�$I���rH&���x��KKKQƘV�l\"�$I\\ ���~Y	`���l��T(H7ʛ&es9�f����(��S�P�J511�Ȱ��ܹs�޵kW��H�2�dln��	N�@�������e�q0Ms���j\r�B!�\\	x�GN�����Lb~dz>��\Z �q�Z�1�ܹ�vhh�����v��������Y\n��P]Ws|ZK,}}\0c�\\aQq�p8�]$Y�=:244t�ƍI$Y������\0����,X\Z\Z�:0\0�iª� ���}�Ń[,��ᘮ�	�ҥKWc����ŋ�utt�����������?-,,�cE?���8���4��\n\0����\0Y ��`0����=�g��޽{�aؚ��ۈ�����n��^Vd3�<���%	*��\r	�\0UU166v+�=\0茱��O��N�R����]�������߽{W�o�>���=��$a��/P�N���x�ZY+]�$!�Hеk�FE�f=�<�^�z�*\nٝN�ޞ�����nW>��(��$���_ce~m�ðUU��v���`0�\Z�3���\Z�\0�g�<y�X,����x<��(H�*ҙҟ|���|�������(�ٳg�����\0d�^\"�R%899�e�������x��p���?��Q]U\"�V��\0/_�\\�}���\0�X�u��w���R�e<�]��n�E�qx�/[��׵�}K9a���K����z����F4\Z���0�ZP���Yo]��y��Ȯ�.� �z���l�������Z����\'�r�`h͖7�\nSL�\0D�߿o�দ&:t������@(���\08\0��2,R�l6[�����T*EDD�a�a�(\n]�|�DQ�;vБ#G�֭[DDd�&i�F��Q>����/[UURU�2�ݼy3\0��$@ggg���K&��0M����ݻG�w�&\0���JW�\\!UUI�u�4m#�:@&�!EQ�������\0Ԕ8{��o��,-//`3ě7ohpp�\0���L&C����UU�دi\Z��I�?�ZZZ�\0��HΟ?�����s��v;\0������p��I�|>���B�$477�j��1�0 �\"�\0c�@�8s��W�D�\0JΏ��N���Q�4����ڣG��Ν;�)��S*�\"EQ(�JQ8����Y\0{�i^�1p��Z���~��1��	��q��ፎ \"躎l6���9H��0\0����J�\'� kjj���ŋ�rC&c�L�$]��0\"\"Z]]�h4J<�H$BDDǎ���@?��4$�ɕB��i9���k�&��4^�~�t:������@�e�F�* \0��.��n���b>�� Q����k�nwC{{{CgggM__�V+\0`qq�x<>_)��އB�?�i��7@�Z��?r�\\n�����|�����X,�����O��%\0�\0�\0��h�0@�o�z�*����M]<6�H \0\0\0\0IEND�B`�',14,14);
 /*!40000 ALTER TABLE `workflow_icon` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -4243,11 +4240,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_prerequisite`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_prerequisite` (
-  `id_prerequisite` int NOT NULL AUTO_INCREMENT,
-  `id_action` int NOT NULL,
+  `id_prerequisite` int(11) NOT NULL AUTO_INCREMENT,
+  `id_action` int(11) NOT NULL,
   `prerequisite_type` varchar(255) NOT NULL,
+  `uid_prerequisite` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_prerequisite`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -4267,10 +4265,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_prerequisite_duration_cf`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_prerequisite_duration_cf` (
-  `id_prerequisite` int NOT NULL,
-  `duration` int NOT NULL,
+  `id_prerequisite` int(11) NOT NULL,
+  `duration` int(11) NOT NULL,
   PRIMARY KEY (`id_prerequisite`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -4290,18 +4288,19 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_resource_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_resource_history` (
-  `id_history` int NOT NULL AUTO_INCREMENT,
-  `id_resource` int DEFAULT NULL,
+  `id_history` int(11) NOT NULL AUTO_INCREMENT,
+  `id_resource` int(11) DEFAULT NULL,
   `resource_type` varchar(255) DEFAULT NULL,
-  `id_workflow` int DEFAULT NULL,
-  `id_action` int DEFAULT NULL,
-  `creation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `id_workflow` int(11) DEFAULT NULL,
+  `id_action` int(11) DEFAULT NULL,
+  `creation_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `user_access_code` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_history`),
   KEY `history_id_workflow_fk` (`id_workflow`),
-  KEY `history_id_action_fk` (`id_action`)
+  KEY `history_id_action_fk` (`id_action`),
+  KEY `history_id_resource_fk` (`id_resource`)
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -4321,9 +4320,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_resource_user_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_resource_user_history` (
-  `id_history` int NOT NULL,
+  `id_history` int(11) NOT NULL,
   `user_access_code` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT '',
   `first_name` varchar(255) DEFAULT '',
@@ -4349,14 +4348,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_resource_workflow`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_resource_workflow` (
-  `id_resource` int NOT NULL DEFAULT '0',
+  `id_resource` int(11) NOT NULL DEFAULT 0,
   `resource_type` varchar(255) NOT NULL,
-  `id_state` int DEFAULT NULL,
-  `id_workflow` int NOT NULL,
-  `id_external_parent` int DEFAULT NULL,
-  `is_associated_workgroups` smallint DEFAULT '0',
+  `id_state` int(11) DEFAULT NULL,
+  `id_workflow` int(11) NOT NULL,
+  `id_external_parent` int(11) DEFAULT NULL,
+  `is_associated_workgroups` smallint(6) DEFAULT 0,
   PRIMARY KEY (`id_resource`,`resource_type`,`id_workflow`),
   KEY `workflow_resource_workflow_id_resource_fk` (`id_resource`),
   KEY `workflow_resource_workflow_resource_type_fk` (`resource_type`),
@@ -4381,11 +4380,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_resource_workgroup`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_resource_workgroup` (
-  `id_resource` int NOT NULL DEFAULT '0',
+  `id_resource` int(11) NOT NULL DEFAULT 0,
   `resource_type` varchar(255) DEFAULT NULL,
-  `id_workflow` int DEFAULT NULL,
+  `id_workflow` int(11) DEFAULT NULL,
   `workgroup_key` varchar(255) DEFAULT NULL,
   KEY `workflow_resource_workgroup_id_resource_fk` (`id_resource`),
   KEY `workflow_resource_workgroup_resource_type_fk` (`resource_type`),
@@ -4408,16 +4407,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_state`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_state` (
-  `id_state` int NOT NULL AUTO_INCREMENT,
+  `id_state` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
-  `description` mediumtext,
-  `id_workflow` int DEFAULT NULL,
-  `is_initial_state` smallint DEFAULT '0',
-  `is_required_workgroup_assigned` smallint DEFAULT '0',
-  `id_icon` int DEFAULT NULL,
-  `display_order` int DEFAULT '0',
+  `description` mediumtext DEFAULT NULL,
+  `id_workflow` int(11) DEFAULT NULL,
+  `is_initial_state` smallint(6) DEFAULT 0,
+  `is_required_workgroup_assigned` smallint(6) DEFAULT 0,
+  `id_icon` int(11) DEFAULT NULL,
+  `display_order` int(11) DEFAULT 0,
+  `uid_state` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_state`),
   KEY `fk_state_id_workflow` (`id_workflow`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -4429,7 +4429,7 @@ CREATE TABLE `workflow_state` (
 
 LOCK TABLES `workflow_state` WRITE;
 /*!40000 ALTER TABLE `workflow_state` DISABLE KEYS */;
-INSERT INTO `workflow_state` VALUES (1,'Demande de contact déposée','Une demande de contact rentre dans le workflow. L\'affectation aux entités organisationnelles est réalisée en tâche automatique sur cet état.',1,1,0,NULL,1),(2,'Demande en cours d\'instruction','La demande de contact est en cours d\'instruction. L\'usager a été notifié.',1,0,0,NULL,2),(3,'Demande clôturée','La demande a été traitée, l\'usager en a été informé.',1,0,0,NULL,4),(4,'En attente d\'informations','La sollicitation a fait l\'objet d\'une demande d\'informations complémentaires. L\'agent est en attente de l\'usager',1,0,0,NULL,3),(5,'Sollicitation supprimée','Sollicitation supprimée',1,0,0,NULL,5),(6,'Dossier déposé','La réponse au formulaire rentre dans le workflow. ',2,1,0,NULL,1),(7,'Dossier en instruction','L\'usager a été notifié. Il est possible de clôturer le dossier depuis cet état ou de demander des compléments/corrections à l\'usager.',2,0,0,NULL,2),(8,'Demande refusée','La demande ne peut être traitée pour différentes raisons.',2,0,0,NULL,3),(9,'Dossier traité','La demande a été traitée et l\'acte mis au courrier',2,0,0,NULL,4),(10,'Dossier en attente de correction','Une demande de correction a été envoyée à l\'usager. On attend son renvoi.',2,0,0,NULL,5),(11,'Dossier en attente de complément','La demande ne peut être traitée car elle semble incomplète. En attente de complément.',2,0,0,NULL,6),(12,'Demande anonymisée','Passé le délai configuré, les informations relatives aux données personnelles sont remplacées.',2,0,0,6,7),(13,'Demande Archivée/Supprimée','Passé le délai renseigné dans la configuration, la demande est supprimée',2,0,0,5,8);
+INSERT INTO `workflow_state` VALUES (1,'Demande de contact déposée','Une demande de contact rentre dans le workflow. L\'affectation aux entités organisationnelles est réalisée en tâche automatique sur cet état.',1,1,0,NULL,1,'9fbb58ee-1d0d-11ef-8590-0242ac180003'),(2,'Demande en cours d\'instruction','La demande de contact est en cours d\'instruction. L\'usager a été notifié.',1,0,0,NULL,2,'9fbb5c42-1d0d-11ef-8590-0242ac180003'),(3,'Demande clôturée','La demande a été traitée, l\'usager en a été informé.',1,0,0,NULL,4,'9fbb5d15-1d0d-11ef-8590-0242ac180003'),(4,'En attente d\'informations','La sollicitation a fait l\'objet d\'une demande d\'informations complémentaires. L\'agent est en attente de l\'usager',1,0,0,NULL,3,'9fbb5da0-1d0d-11ef-8590-0242ac180003'),(5,'Sollicitation supprimée','Sollicitation supprimée',1,0,0,NULL,5,'9fbb5e26-1d0d-11ef-8590-0242ac180003'),(6,'Dossier déposé','La réponse au formulaire rentre dans le workflow. ',2,1,0,NULL,1,'9fbb5eab-1d0d-11ef-8590-0242ac180003'),(7,'Dossier en instruction','L\'usager a été notifié. Il est possible de clôturer le dossier depuis cet état ou de demander des compléments/corrections à l\'usager.',2,0,0,NULL,2,'9fbb5f17-1d0d-11ef-8590-0242ac180003'),(8,'Demande refusée','La demande ne peut être traitée pour différentes raisons.',2,0,0,NULL,3,'9fbb5f8c-1d0d-11ef-8590-0242ac180003'),(9,'Dossier traité','La demande a été traitée et l\'acte mis au courrier',2,0,0,NULL,4,'9fbb600a-1d0d-11ef-8590-0242ac180003'),(10,'Dossier en attente de correction','Une demande de correction a été envoyée à l\'usager. On attend son renvoi.',2,0,0,NULL,5,'9fbb6076-1d0d-11ef-8590-0242ac180003'),(11,'Dossier en attente de complément','La demande ne peut être traitée car elle semble incomplète. En attente de complément.',2,0,0,NULL,6,'9fbb60fe-1d0d-11ef-8590-0242ac180003'),(12,'Demande anonymisée','Passé le délai configuré, les informations relatives aux données personnelles sont remplacées.',2,0,0,6,7,'9fbb631b-1d0d-11ef-8590-0242ac180003'),(13,'Demande Archivée/Supprimée','Passé le délai renseigné dans la configuration, la demande est supprimée',2,0,0,5,8,'9fbb63dd-1d0d-11ef-8590-0242ac180003');
 /*!40000 ALTER TABLE `workflow_state` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -4439,14 +4439,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_state_controller_form_response_value`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_state_controller_form_response_value` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `id_task` int NOT NULL DEFAULT '0',
-  `is_multiform` smallint NOT NULL DEFAULT '0',
-  `id_form` int DEFAULT NULL,
-  `id_step` int DEFAULT NULL,
-  `id_question` int DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_task` int(11) NOT NULL DEFAULT 0,
+  `is_multiform` smallint(6) NOT NULL DEFAULT 0,
+  `id_form` int(11) DEFAULT NULL,
+  `id_step` int(11) DEFAULT NULL,
+  `id_question` int(11) DEFAULT NULL,
   `code` varchar(100) DEFAULT NULL,
   `response_value` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -4469,12 +4469,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task` (
-  `id_task` int NOT NULL AUTO_INCREMENT,
+  `id_task` int(11) NOT NULL AUTO_INCREMENT,
   `task_type_key` varchar(50) DEFAULT NULL,
-  `id_action` int NOT NULL DEFAULT '0',
-  `display_order` int DEFAULT '0',
+  `id_action` int(11) NOT NULL DEFAULT 0,
+  `display_order` int(11) DEFAULT 0,
+  `uid_task` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_task`),
   KEY `task_id_action_fk` (`id_action`)
 ) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -4486,7 +4487,7 @@ CREATE TABLE `workflow_task` (
 
 LOCK TABLES `workflow_task` WRITE;
 /*!40000 ALTER TABLE `workflow_task` DISABLE KEYS */;
-INSERT INTO `workflow_task` VALUES (1,'taskUnitAssignmentAutomatic',1,1),(2,'taskTypeArchive',1,2),(3,'taskTypeArchive',7,1),(4,'taskTypeArchive',8,1),(5,'taskTypeArchive',9,1),(6,'taskNotifyGru',2,1),(7,'taskUnitAssignmentManual',3,1),(8,'taskTypeComment',3,2),(9,'taskNotifyGru',3,3),(10,'taskUnitAssignmentManual',4,1),(11,'taskUnitAssignmentManual',10,1),(13,'completeFormResponseTypeTask',6,1),(14,'taskNotifyGru',6,3),(15,'taskTypeComment',6,2),(16,'taskNotifyGru',5,2),(17,'taskTypeComment',5,1),(19,'taskNotifyGru',11,1),(20,'taskUnitAssignmentAutomatic',11,2),(22,'resubmitFormResponseTypeTask',12,1),(23,'taskTypeComment',12,2),(24,'taskNotifyGru',12,3),(26,'taskTypeComment',13,2),(27,'taskNotifyGru',13,3),(28,'completeFormResponseTypeTask',13,1),(29,'taskNotifyGru',14,1),(30,'taskTypeComment',15,1),(31,'taskNotifyGru',15,2),(32,'taskTypeArchive',16,1),(33,'taskTypeArchive',16,2),(34,'taskTypeArchive',17,1),(35,'taskTypeArchive',17,2),(36,'taskTypeArchive',18,1),(37,'taskTypeArchive',18,2),(38,'taskTypeArchive',19,1),(39,'taskTypeArchive',19,2),(40,'taskTypeArchive',20,1),(41,'taskTypeArchive',20,2),(42,'taskTypeArchive',21,1),(43,'taskTypeArchive',21,2);
+INSERT INTO `workflow_task` VALUES (1,'taskUnitAssignmentAutomatic',1,1,'9fcf3bb8-1d0d-11ef-8590-0242ac180003'),(2,'taskTypeArchive',1,2,'9fcf3e5c-1d0d-11ef-8590-0242ac180003'),(3,'taskTypeArchive',7,1,'9fcf3f00-1d0d-11ef-8590-0242ac180003'),(4,'taskTypeArchive',8,1,'9fcf3f78-1d0d-11ef-8590-0242ac180003'),(5,'taskTypeArchive',9,1,'9fcf414c-1d0d-11ef-8590-0242ac180003'),(6,'taskNotifyGru',2,1,'9fcf4209-1d0d-11ef-8590-0242ac180003'),(7,'taskUnitAssignmentManual',3,1,'9fcf435e-1d0d-11ef-8590-0242ac180003'),(8,'taskTypeComment',3,2,'9fcf43de-1d0d-11ef-8590-0242ac180003'),(9,'taskNotifyGru',3,3,'9fcf4430-1d0d-11ef-8590-0242ac180003'),(10,'taskUnitAssignmentManual',4,1,'9fcf447e-1d0d-11ef-8590-0242ac180003'),(11,'taskUnitAssignmentManual',10,1,'9fcf44cd-1d0d-11ef-8590-0242ac180003'),(13,'completeFormResponseTypeTask',6,1,'9fcf4517-1d0d-11ef-8590-0242ac180003'),(14,'taskNotifyGru',6,3,'9fcf4560-1d0d-11ef-8590-0242ac180003'),(15,'taskTypeComment',6,2,'9fcf45aa-1d0d-11ef-8590-0242ac180003'),(16,'taskNotifyGru',5,2,'9fcf45f3-1d0d-11ef-8590-0242ac180003'),(17,'taskTypeComment',5,1,'9fcf4640-1d0d-11ef-8590-0242ac180003'),(19,'taskNotifyGru',11,1,'9fcf4782-1d0d-11ef-8590-0242ac180003'),(20,'taskUnitAssignmentAutomatic',11,2,'9fcf47cd-1d0d-11ef-8590-0242ac180003'),(22,'resubmitFormResponseTypeTask',12,1,'9fcf48a1-1d0d-11ef-8590-0242ac180003'),(23,'taskTypeComment',12,2,'9fcf48ff-1d0d-11ef-8590-0242ac180003'),(24,'taskNotifyGru',12,3,'9fcf495b-1d0d-11ef-8590-0242ac180003'),(26,'taskTypeComment',13,2,'9fcf49af-1d0d-11ef-8590-0242ac180003'),(27,'taskNotifyGru',13,3,'9fcf4a01-1d0d-11ef-8590-0242ac180003'),(28,'completeFormResponseTypeTask',13,1,'9fcf4a54-1d0d-11ef-8590-0242ac180003'),(29,'taskNotifyGru',14,1,'9fcf4aa9-1d0d-11ef-8590-0242ac180003'),(30,'taskTypeComment',15,1,'9fcf4af5-1d0d-11ef-8590-0242ac180003'),(31,'taskNotifyGru',15,2,'9fcf4b46-1d0d-11ef-8590-0242ac180003'),(32,'taskTypeArchive',16,1,'9fcf4b9a-1d0d-11ef-8590-0242ac180003'),(33,'taskTypeArchive',16,2,'9fcf4bf9-1d0d-11ef-8590-0242ac180003'),(34,'taskTypeArchive',17,1,'9fcf4c59-1d0d-11ef-8590-0242ac180003'),(35,'taskTypeArchive',17,2,'9fcf4cb6-1d0d-11ef-8590-0242ac180003'),(36,'taskTypeArchive',18,1,'9fcf4d0a-1d0d-11ef-8590-0242ac180003'),(37,'taskTypeArchive',18,2,'9fcf4d72-1d0d-11ef-8590-0242ac180003'),(38,'taskTypeArchive',19,1,'9fcf4dcd-1d0d-11ef-8590-0242ac180003'),(39,'taskTypeArchive',19,2,'9fcf4e20-1d0d-11ef-8590-0242ac180003'),(40,'taskTypeArchive',20,1,'9fcf4e76-1d0d-11ef-8590-0242ac180003'),(41,'taskTypeArchive',20,2,'9fcf4ed2-1d0d-11ef-8590-0242ac180003'),(42,'taskTypeArchive',21,1,'9fcf4f2e-1d0d-11ef-8590-0242ac180003'),(43,'taskTypeArchive',21,2,'9fcf4f85-1d0d-11ef-8590-0242ac180003');
 /*!40000 ALTER TABLE `workflow_task` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -4496,44 +4497,44 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_alert_gru_cf`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_alert_gru_cf` (
-  `id_task` int NOT NULL,
+  `id_task` int(11) NOT NULL,
   `id_spring_provider` varchar(255) DEFAULT NULL,
   `marker_provider_ids` varchar(1000) DEFAULT NULL,
-  `demand_status` int DEFAULT NULL,
-  `crm_status_id` int DEFAULT '1',
-  `set_onglet` smallint DEFAULT NULL,
-  `message_guichet` text,
+  `demand_status` int(11) DEFAULT NULL,
+  `crm_status_id` int(11) DEFAULT 1,
+  `set_onglet` smallint(6) DEFAULT NULL,
+  `message_guichet` text DEFAULT NULL,
   `status_text_guichet` varchar(255) DEFAULT NULL,
   `sender_name_guichet` varchar(255) DEFAULT NULL,
   `subject_guichet` varchar(255) DEFAULT NULL,
-  `demand_max_step_guichet` smallint DEFAULT '1',
-  `demand_user_current_step_guichet` smallint DEFAULT '1',
-  `is_active_onglet_guichet` smallint DEFAULT '0',
+  `demand_max_step_guichet` smallint(6) DEFAULT 1,
+  `demand_user_current_step_guichet` smallint(6) DEFAULT 1,
+  `is_active_onglet_guichet` smallint(6) DEFAULT 0,
   `status_text_agent` varchar(255) DEFAULT NULL,
-  `message_agent` text,
-  `is_active_onglet_agent` smallint NOT NULL DEFAULT '0',
+  `message_agent` text DEFAULT NULL,
+  `is_active_onglet_agent` smallint(6) NOT NULL DEFAULT 0,
   `subject_email` varchar(255) DEFAULT NULL,
-  `message_email` text,
+  `message_email` text DEFAULT NULL,
   `sender_name_email` varchar(255) DEFAULT NULL,
   `recipients_cc_email` varchar(255) DEFAULT NULL,
   `recipients_cci_email` varchar(255) DEFAULT NULL,
-  `is_active_onglet_email` smallint DEFAULT '0',
-  `message_sms` text,
+  `is_active_onglet_email` smallint(6) DEFAULT 0,
+  `message_sms` text DEFAULT NULL,
   `billing_account_sms` varchar(255) DEFAULT NULL,
   `billing_group_sms` varchar(255) DEFAULT NULL,
-  `is_active_onglet_sms` smallint NOT NULL DEFAULT '0',
-  `id_mailing_list_broadcast` int DEFAULT NULL,
+  `is_active_onglet_sms` smallint(6) NOT NULL DEFAULT 0,
+  `id_mailing_list_broadcast` int(11) DEFAULT NULL,
   `email_broadcast` varchar(255) DEFAULT NULL,
   `sender_name_broadcast` varchar(255) DEFAULT NULL,
   `subject_broadcast` varchar(255) DEFAULT NULL,
-  `message_broadcast` text,
+  `message_broadcast` text DEFAULT NULL,
   `recipients_cc_broadcast` varchar(255) DEFAULT NULL,
   `recipients_cci_broadcast` varchar(255) DEFAULT NULL,
-  `is_active_onglet_broadcast` smallint DEFAULT '0',
-  `days_to_alert` int DEFAULT NULL,
-  `id_state_after` int DEFAULT NULL,
+  `is_active_onglet_broadcast` smallint(6) DEFAULT 0,
+  `days_to_alert` int(11) DEFAULT NULL,
+  `id_state_after` int(11) DEFAULT NULL,
   `alert_subject` varchar(255) DEFAULT NULL,
   `marker_alert` varchar(255) DEFAULT NULL,
   `alert_after_before` varchar(50) DEFAULT NULL,
@@ -4556,39 +4557,39 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_alert_gru_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_alert_gru_history` (
-  `id_history` int NOT NULL,
-  `id_task` int NOT NULL,
-  `crm_status_id` int DEFAULT '1',
-  `message_guichet` text,
+  `id_history` int(11) NOT NULL,
+  `id_task` int(11) NOT NULL,
+  `crm_status_id` int(11) DEFAULT 1,
+  `message_guichet` text DEFAULT NULL,
   `status_text_guichet` varchar(255) DEFAULT NULL,
   `sender_name_guichet` varchar(255) DEFAULT NULL,
   `subject_guichet` varchar(255) DEFAULT NULL,
-  `demand_max_step_guichet` smallint DEFAULT '1',
-  `demand_user_current_step_guichet` smallint DEFAULT '1',
-  `is_active_onglet_guichet` smallint DEFAULT '0',
+  `demand_max_step_guichet` smallint(6) DEFAULT 1,
+  `demand_user_current_step_guichet` smallint(6) DEFAULT 1,
+  `is_active_onglet_guichet` smallint(6) DEFAULT 0,
   `status_text_agent` varchar(255) DEFAULT NULL,
-  `message_agent` text,
-  `is_active_onglet_agent` smallint NOT NULL DEFAULT '0',
+  `message_agent` text DEFAULT NULL,
+  `is_active_onglet_agent` smallint(6) NOT NULL DEFAULT 0,
   `subject_email` varchar(255) DEFAULT NULL,
-  `message_email` text,
+  `message_email` text DEFAULT NULL,
   `sender_name_email` varchar(255) DEFAULT NULL,
   `recipients_cc_email` varchar(255) DEFAULT NULL,
   `recipients_cci_email` varchar(255) DEFAULT NULL,
-  `is_active_onglet_email` smallint DEFAULT '0',
-  `message_sms` text,
+  `is_active_onglet_email` smallint(6) DEFAULT 0,
+  `message_sms` text DEFAULT NULL,
   `billing_account_sms` varchar(255) DEFAULT NULL,
   `billing_group_sms` varchar(255) DEFAULT NULL,
-  `is_active_onglet_sms` smallint NOT NULL DEFAULT '0',
-  `id_mailing_list_broadcast` int DEFAULT NULL,
+  `is_active_onglet_sms` smallint(6) NOT NULL DEFAULT 0,
+  `id_mailing_list_broadcast` int(11) DEFAULT NULL,
   `email_broadcast` varchar(255) DEFAULT NULL,
   `sender_name_broadcast` varchar(255) DEFAULT NULL,
   `subject_broadcast` varchar(255) DEFAULT NULL,
-  `message_broadcast` text,
+  `message_broadcast` text DEFAULT NULL,
   `recipients_cc_broadcast` varchar(255) DEFAULT NULL,
   `recipients_cci_broadcast` varchar(255) DEFAULT NULL,
-  `is_active_onglet_broadcast` smallint DEFAULT '0',
+  `is_active_onglet_broadcast` smallint(6) DEFAULT 0,
   PRIMARY KEY (`id_history`,`id_task`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -4608,12 +4609,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_archive_cf`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_archive_cf` (
-  `id_task` int NOT NULL DEFAULT '0',
-  `next_state` int NOT NULL,
+  `id_task` int(11) NOT NULL DEFAULT 0,
+  `next_state` int(11) NOT NULL,
   `type_archival` varchar(255) DEFAULT NULL,
-  `delay_archival` int DEFAULT NULL,
+  `delay_archival` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_task`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -4634,13 +4635,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_archive_resource`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_archive_resource` (
-  `id_resource` int NOT NULL DEFAULT '0',
-  `id_task` int NOT NULL DEFAULT '0',
+  `id_resource` int(11) NOT NULL DEFAULT 0,
+  `id_task` int(11) NOT NULL DEFAULT 0,
   `initial_date` timestamp NULL DEFAULT NULL,
   `archival_date` timestamp NULL DEFAULT NULL,
-  `is_archived` smallint DEFAULT '0',
+  `is_archived` smallint(6) DEFAULT 0,
   PRIMARY KEY (`id_resource`,`id_task`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -4661,9 +4662,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_assign_user_config`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_assign_user_config` (
-  `id_task` int NOT NULL DEFAULT '0',
+  `id_task` int(11) NOT NULL DEFAULT 0,
   `provider_name` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id_task`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -4684,10 +4685,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_assign_user_information`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_assign_user_information` (
-  `id_history` int NOT NULL,
-  `id_task` int NOT NULL,
+  `id_history` int(11) NOT NULL,
+  `id_task` int(11) NOT NULL,
   `information_key` varchar(255) NOT NULL,
   `information_value` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -4708,15 +4709,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_assignment_cf`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_assignment_cf` (
-  `id_task` int NOT NULL DEFAULT '0',
+  `id_task` int(11) NOT NULL DEFAULT 0,
   `title` varchar(255) DEFAULT NULL,
-  `is_multiple_owner` smallint DEFAULT '0',
-  `is_notify` smallint DEFAULT '0',
+  `is_multiple_owner` smallint(6) DEFAULT 0,
+  `is_notify` smallint(6) DEFAULT 0,
   `message` varchar(255) DEFAULT NULL,
   `subject` varchar(45) DEFAULT NULL,
-  `is_use_user_name` smallint DEFAULT '0',
+  `is_use_user_name` smallint(6) DEFAULT 0,
   PRIMARY KEY (`id_task`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -4736,10 +4737,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_change_state_config`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_change_state_config` (
-  `id_task` int NOT NULL DEFAULT '0',
-  `id_next_state` int NOT NULL
+  `id_task` int(11) NOT NULL DEFAULT 0,
+  `id_next_state` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -4758,10 +4759,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_change_state_information`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_change_state_information` (
-  `id_history` int NOT NULL,
-  `id_task` int NOT NULL,
+  `id_history` int(11) NOT NULL,
+  `id_task` int(11) NOT NULL,
   `new_state` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -4781,9 +4782,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_choice_config`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_choice_config` (
-  `id_task` int NOT NULL DEFAULT '0',
+  `id_task` int(11) NOT NULL DEFAULT 0,
   `message` mediumtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -4803,12 +4804,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_choose_state_config`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_choose_state_config` (
-  `id_task` int NOT NULL DEFAULT '0',
+  `id_task` int(11) NOT NULL DEFAULT 0,
   `controller_name` varchar(100) DEFAULT NULL,
-  `id_state_ok` int NOT NULL,
-  `id_state_ko` int NOT NULL,
+  `id_state_ok` int(11) NOT NULL,
+  `id_state_ko` int(11) NOT NULL,
   PRIMARY KEY (`id_task`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -4828,10 +4829,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_choose_state_information`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_choose_state_information` (
-  `id_history` int NOT NULL,
-  `id_task` int NOT NULL,
+  `id_history` int(11) NOT NULL,
+  `id_task` int(11) NOT NULL,
   `new_state` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -4851,12 +4852,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_comment_config`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_comment_config` (
-  `id_task` int NOT NULL DEFAULT '0',
+  `id_task` int(11) NOT NULL DEFAULT 0,
   `title` varchar(255) DEFAULT NULL,
-  `is_mandatory` smallint DEFAULT '0',
-  `is_richtext` smallint DEFAULT '0',
+  `is_mandatory` smallint(6) DEFAULT 0,
+  `is_richtext` smallint(6) DEFAULT 0,
   PRIMARY KEY (`id_task`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -4877,11 +4878,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_comment_value`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_comment_value` (
-  `id_history` int NOT NULL DEFAULT '0',
-  `id_task` int NOT NULL,
-  `comment_value` mediumtext,
+  `id_history` int(11) NOT NULL DEFAULT 0,
+  `id_task` int(11) NOT NULL,
+  `comment_value` mediumtext DEFAULT NULL,
   PRIMARY KEY (`id_history`,`id_task`),
   KEY `comment_value_id_history_fk` (`id_history`),
   KEY `comment_value_id_task_fk` (`id_task`)
@@ -4904,12 +4905,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_complete_response`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_complete_response` (
-  `id_history` int NOT NULL DEFAULT '0',
-  `id_task` int NOT NULL DEFAULT '0',
-  `message` mediumtext,
-  `is_complete` smallint NOT NULL DEFAULT '0',
+  `id_history` int(11) NOT NULL DEFAULT 0,
+  `id_task` int(11) NOT NULL DEFAULT 0,
+  `message` mediumtext DEFAULT NULL,
+  `is_complete` smallint(6) NOT NULL DEFAULT 0,
   `date_completed` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_history`,`id_task`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -4931,11 +4932,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_complete_response_cf`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_complete_response_cf` (
-  `id_task` int NOT NULL DEFAULT '0',
-  `id_state_after_edition` int NOT NULL DEFAULT '0',
-  `default_message` mediumtext,
+  `id_task` int(11) NOT NULL DEFAULT 0,
+  `id_state_after_edition` int(11) NOT NULL DEFAULT 0,
+  `default_message` mediumtext DEFAULT NULL,
   PRIMARY KEY (`id_task`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -4956,13 +4957,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_complete_response_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_complete_response_history` (
-  `id_history` int NOT NULL DEFAULT '0',
-  `id_task` int NOT NULL DEFAULT '0',
-  `id_question` int NOT NULL DEFAULT '0',
-  `iteration_number` int NOT NULL DEFAULT '0',
-  `new_value` mediumtext,
+  `id_history` int(11) NOT NULL DEFAULT 0,
+  `id_task` int(11) NOT NULL DEFAULT 0,
+  `id_question` int(11) NOT NULL DEFAULT 0,
+  `iteration_number` int(11) NOT NULL DEFAULT 0,
+  `new_value` mediumtext DEFAULT NULL,
   PRIMARY KEY (`id_history`,`id_task`,`id_question`,`iteration_number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -4983,10 +4984,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_complete_response_value`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_complete_response_value` (
-  `id_history` int NOT NULL DEFAULT '0',
-  `id_entry` int NOT NULL DEFAULT '0',
+  `id_history` int(11) NOT NULL DEFAULT 0,
+  `id_entry` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_history`,`id_entry`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -5007,9 +5008,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_confirm_action_config`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_confirm_action_config` (
-  `id_task` int NOT NULL DEFAULT '0',
+  `id_task` int(11) NOT NULL DEFAULT 0,
   `message` mediumtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -5029,11 +5030,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_editformresponse_config`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_editformresponse_config` (
-  `id_config` int NOT NULL AUTO_INCREMENT,
-  `is_multiform` smallint NOT NULL DEFAULT '0',
-  `id_task` int NOT NULL,
+  `id_config` int(11) NOT NULL AUTO_INCREMENT,
+  `is_multiform` smallint(6) NOT NULL DEFAULT 0,
+  `id_task` int(11) NOT NULL,
   PRIMARY KEY (`id_config`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -5053,13 +5054,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_editformresponse_config_value`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_editformresponse_config_value` (
-  `id_config_value` int NOT NULL AUTO_INCREMENT,
-  `id_config` int NOT NULL DEFAULT '0',
-  `id_form` int DEFAULT NULL,
-  `id_step` int DEFAULT NULL,
-  `id_question` int DEFAULT NULL,
+  `id_config_value` int(11) NOT NULL AUTO_INCREMENT,
+  `id_config` int(11) NOT NULL DEFAULT 0,
+  `id_form` int(11) DEFAULT NULL,
+  `id_step` int(11) DEFAULT NULL,
+  `id_question` int(11) DEFAULT NULL,
   `code` varchar(100) DEFAULT NULL,
   `response` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id_config_value`),
@@ -5082,14 +5083,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_forms_editresponse_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_forms_editresponse_history` (
-  `id_history` int NOT NULL DEFAULT '0',
-  `id_task` int NOT NULL DEFAULT '0',
-  `id_question` int NOT NULL DEFAULT '0',
-  `iteration_number` int NOT NULL DEFAULT '0',
-  `previous_value` mediumtext,
-  `new_value` mediumtext,
+  `id_history` int(11) NOT NULL DEFAULT 0,
+  `id_task` int(11) NOT NULL DEFAULT 0,
+  `id_question` int(11) NOT NULL DEFAULT 0,
+  `iteration_number` int(11) NOT NULL DEFAULT 0,
+  `previous_value` mediumtext DEFAULT NULL,
+  `new_value` mediumtext DEFAULT NULL,
   PRIMARY KEY (`id_history`,`id_task`,`id_question`,`iteration_number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -5109,12 +5110,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_formspdf_cf`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_formspdf_cf` (
-  `id_task` int NOT NULL DEFAULT '0',
-  `id_forms` int DEFAULT '0',
+  `id_task` int(11) NOT NULL DEFAULT 0,
+  `id_forms` int(11) DEFAULT 0,
   `format` varchar(15) DEFAULT NULL,
-  `id_template` int NOT NULL DEFAULT '0',
+  `id_template` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_task`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -5134,13 +5135,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_formspdf_template`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_formspdf_template` (
-  `id_template` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
-  `id_form` int NOT NULL DEFAULT '-1',
-  `is_generic` smallint NOT NULL DEFAULT '1',
-  `content` longtext COLLATE utf8mb4_unicode_520_ci,
+  `id_template` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `id_form` int(11) NOT NULL DEFAULT -1,
+  `is_generic` smallint(6) NOT NULL DEFAULT 1,
+  `content` longtext DEFAULT NULL,
   PRIMARY KEY (`id_template`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -5161,10 +5162,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_linkedvaluesformresponse_config`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_linkedvaluesformresponse_config` (
-  `id_config` int NOT NULL AUTO_INCREMENT,
-  `id_task` int NOT NULL DEFAULT '0',
+  `id_config` int(11) NOT NULL AUTO_INCREMENT,
+  `id_task` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_config`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -5184,14 +5185,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_linkedvaluesformresponse_config_value`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_linkedvaluesformresponse_config_value` (
-  `id_config_value` int NOT NULL AUTO_INCREMENT,
-  `id_config` int NOT NULL DEFAULT '0',
-  `id_form` int NOT NULL DEFAULT '0',
-  `id_question_source` int NOT NULL DEFAULT '0',
+  `id_config_value` int(11) NOT NULL AUTO_INCREMENT,
+  `id_config` int(11) NOT NULL DEFAULT 0,
+  `id_form` int(11) NOT NULL DEFAULT 0,
+  `id_question_source` int(11) NOT NULL DEFAULT 0,
   `question_source_value` varchar(255) DEFAULT NULL,
-  `id_question_target` int NOT NULL DEFAULT '0',
+  `id_question_target` int(11) NOT NULL DEFAULT 0,
   `question_target_value` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_config_value`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -5212,13 +5213,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_notification_cf`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_notification_cf` (
-  `id_task` int NOT NULL DEFAULT '0',
-  `id_mailing_list` int DEFAULT NULL,
+  `id_task` int(11) NOT NULL DEFAULT 0,
+  `id_mailing_list` int(11) DEFAULT NULL,
   `sender_name` varchar(255) DEFAULT NULL,
   `subject` varchar(255) DEFAULT NULL,
-  `message` mediumtext,
+  `message` mediumtext DEFAULT NULL,
   PRIMARY KEY (`id_task`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -5238,43 +5239,43 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_notify_gru_cf`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_notify_gru_cf` (
-  `id_task` int NOT NULL,
+  `id_task` int(11) NOT NULL,
   `id_spring_provider` varchar(255) DEFAULT NULL,
   `marker_provider_ids` varchar(1000) DEFAULT NULL,
-  `demand_status` int DEFAULT NULL,
-  `crm_status_id` int DEFAULT '1',
-  `set_onglet` smallint DEFAULT NULL,
-  `message_guichet` text,
+  `demand_status` int(11) DEFAULT NULL,
+  `crm_status_id` int(11) DEFAULT 1,
+  `set_onglet` smallint(6) DEFAULT NULL,
+  `message_guichet` text DEFAULT NULL,
   `status_text_guichet` varchar(255) DEFAULT NULL,
   `sender_name_guichet` varchar(255) DEFAULT NULL,
   `subject_guichet` varchar(255) DEFAULT NULL,
-  `demand_max_step_guichet` smallint DEFAULT '1',
-  `demand_user_current_step_guichet` smallint DEFAULT '1',
-  `is_active_onglet_guichet` smallint DEFAULT '0',
+  `demand_max_step_guichet` smallint(6) DEFAULT 1,
+  `demand_user_current_step_guichet` smallint(6) DEFAULT 1,
+  `is_active_onglet_guichet` smallint(6) DEFAULT 0,
   `status_text_agent` varchar(255) DEFAULT NULL,
-  `message_agent` text,
-  `is_active_onglet_agent` smallint NOT NULL DEFAULT '0',
+  `message_agent` text DEFAULT NULL,
+  `is_active_onglet_agent` smallint(6) NOT NULL DEFAULT 0,
   `subject_email` varchar(255) DEFAULT NULL,
-  `message_email` text,
+  `message_email` text DEFAULT NULL,
   `sender_name_email` varchar(255) DEFAULT NULL,
   `recipients_cc_email` varchar(255) DEFAULT NULL,
   `recipients_cci_email` varchar(255) DEFAULT NULL,
-  `is_active_onglet_email` smallint DEFAULT '0',
-  `message_sms` text,
+  `is_active_onglet_email` smallint(6) DEFAULT 0,
+  `message_sms` text DEFAULT NULL,
   `billing_account_sms` varchar(255) DEFAULT NULL,
   `billing_group_sms` varchar(255) DEFAULT NULL,
-  `is_active_onglet_sms` smallint NOT NULL DEFAULT '0',
-  `id_mailing_list_broadcast` int DEFAULT NULL,
+  `is_active_onglet_sms` smallint(6) NOT NULL DEFAULT 0,
+  `id_mailing_list_broadcast` int(11) DEFAULT NULL,
   `email_broadcast` varchar(255) DEFAULT NULL,
   `sender_name_broadcast` varchar(255) DEFAULT NULL,
   `subject_broadcast` varchar(255) DEFAULT NULL,
-  `message_broadcast` text,
+  `message_broadcast` text DEFAULT NULL,
   `recipients_cc_broadcast` varchar(255) DEFAULT NULL,
   `recipients_cci_broadcast` varchar(255) DEFAULT NULL,
-  `is_active_onglet_broadcast` smallint DEFAULT '0',
-  `content_cleaned` smallint DEFAULT '0',
+  `is_active_onglet_broadcast` smallint(6) DEFAULT 0,
+  `content_cleaned` smallint(6) DEFAULT 0,
   PRIMARY KEY (`id_task`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -5295,43 +5296,43 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_notify_gru_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_notify_gru_history` (
-  `id_history` int NOT NULL,
-  `id_task` int NOT NULL,
-  `crm_status_id` int DEFAULT '1',
-  `message_guichet` text,
+  `id_history` int(11) NOT NULL,
+  `id_task` int(11) NOT NULL,
+  `crm_status_id` int(11) DEFAULT 1,
+  `message_guichet` text DEFAULT NULL,
   `status_text_guichet` varchar(255) DEFAULT NULL,
   `sender_name_guichet` varchar(255) DEFAULT NULL,
   `subject_guichet` varchar(255) DEFAULT NULL,
-  `demand_max_step_guichet` smallint DEFAULT '1',
-  `demand_user_current_step_guichet` smallint DEFAULT '1',
-  `is_active_onglet_guichet` smallint DEFAULT '0',
+  `demand_max_step_guichet` smallint(6) DEFAULT 1,
+  `demand_user_current_step_guichet` smallint(6) DEFAULT 1,
+  `is_active_onglet_guichet` smallint(6) DEFAULT 0,
   `status_text_agent` varchar(255) DEFAULT NULL,
-  `message_agent` text,
-  `is_active_onglet_agent` smallint NOT NULL DEFAULT '0',
+  `message_agent` text DEFAULT NULL,
+  `is_active_onglet_agent` smallint(6) NOT NULL DEFAULT 0,
   `subject_email` varchar(255) DEFAULT NULL,
-  `message_email` text,
+  `message_email` text DEFAULT NULL,
   `sender_name_email` varchar(255) DEFAULT NULL,
   `recipients_cc_email` varchar(255) DEFAULT NULL,
   `recipients_cci_email` varchar(255) DEFAULT NULL,
-  `is_active_onglet_email` smallint DEFAULT '0',
-  `message_sms` text,
+  `is_active_onglet_email` smallint(6) DEFAULT 0,
+  `message_sms` text DEFAULT NULL,
   `billing_account_sms` varchar(255) DEFAULT NULL,
   `billing_group_sms` varchar(255) DEFAULT NULL,
-  `is_active_onglet_sms` smallint NOT NULL DEFAULT '0',
-  `id_mailing_list_broadcast` int DEFAULT NULL,
+  `is_active_onglet_sms` smallint(6) NOT NULL DEFAULT 0,
+  `id_mailing_list_broadcast` int(11) DEFAULT NULL,
   `email_broadcast` varchar(255) DEFAULT NULL,
   `sender_name_broadcast` varchar(255) DEFAULT NULL,
   `subject_broadcast` varchar(255) DEFAULT NULL,
-  `message_broadcast` text,
+  `message_broadcast` text DEFAULT NULL,
   `recipients_cc_broadcast` varchar(255) DEFAULT NULL,
   `recipients_cci_broadcast` varchar(255) DEFAULT NULL,
-  `is_active_onglet_broadcast` smallint DEFAULT '0',
+  `is_active_onglet_broadcast` smallint(6) DEFAULT 0,
   `code_event` varchar(45) DEFAULT NULL,
   `type_event` varchar(45) DEFAULT NULL,
-  `message_event` text,
-  `content_cleaned` smallint DEFAULT '0',
+  `message_event` text DEFAULT NULL,
+  `content_cleaned` smallint(6) DEFAULT 0,
   PRIMARY KEY (`id_history`,`id_task`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -5352,17 +5353,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_notify_gru_mapping_manager`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_notify_gru_mapping_manager` (
-  `id_notifygrumappingmanager` int NOT NULL,
+  `id_notifygrumappingmanager` int(11) NOT NULL,
   `beankey` varchar(255) NOT NULL DEFAULT '',
-  `connection_id` int NOT NULL DEFAULT '0',
-  `customer_id` int NOT NULL DEFAULT '0',
-  `mobilephonenumber` int NOT NULL DEFAULT '0',
-  `fixedphonenumber` int NOT NULL DEFAULT '0',
-  `email` int NOT NULL DEFAULT '0',
-  `demandetype` int NOT NULL DEFAULT '0',
-  `demand_reference` int NOT NULL DEFAULT '0',
+  `connection_id` int(11) NOT NULL DEFAULT 0,
+  `customer_id` int(11) NOT NULL DEFAULT 0,
+  `mobilephonenumber` int(11) NOT NULL DEFAULT 0,
+  `fixedphonenumber` int(11) NOT NULL DEFAULT 0,
+  `email` int(11) NOT NULL DEFAULT 0,
+  `demandetype` int(11) NOT NULL DEFAULT 0,
+  `demand_reference` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_notifygrumappingmanager`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -5383,12 +5384,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_resubmit_response`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_resubmit_response` (
-  `id_history` int NOT NULL DEFAULT '0',
-  `id_task` int NOT NULL DEFAULT '0',
-  `message` mediumtext,
-  `is_complete` smallint NOT NULL DEFAULT '0',
+  `id_history` int(11) NOT NULL DEFAULT 0,
+  `id_task` int(11) NOT NULL DEFAULT 0,
+  `message` mediumtext DEFAULT NULL,
+  `is_complete` smallint(6) NOT NULL DEFAULT 0,
   `date_completed` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_history`,`id_task`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -5409,11 +5410,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_resubmit_response_cf`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_resubmit_response_cf` (
-  `id_task` int NOT NULL DEFAULT '0',
-  `id_state_after_edition` int NOT NULL DEFAULT '0',
-  `default_message` mediumtext,
+  `id_task` int(11) NOT NULL DEFAULT 0,
+  `id_state_after_edition` int(11) NOT NULL DEFAULT 0,
+  `default_message` mediumtext DEFAULT NULL,
   PRIMARY KEY (`id_task`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -5434,14 +5435,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_resubmit_response_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_resubmit_response_history` (
-  `id_history` int NOT NULL DEFAULT '0',
-  `id_task` int NOT NULL DEFAULT '0',
-  `id_question` int NOT NULL DEFAULT '0',
-  `iteration_number` int NOT NULL DEFAULT '0',
-  `previous_value` mediumtext,
-  `new_value` mediumtext,
+  `id_history` int(11) NOT NULL DEFAULT 0,
+  `id_task` int(11) NOT NULL DEFAULT 0,
+  `id_question` int(11) NOT NULL DEFAULT 0,
+  `iteration_number` int(11) NOT NULL DEFAULT 0,
+  `previous_value` mediumtext DEFAULT NULL,
+  `new_value` mediumtext DEFAULT NULL,
   PRIMARY KEY (`id_history`,`id_task`,`id_question`,`iteration_number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -5461,10 +5462,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_resubmit_response_value`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_resubmit_response_value` (
-  `id_history` int NOT NULL DEFAULT '0',
-  `id_entry` int NOT NULL DEFAULT '0',
+  `id_history` int(11) NOT NULL DEFAULT 0,
+  `id_entry` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_history`,`id_entry`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -5484,10 +5485,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_unittree_information`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_unittree_information` (
-  `id_history` int NOT NULL,
-  `id_task` int NOT NULL,
+  `id_history` int(11) NOT NULL,
+  `id_task` int(11) NOT NULL,
   `information_key` varchar(255) NOT NULL,
   `information_value` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -5509,9 +5510,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_unittree_unit_assignment_cf`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_unittree_unit_assignment_cf` (
-  `id_task` int NOT NULL,
+  `id_task` int(11) NOT NULL,
   `assignment_type` varchar(50) DEFAULT NULL,
   `unit_selections` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`id_task`)
@@ -5534,9 +5535,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_unittree_unit_selection_parametrable_cf`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_unittree_unit_selection_parametrable_cf` (
-  `id_task` int NOT NULL,
+  `id_task` int(11) NOT NULL,
   `parametrable_config_handler` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_task`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -5558,10 +5559,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_unittree_unit_selection_specific_unit_cf`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_unittree_unit_selection_specific_unit_cf` (
-  `id_task` int NOT NULL,
-  `id_unit` int NOT NULL,
+  `id_task` int(11) NOT NULL,
+  `id_unit` int(11) NOT NULL,
   PRIMARY KEY (`id_task`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -5582,10 +5583,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_update_status`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_update_status` (
-  `id_task` int NOT NULL DEFAULT '0',
-  `status` int NOT NULL DEFAULT '0',
+  `id_task` int(11) NOT NULL DEFAULT 0,
+  `status` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_task`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -5605,15 +5606,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_task_userassignment_assignment_notification_cf`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_task_userassignment_assignment_notification_cf` (
-  `id_task` int NOT NULL,
+  `id_task` int(11) NOT NULL,
   `message` mediumtext NOT NULL,
   `subject` mediumtext NOT NULL,
   `sender_name` varchar(255) DEFAULT NULL,
   `sender_email` varchar(255) DEFAULT NULL,
-  `recipients_cc` mediumtext,
-  `recipients_bcc` mediumtext,
+  `recipients_cc` mediumtext DEFAULT NULL,
+  `recipients_bcc` mediumtext DEFAULT NULL,
   PRIMARY KEY (`id_task`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -5633,14 +5634,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_workflow`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_workflow` (
-  `id_workflow` int NOT NULL AUTO_INCREMENT,
+  `id_workflow` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
-  `description` mediumtext,
-  `creation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `is_enabled` smallint DEFAULT '0',
+  `description` mediumtext DEFAULT NULL,
+  `creation_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `is_enabled` smallint(6) DEFAULT 0,
   `workgroup_key` varchar(255) DEFAULT NULL,
+  `uid_workflow` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_workflow`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -5651,7 +5653,7 @@ CREATE TABLE `workflow_workflow` (
 
 LOCK TABLES `workflow_workflow` WRITE;
 /*!40000 ALTER TABLE `workflow_workflow` DISABLE KEYS */;
-INSERT INTO `workflow_workflow` VALUES (1,'Contacter ma mairie','Workflow de distribution des demandes au sein des services compétents','2024-03-05 16:38:00',1,'all'),(2,'Demande d\'acte de mariage','Workflow de suivi des demandes d\'actes permettant de notifier les demandeurs à chaque étape, de demander des compléments et corrections, et de l\'instruction','2024-03-14 16:29:11',1,'all');
+INSERT INTO `workflow_workflow` VALUES (1,'Contacter ma mairie','Workflow de distribution des demandes au sein des services compétents','2024-03-05 16:38:00',1,'all','9fb11dcf-1d0d-11ef-8590-0242ac180003'),(2,'Demande d\'acte de mariage','Workflow de suivi des demandes d\'actes permettant de notifier les demandeurs à chaque étape, de demander des compléments et corrections, et de l\'instruction','2024-03-14 16:29:11',1,'all','9fb127db-1d0d-11ef-8590-0242ac180003');
 /*!40000 ALTER TABLE `workflow_workflow` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -5661,11 +5663,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `workflow_workgroup_cf`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `workflow_workgroup_cf` (
-  `id_task` int NOT NULL DEFAULT '0',
+  `id_task` int(11) NOT NULL DEFAULT 0,
   `workgroup_key` varchar(255) NOT NULL,
-  `id_mailing_list` int DEFAULT NULL,
+  `id_mailing_list` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_task`,`workgroup_key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -5688,4 +5690,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-15 14:11:03
+-- Dump completed on 2024-05-28 17:09:40
