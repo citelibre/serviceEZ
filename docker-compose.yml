@@ -24,12 +24,17 @@ services:
         #    - ./solr-data:/var/solr/data/cite-libre/data
 
 
-    fake-smtp:
-        image: citelibre/service_ez:fake-smtp-1.0.9
-        container_name: service_ez_fake-smtp
+    mailpit:
+        image: axllent/mailpit:v1.18.3
+        container_name: service_ez_mailpit
+        restart: unless-stopped
         ports:
-            - "1080:1080"
-            - "25:25"
+            - 1080:8025
+            - 1025:1025
+        environment:
+            MP_MAX_MESSAGES: 500
+            MP_SMTP_AUTH_ACCEPT_ANY: 1
+            MP_SMTP_AUTH_ALLOW_INSECURE: 1
 
     matomo:
         image: citelibre/service_ez:matomo-1.0.9
@@ -69,11 +74,11 @@ services:
             - LUTECE_INTERNAL_KEYCLOAK=true
 
   kibana:
-    image: citelibre/rendezvous:kibana-1.0.12-SNAPSHOT
-    container_name: rdv_kibana
+    image: citelibre/service_ez:kibana-1.0.9
+    container_name: service_ez_kibana
     environment:
-      - discovery.type=single-node
-      - server.publicBaseUrl=localhost
+    - discovery.type=single-node
+    - server.publicBaseUrl=localhost
     ports:
       - 5601:5601
     mem_limit: 1g
@@ -83,13 +88,13 @@ services:
         #  - ./kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
 
   elasticsearch:
-    image: citelibre/rendezvous:elasticsearch-1.0.12-SNAPSHOT
-    container_name: rdv_elasticsearch
+    image: citelibre/service_ez:elasticsearch-1.0.9
+    container_name: service_ez_elasticsearch
     environment:
-      - ELASTIC_PASSWORD="*93n2US7fWog"
-      - discovery.type=single-node
-      - ESJAVAOPTS=-Xmx1g
-      - xpack.security.enabled=false
+    - ELASTIC_PASSWORD="*93n2US7fWog"
+    - discovery.type=single-node
+    - xpack.security.enabled=false
+    - ESJAVAOPTS=-Xmx1g
     mem_limit: 1g
     ports:
       - 9200:9200

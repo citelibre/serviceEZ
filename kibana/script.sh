@@ -8,7 +8,7 @@ response="500"
 while [ $response != "200" ]
 do
   sleep 20
-  response=$(curl -so /dev/null -w "%{http_code}\n" localhost:5601/status) 
+  response=$(curl -so /dev/null -w "%{http_code}\n" localhost:5601/api/uptime/settings) 
   if [ $response = "200" ]
   then
     response_elastic="500"
@@ -30,7 +30,7 @@ do
         }
         '
 
-        curl -X POST -u $KIBANAUSER:$KIBANAPASS "localhost:5601/s/dev/api/saved_objects/_import?createNewCopies=true" -H "kbn-xsrf: true" \
+        curl -X POST -u $KIBANAUSER:$KIBANAPASS "localhost:5601/s/dev/api/saved_objects/_import?overwrite=true" -H "kbn-xsrf: true" \
             --form file=@/usr/share/kibana/export.ndjson -H 'kbn-xsrf: true'
       fi
     done

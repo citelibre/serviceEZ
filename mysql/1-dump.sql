@@ -15,6 +15,10 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+CREATE DATABASE lutece;
+
+USE lutece;
+
 --
 -- Table structure for table `accesscontrol_accesscontrol`
 --
@@ -572,7 +576,7 @@ CREATE TABLE `core_admin_user` (
 
 LOCK TABLES `core_admin_user` WRITE;
 /*!40000 ALTER TABLE `core_admin_user` DISABLE KEYS */;
-INSERT INTO `core_admin_user` VALUES (1,'admin','Admin','admin','admin@lutece.fr',0,'PBKDF2WITHHMACSHA512:40000:5213a247b2f7d70cf70a6082b4e69fbe:fc97c6be27b5f4a0489e5bbc4ff6576f8fe7c92ce74f250e92b5efa2f7cfec616a74be367120abd6108bba2f1e04cd7c1df74bdff2777c89cf112b8375d6eacce656ca73ee3cc00130a0cc1166b4973baf847d44bda348b17a418fb3adddf4ec43a23400392de8ce47e6a3bf771bb4415e40b4bc0dd39623da37664adb3f9332','fr',0,0,0,NULL,1748451860817,0,'2024-05-28 17:04:20','all'),(2,'lutece','Lutece','lutece','lutece@lutece.fr',1,'PLAINTEXT:adminadmin','fr',1,0,0,NULL,NULL,0,'1979-12-31 23:00:00','all'),(3,'redac','redac','redac','redac@lutece.fr',1,'PLAINTEXT:adminadmin','fr',2,0,0,NULL,NULL,0,'1979-12-31 23:00:00','all'),(4,'valid','valid','valid','valid@lutece.fr',1,'PLAINTEXT:adminadmin','fr',3,0,0,NULL,NULL,0,'1979-12-31 23:00:00','all'),(5,'direction','Direction','Agent','agent.direction@citelibre.org',0,'PBKDF2WITHHMACSHA512:40000:cb27f86b760365f5b91d1486796a252a:07d28d07a75f6b41ae435085e5be63ebfbc3ab331ac08cca8e0978400f7feeb86824b86f7a2b381e50a11ac9e0bcef782b9aefddb66edb6e02b57cc20e640d3390b0f4365eb059ba23a344114f3ebeeab4ad59b124ff90a18fb306cc5059f72f6471f382014937a6c1be51b405fabbf0bfe7d219dead1d87eaa75b5780f71f3f','fr',1,0,0,'2024-07-10 15:37:52',1741793877224,0,'2024-03-12 15:37:57','all'),(6,'espacepublic','EspacePublic','Agent','agent.espacepublic@citelibre.org',0,'PBKDF2WITHHMACSHA512:40000:423e23bba77c71fad7b25844a82d19e3:b655d85f8f7a10be0006d653a299691ea4c5ff93fb834853c9d72c7c52cca4afd27b6936595605745392b656727194a9042a6ff28e25976f5bba9121f19710954dae14ab2bd35c1dc20b39b829c16aa3996df18f50b22ca1f1e9f8e9afb48bfa3f9477a4b3f2effdeccb0539a1b5015953475361f1fbf5673d7dfd94b57c1b3d','fr',2,0,0,'2024-07-10 15:36:36',1741794199513,0,'2024-03-12 15:43:20','all'),(7,'voirie','Voirie','Agent','agent.voirie@citelibre.org',0,'PBKDF2WITHHMACSHA512:40000:ed0fbc804a9612f983bef9d25593a85b:860171e61e7609ddeec428b4127182eceb368b42439ead08ffafea9880f84329d78b52abda75f6b5cecfe66743c823d10b6878ff90a470516263a0472bb38bdb2798de4b3fbd920cf5ea51e358b2d93d3052d5e972d6a6a3e0b29d37e2b3fcbcf14e7c77936cbd05d0f3b1aa45a6ca8ef474752f8ee04dbdea64b4c31f8eb36c','fr',3,0,0,'2024-07-10 15:34:50',1741796310742,0,'2024-03-12 16:18:31','all'),(8,'petiteenfance','PetiteEnfance','Agent','agent.petiteenfance@citelibre.org',0,'PBKDF2WITHHMACSHA512:40000:dfe26e33fa61efb67333567beea45ad0:b08687413cea5337dda4dd6bcc9fcde0b64a8c39d5083cbf1ade620b3e5f28c8eee944ea9b3e20f9387130ee9881814ae315c8fdaea8aab6533036d8aa47885aa1c4dae1b1475a2f25fff28f783bd90c22878cbce57b27a9894e7c087856a170f76b6662c5f7250134fdfa4308ed80791836d2c7f22376819acadcccb7fd3080','fr',3,0,0,'2024-07-10 15:44:52',1741794297655,0,'2024-03-12 15:44:58','all');
+INSERT INTO `core_admin_user` VALUES (1,'admin','Admin','admin','admin@lutece.fr',0,'PLAINTEXT:adminadmin','fr',0,0,0,'1980-01-01 00:00:00',NULL,0,'1980-01-01 00:00:00','all');
 /*!40000 ALTER TABLE `core_admin_user` ENABLE KEYS */;
 UNLOCK TABLES;
 

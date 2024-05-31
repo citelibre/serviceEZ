@@ -1,3 +1,9 @@
-FROM matomo:5.0.3
+FROM matomo
 
 COPY config.ini.php /var/www/html/config/
+
+
+
+
+
+
