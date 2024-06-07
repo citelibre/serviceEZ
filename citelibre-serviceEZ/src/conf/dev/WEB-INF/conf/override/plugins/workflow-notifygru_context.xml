@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+    <!-- Transaction Manager -->
+    <bean id="workflow-notifygru.transactionManager"
+        class="fr.paris.lutece.portal.service.database.DAOUtilTransactionManager"
+        p:pluginName="workflow-notifygru" />
+
+    <!-- DAO -->
+    <bean id="taskNotifyGruConfigDAO"
+        class="fr.paris.lutece.plugins.workflow.modules.notifygru.business.TaskNotifyGruConfigDAO" />
+    <bean id="NotifyGruHistoryDAO"
+        class="fr.paris.lutece.plugins.workflow.modules.notifygru.business.NotifyGruHistoryDAO" />
+
+
+    <!-- Task -->
+    <bean id="workflow-notifygru.taskTypeNotifyGru"
+        class="fr.paris.lutece.plugins.workflowcore.business.task.TaskType"
+        p:key="taskNotifyGru"
+        p:titleI18nKey="module.workflow.notifygru.task_notify_gru_title"
+        p:beanName="workflow-notifygru.taskNotifyGru"
+        p:configBeanName="workflow-notifygru.taskNotifyGruConfig"
+        p:configRequired="true" p:taskForAutomaticAction="true" />
+        
+    <bean id="workflow-notifygru.taskNotifyGru"
+        class="fr.paris.lutece.plugins.workflow.modules.notifygru.service.TaskNotifyGru"
+        scope="prototype" />
+    <bean id="workflow-notifygru.taskNotifyGruConfig"
+        class="fr.paris.lutece.plugins.workflow.modules.notifygru.business.TaskNotifyGruConfig"
+        scope="prototype" />
+    <bean id="workflow-notifygru.notifyDirectoryTaskComponent"
+        class="fr.paris.lutece.plugins.workflow.modules.notifygru.web.NotifyGruTaskComponent"
+        p:taskType-ref="workflow-notifygru.taskTypeNotifyGru"
+        p:taskConfigService-ref="workflow-notifygru.taskNotifyGruConfigService" />
+
+    <!-- Service -->
+    <bean id="workflow-notifygru.notifyGruService"
+        class="fr.paris.lutece.plugins.workflow.modules.notifygru.service.NotifyGruService" />
+    <bean id="workflow-notifygru.notifyGruHistoryService"
+        class="fr.paris.lutece.plugins.workflow.modules.notifygru.service.NotifyGruHistoryService" />
+    <bean id="workflow-notifygru.taskNotifyGruConfigService"
+        class="fr.paris.lutece.plugins.workflow.modules.notifygru.service.TaskNotifyGruConfigService"
+        p:taskConfigDAO-ref="taskNotifyGruConfigDAO" />
+
+    <bean id="workflow-notifygru.notifyGruCacheService"
+        class="fr.paris.lutece.plugins.workflow.modules.notifygru.service.cache.NotifyGruCacheService" />
+
+    <!-- library notifyGru -->
+    <bean id="workflow-notifygru.lib-notifygru.apiManagerTransport"
+        class="fr.paris.lutece.plugins.librarynotifygru.rs.service.NotificationTransportApiManagerRest">
+        <property name="notificationEndPoint">
+            <value>http://localhost:8080/serviceEZ/rest/grusupply/notification</value>
+        </property>
+        <property name="apiManagerEndPoint">
+            <value>http://localhost:8080/serviceEZ/rest/api/token</value>
+        </property>
+        <property name="apiManagerCredentials">
+            <value>tobecompleted</value>
+        </property>
+    </bean>
+    <bean id="workflow-notifygru.lib-notifygru.restTransport"
+        class="fr.paris.lutece.plugins.librarynotifygru.rs.service.NotificationTransportRest">
+        <property name="notificationEndPoint">
+            <value>hhttp://localhost:8080/serviceEZ/rest/grusupply/notification</value>
+        </property>
+    </bean>
+    <bean id="workflow-notifygru.lib-notifygru.notificationService"
+        class="fr.paris.lutece.plugins.librarynotifygru.services.NotificationService">
+        <constructor-arg
+            ref="workflow-notifygru.lib-notifygru.apiManagerTransport" />
+    </bean>
+
+    <bean id="workflow-notifygru.commentMarkerProvider"
+        class="fr.paris.lutece.plugins.workflow.modules.notifygru.service.provider.impl.CommentMarkerProvider" />
+</beans>
+ 	
