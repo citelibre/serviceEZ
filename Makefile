@@ -1,7 +1,7 @@
 VERSION=1.0.9
 
 REPO=citelibre/serviceEZ
-REPO-TEST=test-serviceEZ
+REPO-TEST=test-serviceez
 NAME_SERVICE=serviceEZ
 
 build: ## Build the containers
