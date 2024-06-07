@@ -1,7 +1,7 @@
 services:
   db:
       image: ${REPO}/db
-      container_name: service_ez_db
+      container_name: serviceEZ_db
       ports:
           - "3307:3306"
       mem_limit: 1g
@@ -12,7 +12,7 @@ services:
 
   solr:
       image: ${REPO}/solr
-      container_name: service_ez_solr
+      container_name: serviceEZ_solr
       command: -force
       depends_on:
           - db
@@ -26,7 +26,7 @@ services:
 
   mailpit:
       image: axllent/mailpit:v1.18.3
-      container_name: service_ez_mailpit
+      container_name: serviceEZ_mailpit
       restart: unless-stopped
       ports:
           - 1080:8025
@@ -40,7 +40,7 @@ services:
             
   matomo:
       image: ${REPO}/matomo
-      container_name: service_ez_matomo
+      container_name: serviceEZ_matomo
       ports:
           - "80:80"
       mem_limit: 1g
@@ -49,7 +49,7 @@ services:
 
   keycloak:
       image: ${REPO}/keycloak
-      container_name: service_ez_keycloak
+      container_name: serviceEZ_keycloak
       ports:
           - "8081:8080"
             #command: ["-Djboss.http.port=8081"]
@@ -60,7 +60,7 @@ services:
 
   citelibre:
     image: ${REPO}/ihm
-    container_name: service_ez_citelibre
+    container_name: serviceEZ_citelibre
     ports:
       - 8080:8080
     depends_on:
@@ -80,7 +80,7 @@ services:
 
   kibana:
     image: ${REPO}/kibana
-    container_name: service_ez_kibana
+    container_name: serviceEZ_kibana
     environment:
     - discovery.type=single-node
     - server.publicBaseUrl=localhost
@@ -94,7 +94,7 @@ services:
 
   elasticsearch:
     image: ${REPO}/elasticsearch
-    container_name: service_ez_elasticsearch
+    container_name: serviceEZ_elasticsearch
     environment:
     - ELASTIC_PASSWORD="*93n2US7fWog"
     - discovery.type=single-node
@@ -111,5 +111,5 @@ services:
 
 volumes:
   elasticsearch-data:
-  rendezvous-data:
+  serviceEZ-data:
     #  solr-data:

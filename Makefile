@@ -1,8 +1,8 @@
 VERSION=1.0.9
 
 REPO=citelibre/serviceEZ
-REPO-TEST=test-service_ez
-NAME_SERVICE=service_ez
+REPO-TEST=test-serviceEZ
+NAME_SERVICE=serviceEZ
 
 build: ## Build the containers
 	docker build $(NAME_SERVICE)_citelibre -t $(REPO):ihm
