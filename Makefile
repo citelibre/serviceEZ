@@ -22,7 +22,7 @@ test: ## Build the containers
 	docker build -t $(REPO-TEST)/keycloak keycloak
 	docker build -t $(REPO-TEST)/kibana kibana
 	docker build -t $(REPO-TEST)/elasticsearch elasticsearch
-	echo "REPO=$(REPO-TEST)" > .env.test
+	echo REPO=$(REPO-TEST) > .env.test
 	docker-compose --env-file .env.test -f ./docker-compose-test.yml up -d
 
 test-down:
