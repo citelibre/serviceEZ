@@ -2,7 +2,7 @@ VERSION=1.0.9
 
 REPO=citelibre/serviceEZ
 REPO-TEST=test-serviceez
-NAME_SERVICE=serviceEZ
+NAME_SERVICE=service_ez
 
 build: ## Build the containers
 	docker build $(NAME_SERVICE)_citelibre -t $(REPO):ihm
@@ -15,7 +15,7 @@ build: ## Build the containers
 	docker build $(NAME_SERVICE)_mysql -t $(REPO):db-$(VERSION)
 
 test: ## Build the containers
-	docker build -t $(REPO-TEST)/ihm citelibre-serviceEZ
+	docker build -t $(REPO-TEST)/ihm citelibre-service_ez
 	docker build -t $(REPO-TEST)/matomo matomo
 	docker build -t $(REPO-TEST)/solr solr
 	docker build -t $(REPO-TEST)/db mysql

@@ -2,8 +2,8 @@ version: '3.5'
 
 services:
     db:
-        image: citelibre/serviceEZ:db-1.0.9
-        container_name: serviceEZ_db
+        image: citelibre/service_ez:db-1.0.9
+        container_name: service_ez_db
         ports:
             - "3307:3306"
         # if you want to persist data uncomment the following 2 lines... don't forget to create the directory mysql-data for sample
@@ -12,8 +12,8 @@ services:
 
 
     solr:
-        image: citelibre/serviceEZ:solr-1.0.9
-        container_name: serviceEZ_solr
+        image: citelibre/service_ez:solr-1.0.9
+        container_name: service_ez_solr
         command: -force
         depends_on:
             - db
@@ -26,7 +26,7 @@ services:
 
     mailpit:
         image: axllent/mailpit:v1.18.3
-        container_name: serviceEZ_mailpit
+        container_name: service_ez_mailpit
         restart: unless-stopped
         ports:
             - 1080:8025
@@ -37,16 +37,16 @@ services:
             MP_SMTP_AUTH_ALLOW_INSECURE: 1
 
     matomo:
-        image: citelibre/serviceEZ:matomo-1.0.9
-        container_name: serviceEZ_matomo
+        image: citelibre/service_ez:matomo-1.0.9
+        container_name: service_ez_matomo
         ports:
             - "80:80"
         depends_on:
             - solr
 
     keycloak:
-        image: citelibre/serviceEZ:keycloak-1.0.9
-        container_name: serviceEZ_keycloak
+        image: citelibre/service_ez:keycloak-1.0.9
+        container_name: service_ez_keycloak
         ports:
             - "8081:8081"
         command: ["-Djboss.http.port=8081"]
@@ -55,8 +55,8 @@ services:
 
 
     citelibre:
-        image: citelibre/serviceEZ:ihm-1.0.9
-        container_name: serviceEZ_citelibre
+        image: citelibre/service_ez:ihm-1.0.9
+        container_name: service_ez_citelibre
         ports:
             - 8080:8080
         depends_on:
@@ -74,8 +74,8 @@ services:
             - LUTECE_INTERNAL_KEYCLOAK=true
 
   kibana:
-    image: citelibre/serviceEZ:kibana-1.0.9
-    container_name: serviceEZ_kibana
+    image: citelibre/service_ez:kibana-1.0.9
+    container_name: service_ez_kibana
     environment:
     - discovery.type=single-node
     - server.publicBaseUrl=localhost
@@ -88,8 +88,8 @@ services:
         #  - ./kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
 
   elasticsearch:
-    image: citelibre/serviceEZ:elasticsearch-1.0.9
-    container_name: serviceEZ_elasticsearch
+    image: citelibre/service_ez:elasticsearch-1.0.9
+    container_name: service_ez_elasticsearch
     environment:
     - ELASTIC_PASSWORD="*93n2US7fWog"
     - discovery.type=single-node
@@ -106,5 +106,5 @@ services:
 
 volumes:
   elasticsearch-data:
-  serviceEZ-data:
+  service_ez-data:
     #  solr-data:
