@@ -62,7 +62,7 @@ jobs:
       run: cd citelibre-serviceEZ
       
     - name: build serviceEZ
-      run: docker build citelibre-service_ez -t citelibre/service_ez:ihm-$VERSION
+      run: docker build citelibre-serviceEZ -t citelibre/service_ez:ihm-$VERSION
     
     - name: Save serviceEZ
       run: docker save -o citelibre-serviceEZ.tar citelibre/service_ez:ihm-$VERSION
