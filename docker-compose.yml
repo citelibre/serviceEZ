@@ -1,80 +1,77 @@
 version: '3.5'
 
 services:
-    db:
-        image: citelibre/service_ez:db-1.0.9
-        container_name: service_ez_db
-        ports:
-            - "3307:3306"
-        # if you want to persist data uncomment the following 2 lines... don't forget to create the directory mysql-data for sample
-        #volumes:
-        #    - ./mysql-data:/var/lib/mysql
+  db:
+    image: citelibre/service_ez:db-1.0.2-SNAPSHOT
+    container_name: service_ez_db
+    ports:
+      - "3307:3306"
+    # if you want to persist data uncomment the following 2 lines... don't forget to create the directory mysql-data for sample
+    #volumes:
+    #    - ./mysql-data:/var/lib/mysql
 
+  solr:
+    image: citelibre/service_ez:solr-1.0.2-SNAPSHOT
+    container_name: service_ez_solr
+    command: -force
+    depends_on:
+      - db
+    ports:
+      - "8983:8983"
+    # if you want to persist data uncomment the following 2 lines... and don't forget to create the directory
+    #volumes:
+    #    - ./solr-data:/var/solr/data/cite-libre/data
 
-    solr:
-        image: citelibre/service_ez:solr-1.0.9
-        container_name: service_ez_solr
-        command: -force
-        depends_on:
-            - db
-        ports:
-            - "8983:8983"
-        # if you want to persist data uncomment the following 2 lines... and don't forget to create the directory
-        #volumes:
-        #    - ./solr-data:/var/solr/data/cite-libre/data
+  mailpit:
+    image: axllent/mailpit:v1.18.3
+    container_name: service_ez_mailpit
+    restart: unless-stopped
+    ports:
+      - 1080:8025
+      - 1025:1025
+    environment:
+      MP_MAX_MESSAGES: 500
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
 
+  matomo:
+    image: citelibre/service_ez:matomo-1.0.2-SNAPSHOT
+    container_name: service_ez_matomo
+    ports:
+      - "80:80"
+    depends_on:
+      - solr
 
-    mailpit:
-        image: axllent/mailpit:v1.18.3
-        container_name: service_ez_mailpit
-        restart: unless-stopped
-        ports:
-            - 1080:8025
-            - 1025:1025
-        environment:
-            MP_MAX_MESSAGES: 500
-            MP_SMTP_AUTH_ACCEPT_ANY: 1
-            MP_SMTP_AUTH_ALLOW_INSECURE: 1
+  keycloak:
+    image: citelibre/service_ez:keycloak-1.0.2-SNAPSHOT
+    container_name: service_ez_keycloak
+    ports:
+      - "8081:8081"
+    command: ["-Djboss.http.port=8081"]
+    depends_on:
+      - citelibre
 
-    matomo:
-        image: citelibre/service_ez:matomo-1.0.9
-        container_name: service_ez_matomo
-        ports:
-            - "80:80"
-        depends_on:
-            - solr
-
-    keycloak:
-        image: citelibre/service_ez:keycloak-1.0.9
-        container_name: service_ez_keycloak
-        ports:
-            - "8081:8081"
-        command: ["-Djboss.http.port=8081"]
-        depends_on:
-            - citelibre
-
-
-    citelibre:
-        image: citelibre/service_ez:ihm-1.0.9
-        container_name: service_ez_citelibre
-        ports:
-            - 8080:8080
-        depends_on:
-            - solr
-        environment:
-            - LUTECE_DB_USER
-            - LUTECE_DB_PWD
-            - LUTECE_DB_NAME
-            - LUTECE_DB_HOST
-            - LUTECE_DB_PORT
-            - LUTECE_MAIL_HOST
-            - LUTECE_MAIL_PORT
-            - LUTECE_MAIL_USER
-            - LUTECE_MAIL_PWD
-            - LUTECE_INTERNAL_KEYCLOAK=true
+  citelibre:
+    image: citelibre/service_ez:ihm-1.0.2-SNAPSHOT
+    container_name: service_ez_citelibre
+    ports:
+      - 8080:8080
+    depends_on:
+      - solr
+    environment:
+      - LUTECE_DB_USER
+      - LUTECE_DB_PWD
+      - LUTECE_DB_NAME
+      - LUTECE_DB_HOST
+      - LUTECE_DB_PORT
+      - LUTECE_MAIL_HOST
+      - LUTECE_MAIL_PORT
+      - LUTECE_MAIL_USER
+      - LUTECE_MAIL_PWD
+      - LUTECE_INTERNAL_KEYCLOAK=true
 
   kibana:
-    image: citelibre/service_ez:kibana-1.0.9
+    image: citelibre/service_ez:kibana-1.0.2-SNAPSHOT
     container_name: service_ez_kibana
     environment:
     - discovery.type=single-node
@@ -84,11 +81,11 @@ services:
     mem_limit: 1g
     depends_on:
       - elasticsearch
-        #volumes:
-        #  - ./kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
+      #volumes:
+      #  - ./kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
 
   elasticsearch:
-    image: citelibre/service_ez:elasticsearch-1.0.9
+    image: citelibre/service_ez:elasticsearch-1.0.2-SNAPSHOT
     container_name: service_ez_elasticsearch
     environment:
     - ELASTIC_PASSWORD="*93n2US7fWog"
@@ -105,6 +102,6 @@ services:
         target: /usr/share/elasticsearch/data
 
 volumes:
-  elasticsearch-data:
-  service_ez-data:
-    #  solr-data:
+   elasticsearch-data:
+   service_ez-data:
+   #  solr-data:
