@@ -62,10 +62,10 @@ jobs:
       run: cd citelibre-serviceEZ
       
     - name: build serviceEZ
-      run: docker build  citelibre-serviceEZ -t citelibre/serviceEZ:ihm-$VERSION
+      run: docker build citelibre-service_ez -t citelibre/service_ez:ihm-$VERSION
     
     - name: Save serviceEZ
-      run: docker save -o citelibre-serviceEZ.tar citelibre/serviceEZ:ihm-$VERSION
+      run: docker save -o citelibre-serviceEZ.tar citelibre/service_ez:ihm-$VERSION
       
     - name: Run Trivy vulnerability scanner in tarball mode of rendez vous image
       uses: aquasecurity/trivy-action@master
@@ -81,32 +81,32 @@ jobs:
         sarif_file: 'trivy-results.sarif'
       
     - name: build mysql
-      run: docker build  mysql -t citelibre/serviceEZ:db-$VERSION
+      run: docker build  mysql -t citelibre/service_ez:db-$VERSION
       
     - name: build matomo
-      run: docker build  matomo -t citelibre/serviceEZ:matomo-$VERSION
+      run: docker build  matomo -t citelibre/service_ez:matomo-$VERSION
       
     - name: build solr
-      run: docker build  solr -t citelibre/serviceEZ:solr-$VERSION
+      run: docker build  solr -t citelibre/service_ez:solr-$VERSION
       
     - name: build keycloak
-      run: docker build  keycloak -t citelibre/serviceEZ:keycloak-$VERSION
+      run: docker build  keycloak -t citelibre/service_ez:keycloak-$VERSION
 
     - name: build kibana
-      run: docker build  kibana -t citelibre/serviceEZ:kibana-$VERSION
+      run: docker build  kibana -t citelibre/service_ez:kibana-$VERSION
 
     - name: build elasticsearch
-      run: docker build  elasticsearch -t citelibre/serviceEZ:elasticsearch-$VERSION
+      run: docker build  elasticsearch -t citelibre/service_ez:elasticsearch-$VERSION
       
     - name: push images on docker hub
       run: |
-        docker push citelibre/serviceEZ:solr-$VERSION
-        docker push citelibre/serviceEZ:db-$VERSION
-        docker push citelibre/serviceEZ:matomo-$VERSION
-        docker push citelibre/serviceEZ:keycloak-$VERSION
-        docker push citelibre/serviceEZ:ihm-$VERSION
-        docker push citelibre/serviceEZ:kibana-$VERSION
-        docker push citelibre/serviceEZ:elasticsearch-$VERSION
+        docker push citelibre/service_ez:solr-$VERSION
+        docker push citelibre/service_ez:db-$VERSION
+        docker push citelibre/service_ez:matomo-$VERSION
+        docker push citelibre/service_ez:keycloak-$VERSION
+        docker push citelibre/service_ez:ihm-$VERSION
+        docker push citelibre/service_ez:kibana-$VERSION
+        docker push citelibre/service_ez:elasticsearch-$VERSION
       
     - name: update docker compose
       run: |  
