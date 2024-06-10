@@ -18,7 +18,7 @@ Thank you for contributing to our project! Please fill in the fields below to he
 
 - [ ] citelibre-serviceEZ
 - [ ] Elasticsearch / Kibana
-- [ ] fake-smtp
+- [ ] mailpit
 - [ ] Keycloak
 - [ ] MariaDB
 - [ ] Matomo
