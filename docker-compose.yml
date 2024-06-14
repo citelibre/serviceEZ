@@ -1,6 +1,6 @@
 services:
   db:
-    image: citelibre/service_ez:db-1.0.2-SNAPSHOT
+    image: citelibre/service_ez:db-1.0.3-SNAPSHOT
     container_name: service_ez_db
     env_file: "./external.env"
     ports:
@@ -23,7 +23,7 @@ services:
       - MP_SMTP_AUTH_ALLOW_INSECURE=1
 
   solr:
-    image: citelibre/service_ez:solr-1.0.2-SNAPSHOT
+    image: citelibre/service_ez:solr-1.0.3-SNAPSHOT
     container_name: service_ez_solr
     command: -force
     depends_on:
@@ -36,7 +36,7 @@ services:
     #    - ./solr-data:/var/solr/data/cite-libre/data
 
   matomo:
-    image: citelibre/service_ez:matomo-1.0.2-SNAPSHOT
+    image: citelibre/service_ez:matomo-1.0.3-SNAPSHOT
     container_name: service_ez_matomo
     env_file: "./external.env"
     ports:
@@ -45,7 +45,7 @@ services:
       - solr
 
   keycloak:
-    image: citelibre/service_ez:keycloak-1.0.2-SNAPSHOT
+    image: citelibre/service_ez:keycloak-1.0.3-SNAPSHOT
     container_name: service_ez_keycloak
     env_file: "./external.env"
     ports:
@@ -55,7 +55,7 @@ services:
       - citelibre
 
   citelibre:
-    image: citelibre/service_ez:ihm-1.0.2-SNAPSHOT
+    image: citelibre/service_ez:ihm-1.0.3-SNAPSHOT
     container_name: service_ez_citelibre
     env_file: "./external.env"
     ports:
@@ -75,7 +75,7 @@ services:
       - LUTECE_INTERNAL_KEYCLOAK=true
 
   kibana:
-    image: citelibre/service_ez:kibana-1.0.2-SNAPSHOT
+    image: citelibre/service_ez:kibana-1.0.3-SNAPSHOT
     container_name: service_ez_kibana
     env_file: "./external.env"
     environment:
@@ -90,7 +90,7 @@ services:
       #  - ./kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
 
   elasticsearch:
-    image: citelibre/service_ez:elasticsearch-1.0.2-SNAPSHOT
+    image: citelibre/service_ez:elasticsearch-1.0.3-SNAPSHOT
     container_name: service_ez_elasticsearch
     env_file: "./external.env"
     environment:
