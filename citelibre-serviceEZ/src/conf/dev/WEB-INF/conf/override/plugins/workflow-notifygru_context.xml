@@ -72,7 +72,7 @@
     <bean id="workflow-notifygru.lib-notifygru.restTransport"
         class="fr.paris.lutece.plugins.librarynotifygru.rs.service.NotificationTransportRest">
         <property name="notificationEndPoint">
-            <value>hhttp://localhost:8080/serviceEZ/rest/grusupply/notification</value>
+            <value>http://localhost:8080/serviceEZ/rest/grusupply/notification</value>
         </property>
     </bean>
     <bean id="workflow-notifygru.lib-notifygru.notificationService"
