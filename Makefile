@@ -2,11 +2,11 @@ VERSION=1.0.9
 
 REPO=citelibre/serviceEZ
 REPO-TEST=test-serviceez
-NAME_SERVICE=service_ez
+NAME_SERVICE=serviceEZ
 
 build: ## Build the containers
-	docker build citelibre-serviceEZ -t $(REPO):ihm
-	docker build citelibre-serviceEZ -t $(REPO):ihm-$(VERSION)
+	docker build citelibre-$(NAME_SERVICE) -t $(REPO):ihm
+	docker build citelibre-$(NAME_SERVICE) -t $(REPO):ihm-$(VERSION)
 	docker build matomo -t $(REPO):matomo
 	docker build matomo -t $(REPO):matomo-$(VERSION)
 	docker build solr -t $(REPO):solr
