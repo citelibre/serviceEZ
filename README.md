@@ -14,12 +14,12 @@
 - [Matomo](#matomo)
 - [Production usage](#production-usage)
 
-You can find more information in the [Wiki](https://github.com/citelibre/CiteLibreEZ/wiki) (persistant data, dev mode, edit theme, etc)
+You can find more information in the [Wiki](https://github.com/citelibre/serviceEZ/wiki) (persistant data, dev mode, edit theme, etc)
 
 ## Architecture
 Architecture with embedded database and stmp server
 
-![CiteLibre architecture diagram](./utils/CiteLibre-EZ-docker.svg "CiteLibre architecture")
+![CiteLibre architecture diagram](./utils/CiteLibre-serviceEZ-docker.svg "CiteLibre architecture")
 
 ## Getting started
 
