@@ -50,9 +50,9 @@ If you create an `.env` file, docker compose use it without using --env-file
 
 ### URL and default login
 
-- Lutece Open UI at <http://localhost:8080/citelibreez>.
+- Lutece Open UI at <http://localhost:8080/serviceEZ>.
 
-- Lutece Back end is available at : <http://localhost:8080/citelibreez/jsp/admin/AdminLogin.jsp> : `admin`/`adminadmin`
+- Lutece Back end is available at : <http://localhost:8080/serviceEZ/jsp/admin/AdminLogin.jsp> : `admin`/`adminadmin`
 
 - Mail (in order to see mail send by application) at <http://localhost:1080/>.
 

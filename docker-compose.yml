@@ -49,8 +49,7 @@ services:
     container_name: service_ez_keycloak
     env_file: "./external.env"
     ports:
-      - "8081:8081"
-    command: ["-Djboss.http.port=8081"]
+      - "8081:8080"
     depends_on:
       - citelibre
 
