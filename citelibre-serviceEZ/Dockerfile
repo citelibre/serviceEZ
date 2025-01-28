@@ -2,7 +2,7 @@ ARG site=site-citelibre-serviceEZ-1.0.9
 ARG NAME_APP=serviceEZ
 
 # build the site and assemble the webapp
-FROM lutece/builder as builder
+FROM lutece/builder AS builder
 ARG site
 ARG NAME_APP
 
@@ -31,7 +31,6 @@ RUN cd webapps && mkdir ${NAME_APP} &&  mv ${site}.war ${NAME_APP}/${NAME_APP}.w
 # Add webapps folder
 COPY webapp/WEB-INF webapps/${NAME_APP}/WEB-INF/
 COPY webapp/js webapps/${NAME_APP}/js/
-
 
 COPY entrypoint.sh /entrypoint.sh
 

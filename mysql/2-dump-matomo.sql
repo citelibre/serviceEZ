@@ -15,7 +15,6 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-
 CREATE DATABASE matomo;
 
 USE matomo;
@@ -1046,7 +1045,7 @@ CREATE TABLE `matomo_site` (
 
 LOCK TABLES `matomo_site` WRITE;
 /*!40000 ALTER TABLE `matomo_site` DISABLE KEYS */;
-INSERT INTO `matomo_site` VALUES (1,'Cité Libre ServiceEZ','http://localhost:8080/serviceEZ','2022-10-24 12:53:29',0,1,'','','Europe/Paris','USD',0,'','','','','','website',0,'anonymous');
+INSERT INTO `matomo_site` VALUES (1,'Cite Libre ServiceEZ','http://localhost:8080/serviceEZ','2022-10-24 12:53:29',0,1,'','','Europe/Paris','USD',0,'','','','','','website',0,'anonymous');
 /*!40000 ALTER TABLE `matomo_site` ENABLE KEYS */;
 UNLOCK TABLES;
 

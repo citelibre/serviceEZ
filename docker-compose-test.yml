@@ -6,10 +6,10 @@ services:
     ports:
       - "3307:3306"
     mem_limit: 1g
-    # if you want to persist data uncomment the following 2 lines... don't forget to create the directory mysql-data for sample
-    #volumes:
-    #    - ./mysql-data:/var/lib/mysql
-
+    # volumes:
+    #  - type: volume
+    #    source: mysql-data
+    #    target: /var/lib/mysql
 
   solr:
     image: ${REPO}/solr
@@ -21,10 +21,10 @@ services:
     env_file: "./external.env"
     ports:
       - "8983:8983"
-    # if you want to persist data uncomment the following 2 lines... and don't forget to create the directory
     #volumes:
-    #    - ./solr-data:/var/solr/data/cite-libre/data
-
+    #  - type: volume
+    #    source: solr-data
+    #    target: /var/solr/data/cite-libre/data
 
   mailpit:
     image: axllent/mailpit:v1.18.3
@@ -40,7 +40,6 @@ services:
       - MP_SMTP_AUTH_ACCEPT_ANY=1
       - MP_SMTP_AUTH_ALLOW_INSECURE=1
 
-            
   matomo:
     image: ${REPO}/matomo
     container_name: service_ez_matomo
@@ -59,8 +58,7 @@ services:
       - "8081:8080"
     mem_limit: 1g
     depends_on:
-      - citelibre
-
+      - db
 
   citelibre:
     image: ${REPO}/ihm
@@ -70,7 +68,6 @@ services:
       - 8080:8080
     depends_on:
       - solr
-    mem_limit: 1g
     environment:
       - LUTECE_DB_USER
       - LUTECE_DB_PWD
@@ -82,31 +79,36 @@ services:
       - LUTECE_MAIL_USER
       - LUTECE_MAIL_PWD
       - LUTECE_INTERNAL_KEYCLOAK=true
+    mem_limit: 2g
+    # volumes:
+    #   - type: volume
+    #     source: webapp-data
+    #     target: /usr/local/tomcat/webapps/serviceEZ
 
   kibana:
     image: ${REPO}/kibana
     container_name: service_ez_kibana
-    env_file: "./external.env"
     environment:
       - discovery.type=single-node
       - server.publicBaseUrl=localhost
+    env_file: "./external.env"
     ports:
       - 5601:5601
     mem_limit: 1g
     depends_on:
       - elasticsearch
-        #volumes:
-        #  - ./kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
+    #volumes:
+    #  - ./kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
 
   elasticsearch:
     image: ${REPO}/elasticsearch
     container_name: service_ez_elasticsearch
-    env_file: "./external.env"
     environment:
       - ELASTIC_PASSWORD="*93n2US7fWog"
       - discovery.type=single-node
       - xpack.security.enabled=false
       - ESJAVAOPTS=-Xmx1g
+    env_file: "./external.env"
     mem_limit: 1g
     ports:
       - 9200:9200
@@ -116,7 +118,7 @@ services:
     #     source: elasticsearch-data
     #     target: /usr/share/elasticsearch/data
 
-volumes:
-  elasticsearch-data:
-  service_ez-data:
-    #  solr-data:
+# volumes:
+  # elasticsearch-data:
+  # webapp-data:
+  # solr-data:

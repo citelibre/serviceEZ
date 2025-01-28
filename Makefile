@@ -28,7 +28,7 @@ test: ## Build the containers
 	docker build -t $(REPO-TEST)/keycloak keycloak
 	docker build -t $(REPO-TEST)/kibana kibana
 	docker build -t $(REPO-TEST)/elasticsearch elasticsearch
-	echo REPO=$(REPO-TEST) > .env.test
+	@echo REPO=$(REPO-TEST) > .env.test
 	docker-compose --env-file .env.test -f ./docker-compose-test.yml up -d
 
 test-down:
@@ -43,6 +43,9 @@ publish-latest: ## Publish the `latest` tagged container
 	docker push $(REPO):db
 	docker push $(REPO):ihm
 	docker push $(REPO):matomo
+	docker push $(REPO):keycloak
+	docker push $(REPO):kibana
+	docker push $(REPO):elasticsearch
 
 publish-version: ## Publish the `{version}` tagged container t
 	@echo 'publish $(VERSION) to $(REPO)'
@@ -50,6 +53,9 @@ publish-version: ## Publish the `{version}` tagged container t
 	docker push $(REPO):db-$(VERSION)
 	docker push $(REPO):ihm-$(VERSION)
 	docker push $(REPO):matomo-$(VERSION)
+	docker push $(REPO):keycloak-$(VERSION)
+	docker push $(REPO):kibana-$(VERSION)
+	docker push $(REPO):elasticsearch-$(VERSION)
 
 repo-login:
 	docker login

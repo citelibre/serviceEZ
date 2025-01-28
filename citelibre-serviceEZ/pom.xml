@@ -28,7 +28,7 @@
             </snapshots>
             <id>lutece</id>
             <name>luteceRepository</name>
-            <url>http://dev.lutece.paris.fr/maven_repository</url>
+            <url>https://dev.lutece.paris.fr/maven_repository</url>
             <layout>default</layout>
         </repository>
         <repository>
@@ -37,7 +37,7 @@
             </snapshots>
             <id>luteceSnapshot</id>
             <name>luteceSnapshot</name>
-            <url>http://dev.lutece.paris.fr/snapshot_repository</url>
+            <url>https://dev.lutece.paris.fr/snapshot_repository</url>
         </repository>
     </repositories>
     <pluginRepositories>
@@ -47,7 +47,7 @@
             </snapshots>
             <id>luteceSnapshot</id>
             <name>luteceSnapshot</name>
-            <url>http://${serverUrl}/snapshot_repository</url>
+            <url>https://${serverUrl}/snapshot_repository</url>
         </pluginRepository>
     </pluginRepositories>
     <dependencies>
@@ -330,7 +330,6 @@
 			<type>lutece-plugin</type>
 		</dependency>
 
-
 		<!-- MODULES -->
 		<dependency>
             <groupId>fr.paris.lutece.plugins</groupId>
@@ -483,7 +482,7 @@
         <dependency>
             <groupId>fr.paris.lutece.plugins</groupId>
             <artifactId>module-workflow-unittree</artifactId>
-            <version>[2.1.0]</version>
+            <version>[2.1.1-SNAPSHOT]</version>
             <type>lutece-plugin</type>
         </dependency>
         <dependency>
@@ -493,12 +492,17 @@
             <type>lutece-plugin</type>
         </dependency>
         <dependency>
+			<groupId>fr.paris.lutece.plugins</groupId>
+			<artifactId>module-unittree-notification</artifactId>
+			<type>lutece-plugin</type>
+			<version>[1.0.2-SNAPSHOT]</version>
+        </dependency>
+        <dependency>
             <groupId>fr.paris.lutece.plugins</groupId>
             <artifactId>module-workflow-userassignment</artifactId>
             <version>[2.1.1]</version>
             <type>lutece-plugin</type>
         </dependency>
-
 
 		<!-- LIBRARIES -->
         <dependency>
