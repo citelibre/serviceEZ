@@ -25,61 +25,55 @@ mail_user="${LUTECE_MAIL_USER:-}"
 mail_password="${LUTECE_MAIL_PWD:-}"
 
 # available languages to switch to in BO only
-echo "Configure languages"
+echo "** Configure languages"
 default_fo_lang="${LUTECE_DEFAULT_LANG:-en}"
 available_lang="${LUTECE_AVAILABLE_LANG:-en,fr}"
 sed -i "s/lutece.i18n.defaultLocale=.*/lutece.i18n.defaultLocale=$default_fo_lang/" ${tomcat}/webapps/${site_folder}/WEB-INF/conf/lutece.properties
 sed -i "s/lutece.i18n.availableLocales=.*/lutece.i18n.availableLocales=$available_lang/" ${tomcat}/webapps/${site_folder}/WEB-INF/conf/lutece.properties
 
-echo "Config database"
+echo "** Config database"
 sed -i "s/portal.user=.*/portal\.user=$db_user/" ${tomcat}/webapps/${site_folder}/WEB-INF/conf/db.properties
-sed -i "s/portal.password=.*/portal\.password=$db_password/"  ${tomcat}/webapps/${site_folder}/WEB-INF/conf/db.properties
+sed -i "s/portal.password=.*/portal\.password=$db_password/" ${tomcat}/webapps/${site_folder}/WEB-INF/conf/db.properties
 sed -i "s/\/lutece/\/$db_name/" ${tomcat}/webapps/${site_folder}/WEB-INF/conf/db.properties
-sed -i "s/db:3306/$db_host:$db_port/"  ${tomcat}/webapps/${site_folder}/WEB-INF/conf/db.properties
+sed -i "s/db:3306/$db_host:$db_port/" ${tomcat}/webapps/${site_folder}/WEB-INF/conf/db.properties
 
-echo "Edit host"
-url_citelibre=${URL_CITELIBRE}
-url_citelibre_https=${URL_CITELIBRE_HTTPS}
-url_citelibre_html=${URL_CITELIBRE_HTML}
+echo "** Edit host"
+protocol="${PROTOCOL:-http}"
+url_citelibre=${protocol}":\/\/"${URL_CITELIBRE}
+url_citelibre_https="https:\/\/"${URL_CITELIBRE}
+url_citelibre_html=${PROTOCOL}"%3A%2F%2F"${URL_CITELIBRE}
 url_kibana=${URL_KIBANA}
 url_matomo_http=${URL_MATOMO_HTTP}
 url_matomo_https=${URL_MATOMO_HTTPS}
 url_keycloak=${URL_KEYCLOAK}
 
-sed -i "s/http:\/\/localhost:8080/$url_citelibre/g" ${tomcat}/webapps/${site_folder}/WEB-INF/conf/config.properties
-sed -i "s/https:\/\/localhost:8080/$url_citelibre_https/g" ${tomcat}/webapps/${site_folder}/WEB-INF/conf/config.properties
-sed -i "s/http%3A%2F%2Flocalhost/$url_citelibre_html/g" ${tomcat}/webapps/${site_folder}/WEB-INF/conf/override/plugins/mylutece.properties
-sed -i "s/http:\/\/localhost:8080/$url_citelibre/g" ${tomcat}/webapps/${site_folder}/WEB-INF/conf/override/plugins/workflow-notifygru_context.xml
+# working on the override conf.properties file
+conf_dir=${tomcat}/webapps/${site_folder}/WEB-INF/conf
+conf_override_dir=${tomcat}/webapps/${site_folder}/WEB-INF/conf/override
+conf_override_plugins_dir=${tomcat}/webapps/${site_folder}/WEB-INF/conf/override/plugins
+template_dir=${tomcat}/webapps/${site_folder}/WEB-INF/templates/admin/system
+sed -i "s/http:\/\/localhost:8080/$url_citelibre/g" ${conf_override_dir}/config.properties
+sed -i "s/https:\/\/localhost:8080/$url_citelibre_https/g" ${conf_override_dir}/config.properties
+sed -i "s/http%3A%2F%2Flocalhost/$url_citelibre_html/g" ${conf_override_plugins_dir}/mylutece.properties
+sed -i "s/http:\/\/localhost:8080/$url_citelibre/g" ${conf_override_plugins_dir}/workflow-notifygru_context.xml
+sed -i "s/http%3A%2F%2Flocalhost/$url_citelibre_html/g" ${conf_override_plugins_dir}/oauth2_context.xml
+sed -i "s/matomo.default.server.http.url=.*/matomo.default.server.http.url=$url_matomo_http/g" ${conf_override_plugins_dir}/matomo.properties
+sed -i "s/matomo.default.server.https.url=.*/matomo.default.server.http.url=$url_matomo_https/g" ${conf_override_plugins_dir}/matomo.properties
+sed -i "s/http:\/\/localhost:8081/$url_keycloak/g" ${conf_override_plugins_dir}/mylutece.properties
+sed -i "s/http:\/\/localhost:8081/$url_keycloak/g" ${conf_override_plugins_dir}/oauth2_context.xml
+sed -i "s/http:\/\/localhost:8081/$url_keycloak/g" ${conf_override_plugins_dir}/mylutece-oauth2_context.xml
 
-sed -i "s/http%3A%2F%2Flocalhost/$url_citelibre_html/g" ${tomcat}/webapps/${site_folder}/WEB-INF/conf/override/plugins/oauth2_context.xml
+echo "** Config SMTP"
+sed -i "s/mail.server=.*/mail.server=$mail_host/g" ${conf_override_dir}/config.properties
+sed -i "s/mail.server=.*/mail.server=$mail_host/g" ${template_dir}/config_properties.html
+sed -i "s/mail.server.port=.*/mail.server.port=$mail_port/" ${conf_dir}/config.properties
+sed -i "s/mail.server.port=.*/mail.server.port=$mail_port/" ${template_dir}/config_properties.html
+sed -i "s/mail.username=.*/mail.username=$mail_user/" ${conf_dir}/config.properties 
+sed -i "s/mail.username=.*/mail.username=$mail_user/" ${template_dir}/config_properties.html
+sed -i "s/mail.password=.*/mail.password=$mail_password/" ${conf_dir}/config.properties 
+sed -i "s/mail.password=.*/mail.password=$mail_password/" ${template_dir}/config_properties.html
 
-sed -i "s/http:\/\/localhost:5601/$url_kibana/g" ${tomcat}/webapps/${site_folder}/WEB-INF/conf/override/plugins/kibana.properties
-
-sed -i "s/matomo.default.server.http.url=.*/matomo.default.server.http.url=$url_matomo_http/g" ${tomcat}/webapps/${site_folder}/WEB-INF/conf/override/plugins/matomo.properties
-sed -i "s/matomo.default.server.https.url=.*/matomo.default.server.http.url=$url_matomo_https/g" ${tomcat}/webapps/${site_folder}/WEB-INF/conf/override/plugins/matomo.properties
-
-sed -i "s/http:\/\/localhost:8081/$url_keycloak/g" ${tomcat}/webapps/${site_folder}/WEB-INF/conf/override/plugins/mylutece.properties
-sed -i "s/http:\/\/localhost:8081/$url_keycloak/g" ${tomcat}/webapps/${site_folder}/WEB-INF/conf/override/plugins/oauth2_context.xml
-sed -i "s/http:\/\/localhost:8081/$url_keycloak/g" ${tomcat}/webapps/${site_folder}/WEB-INF/conf/override/plugins/mylutece-oauth2_context.xml
-
-# SMTP
-# Pb with new version => delete this file 
-rm  ${tomcat}/webapps/${site_folder}/WEB-INF/conf/override/config.properties
-
-echo "Config SMTP"
-sed -i "s/mail.server=.*/mail.server=$mail_host/g"  ${tomcat}/webapps/${site_folder}/WEB-INF/conf/config.properties 
-sed -i "s/mail.server=.*/mail.server=$mail_host/g"  ${tomcat}/webapps/${site_folder}/WEB-INF/templates/admin/system/config_properties.html
-
-sed -i "s/mail.server.port=.*/mail.server.port=$mail_port/"  ${tomcat}/webapps/${site_folder}/WEB-INF/conf/config.properties
-sed -i "s/mail.server.port=.*/mail.server.port=$mail_port/"  ${tomcat}/webapps/${site_folder}/WEB-INF/templates/admin/system/config_properties.html
-
-sed -i "s/mail.username=.*/mail.username=$mail_user/"  ${tomcat}/webapps/${site_folder}/WEB-INF/conf/config.properties 
-sed -i "s/mail.username=.*/mail.username=$mail_user/"  ${tomcat}/webapps/${site_folder}/WEB-INF/templates/admin/system/config_properties.html
-
-sed -i "s/mail.password=.*/mail.password=$mail_password/"  ${tomcat}/webapps/${site_folder}/WEB-INF/conf/config.properties 
-sed -i "s/mail.password=.*/mail.password=$mail_password/"  ${tomcat}/webapps/${site_folder}/WEB-INF/templates/admin/system/config_properties.html
-
-echo "Launch tomcat server"
+echo "** Launch tomcat server"
 if [[ "$LUTECE_INTERNAL_KEYCLOAK" == "true" ]]
 then
     echo "Enable haproxy on 8080"

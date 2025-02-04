@@ -19,7 +19,7 @@ FROM tomcat:9.0-jdk11
 ARG site
 ARG NAME_APP
 
-RUN apt update && apt install -y haproxy
+RUN apt update && apt install -y haproxy vim
 
 ARG tomcat=/usr/local/tomcat
 WORKDIR ${tomcat}

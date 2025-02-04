@@ -2,5 +2,5 @@ mysql-data
 elasticsearch-data
 rendezvous-data
 solr-data
-.env.test
-.env
+/.env.test
+/.env
