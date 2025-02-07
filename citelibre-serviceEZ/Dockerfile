@@ -29,8 +29,8 @@ COPY haproxy.cfg /etc/haproxy/haproxy.cfg
 RUN cd webapps && mkdir ${NAME_APP} &&  mv ${site}.war ${NAME_APP}/${NAME_APP}.war  && cd ${NAME_APP} && jar xvf ${NAME_APP}.war && rm ${NAME_APP}.war
 
 # Add webapps folder
-COPY webapp/WEB-INF webapps/${NAME_APP}/WEB-INF/
-COPY webapp/js webapps/${NAME_APP}/js/
+# COPY webapp/WEB-INF webapps/${NAME_APP}/WEB-INF/
+# COPY webapp/js webapps/${NAME_APP}/js/
 
 COPY entrypoint.sh /entrypoint.sh
 

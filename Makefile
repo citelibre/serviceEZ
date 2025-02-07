@@ -31,6 +31,19 @@ test: ## Build the containers
 	@echo REPO=$(REPO-TEST) > .env.test
 	docker-compose --env-file .env.test -f ./docker-compose-test.yml up -d
 
+test-tmux: test
+	tmux detach || true
+	tmux kill-session -t citelibre || true
+	tmux new-session -d -s citelibre
+	tmux split-window -h
+	tmux split-window -v -t 0
+	tmux select-pane -t 2
+
+	tmux send-keys -t 0 'docker-compose logs citelibre -f' C-m 
+	tmux send-keys -t 1 'docker-compose stats' C-m 
+	tmux send-keys -t 2 'docker-compose ps' C-m 
+	tmux attach -t citelibre
+
 test-down:
 	docker-compose --env-file .env.test -f ./docker-compose-test.yml down
 	rm .env.test

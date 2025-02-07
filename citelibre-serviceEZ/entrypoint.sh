@@ -45,13 +45,14 @@ url_citelibre_html=${PROTOCOL}"%3A%2F%2F"${URL_CITELIBRE}
 url_kibana=${URL_KIBANA}
 url_matomo_http=${URL_MATOMO_HTTP}
 url_matomo_https=${URL_MATOMO_HTTPS}
-url_keycloak=${URL_KEYCLOAK}
+url_keycloak=${protocol}":\/\/"${URL_KEYCLOAK}
 
 # working on the override conf.properties file
 conf_dir=${tomcat}/webapps/${site_folder}/WEB-INF/conf
 conf_override_dir=${tomcat}/webapps/${site_folder}/WEB-INF/conf/override
 conf_override_plugins_dir=${tomcat}/webapps/${site_folder}/WEB-INF/conf/override/plugins
 template_dir=${tomcat}/webapps/${site_folder}/WEB-INF/templates/admin/system
+
 sed -i "s/http:\/\/localhost:8080/$url_citelibre/g" ${conf_override_dir}/config.properties
 sed -i "s/https:\/\/localhost:8080/$url_citelibre_https/g" ${conf_override_dir}/config.properties
 sed -i "s/http%3A%2F%2Flocalhost/$url_citelibre_html/g" ${conf_override_plugins_dir}/mylutece.properties
@@ -59,9 +60,10 @@ sed -i "s/http:\/\/localhost:8080/$url_citelibre/g" ${conf_override_plugins_dir}
 sed -i "s/http%3A%2F%2Flocalhost/$url_citelibre_html/g" ${conf_override_plugins_dir}/oauth2_context.xml
 sed -i "s/matomo.default.server.http.url=.*/matomo.default.server.http.url=$url_matomo_http/g" ${conf_override_plugins_dir}/matomo.properties
 sed -i "s/matomo.default.server.https.url=.*/matomo.default.server.http.url=$url_matomo_https/g" ${conf_override_plugins_dir}/matomo.properties
+
+sed -i "s/http:\/\/localhost:8081/$url_keycloak/g" ${conf_override_plugins_dir}/mylutece-oauth2_context.xml
 sed -i "s/http:\/\/localhost:8081/$url_keycloak/g" ${conf_override_plugins_dir}/mylutece.properties
 sed -i "s/http:\/\/localhost:8081/$url_keycloak/g" ${conf_override_plugins_dir}/oauth2_context.xml
-sed -i "s/http:\/\/localhost:8081/$url_keycloak/g" ${conf_override_plugins_dir}/mylutece-oauth2_context.xml
 
 echo "** Config SMTP"
 sed -i "s/mail.server=.*/mail.server=$mail_host/g" ${conf_override_dir}/config.properties

@@ -13,9 +13,10 @@ fi
 url_citelibre=${URL_CITELIBRE}
 url_matomo_http=${URL_MATOMO_HTTP}
 url_kibana=${URL_KIBANA}
-url_keycloak=${URL_KEYCLOAK}
 url_solr=${URL_SOLR}
 url_mail=${URL_MAIL}
+# url_keycloak=${URL_KEYCLOAK}
+url_keycloak=${protocol}":\/\/"${URL_KEYCLOAK}
 
 sed -i "s/http:\/\/localhost\//${url_matomo_http}\//g" /docker-entrypoint-initdb.d/1-dump.sql
 sed -i "s/http:\/\/localhost\//${url_matomo_http}\//g" /docker-entrypoint-initdb.d/2-dump-matomo.sql
