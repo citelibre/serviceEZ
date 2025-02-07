@@ -13,13 +13,12 @@ if [[ "$PROTOCOL" == "http" ]]; then
     http_enabled="true"
 else
     http_enabled="false"
+    url_keycloak="${protocol}://${url_keycloak}"
 fi
 
 if echo "$url_keycloak" | grep -qE "localhost|127\.0\.0\.1"; then
     url_keycloak="localhost"
 fi
-
-http_enabled="false"
 
 /tmp/wait 
 /opt/keycloak/bin/kc.sh \
