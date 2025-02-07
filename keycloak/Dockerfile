@@ -1,4 +1,5 @@
-FROM keycloak/keycloak:18.0.0
+FROM keycloak/keycloak:26.0.7-0 
+#18.0.0
 
 ENV KEYCLOAK_USER=admin
 ENV KEYCLOAK_PASSWORD=admin1234
@@ -17,9 +18,17 @@ ENV KC_DB_URL=jdbc:mariadb://db:3306/keycloak
 ENV KC_DB_USERNAME=root
 ENV KC_DB_PASSWORD=root
 
-COPY themes/mytheme /opt/keycloak/themes/mytheme  
+
+ENV KC_HOSTNAME_STRICT=false
+ENV quarkus.hibernate-orm.persistence-xml.ignore=true
+ENV KC_HOSTNAME_STRICT_HTTPS=false
+# Deprecated
+# ENV KC_PROXY='edge'
+
+COPY themes/citelibre /opt/keycloak/themes/citelibre
+# COPY themes/mytheme /opt/keycloak/themes/mytheme  
 
 COPY wait /tmp/wait
-COPY wait-db-available.sh /docker-entrypoint-initdb.d
+COPY entrypoint.sh /docker-entrypoint-initdb.d
 
 ENTRYPOINT ["/bin/sh", "/docker-entrypoint-initdb.d"]
