@@ -1,6 +1,6 @@
 services:
   db:
-    image: citelibre/service_ez:db-latest
+    image: citelibre/service_ez:db-1.0.4-SNAPSHOT
     container_name: service_ez_db
     env_file: "./external.env"
     ports:
@@ -12,7 +12,7 @@ services:
     #    target: /var/lib/mysql
 
   solr:
-    image: citelibre/service_ez:solr-latest
+    image: citelibre/service_ez:solr-1.0.4-SNAPSHOT
     container_name: service_ez_solr
     command: -force
     depends_on:
@@ -41,7 +41,7 @@ services:
       - MP_SMTP_AUTH_ALLOW_INSECURE=1
 
   matomo:
-    image: citelibre/service_ez:matomo-latest
+    image: citelibre/service_ez:matomo-1.0.4-SNAPSHOT
     container_name: service_ez_matomo
     env_file: "./external.env"
     ports:
@@ -51,7 +51,7 @@ services:
       - solr
 
   keycloak:
-    image: citelibre/service_ez:keycloak-latest
+    image: citelibre/service_ez:keycloak-1.0.4-SNAPSHOT
     container_name: service_ez_keycloak
     env_file: "./external.env"
     ports:
@@ -61,7 +61,7 @@ services:
       - citelibre
 
   citelibre:
-    image: citelibre/service_ez:ihm-latest
+    image: citelibre/service_ez:ihm-1.0.4-SNAPSHOT
     container_name: service_ez_citelibre
     env_file: "./external.env"
     ports:
@@ -86,7 +86,7 @@ services:
     #     target: /usr/local/tomcat/webapps/serviceEZ
 
   kibana:
-    image: citelibre/service_ez:kibana-latest
+    image: citelibre/service_ez:kibana-1.0.4-SNAPSHOT
     container_name: service_ez_kibana
     env_file: "./external.env"
     environment:
@@ -101,7 +101,7 @@ services:
     #  - ./kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
 
   elasticsearch:
-    image: citelibre/service_ez:elasticsearch-latest
+    image: citelibre/service_ez:elasticsearch-1.0.4-SNAPSHOT
     container_name: service_ez_elasticsearch
     env_file: "./external.env"
     environment:
