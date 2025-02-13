@@ -34,6 +34,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+
+    - name: Cache Maven packages
+      uses: actions/cache@v3
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
+    
     - name: Set up maven
       uses: s4u/setup-maven-action@v1.2.1
       with:
@@ -65,7 +74,7 @@ jobs:
       run: docker build citelibre-serviceEZ -t citelibre/service_ez:ihm-$VERSION
     
     - name: Save serviceEZ
-      run: docker save -o citelibre-serviceEZ.tar citelibre/service_ez:ihm-$VERSION && pwd && ls
+      run: docker save -o /github/workspace/citelibre-serviceEZ.tar citelibre/service_ez:ihm-$VERSION && pwd && ls
       
     - name: Run Trivy vulnerability scanner in tarball mode of rendez vous image
       uses: aquasecurity/trivy-action@master
