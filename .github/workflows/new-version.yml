@@ -5,7 +5,7 @@ on:
     inputs:
       logLevel:
         description: 'Log level'
-        required: false
+        required: true
         default: 'warning'
         type: choice
         options:
@@ -13,7 +13,7 @@ on:
           - warning
       print_tags:
         description: 'True to print to STDOUT'
-        required: false
+        required: true
         type: boolean
       tags:
         description: 'Test scenario tags'
@@ -65,7 +65,7 @@ jobs:
       run: docker build citelibre-serviceEZ -t citelibre/service_ez:ihm-$VERSION
     
     - name: Save serviceEZ
-      run: docker save -o citelibre-serviceEZ.tar citelibre/service_ez:ihm-$VERSION
+      run: docker save -o citelibre-serviceEZ.tar citelibre/service_ez:ihm-$VERSION && pwd && ls
       
     - name: Run Trivy vulnerability scanner in tarball mode of rendez vous image
       uses: aquasecurity/trivy-action@master
